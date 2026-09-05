@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+coverage/
+*.log
+.env*
+!.env.example
+reports/verification.json
+
+# Kit de instrucciones, separado del proyecto entregable.
+referencias/
+# Salidas locales, excluidas del commit que identifican.
+reports/
+*.tsbuildinfo
