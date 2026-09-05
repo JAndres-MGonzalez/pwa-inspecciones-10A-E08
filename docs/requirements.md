@@ -2,6 +2,8 @@
 
 Fecha: 4 de septiembre de 2026. Estado: propuesta para revisión del equipo.
 
+Documento del equipo **10A-E08**. Identificación actualizada el 5 de septiembre de 2026.
+
 ## 1. Problema, contexto y límites
 
 En el caso académico propuesto, una persona recorre laboratorios y registra observaciones de mantenimiento. Si depende de un formulario conectado y la red se interrumpe, puede perder la captura o anotarla en otro medio. La transcripción posterior puede omitir hallazgos o duplicar inspecciones. Quien coordina mantenimiento necesita distinguir espacios sin incidencias de aquellos que requieren atención.
@@ -72,7 +74,7 @@ El archivo `src/lib/data/inspections.ts` contiene datos ficticios:
 
 Cada registro incluye un resumen ficticio. Las etiquetas no acreditan inspecciones reales. No existen cuentas ni expedientes de personas en la aplicación.
 
-En etapas futuras se propone añadir observación, ID local estable y estado de envío a conjuntos igualmente sintéticos. Se excluyen datos de estudiantes y personal, matrículas, teléfonos, correos, rostros, geolocalización, credenciales y reportes reales. Los nombres de integrantes se registrarán aparte en evidencia privada después de ser proporcionados.
+En etapas futuras se propone añadir observación, ID local estable y estado de envío a conjuntos igualmente sintéticos. Se excluyen datos de estudiantes y personal, matrículas, teléfonos, correos, rostros, geolocalización, credenciales y reportes reales. Los nombres y matrículas de los integrantes de 10A-E08 están registrados aparte en `evidence/individual.md`, dentro del repositorio privado, y no forman parte de los datos del producto.
 
 ## 6. Criterios de aceptación de Semana 1
 

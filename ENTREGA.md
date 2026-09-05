@@ -2,13 +2,14 @@
 
 Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-laboratorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio).
 
+Grupo **10A**, equipo **E08** (**10A-E08**). Integrantes y matrículas registrados en [evidence/individual.md](evidence/individual.md).
+
 ## Pendientes personales y del equipo
 
-1. Indicar grupo, equipo e integrantes asignados.
-2. Revisar requisitos y ADR, corregir supuestos y registrar aceptación real.
-3. Completar una sección personal por integrante en [evidence/individual.md](evidence/individual.md), con contribución enlazada, ejecución propia explicada, limitación y declaración de IA.
-4. Proporcionar cuentas de GitHub de compañeros y docente para invitarlas. No hay invitaciones realizadas. Si falta la cuenta docente, registrarlo como incidencia.
-5. Confirmar la fecha límite directamente en Classroom.
+1. Revisar requisitos y ADR, corregir supuestos y registrar aceptación real.
+2. Completar las tres secciones personales ya identificadas en [evidence/individual.md](evidence/individual.md), con contribución enlazada, ejecución propia explicada, limitación y declaración de IA.
+3. Proporcionar cuentas de GitHub de compañeros y docente para invitarlas. No hay invitaciones realizadas. Si falta la cuenta docente, registrarlo como incidencia.
+4. Confirmar la fecha límite directamente en Classroom.
 
 ## Fijar la versión después de completar los documentos
 
@@ -28,12 +29,12 @@ Abrir [Actions del repositorio](https://github.com/JAndres-MGonzalez/pwa-inspecc
 ## Formato personal
 
 ```text
-Grupo y equipo: PENDIENTE
-Mi nombre: PENDIENTE
+Grupo y equipo: 10A-E08
+Mi nombre: COPIAR EL NOMBRE PROPIO DE evidence/individual.md
 Repositorio privado del equipo: https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio
 SHA final (40 caracteres): COPIAR DESPUÉS DEL ÚLTIMO COMMIT
 Enlace a Actions de ese SHA: COPIAR LA EJECUCIÓN CORRESPONDIENTE
-Mi sección en evidence/individual.md: PENDIENTE
+Mi sección en evidence/individual.md: Integrante: NOMBRE COMPLETO PROPIO
 Mi contribución y enlace al archivo, commit o revisión: PENDIENTE
 Acceso docente: falta cuenta por indicar
 Incidencia: evidencia personal y acceso pendientes; revisar avisos de dependencias documentados

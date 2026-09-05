@@ -1,6 +1,6 @@
 # Bitácora de ejecución asistida
 
-Sesión iniciada el 4 de septiembre de 2026, zona America/Mexico_City. Ejecutor de los comandos: **Codex**, en el entorno del usuario. No se atribuyen estas acciones a integrantes todavía no identificados.
+Sesión iniciada el 4 de septiembre de 2026, zona America/Mexico_City. Ejecutor de los comandos de la primera sesión: **Codex**, en el entorno del usuario. La ejecución posterior compartida por el usuario se registra en una sección aparte. Equipo identificado el 5 de septiembre de 2026: **10A-E08**.
 
 ## Entorno
 
@@ -22,6 +22,18 @@ Windows NT 10.0.26200.0; Node v26.4.0; npm 11.17.0; Git 2.55.0.windows.3. Starte
 | `npm.cmd audit --json` autorizado | Código 1; Next.js y PostCSS marcados con severidad alta; total 2 dependencias vulnerables | No se demostró explotación ni se ejecutó corrección forzada |
 
 Durante desarrollo y build se observó `Caching failed for pack: Error: Unable to snapshot resolve dependencies`. No impidió el HTTP 200 ni la compilación; queda documentado, no resuelto.
+
+## Ejecución local compartida por el usuario
+
+El 5 de septiembre de 2026, después de clonar el repositorio en `C:\Users\Ra1zeR\Documents\pwa-inspecciones-laboratorio`, el usuario compartió las siguientes salidas de PowerShell:
+
+| Comando | Resultado comunicado |
+|---|---|
+| `npm ci` | 28 paquetes instalados y 29 auditados en 13 s; 2 vulnerabilidades de severidad alta |
+| `npm run dev` | Next.js 14.2.35 listo en 3.9 s; compilación de `/` en 5 s y respuesta `GET / 200` |
+| `npm run verify` | `starter.spec.mjs: PASS`, `Compiled successfully`, generación de 4/4 páginas estáticas y `Verificación técnica: pass. Revisión académica: pendiente.` |
+
+El reporte local consultado antes de actualizar la identificación tiene `checkedAt: 2026-09-05T06:33:29.163Z`, Node `v26.4.0`, árbol limpio y los checks de estructura, prueba y build en `pass`. La salida comunicada constituye evidencia de esta ejecución concreta; no demuestra que cada integrante la haya realizado ni que haya revisado los documentos. Las secciones personales deben vincular la aportación y explicación correspondiente.
 
 ## Explicación de la prueba proporcionada
 

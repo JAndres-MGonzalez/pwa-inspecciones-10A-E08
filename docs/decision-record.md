@@ -4,6 +4,8 @@
 
 4 de septiembre de 2026. **Propuesta para revisión del equipo.** Se conserva Next.js y la trayectoria PWA del curso. El documento fue preparado con IA y requiere revisión y aceptación de integrantes; no se afirma una aprobación colectiva todavía no confirmada.
 
+Equipo **10A-E08**. Identificación actualizada el 5 de septiembre de 2026.
+
 ## Contexto y restricciones
 
 La persona coordinadora consulta inspecciones en computadora o teléfono (E-01). La persona inspectora necesitará conservar capturas durante interrupciones de red y enviarlas después (E-02). Véanse escenarios y condiciones en [requirements.md](requirements.md).
