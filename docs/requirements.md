@@ -74,7 +74,7 @@ El archivo `src/lib/data/inspections.ts` contiene datos ficticios:
 
 Cada registro incluye un resumen ficticio. Las etiquetas no acreditan inspecciones reales. No existen cuentas ni expedientes de personas en la aplicación.
 
-En etapas futuras se propone añadir observación, ID local estable y estado de envío a conjuntos igualmente sintéticos. Se excluyen datos de estudiantes y personal, matrículas, teléfonos, correos, rostros, geolocalización, credenciales y reportes reales. Los nombres y matrículas de los integrantes de 10A-E08 están registrados aparte en `evidence/individual.md`, dentro del repositorio privado, y no forman parte de los datos del producto.
+En etapas futuras se propone añadir observación, ID local estable y estado de envío a conjuntos igualmente sintéticos. Se excluyen datos de estudiantes y personal, matrículas, teléfonos, correos, rostros, geolocalización, credenciales y reportes reales. Los nombres y matrículas de los integrantes de 10A-E08 están registrados aparte en el [README](../README.md#integrantes), dentro del repositorio privado, y no forman parte de los datos del producto.
 
 ## 6. Criterios de aceptación de Semana 1
 

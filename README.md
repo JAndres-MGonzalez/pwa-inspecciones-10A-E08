@@ -4,17 +4,25 @@ Starter Next.js de la Actividad 1: consulta de tres inspecciones sintéticas, de
 
 Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
-Grupo **10A**, equipo **E08** (**10A-E08**). Los tres integrantes y sus matrículas están registrados en [evidence/individual.md](evidence/individual.md).
+Grupo **10A**, equipo **E08** (**10A-E08**).
+
+## Integrantes
+
+| Matrícula | Nombre completo |
+|---|---|
+| 3523110131 | Medina González Juan Andrés |
+| 3523110741 | Montalvo Lopez Jose Ismael |
+| 3523110092 | Montalvo Marcial Kevin Armando |
 
 ## Estado del trabajo
 
 - Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados.
 - `npm run verify` ejecutado con resultado técnico `pass`: estructura, prueba proporcionada y build.
 - [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados como propuestas para revisión del equipo.
-- [Evidencia](evidence/individual.md) incluye la identificación de los tres integrantes y una sección por persona. Juan Andrés registró la instalación, los comandos ejecutados, los resultados y las limitaciones. Jose Ismael y Kevin Armando tienen pendiente registrar sus aportaciones.
+- [Evidencia de Juan Andrés](evidence/individual.md): instalación, comandos ejecutados, resultados y limitaciones.
 - Cuenta del docente e integrantes de GitHub pendientes de indicar; no se han enviado invitaciones.
 
-La aceptación de los documentos por el equipo, las dos secciones personales restantes y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
+La aceptación de los documentos por el equipo y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
 
 ## Entorno comprobado
 
@@ -66,7 +74,7 @@ Los resultados de instalación, verificación y los problemas encontrados están
 - `src/app/`: pantalla inicial y estilos.
 - `src/lib/data/inspections.ts`: datos sintéticos.
 - `docs/`: análisis de requisitos y decisión.
-- `evidence/`: evidencia compartida e individual, con atribución explícita.
+- `evidence/`: evidencia individual y registro de instalación y verificación.
 - `tests/` y `scripts/`: prueba y verificación proporcionadas.
 - `.github/workflows/week-01-starter-feedback.yml`: workflow original del starter.
 - `referencias/PWA-w01-kit-estudiante/`: kit descomprimido aparte para lectura, excluido de Git; no sobrescribe archivos del starter.

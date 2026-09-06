@@ -35,7 +35,7 @@ El 5 de septiembre de 2026, Juan Andrés ejecutó los siguientes comandos en Win
 | `npm run dev` | Next.js 14.2.35 listo en 3.9 s; compilación de `/` en 5 s y respuesta `GET / 200` |
 | `npm run verify` | `starter.spec.mjs: PASS`, `Compiled successfully`, generación de 4/4 páginas estáticas y `Verificación técnica: pass. Revisión académica: pendiente.` |
 
-El reporte de esta ejecución tiene `checkedAt: 2026-09-05T06:33:29.163Z`, Node `v26.4.0`, árbol limpio y resultados de estructura, prueba y compilación en `pass`. Estos resultados corresponden a la ejecución de Juan Andrés. Cada integrante debe registrar su propia aportación y explicar la prueba que realizó.
+El reporte de esta ejecución tiene `checkedAt: 2026-09-05T06:33:29.163Z`, Node `v26.4.0`, árbol limpio y resultados de estructura, prueba y compilación en `pass`. Estos resultados corresponden a la ejecución de Juan Andrés.
 
 ## Explicación de la prueba proporcionada
 
@@ -47,4 +47,4 @@ Un PASS confirma esas aserciones. No importa el dataset ni cuenta tarjetas, no a
 
 La primera ejecución ocurrió antes del primer commit y generó un reporte con `commitSha: null` y `workingTreeClean: false`. Para la entrega se usa el reporte generado después de guardar los cambios en Git, con el mismo SHA y el árbol de trabajo limpio. El JSON y Actions permiten comprobar la versión y la fecha de verificación.
 
-La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. La sección de Juan Andrés documenta la ejecución anterior; las aportaciones de Jose Ismael y Kevin Armando y la aceptación de los documentos por el equipo siguen pendientes.
+La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. La sección de Juan Andrés documenta la ejecución anterior.

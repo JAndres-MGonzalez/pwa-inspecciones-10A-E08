@@ -1,17 +1,8 @@
-# Evidencia individual del equipo
+# Evidencia individual
 
 - Grupo: **10A**.
 - Equipo: **E08** (identificador completo: **10A-E08**).
 - Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
-- Integrantes del equipo:
-
-| Matrícula | Nombre completo |
-|---|---|
-| 3523110131 | Medina González Juan Andrés |
-| 3523110741 | Montalvo Lopez Jose Ismael |
-| 3523110092 | Montalvo Marcial Kevin Armando |
-
-Juan Andrés registró su instalación y verificación local. Jose Ismael y Kevin Armando tienen pendiente completar su evidencia. Los nombres y matrículas se usan para identificar a los integrantes en la entrega y no forman parte de los datos de la aplicación.
 
 ## Integrante: Medina González Juan Andrés
 
@@ -24,29 +15,3 @@ Juan Andrés registró su instalación y verificación local. Jose Ismael y Kevi
 - **Qué verifica y qué no:** la prueba revisa que el comando de compilación sea `next build` y que el código de la página incluya el título y la palabra «sintéticos». La verificación completa también revisa los archivos requeridos y compila el proyecto. No comprueba el funcionamiento sin conexión, la sincronización ni la calidad de los documentos. Un resultado aprobado tampoco significa que no haya problemas de seguridad.
 - **Limitación, dificultad o riesgo que identifiqué:** la aplicación todavía solo muestra datos de ejemplo; no guarda nuevas inspecciones ni funciona offline. Además, npm reportó dos alertas de seguridad de severidad alta, que siguen documentadas y pendientes de atender.
 - **Uso de IA:** usé Codex (OpenAI) como apoyo para preparar el repositorio, redactar los requisitos, la decisión PWA, el README, la evidencia y la bitácora, y entender los resultados. Para comprobar el proyecto ejecuté personalmente `npm ci`, `npm run dev` y `npm run verify` en PowerShell.
-
-## Integrante: Montalvo Lopez Jose Ismael
-
-- **Matrícula:** 3523110741.
-- **Grupo y equipo:** 10A-E08.
-- **Mi contribución concreta y enlace:** pendiente de declaración personal, con enlace a archivo, commit o revisión.
-- **Decisión que puedo explicar y por qué:** pendiente de explicación propia tras revisar [el ADR](../docs/decision-record.md).
-- **Comando o prueba que ejecuté:** pendiente de registrar la ejecución personal; no se atribuye automáticamente la ejecución de otro integrante.
-- **Resultado real que observé:** pendiente de declaración personal, con fecha, comando y resultado.
-- **Qué verifica y qué no:** pendiente de explicación propia; puede contrastarse con [la descripción de la prueba](session-log.md#explicación-de-la-prueba-proporcionada).
-- **Limitación, dificultad o riesgo que identifiqué:** pendiente de reflexión personal.
-- **Uso de IA:** el producto recibió asistencia de Codex; pendiente precisar el uso personal, las partes utilizadas y la comprobación humana realizada.
-
-## Integrante: Montalvo Marcial Kevin Armando
-
-- **Matrícula:** 3523110092.
-- **Grupo y equipo:** 10A-E08.
-- **Mi contribución concreta y enlace:** pendiente de declaración personal, con enlace a archivo, commit o revisión.
-- **Decisión que puedo explicar y por qué:** pendiente de explicación propia tras revisar [el ADR](../docs/decision-record.md).
-- **Comando o prueba que ejecuté:** pendiente de registrar la ejecución personal; no se atribuye automáticamente la ejecución de otro integrante.
-- **Resultado real que observé:** pendiente de declaración personal, con fecha, comando y resultado.
-- **Qué verifica y qué no:** pendiente de explicación propia; puede contrastarse con [la descripción de la prueba](session-log.md#explicación-de-la-prueba-proporcionada).
-- **Limitación, dificultad o riesgo que identifiqué:** pendiente de reflexión personal.
-- **Uso de IA:** el producto recibió asistencia de Codex; pendiente precisar el uso personal, las partes utilizadas y la comprobación humana realizada.
-
-El SHA final se entrega en Classroom después del último commit. Este documento no contiene un SHA que deba volver a incorporarse a otro commit.
