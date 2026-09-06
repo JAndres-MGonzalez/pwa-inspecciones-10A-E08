@@ -1,12 +1,14 @@
-# Bitácora de ejecución asistida
+# Registro de instalación y verificación
 
-Sesión iniciada el 4 de septiembre de 2026, zona America/Mexico_City. Ejecutor de los comandos de la primera sesión: **Codex**, en el entorno del usuario. La ejecución posterior compartida por el usuario se registra en una sección aparte. Equipo identificado el 5 de septiembre de 2026: **10A-E08**.
+Equipo **10A-E08**. Este documento registra la preparación del entorno y la ejecución local de Juan Andrés. Las fechas usan la zona America/Mexico_City, excepto las marcas de tiempo del reporte terminadas en `Z`, que están en UTC.
 
 ## Entorno
 
 Windows NT 10.0.26200.0; Node v26.4.0; npm 11.17.0; Git 2.55.0.windows.3. Starter original con Next.js 14.2.35 y React 18.3.1.
 
-## Resultados observados
+## Preparación del entorno
+
+Fecha: 4 de septiembre de 2026. Los comandos de esta preparación fueron ejecutados por Codex (OpenAI).
 
 | Acción | Resultado real | Alcance |
 |---|---|---|
@@ -23,17 +25,17 @@ Windows NT 10.0.26200.0; Node v26.4.0; npm 11.17.0; Git 2.55.0.windows.3. Starte
 
 Durante desarrollo y build se observó `Caching failed for pack: Error: Unable to snapshot resolve dependencies`. No impidió el HTTP 200 ni la compilación; queda documentado, no resuelto.
 
-## Ejecución local compartida por el usuario
+## Ejecución de Juan Andrés
 
-El 5 de septiembre de 2026, después de clonar el repositorio en `C:\Users\Ra1zeR\Documents\pwa-inspecciones-laboratorio`, Juan Andrés compartió en esta conversación las siguientes salidas de PowerShell. Esta es la ejecución vinculada a su sección personal:
+El 5 de septiembre de 2026, Juan Andrés ejecutó los siguientes comandos en Windows PowerShell, desde `C:\Users\Ra1zeR\Documents\pwa-inspecciones-laboratorio`:
 
-| Comando | Resultado comunicado |
+| Comando | Resultado |
 |---|---|
 | `npm ci` | 28 paquetes instalados y 29 auditados en 13 s; 2 vulnerabilidades de severidad alta |
 | `npm run dev` | Next.js 14.2.35 listo en 3.9 s; compilación de `/` en 5 s y respuesta `GET / 200` |
 | `npm run verify` | `starter.spec.mjs: PASS`, `Compiled successfully`, generación de 4/4 páginas estáticas y `Verificación técnica: pass. Revisión académica: pendiente.` |
 
-El reporte local consultado antes de actualizar la identificación tiene `checkedAt: 2026-09-05T06:33:29.163Z`, Node `v26.4.0`, árbol limpio y los checks de estructura, prueba y build en `pass`. La salida comunicada constituye evidencia de esta ejecución concreta; no demuestra que cada integrante la haya realizado ni que haya revisado los documentos. Las secciones personales deben vincular la aportación y explicación correspondiente.
+El reporte de esta ejecución tiene `checkedAt: 2026-09-05T06:33:29.163Z`, Node `v26.4.0`, árbol limpio y resultados de estructura, prueba y compilación en `pass`. Estos resultados corresponden a la ejecución de Juan Andrés. Cada integrante debe registrar su propia aportación y explicar la prueba que realizó.
 
 ## Explicación de la prueba proporcionada
 
@@ -43,6 +45,6 @@ Un PASS confirma esas aserciones. No importa el dataset ni cuenta tarjetas, no a
 
 ## Versión y límites
 
-La primera ejecución ocurrió antes de crear el primer commit: su reporte tenía `commitSha: null` y `workingTreeClean: false`. No se presenta como reporte del SHA final. Tras integrar los documentos, se regenera el reporte sobre el commit y árbol limpio; el SHA y la hora autoritativos están en ese JSON y en Actions.
+La primera ejecución ocurrió antes del primer commit y generó un reporte con `commitSha: null` y `workingTreeClean: false`. Para la entrega se usa el reporte generado después de guardar los cambios en Git, con el mismo SHA y el árbol de trabajo limpio. El JSON y Actions permiten comprobar la versión y la fecha de verificación.
 
 La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. La sección de Juan Andrés documenta la ejecución anterior; las aportaciones de Jose Ismael y Kevin Armando y la aceptación de los documentos por el equipo siguen pendientes.

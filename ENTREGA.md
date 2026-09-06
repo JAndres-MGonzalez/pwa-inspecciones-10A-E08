@@ -41,4 +41,4 @@ Incidencia: evidencia personal y acceso pendientes; revisar avisos de dependenci
 Adjuntos: verification.json y evidence/individual.md
 ```
 
-Cada integrante registra su propia entrega. Este archivo es una guía, no constancia de entrega en Classroom ni de una calificación. El resultado técnico no sustituye la evidencia personal.
+Cada integrante entrega en Classroom el mismo repositorio y SHA del equipo, junto con los dos adjuntos. Debe indicar su nombre, la sección de evidencia que le corresponde y su contribución.

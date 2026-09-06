@@ -11,7 +11,7 @@ Grupo **10A**, equipo **E08** (**10A-E08**). Los tres integrantes y sus matrícu
 - Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados.
 - `npm run verify` ejecutado con resultado técnico `pass`: estructura, prueba proporcionada y build.
 - [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados como propuestas para revisión del equipo.
-- [Evidencia](evidence/individual.md) incluye la identificación de los tres integrantes y una sección por persona. La sección de Juan Andrés documenta su instalación y verificación local con una explicación básica; faltan las aportaciones personales de Jose Ismael y Kevin Armando.
+- [Evidencia](evidence/individual.md) incluye la identificación de los tres integrantes y una sección por persona. Juan Andrés registró la instalación, los comandos ejecutados, los resultados y las limitaciones. Jose Ismael y Kevin Armando tienen pendiente registrar sus aportaciones.
 - Cuenta del docente e integrantes de GitHub pendientes de indicar; no se han enviado invitaciones.
 
 La aceptación de los documentos por el equipo, las dos secciones personales restantes y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
@@ -52,7 +52,7 @@ El comando comprueba archivos, ejecuta `tests/starter.spec.mjs` y compila; gener
 
 La prueba inicial comprueba que el script de build sea `next build` y que el archivo de página contenga el título y la mención de datos sintéticos. No renderiza, cuenta tarjetas, prueba accesibilidad ni valida offline. La inspección del navegador se documenta aparte.
 
-Los logs reales y las limitaciones están en [la bitácora](evidence/session-log.md). No se añadieron nuevas pruebas ni se cambiaron las dependencias, los scripts o el código de la aplicación.
+Los resultados de instalación, verificación y los problemas encontrados están en [la bitácora](evidence/session-log.md). Se utilizan las pruebas y dependencias proporcionadas en el starter.
 
 ## Incidencias observadas
 

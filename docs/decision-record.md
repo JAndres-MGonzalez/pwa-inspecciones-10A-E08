@@ -2,7 +2,7 @@
 
 ## Estado
 
-4 de septiembre de 2026. **Propuesta para revisión del equipo.** Se conserva Next.js y la trayectoria PWA del curso. El documento fue preparado con IA y requiere revisión y aceptación de integrantes; no se afirma una aprobación colectiva todavía no confirmada.
+4 de septiembre de 2026. **Propuesta pendiente de revisión del equipo.** Se mantiene Next.js y se plantea desarrollar las funciones PWA en las siguientes etapas del curso. El uso de IA está declarado en [la evidencia individual](../evidence/individual.md).
 
 Equipo **10A-E08**. Identificación actualizada el 5 de septiembre de 2026.
 
