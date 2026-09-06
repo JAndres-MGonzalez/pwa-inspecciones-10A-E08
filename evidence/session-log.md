@@ -25,7 +25,7 @@ Durante desarrollo y build se observó `Caching failed for pack: Error: Unable t
 
 ## Ejecución local compartida por el usuario
 
-El 5 de septiembre de 2026, después de clonar el repositorio en `C:\Users\Ra1zeR\Documents\pwa-inspecciones-laboratorio`, el usuario compartió las siguientes salidas de PowerShell:
+El 5 de septiembre de 2026, después de clonar el repositorio en `C:\Users\Ra1zeR\Documents\pwa-inspecciones-laboratorio`, Juan Andrés compartió en esta conversación las siguientes salidas de PowerShell. Esta es la ejecución vinculada a su sección personal:
 
 | Comando | Resultado comunicado |
 |---|---|
@@ -45,4 +45,4 @@ Un PASS confirma esas aserciones. No importa el dataset ni cuenta tarjetas, no a
 
 La primera ejecución ocurrió antes de crear el primer commit: su reporte tenía `commitSha: null` y `workingTreeClean: false`. No se presenta como reporte del SHA final. Tras integrar los documentos, se regenera el reporte sobre el commit y árbol limpio; el SHA y la hora autoritativos están en ese JSON y en Actions.
 
-La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. Las contribuciones personales y aceptación del equipo permanecen pendientes de confirmación.
+La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. La sección de Juan Andrés documenta la ejecución anterior; las aportaciones de Jose Ismael y Kevin Armando y la aceptación de los documentos por el equipo siguen pendientes.

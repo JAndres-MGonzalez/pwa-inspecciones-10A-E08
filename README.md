@@ -11,10 +11,10 @@ Grupo **10A**, equipo **E08** (**10A-E08**). Los tres integrantes y sus matrícu
 - Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados.
 - `npm run verify` ejecutado con resultado técnico `pass`: estructura, prueba proporcionada y build.
 - [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados como propuestas para revisión del equipo.
-- [Evidencia](evidence/individual.md) incluye la identificación de los tres integrantes, una sección por persona y los resultados de la sesión asistida. Se registró también la ejecución local compartida por el usuario; faltan las aportaciones y explicaciones confirmadas por cada integrante.
+- [Evidencia](evidence/individual.md) incluye la identificación de los tres integrantes y los resultados de la sesión asistida. La sección de Juan Andrés documenta su instalación y verificación local con una explicación básica; faltan las aportaciones personales de Jose Ismael y Kevin Armando.
 - Cuenta del docente e integrantes de GitHub pendientes de indicar; no se han enviado invitaciones.
 
-La aceptación del equipo, la evidencia personal y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
+La aceptación de los documentos por el equipo, las dos secciones personales restantes y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
 
 ## Entorno comprobado
 

@@ -7,7 +7,7 @@ Grupo **10A**, equipo **E08** (**10A-E08**). Integrantes y matrículas registrad
 ## Pendientes personales y del equipo
 
 1. Revisar requisitos y ADR, corregir supuestos y registrar aceptación real.
-2. Completar las tres secciones personales ya identificadas en [evidence/individual.md](evidence/individual.md), con contribución enlazada, ejecución propia explicada, limitación y declaración de IA.
+2. Juan Andrés ya tiene documentada su instalación y verificación local en [evidence/individual.md](evidence/individual.md). Jose Ismael y Kevin Armando deben completar sus secciones con contribución enlazada, ejecución propia explicada, limitación y declaración de IA.
 3. Proporcionar cuentas de GitHub de compañeros y docente para invitarlas. No hay invitaciones realizadas. Si falta la cuenta docente, registrarlo como incidencia.
 4. Confirmar la fecha límite directamente en Classroom.
 
