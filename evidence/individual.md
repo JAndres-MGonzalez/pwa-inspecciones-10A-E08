@@ -2,7 +2,7 @@
 
 - Grupo: **10A**.
 - Equipo: **E08** (identificador completo: **10A-E08**).
-- Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-laboratorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio).
+- Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 - Integrantes y matrículas proporcionados por el usuario el 5 de septiembre de 2026:
 
 | Matrícula | Nombre completo |

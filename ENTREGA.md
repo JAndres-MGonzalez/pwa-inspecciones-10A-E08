@@ -1,6 +1,6 @@
 # Preparación de la entrega en Classroom
 
-Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-laboratorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio).
+Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
 Grupo **10A**, equipo **E08** (**10A-E08**). Integrantes y matrículas registrados en [evidence/individual.md](evidence/individual.md).
 
@@ -24,14 +24,14 @@ npm run verify
 
 El estado debe quedar limpio. El JSON debe tener `status: "pass"`, `workingTreeClean: true` y el mismo `commitSha`. Si se modifica un documento después, crear otro commit y volver a verificar esa nueva versión.
 
-Abrir [Actions del repositorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio/actions), seleccionar «Starter Semana 1 — feedback» para ese SHA y copiar el enlace de la ejecución. Descargar `starter-week-01-evidence` y adjuntar su `verification.json`, o utilizar el reporte local generado sobre ese mismo commit limpio.
+Abrir [Actions del repositorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions), seleccionar «Starter Semana 1 — feedback» para ese SHA y copiar el enlace de la ejecución. Descargar `starter-week-01-evidence` y adjuntar su `verification.json`, o utilizar el reporte local generado sobre ese mismo commit limpio.
 
 ## Formato personal
 
 ```text
 Grupo y equipo: 10A-E08
 Mi nombre: COPIAR EL NOMBRE PROPIO DE evidence/individual.md
-Repositorio privado del equipo: https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio
+Repositorio privado del equipo: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08
 SHA final (40 caracteres): COPIAR DESPUÉS DEL ÚLTIMO COMMIT
 Enlace a Actions de ese SHA: COPIAR LA EJECUCIÓN CORRESPONDIENTE
 Mi sección en evidence/individual.md: Integrante: NOMBRE COMPLETO PROPIO

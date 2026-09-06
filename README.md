@@ -2,7 +2,7 @@
 
 Starter Next.js de la Actividad 1: consulta de tres inspecciones sintéticas, definición del producto y justificación de su trayectoria PWA.
 
-Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-laboratorio](https://github.com/JAndres-MGonzalez/pwa-inspecciones-laboratorio).
+Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
 Grupo **10A**, equipo **E08** (**10A-E08**). Los tres integrantes y sus matrículas están registrados en [evidence/individual.md](evidence/individual.md).
 
