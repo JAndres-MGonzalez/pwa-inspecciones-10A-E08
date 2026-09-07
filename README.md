@@ -16,26 +16,26 @@ Grupo **10A**, equipo **E08** (**10A-E08**).
 
 ## Estado del trabajo
 
-- Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados.
-- `npm run verify` ejecutado con resultado técnico `pass`: estructura, prueba proporcionada y build.
-- [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados como propuestas para revisión del equipo.
-- [Evidencia de Juan Andrés](evidence/individual.md): instalación, comandos ejecutados, resultados y limitaciones.
-- Cuenta del docente e integrantes de GitHub pendientes de indicar; no se han enviado invitaciones.
+- Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados, en los dos entornos declarados.
+- `npm run verify` ejecutado con resultado técnico `pass` por Juan Andrés; Kevin Armando ejecutó `npm.cmd test` (`PASS`), `npm.cmd run build` y `npm.cmd run verify`.
+- [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados y ajustados por el equipo: el ADR fue revisado y completado por Kevin Armando.
+- [Evidencia individual](evidence/individual.md): secciones de Juan Andrés y Kevin Armando completas; la de Ismael queda pendiente de su declaración personal.
+- Cuenta del docente pendiente de indicar; no se han enviado invitaciones de acceso.
 
 La aceptación de los documentos por el equipo y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
 
 ## Entorno comprobado
 
-| Herramienta | Versión local |
-|---|---|
-| Sistema | Windows NT 10.0.26200.0 |
-| Node.js | v26.4.0 |
-| npm | 11.17.0 |
-| Git | 2.55.0.windows.3 |
-| Next.js del starter | 14.2.35 |
-| React del starter | 18.3.1 |
+| Herramienta | Entorno 1 (Juan Andrés) | Entorno 2 (Kevin Armando) |
+|---|---|---|
+| Sistema | Windows NT 10.0.26200.0 | Windows (PowerShell) |
+| Node.js | v26.4.0 | v22.22.0 |
+| npm | 11.17.0 | 10.9.4 |
+| Git | 2.55.0.windows.3 | 2.47.0.windows.2 |
+| Next.js del starter | 14.2.35 | 14.2.35 |
+| React del starter | 18.3.1 | 18.3.1 |
 
-La actividad admite Node 20.19 o posterior compatible y npm 10 o posterior. El workflow proporcionado usa Node **20.19.6**; sus resultados se comprueban por separado en Actions.
+La actividad admite Node 20.19 o posterior compatible y npm 10 o posterior; los dos entornos la cumplen. El workflow proporcionado usa Node **20.19.6**; sus resultados se comprueban por separado en Actions. El segundo entorno fue verificado el 5 de septiembre de 2026 con `npm.cmd ci`, `npm.cmd run dev` (tres inspecciones en localhost:3000), `npm.cmd run build` y `npm.cmd test` (`PASS`); la ejecución duplicada en entornos distintos refuerza RNF-01 (reproducibilidad).
 
 ## Instalar y ejecutar
 
