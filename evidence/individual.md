@@ -28,7 +28,7 @@
 - **Limitación, dificultad o riesgo que identifiqué:** mi verificación se ejecutó en un solo entorno (Windows, Node v22.22.0); la CI usa Node 20.19.6 y debe confirmarse en Actions. Además, al integrar los cambios del equipo apareció un `reports/verification.json` con `commitSha` nulo y marcadores «PENDIENTE», que retiré de Git porque el reporte no debe versionarse; se regenerará sobre el commit final con `npm.cmd run verify`.
 - **Uso de IA:** usé un asistente de IA de terminal (opencode) como apoyo para revisar el ADR, restaurar el formato de los documentos, redactar esta evidencia y explicar los resultados. Las decisiones de contenido y los comandos de verificación los ejecuté y confirmé personalmente en PowerShell: instalación, servidor con las tres inspecciones, `npm.cmd test` en `PASS` y `npm.cmd run verify` con `reports/verification.json` real.
 
-# Evidencia individual — José Ismael Montalvo Lopes
+# Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08
 - **Integrante:** José Ismael Montalvo Lopes
@@ -39,8 +39,6 @@
 Mi contribución fue revisar y ajustar el documento `docs/requirements.md`, enfocándome en que el problema estuviera claramente delimitado, que los usuarios y escenarios fueran coherentes, que uno de los escenarios contemplara conectividad intermitente y que los requisitos fueran verificables y estuvieran vinculados con los escenarios.
 
 También revisé que el documento distinguiera entre las funciones implementadas en la Semana 1 y las funciones futuras, incluyera datos ficticios y excluyera datos reales, y que los requisitos no funcionales indicaran una forma concreta de comprobación.
-
-**Enlace al archivo revisado:** https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/blob/main/docs/requirements.md
 
 ## Decisión que puedo explicar
 
@@ -115,3 +113,4 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Enlace de GitHub Actions correspondiente al SHA:** PENDIENTE — copiar la ejecución que corresponda exactamente a ese SHA.
 - **Acceso docente:** PENDIENTE — indicar `invitado` o `confirmado` según el estado real.
 - **Incidencia:** npm reportó 2 vulnerabilidades de severidad alta; no impidieron `npm ci` ni `npm run verify`.
+
