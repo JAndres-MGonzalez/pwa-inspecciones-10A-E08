@@ -28,6 +28,13 @@
 - **Limitación, dificultad o riesgo que identifiqué:** mi verificación se ejecutó en un solo entorno (Windows, Node v22.22.0); la CI usa Node 20.19.6 y debe confirmarse en Actions. Además, al integrar los cambios del equipo apareció un `reports/verification.json` con `commitSha` nulo y marcadores «PENDIENTE», que retiré de Git porque el reporte no debe versionarse; se regenerará sobre el commit final con `npm.cmd run verify`.
 - **Uso de IA:** usé un asistente de IA de terminal (opencode) como apoyo para revisar el ADR, restaurar el formato de los documentos, redactar esta evidencia y explicar los resultados. Las decisiones de contenido y los comandos de verificación los ejecuté y confirmé personalmente en PowerShell: instalación, servidor con las tres inspecciones, `npm.cmd test` en `PASS` y `npm.cmd run verify` con `reports/verification.json` real.
 
+### Semana 2
+
+- **Decisión técnica que puedo explicar:** construí el app shell como componente de servidor (`src/components/app-shell.tsx`) con puntos de referencia accesibles: enlace para saltar al contenido, encabezado con marca y navegación principal, `<main id="contenido-principal">` y pie; los estados de carga, error y vacío se cubren con `src/app/loading.tsx`, `src/app/error.tsx` y una rama en `src/app/page.tsx`. La página usa `export const dynamic = "force-dynamic"` y `await loadInspections()`, con un cargador sintético determinista (700 ms de latencia simulada y fallo desactivado mediante `src/lib/data/inspection-controls.ts`), para que el estado de carga sea observable sin depender de servicios externos.
+- **Prueba que ejecuté y resultado:** `npm.cmd test` terminó con `starter.spec.mjs: PASS`; `npm run build` compiló con código 0 (ruta `/` dinámica, First Load JS 87.4 kB); `npm run dev` con el AppShell integrado temporalmente en `layout.tsx` respondió HTTP 200 e incluyó el enlace «Saltar al contenido», la navegación principal, `main#contenido-principal`, el pie y el título. Después de verificar restauré `layout.tsx` a su versión de Semana 1 (el Turno 2 lo integra).
+- **Limitación o fallo diagnosticado:** `npm test` y `npm run build` no comprueban los estados de carga/error/vacío ni la accesibilidad del shell en un navegador real; la validación visual que ejecuté es una comprobación separada. Además, el AppShell solo estará visible en el sitio oficial cuando el Turno 2 (layout y manifest) se integre en `master`.
+- **Uso declarado de IA (herramienta, propósito, validación):** usé opencode para redactar los componentes, ajustar los estilos y guiar la verificación; los comandos de prueba, build y servidor los ejecuté personalmente en PowerShell y comprobé el HTML servido.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08

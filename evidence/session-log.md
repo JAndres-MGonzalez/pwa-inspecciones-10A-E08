@@ -48,3 +48,16 @@ Un PASS confirma esas aserciones. No importa el dataset ni cuenta tarjetas, no a
 La primera ejecución ocurrió antes del primer commit y generó un reporte con `commitSha: null` y `workingTreeClean: false`. Para la entrega se usa el reporte generado después de guardar los cambios en Git, con el mismo SHA y el árbol de trabajo limpio. El JSON y Actions permiten comprobar la versión y la fecha de verificación.
 
 La documentación de requisitos y la comparación contienen análisis para revisión del equipo. Los objetivos de 100 registros, contraste, zoom y recuperación offline aún no tienen un ensayo completo registrado. La sección de Juan Andrés documenta la ejecución anterior.
+
+## Ejecución de Kevin — Semana 2 (Turno 1)
+
+Fecha: 10 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empezar se verificó `git status` con el árbol limpio sobre `master`.
+
+| Acción | Resultado real |
+|---|---|
+| Revisar alcance contra repositorio re-pull | `master` sincronizado con `origin/master` (HEAD `05094f8`); sin artefactos de Semana 2; evidencia de Semana 1 de Ismael presente |
+| Crear `src/components/app-shell.tsx`, `src/app/loading.tsx`, `src/app/error.tsx`, `src/lib/data/inspection-controls.ts` e `inspection-loader.ts`; modificar `page.tsx` y `globals.css` | 6 archivos del Turno 1; `layout.tsx` sin modificar |
+| `npm.cmd test` | `starter.spec.mjs: PASS`, código 0 |
+| `npm run build` | Código 0; `/` dinámica (142 B, First Load JS 87.4 kB); 4/4 páginas |
+| `npm run dev` con integración temporal del AppShell en `layout.tsx` | HTTP 200; HTML con «Saltar al contenido», navegación principal, `main#contenido-principal`, pie e h1 «Inspecciones de laboratorio» |
+| Restaurar `layout.tsx` | `git checkout` del archivo; `git status` muestra solo los archivos del Turno 1 |
