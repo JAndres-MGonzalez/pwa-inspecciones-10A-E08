@@ -34,6 +34,7 @@
 - **Prueba que ejecuté y resultado:** `npm.cmd test` terminó con `starter.spec.mjs: PASS`; `npm run build` compiló con código 0 (ruta `/` dinámica, First Load JS 87.4 kB); `npm run dev` con el AppShell integrado temporalmente en `layout.tsx` respondió HTTP 200 e incluyó el enlace «Saltar al contenido», la navegación principal, `main#contenido-principal`, el pie y el título. Después de verificar restauré `layout.tsx` a su versión de Semana 1 (el Turno 2 lo integra).
 - **Limitación o fallo diagnosticado:** `npm test` y `npm run build` no comprueban los estados de carga/error/vacío ni la accesibilidad del shell en un navegador real; la validación visual que ejecuté es una comprobación separada. Además, el AppShell solo estará visible en el sitio oficial cuando el Turno 2 (layout y manifest) se integre en `master`.
 - **Uso declarado de IA (herramienta, propósito, validación):** usé opencode para redactar los componentes, ajustar los estilos y guiar la verificación; los comandos de prueba, build y servidor los ejecuté personalmente en PowerShell y comprobé el HTML servido.
+- **Commit de mi turno (SHA):** `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app shell y estados de carga, error y vacio`, empujado a `origin/master` el 10 de septiembre de 2026.
 
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
