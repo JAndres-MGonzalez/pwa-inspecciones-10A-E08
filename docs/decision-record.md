@@ -63,3 +63,15 @@ Una web tradicional sería suficiente si se descartara E-02 y siempre hubiera re
 6. **Evidencia opcional y notificaciones con degradación segura:** cuando exista persistencia y service worker (RNF-06), ensayar la captura de una imagen opcional asociada a una inspección y comprobar que el aviso de "sin conexión" no descarta datos ni simula un envío. Registrar los resultados junto con los ensayos de RNF-06 en el dispositivo y navegador declarados.
 
 No se han ejecutado estos ensayos futuros. La evidencia actual se limita a las comprobaciones de Semana 1 que efectivamente registre la bitácora.
+
+## Semana 2 — Manifest, estructura y verificación
+
+La integración mantiene `start_url` y `scope` en `/`: el producto tiene una sola ruta principal. Se usa `display: standalone` para que un navegador compatible pueda presentar la aplicación en su propia ventana. Esto no añade persistencia ni funcionamiento offline. Los iconos PNG de 192, 512 y maskable 512, más el icono Apple de 180, se enlazan desde el manifest y el layout.
+
+El layout contiene el encabezado, la navegación, una sola área principal y el pie. La página coloca dentro el listado. Se añadió el destino que faltaba para «Inspecciones recientes» y se hizo enfocable el contenido principal para el enlace de teclado. El cargador sintético conserva una espera de 700 ms y el error de demostración queda desactivado en el estado entregado.
+
+Para verificar se consideraron dos opciones: añadir un ejecutor de TypeScript y nuevas dependencias, o usar el compilador que ya incluye el starter. Se eligió la segunda para conservar el lockfile y ejecutar una sola implementación en `tests/manifest.spec.ts` desde `npm test`. El ayudante de pruebas convierte los módulos en memoria y permite sustituir los datos en los casos vacío y error. Su costo es mantener un pequeño cargador de pruebas; el build de Next.js sigue siendo necesario para validar la compilación real.
+
+La prueba renderiza los componentes reales, comprueba campos y dimensiones de iconos, enlaces, estructura y estados. Dos casos detectaron problemas antes de la corrección y luego pasaron junto con los otros siete. La [evidencia de integración](../evidence/week-02/integration-check.json) conserva ambos resultados. Se revisó aparte la página en navegador a 1280 y 320 px y el salto al contenido con teclado.
+
+Esta decisión no implica conformidad integral de accesibilidad ni instalación comprobada en un teléfono real. Los pasos de CampusOps no forman parte del kit PWA de esta semana. La evidencia personal de cada integrante debe describir solo las verificaciones que realmente haya realizado.

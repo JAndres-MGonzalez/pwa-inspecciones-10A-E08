@@ -67,3 +67,22 @@ Commit del turno: `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app
 ## 2026-09-13 — Turno 2 (Ismael)
 - Comandos: git pull, npm ci, script de PowerShell para generar iconos, npm run dev
 - Resultado: git pull y npm ci sin cambios en el lockfile; se generaron 4 iconos PNG (192, 512, 512-maskable, apple-touch-icon); se creó public/manifest.webmanifest; se reemplazó src/app/layout.tsx integrando AppShell y el manifest; npm run dev compiló sin errores (Compiled / in 15.6s, GET / 200); verificado visualmente en http://localhost:3000 y http://localhost:3000/manifest.webmanifest.
+
+## Integración de Juan Andrés — Semana 2
+
+Fecha: 13 de septiembre de 2026. La integración se hizo a solicitud de Juan Andrés, mediante Codex. Los comandos y la revisión de navegador de esta entrada fueron ejecutados por la herramienta. No se atribuyen a una ejecución personal del estudiante.
+
+Se partió de `ae5147ee328b984d2e078fbcb83cf4fde75837fc`, con los cambios de Kevin e Ismael ya presentes. La guía PWA de Juan Andrés y `PWA-w02-kit-estudiante.zip` especifican manifest, shell, estados, suite y workflow; no usan el evaluador ni la etiqueta de CampusOps. El workflow y el chequeo público de Semana 2 se copiaron del kit, sin sustituir el workflow anterior.
+
+| Comprobación | Resultado |
+|---|---|
+| Instalación con `npm.cmd ci` | Código 0; 28 paquetes añadidos y 29 auditados |
+| Primera suite del shell integrado | Código 1; siete casos aprobados y dos fallidos: área principal repetida y destino de navegación ausente |
+| Misma suite después de la corrección | Código 0; nueve casos aprobados |
+| `npm.cmd run verify` | Código 0; estructura, prueba y build aprobados; ruta `/` dinámica y First Load JS de 87.4 kB |
+| Navegador local en puerto 3100 | Carga visible, tres inspecciones, un `main`, un pie, enlaces correctos y sin desbordamiento horizontal a 1280 y 320 px |
+| Teclado, Tab y Enter | El enlace «Saltar al contenido» deja el foco en el área principal |
+| Chequeo público del kit | Imprime coincidencias y `PUBLIC_OK`, código 0; la negación de `rg` no activa la salida anticipada de Bash |
+| Auditoría de dependencias | Una dependencia alta y una crítica; el lockfile no se modificó |
+
+La [evidencia del antes y después](week-02/integration-check.json) y el [reporte de integración](week-02/reports/3523110131.md) permiten revisar lo comprobado y sus límites. Los reportes finales se generan después del último commit y deben coincidir con su SHA. Durante la integración se incorporó la declaración personal de Semana 2 que Ismael publicó en los commits a6a1962 y d1bf722.

@@ -16,6 +16,15 @@
 - **Limitación, dificultad o riesgo que identifiqué:** la aplicación todavía solo muestra datos de ejemplo; no guarda nuevas inspecciones ni funciona offline. Además, npm reportó dos alertas de seguridad de severidad alta, que siguen documentadas y pendientes de atender.
 - **Uso de IA:** usé Codex (OpenAI) como apoyo para preparar el repositorio, redactar los requisitos, la decisión PWA, el README, la evidencia y la bitácora, y entender los resultados. Para comprobar el proyecto ejecuté personalmente `npm ci`, `npm run dev` y `npm run verify` en PowerShell.
 
+### Semana 2 — Integración y verificación
+
+- **Contribución y enlace:** integración de pruebas del manifest y de los estados, workflow de Semana 2 y corrección del área principal duplicada y del enlace a inspecciones. Cambio: [1cbb793](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/1cbb79364bcdc44ca3213e392d4207cd8d5aa793). Detalle: [reporte de integración](week-02/reports/3523110131.md).
+- **Decisión técnica:** ejecutar el spec de TypeScript con el compilador ya incluido en el proyecto. Así se conserva el comando `npm test`, se prueban los componentes reales y no se agregan dependencias ni se duplican las pruebas.
+- **Comprobación y resultado:** Codex ejecutó `npm.cmd ci`, `npm.cmd test` y `npm.cmd run verify`. La primera suite detectó dos fallos de integración; después de corregirlos pasaron nueve casos y la compilación. El [registro del antes y después](week-02/integration-check.json) conserva las salidas. La revisión con navegador comprobó escritorio, ancho de 320 px y navegación con teclado.
+- **Limitación diagnosticada:** el chequeo público devuelve código 0 incluso cuando imprime coincidencias. Los tests y el build no acreditan instalación en un teléfono ni funcionamiento offline. La auditoría actual reporta una dependencia alta y una crítica.
+- **Cambio que puedo defender o modificar:** explicar por qué el layout contiene una sola área principal y cómo el enlace interno coincide con el identificador de la sección.
+- **Uso de IA y validación personal:** Codex (OpenAI) ayudó con código de integración, pruebas, documentación y comprobaciones. Las ejecuciones de esta Semana 2 registradas aquí fueron realizadas por la herramienta. Falta que Juan Andrés repita y explique personalmente la verificación de esta versión; sus ejecuciones personales de Semana 1 se mantienen registradas por separado.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.

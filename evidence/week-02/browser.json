@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-09-13T23:51:17.152Z",
+  "executor": "Codex browser tools",
+  "desktop": {
+    "cards": 3,
+    "footerCount": 1,
+    "horizontalOverflow": false,
+    "mainCount": 1,
+    "manifest": "/manifest.webmanifest",
+    "width": 1280
+  },
+  "mobile": {
+    "cards": 3,
+    "horizontalOverflow": false,
+    "scrollWidth": 305,
+    "width": 320
+  },
+  "skipLink": {
+    "keySequence": "Tab, Enter",
+    "focusedId": "contenido-principal"
+  },
+  "navigation": {
+    "hash": "#inspecciones-recientes",
+    "targetExists": true
+  },
+  "loadingObserved": true
+}

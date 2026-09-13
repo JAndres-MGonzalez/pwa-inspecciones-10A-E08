@@ -1,10 +1,8 @@
-# Inspecciones de laboratorio · Semana 1
+# Inspecciones de laboratorio · Semana 2
 
-Starter Next.js de la Actividad 1: consulta de tres inspecciones sintéticas, definición del producto y justificación de su trayectoria PWA.
+Aplicación de ejemplo para consultar inspecciones de mantenimiento. Esta semana se integraron la estructura de navegación, el manifest, los iconos y los estados de carga, error y lista vacía.
 
-Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
-
-Grupo **10A**, equipo **E08** (**10A-E08**).
+Repositorio: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08). Grupo **10A**, equipo **E08**. El repositorio está público por decisión del propietario; la actividad anterior lo solicitaba privado. Falta indicar la cuenta del docente para una invitación.
 
 ## Integrantes
 
@@ -14,74 +12,69 @@ Grupo **10A**, equipo **E08** (**10A-E08**).
 | 3523110741 | Montalvo Lopez Jose Ismael |
 | 3523110092 | Montalvo Marcial Kevin Armando |
 
-## Estado del trabajo
+## Qué funciona
 
-- Starter instalado y pantalla inicial inspeccionada en navegador: tres registros y sus valores esperados, en los entornos declarados.
-- `npm run verify` ejecutado con resultado técnico `pass` por Juan Andrés, Kevin Armando y Jose Ismael, cada uno en su propio equipo.
-- [Requisitos](docs/requirements.md) y [decisión PWA](docs/decision-record.md) preparados y ajustados por el equipo: el ADR fue revisado y completado por Kevin Armando; el escenario E-02 de requisitos fue revisado y precisado por Jose Ismael.
-- [Evidencia individual](evidence/individual.md): secciones de Juan Andrés, Kevin Armando y Jose Ismael completas.
-- Cuenta del docente pendiente de indicar; no se han enviado invitaciones de acceso.
+- Encabezado, navegación principal, un área principal y un pie de página.
+- Enlace «Saltar al contenido» usable con teclado y acceso a «Inspecciones recientes».
+- Tres registros ficticios: Redes y Software sin hallazgos; Electrónica con dos.
+- Manifest con nombre, colores, inicio y alcance en `/`, y presentación `standalone`.
+- Iconos PNG de 192 y 512 píxeles, uno de 512 declarado maskable, e icono Apple de 180.
+- Estado de carga con espera simulada de 700 ms, error con botón para reintentar y mensaje para una lista sin registros.
 
-La aceptación de los documentos por el equipo y la revisión académica siguen pendientes. No se presenta el resultado técnico como calificación.
-
-## Entorno comprobado
-
-| Herramienta | Entorno 1 (Juan Andrés) | Entorno 2 (Kevin Armando) | Entorno 3 (Jose Ismael) |
-|---|---|---|---|
-| Sistema | Windows NT 10.0.26200.0 | Windows (PowerShell) | Windows (PowerShell) |
-| Node.js | v26.4.0 | v22.22.0 | v24.20.0 |
-| npm | 11.17.0 | 10.9.4 | 11.19.0 |
-| Git | 2.55.0.windows.3 | 2.47.0.windows.2 | 2.55.0.windows.3 |
-| Next.js del starter | 14.2.35 | 14.2.35 | 14.2.35 |
-| React del starter | 18.3.1 | 18.3.1 | 18.3.1 |
-
-La actividad admite Node 20.19 o posterior compatible y npm 10 o posterior; los tres entornos la cumplen. El workflow proporcionado usa Node **20.19.6**; sus resultados se comprueban por separado en Actions. El segundo entorno fue verificado el 5 de septiembre de 2026 con `npm.cmd ci`, `npm.cmd run dev` (tres inspecciones en localhost:3000), `npm.cmd run build` y `npm.cmd test` (`PASS`); el tercer entorno fue verificado el 6 de septiembre de 2026 con `npm ci` y `npm run verify` (`starter.spec.mjs: PASS`, build compilado en 4/4 páginas estáticas). La ejecución triplicada en entornos distintos refuerza RNF-01 (reproducibilidad).
+Kevin preparó la estructura y los estados. Ismael agregó el manifest, los iconos y la integración en el layout. Juan Andrés solicitó la integración final: comprobaciones, corrección de la navegación y de las áreas repetidas, workflow y evidencia. La [evidencia individual](evidence/individual.md) distingue las declaraciones personales y las comprobaciones automatizadas.
 
 ## Instalar y ejecutar
 
-Desde la carpeta que contiene `package.json`:
+Requisitos: Git, Node.js 20.19 o posterior compatible y npm 10 o posterior. Desde la carpeta de `package.json`:
 
-```bash
-npm ci
-npm run dev
+```powershell
+npm.cmd ci
+npm.cmd run dev
 ```
 
-Abrir [localhost:3000](http://localhost:3000). Deben aparecer Redes (0 hallazgos), Electrónica (2) y Software (0), con alias ficticios Técnica A, Técnico B y Técnica C. Detener con Ctrl+C antes de verificar.
+Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. En otros sistemas se puede usar `npm` en lugar de `npm.cmd`.
 
-En PowerShell puede usarse `npm.cmd` para invocar directamente el ejecutable de npm. En esta sesión se utilizó `npm.cmd run dev -- --hostname 127.0.0.1`, limitando el servidor a la máquina local.
+## Comprobar el proyecto
 
-## Verificar
-
-```bash
-npm run verify
+```powershell
+npm.cmd run verify
 ```
 
-El comando comprueba archivos, ejecuta `tests/starter.spec.mjs` y compila; genera `reports/verification.json`. `make verify` es equivalente y Make no es necesario.
+Es el equivalente de `make verify`: comprueba los archivos, ejecuta la suite y compila. Genera `reports/verification.json` con el SHA, el estado del árbol, los resultados y los documentos. La prueba también genera `reports/week-02/tests.json`. Para ejecutar solo las pruebas: `npm.cmd test`; para compilar por separado: `npm.cmd run build`.
 
-La prueba inicial comprueba que el script de build sea `next build` y que el archivo de página contenga el título y la mención de datos sintéticos. No renderiza, cuenta tarjetas, prueba accesibilidad ni valida offline. La inspección del navegador se documenta aparte.
+La suite ejecuta **nueve casos** en `tests/manifest.spec.ts`: contrato inicial, campos del manifest, dimensiones reales de PNG, área principal y pie únicos, destinos de navegación, tres inspecciones, estado vacío, carga y error con recuperación del cargador. `tests/starter.spec.mjs` es la entrada ya configurada en el starter. Un ayudante usa el TypeScript existente para ejecutar el spec y los componentes en Node 20, sin instalar dependencias ni mantener dos versiones de las mismas pruebas.
 
-Los resultados de instalación, verificación y los problemas encontrados están en [la bitácora](evidence/session-log.md). Se utilizan las pruebas y dependencias proporcionadas en el starter.
+Los casos renderizan los componentes con React en memoria y sustituyen únicamente datos y tiempos dentro del proceso de pruebas. No modifican los datos de la aplicación. No comprueban todos los navegadores, instalación en un teléfono real, offline ni todos los aspectos de accesibilidad.
 
-## Incidencias observadas
+## Evidencia de integración
 
-1. El primer `npm ci` falló con `EACCES` al descargar dependencias y escribir en la caché de npm por restricciones del entorno. El reintento autorizado terminó con código 0: 28 paquetes instalados y 29 auditados.
-2. `npm audit --json` reportó **2 dependencias con severidad alta**, Next.js y PostCSS, y terminó con código 1. No significa que se haya demostrado explotación de esta pantalla. Se conserva el lockfile del starter para la actividad; hace falta revisar y corregir o justificar los avisos antes de publicar el servicio. No se ejecutó `npm audit fix --force`, que proponía un cambio de versión mayor.
-3. Webpack emitió `Caching failed for pack: Error: Unable to snapshot resolve dependencies`. A pesar del aviso, la página respondió HTTP 200 y el build terminó con código 0. No se afirma que el aviso haya sido resuelto.
-4. El reporte de una ejecución previa al commit tiene `commitSha: null` y árbol sin confirmar. El reporte entregable se regenera después del commit, con árbol limpio.
+La primera ejecución detectó dos problemas: dos etiquetas `main` y un enlace sin destino. Con la misma suite, después de corregir la integración, pasaron los nueve casos. El registro del [antes y después](evidence/week-02/integration-check.json) identifica el commit de partida y los resultados reales.
 
-## Estructura
+La comprobación de navegador revisó 1280 × 900 y 320 × 800, tres tarjetas, un área principal, un pie, enlaces internos y el foco del teclado. Las capturas y observaciones están en [el reporte de Juan Andrés](evidence/week-02/reports/3523110131.md). Estas comprobaciones las ejecutó Codex; no sustituyen la revisión personal del integrante.
 
-- `src/app/`: pantalla inicial y estilos.
-- `src/lib/data/inspections.ts`: datos sintéticos.
-- `docs/`: análisis de requisitos y decisión.
-- `evidence/`: evidencia individual y registro de instalación y verificación.
-- `tests/` y `scripts/`: prueba y verificación proporcionadas.
-- `.github/workflows/week-01-starter-feedback.yml`: workflow original del starter.
-- `referencias/PWA-w01-kit-estudiante/`: kit descomprimido aparte para lectura, excluido de Git; no sobrescribe archivos del starter.
-- `reports/`: salidas locales excluidas de Git.
+## Entornos registrados
 
-## Límites y entrega
+| Herramienta | Juan Andrés, Semana 1 | Kevin, Semana 2 | Ismael, Semana 1 | Integración automatizada, Semana 2 |
+|---|---|---|---|---|
+| Sistema | Windows | Windows | Windows | Windows |
+| Node.js | 26.4.0 | 22.22.0 | 24.20.0 | 26.4.0 |
+| npm | 11.17.0 | 10.9.4 | 11.19.0 | 11.17.0 |
+| Git | 2.55.0.windows.3 | 2.47.0.windows.2 | 2.55.0.windows.3 | 2.55.0.windows.3 |
 
-Todavía no existen manifest, service worker, instalación PWA, captura, persistencia offline, sincronización ni autenticación. Solo se usan datos ficticios. No versionar `.env`, credenciales, `node_modules`, `.next` ni reportes generados. Los nombres académicos de integrantes se limitan al repositorio privado y Classroom.
+Next.js permanece en 14.2.35 y React en 18.3.1. Se conservan `package.json` y el lockfile. El workflow de Semana 1 utiliza Node 20.19.6; el de Semana 2 conserva la configuración del kit y usa el entorno de GitHub.
 
-Seguir [ENTREGA.md](ENTREGA.md) para identificar la versión final. Después del último cambio personal o del equipo, crear el commit, hacer push, obtener `git rev-parse HEAD` y comprobar Actions sobre ese mismo SHA. Cada integrante entrega en Classroom el mismo repositorio y SHA, identificando su propia sección. El SHA final se copia después del último commit y no se incorpora dentro de otro commit.
+## Comprobación pública e incidencias
+
+El comando `bash public-tests/check.sh` necesita Bash y ripgrep. Se conserva exactamente el script del kit. En la integración imprimió coincidencias de palabras en documentación y en la dependencia `js-tokens`, y después `PUBLIC_OK`, con código 0. La negación de la búsqueda evita que `set -e` interrumpa el script; por tanto, ese código no demuestra que la búsqueda no encontrara coincidencias. Se registra esta limitación sin cambiar el comprobador ni retirar una dependencia para ocultar el resultado.
+
+La instalación actual añadió 28 paquetes y auditó 29. `npm audit` informó una dependencia de severidad alta (PostCSS) y una crítica (Next.js). Son los resultados del momento de esta integración; las dos alertas altas anotadas en Semana 1 corresponden a aquella fecha. No se ejecutó una actualización mayor forzada. Los resultados completos están en `reports/week-02/` de la copia local.
+
+El comportamiento sin conexión, almacenamiento, sincronización, autenticación y notificaciones siguen fuera de esta entrega. No hay service worker. La presencia del manifest por sí sola no acredita todas las condiciones de instalación en cada navegador. La visualización móvil comprobada es un viewport de navegador, no un ensayo en un teléfono físico.
+
+## Entrega
+
+La actividad PWA de Semana 2 usa el mismo repositorio y el commit fijado en Classroom. El kit no utiliza los comandos ni la etiqueta de CampusOps.
+
+Después del último commit, usar su SHA completo y la ejecución **Academic Evaluation Feedback** de ese mismo SHA. El workflow **Starter Semana 1 — feedback** se conserva y ejecuta el verificador actualizado, que produce el reporte descargable `starter-week-01-evidence`. El workflow de Semana 2 puede no producir artefacto, porque sus checks no generan las rutas que declara para subir.
+
+Cada integrante entrega sus enlaces e identifica su propia sección en `evidence/individual.md`. El SHA del reporte debe coincidir y `workingTreeClean` debe ser `true`. Los reportes generados se mantienen fuera de Git. No se deben enviar `.env`, `node_modules` ni `.next`.
