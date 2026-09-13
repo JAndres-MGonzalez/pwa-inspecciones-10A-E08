@@ -63,3 +63,7 @@ Fecha: 10 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empez
 | Restaurar `layout.tsx` | `git checkout` del archivo; `git status` muestra solo los archivos del Turno 1 |
 
 Commit del turno: `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app shell y estados de carga, error y vacio`, empujado a `origin/master` el 10 de septiembre de 2026.
+
+## 2026-09-13 — Turno 2 (Ismael)
+- Comandos: git pull, npm ci, script de PowerShell para generar iconos, npm run dev
+- Resultado: git pull y npm ci sin cambios en el lockfile; se generaron 4 iconos PNG (192, 512, 512-maskable, apple-touch-icon); se creó public/manifest.webmanifest; se reemplazó src/app/layout.tsx integrando AppShell y el manifest; npm run dev compiló sin errores (Compiled / in 15.6s, GET / 200); verificado visualmente en http://localhost:3000 y http://localhost:3000/manifest.webmanifest.
