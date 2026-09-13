@@ -7,7 +7,7 @@ export default async function HomePage() {
   const inspections: Inspection[] = await loadInspections();
 
   return (
-    <main className="page-shell">
+    <div className="page-shell">
       <header className="hero">
         <p className="eyebrow">App shell · Semana 2</p>
         <h1>Inspecciones de laboratorio</h1>
@@ -18,7 +18,7 @@ export default async function HomePage() {
         <span className="status">App shell · estados de carga, error y vacío</span>
       </header>
 
-      <section aria-labelledby="inspections-heading" className="content-section">
+      <section id="inspecciones-recientes" aria-labelledby="inspections-heading" className="content-section">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Datos de demostración</p>
@@ -61,9 +61,6 @@ export default async function HomePage() {
         )}
       </section>
 
-      <footer className="footer">
-        <p>Aplicaciones Web Progresivas · Universidad Tecnológica de Tehuacán</p>
-      </footer>
-    </main>
+    </div>
   );
 }

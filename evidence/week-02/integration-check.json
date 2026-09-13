@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "assignmentId": "w02-shell-manifest",
+  "executor": "Codex (OpenAI)",
+  "baseCommit": "ae5147ee328b984d2e078fbcb83cf4fde75837fc",
+  "workingTreeClean": false,
+  "command": "npm.cmd test",
+  "before": {
+    "exitCode": 1,
+    "report": {
+      "schemaVersion": 1,
+      "assignmentId": "w02-shell-manifest",
+      "checkedAt": "2026-09-13T23:48:56.901Z",
+      "commitSha": "ae5147ee328b984d2e078fbcb83cf4fde75837fc",
+      "status": "fail",
+      "checks": [
+        {
+          "id": "starter-contract",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-fields",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-png-icons",
+          "status": "pass"
+        },
+        {
+          "id": "shell-single-main-and-footer",
+          "status": "fail",
+          "detail": "AssertionError [ERR_ASSERTION]: La página debe tener un solo main\n\n2 !== 1\n"
+        },
+        {
+          "id": "shell-navigation-targets",
+          "status": "fail",
+          "detail": "AssertionError [ERR_ASSERTION]: Falta el destino #inspecciones-recientes"
+        },
+        {
+          "id": "inspection-list",
+          "status": "pass"
+        },
+        {
+          "id": "empty-state",
+          "status": "pass"
+        },
+        {
+          "id": "loading-state",
+          "status": "pass"
+        },
+        {
+          "id": "error-and-recovery",
+          "status": "pass"
+        }
+      ]
+    },
+    "expected": "fail"
+  },
+  "after": {
+    "exitCode": 0,
+    "report": {
+      "schemaVersion": 1,
+      "assignmentId": "w02-shell-manifest",
+      "checkedAt": "2026-09-13T23:49:37.546Z",
+      "commitSha": "ae5147ee328b984d2e078fbcb83cf4fde75837fc",
+      "status": "pass",
+      "checks": [
+        {
+          "id": "starter-contract",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-fields",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-png-icons",
+          "status": "pass"
+        },
+        {
+          "id": "shell-single-main-and-footer",
+          "status": "pass"
+        },
+        {
+          "id": "shell-navigation-targets",
+          "status": "pass"
+        },
+        {
+          "id": "inspection-list",
+          "status": "pass"
+        },
+        {
+          "id": "empty-state",
+          "status": "pass"
+        },
+        {
+          "id": "loading-state",
+          "status": "pass"
+        },
+        {
+          "id": "error-and-recovery",
+          "status": "pass"
+        }
+      ]
+    },
+    "expected": "pass"
+  },
+  "correction": "Dejar un solo main y footer, y añadir el destino del enlace Inspecciones recientes.",
+  "validation": "Misma suite antes y después; siete casos aprobados y dos fallidos antes, nueve aprobados después."
+}

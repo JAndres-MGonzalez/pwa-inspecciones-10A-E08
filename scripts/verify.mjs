@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
 const root = resolve(import.meta.dirname, "..");
-const required = ["package.json", "package-lock.json", "README.md", "src/app/layout.tsx", "src/app/page.tsx", "src/app/globals.css", "src/lib/data/inspections.ts", "docs/requirements.md", "docs/decision-record.md", "tests/starter.spec.mjs", "evidence/individual.md"];
+const required = ["package.json", "package-lock.json", "README.md", "src/app/layout.tsx", "src/app/page.tsx", "src/app/globals.css", "src/app/loading.tsx", "src/app/error.tsx", "src/components/app-shell.tsx", "public/manifest.webmanifest", "public/icons/icon-192.png", "public/icons/icon-512.png", "public/icons/icon-maskable-512.png", "public/apple-touch-icon.png", "src/lib/data/inspections.ts", "docs/requirements.md", "docs/decision-record.md", "tests/starter.spec.mjs", "tests/manifest.spec.ts", "tests/source-loader.cjs", "evidence/individual.md"];
 const missing = required.filter(file => !existsSync(resolve(root, file)));
 const structureOnly = process.argv.includes("--structure");
 if (structureOnly) {
@@ -27,6 +27,7 @@ const documents = ["docs/requirements.md", "docs/decision-record.md", "evidence/
 const gitStatus = git(["status", "--porcelain"]);
 const result = {
   schemaVersion: 2,
+  assignmentId: "w02-shell-manifest",
   checkedAt: new Date().toISOString(),
   commitSha: git(["rev-parse", "HEAD"]),
   workingTreeClean: gitStatus === null ? null : gitStatus === "",
@@ -34,7 +35,8 @@ const result = {
   status: checks.every(c => c.status === "pass") ? "pass" : "fail",
   checks,
   academicReview: { status: "pending", message: "Sin calificación automática. Revisar requisitos, decisión y evidencia por integrante con la rúbrica; existencia no implica calidad.", documents },
-  limits: ["La instalación se verifica mediante npm ci por separado.", "No certifica ausencia de secretos.", "Las pruebas proporcionadas no cubren toda la aplicación."]
+  testReport: existsSync(resolve(root, "reports/week-02/tests.json")) ? JSON.parse(readFileSync(resolve(root, "reports/week-02/tests.json"), "utf8")) : null,
+  limits: ["La instalación se verifica mediante npm ci por separado.", "No certifica ausencia de secretos.", "La suite renderiza componentes y prueba el cargador, pero no acredita instalación en todos los dispositivos ni accesibilidad integral.", "El chequeo público de palabras se registra por separado: puede marcar documentación y nombres de dependencias."]
 };
 mkdirSync(resolve(root, "reports"), { recursive: true });
 writeFileSync(resolve(root, "reports/verification.json"), JSON.stringify(result, null, 2) + "\n");

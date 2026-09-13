@@ -25,7 +25,7 @@ export function AppShell({ children }: Readonly<{ children: React.ReactNode }>) 
         </div>
       </header>
 
-      <main id="contenido-principal">{children}</main>
+      <main id="contenido-principal" tabIndex={-1}>{children}</main>
 
       <footer className="app-footer">
         <p>App shell · Aplicaciones Web Progresivas · Universidad Tecnológica de Tehuacán</p>
