@@ -52,6 +52,8 @@ La primera ejecución detectó dos problemas: dos etiquetas `main` y un enlace s
 
 La comprobación de navegador revisó 1280 × 900 y 320 × 800, tres tarjetas, un área principal, un pie, enlaces internos y el foco del teclado. Las capturas y observaciones están en [el reporte de Juan Andrés](evidence/week-02/reports/3523110131.md). Estas comprobaciones las ejecutó Codex; no sustituyen la revisión personal del integrante.
 
+El 13 de septiembre Juan Andrés ejecutó personalmente `npm.cmd run verify` sobre la integración: nueve pruebas y build aprobados, con el árbol de Git limpio. Su [registro de ejecución](evidence/session-log.md#verificación-personal-de-juan-andrés--semana-2) conserva la fecha y el SHA comprobado.
+
 ## Entornos registrados
 
 | Herramienta | Juan Andrés, Semana 1 | Kevin, Semana 2 | Ismael, Semana 1 | Integración automatizada, Semana 2 |

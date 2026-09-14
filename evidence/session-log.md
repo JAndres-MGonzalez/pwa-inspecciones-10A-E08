@@ -86,3 +86,13 @@ Se partió de `ae5147ee328b984d2e078fbcb83cf4fde75837fc`, con los cambios de Kev
 | Auditoría de dependencias | Una dependencia alta y una crítica; el lockfile no se modificó |
 
 La [evidencia del antes y después](week-02/integration-check.json) y el [reporte de integración](week-02/reports/3523110131.md) permiten revisar lo comprobado y sus límites. Los reportes finales se generan después del último commit y deben coincidir con su SHA. Durante la integración se incorporó la declaración personal de Semana 2 que Ismael publicó en los commits a6a1962 y d1bf722.
+
+## Verificación personal de Juan Andrés — Semana 2
+
+El 13 de septiembre de 2026 Juan Andrés ejecutó `npm.cmd run verify` en su computadora y compartió la salida. Se consultó también el archivo generado `reports/verification.json` de su copia local del proyecto. El reporte registra `checkedAt: 2026-09-14T00:02:16.767Z`, que corresponde al 13 de septiembre en México, Node v26.4.0, commit `1471561f63249025132ead7e37a4ac8e6d67d51f` y `workingTreeClean: true`.
+
+Los nueve casos pasaron: contrato inicial, campos del manifest, iconos PNG, área principal y pie únicos, destinos de navegación, listado, estado vacío, carga y error con recuperación. La salida mostró `starter.spec.mjs: PASS` y `Compiled successfully`, generó las cuatro páginas y terminó con `Verificación técnica: pass`. El reporte confirma estructura, pruebas y build aprobados; pruebas y build finalizaron con código 0. La revisión académica permanece pendiente de la evaluación del docente.
+
+Antes de actualizar los archivos de entrega se conservó el JSON original en `reports/week-02/historial/verification-juan-andres-20260914T000216Z.json`, fuera de Git. Su SHA-256 es `3E8BFDC8D605E9CA762E84CC043ECF5491721D821F143718B881673DCE256EEF`.
+
+Esta entrada documenta la ejecución personal del verificador. La instalación, las pruebas iniciales de integración y las comprobaciones de navegador descritas en la entrada anterior fueron ejecutadas por Codex. La actualización posterior registra la evidencia sin cambiar el código de la aplicación; el reporte final de entrega debe corresponder al nuevo SHA comprobado en Actions.
