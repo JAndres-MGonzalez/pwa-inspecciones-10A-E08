@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AppShell } from "@/components/app-shell";
+import { RegisterSw } from "@/components/register-sw";
 
 export const metadata: Metadata = {
   title: "Inspecciones de laboratorio",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="es-MX">
       <body>
         <AppShell>{children}</AppShell>
+        <RegisterSw />
       </body>
     </html>
   );
