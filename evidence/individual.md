@@ -46,6 +46,18 @@
 - **Uso declarado de IA (herramienta, propósito, validación):** usé opencode para redactar los componentes, ajustar los estilos y guiar la verificación; los comandos de prueba, build y servidor los ejecuté personalmente en PowerShell y comprobé el HTML servido.
 - **Commit de mi turno (SHA):** `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app shell y estados de carga, error y vacio`, empujado a `origin/master` el 10 de septiembre de 2026.
 
+### Semana 3 · Turno 1 — Service Worker y respaldo offline
+
+- **Entregado por:** Kevin.
+- **Descripción de lo que hice (consigna):** declaré en `public/sw.js` el service worker de la app: precache de la shell (/, offline.html, manifest e íconos), estrategia network-first para navegaciones con fallback a `public/offline.html`, caché runtime stale-while-revalidate para `/_next/static/*`, caché primero a cache para el resto, siempre por red para `/api/...` y las peticiones con encabezado de autorización (evita guardar datos personales en caché), y mensajes `SKIP_WAITING` / `PURGE_CACHES` para actualizaciones y depuración manual. Lo registré desde `src/lib/pwa/register-service-worker.ts` y lo monté en el cliente con `src/components/register-sw.tsx`. Agregué `<RegisterSw />` al layout y una cabecera `Cache-Control: public, max-age=0, no-cache` para `/sw.js` en `next.config.mjs`.
+- **Reflexión:** la entrega cumple el objetivo de que la app funcione sin conexión tras la primera visita. El service worker aísla la red: las navegaciones desconocidas caen en la página de respaldo, la lista ya visitada se sirve desde caché, y las versiones anteriores de las cachés se depuran al activar.
+- **Archivos modificados:** `public/sw.js`, `public/offline.html`, `src/lib/pwa/register-service-worker.ts`, `src/components/register-sw.tsx`, `src/app/layout.tsx`, `next.config.mjs`. Sin declaraciones especiales.
+- **Decisión técnica que puedo explicar:** versiono las cachés con el prefijo `inspecciones-` y depuro versiones anteriores al activar; fuerzo `no-cache` sobre `/sw.js` para que el navegador siempre baje la versión nueva del worker.
+- **Fallos diagnosticados y solución:** en la prueba offline el navegador reportaba `Uncaught (in promise) TypeError: Failed to fetch` en `cacheFirst` al pedir recursos no precacheados (p. ej. los íconos); esa estrategia era la única sin control de errores. Agregué `try/catch` que devuelve un `Response` 503 si la red falla y no hay caché, sin romper el precache ni el fallback.
+- **Prueba que ejecuté y resultado:** `npm.cmd test` terminó con `starter.spec.mjs: PASS` (casos de Semanas 1 y 2 intactos); `npm run build` compiló con código 0 (ruta `/` dinámica, First Load JS 87.4 kB). Prueba manual en navegador: `sw.js` registrado con scope `/`; con offline activado la lista de inspecciones se sirve desde caché; `http://localhost:3000/xyz` en offline mostró la página «Estás sin conexión»; la consola quedó sin errores del service worker tras la corrección.
+- **Uso de IA:** usé un asistente de IA de terminal (opencode) como apoyo para redactar el service worker, el registro, la evidencia y guiar la verificación; los comandos `npm.cmd test`, `npm run build`, el servidor y la prueba manual los ejecuté y confirmé personalmente en PowerShell y en el navegador.
+- **Commit del turno (SHA):** `d7a92e4` — `feat(w03): service worker con precache, runtime cache y fallback offline`; evidencia en `7d7d654` — `docs(w03): evidencia y bitacora de Kevin — Turno 1`.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08

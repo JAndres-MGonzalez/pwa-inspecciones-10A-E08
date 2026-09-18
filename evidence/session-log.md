@@ -96,3 +96,19 @@ Los nueve casos pasaron: contrato inicial, campos del manifest, iconos PNG, áre
 Antes de actualizar los archivos de entrega se conservó el JSON original en `reports/week-02/historial/verification-juan-andres-20260914T000216Z.json`, fuera de Git. Su SHA-256 es `3E8BFDC8D605E9CA762E84CC043ECF5491721D821F143718B881673DCE256EEF`.
 
 Esta entrada documenta la ejecución personal del verificador. La instalación, las pruebas iniciales de integración y las comprobaciones de navegador descritas en la entrada anterior fueron ejecutadas por Codex. La actualización posterior registra la evidencia sin cambiar el código de la aplicación; el reporte final de entrega debe corresponder al nuevo SHA comprobado en Actions.
+
+## Ejecución de Kevin — Semana 3 (Turno 1)
+
+Fecha: 18 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empezar se verificó `git status` con el árbol limpio sobre `master` (HEAD `77f60b4`).
+
+| Acción | Resultado real |
+|---|---|
+| `git pull origin master` y `npm.cmd ci --ignore-scripts --no-audit --no-fund` | `master` ya estaba actualizado; `npm ci` añadió 28 paquetes sin cambios en el lockfile |
+| Crear `public/sw.js`, `public/offline.html`, `src/lib/pwa/register-service-worker.ts`, `src/components/register-sw.tsx`; editar `src/app/layout.tsx` y `next.config.mjs` | 6 archivos del Turno 1; sin tocar `tests/`, `scripts/`, `.github/`, `README.md` ni `docs/` |
+| `npm.cmd test` | `starter.spec.mjs: PASS` (10 casos de Semanas 1 y 2), código 0 |
+| `npm run build` | Código 0; `/` dinámica (142 B, First Load JS 87.4 kB); 4/4 páginas |
+| `npm.cmd run dev` y comprobaciones HTTP | `/sw.js` 200 con `Cache-Control: public, max-age=0, no-cache`; `/offline.html` 200; `/` 200 con `main#contenido-principal` |
+| Prueba manual offline en el navegador | `sw.js` registrado con scope `/`; con offline activado la lista de inspecciones se sirve desde caché; `http://localhost:3000/xyz` mostró la página «Estás sin conexión» |
+| Depuración de la consola | `cacheFirst` sin control de errores lanzaba `Uncaught (in promise) TypeError: Failed to fetch` para recursos no precacheados en offline; se agregó `try/catch` con `Response` 503 y la consola quedó limpia |
+
+Commits del turno: `d7a92e4` — `feat(w03): service worker con precache, runtime cache y fallback offline`; `7d7d654` — `docs(w03): evidencia y bitacora de Kevin — Turno 1`.
