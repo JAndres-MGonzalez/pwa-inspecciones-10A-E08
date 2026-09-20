@@ -32,3 +32,11 @@ Permitir que la PWA de inspecciones abra y muestre contenido útil sin conexión
 - Network-first en navegación da frescura, pero con red lenta espera a la petición antes de recurrir a la caché.
 - Stale-while-revalidate puede mostrar un recurso una vez desactualizado hasta la siguiente carga.
 - Precachear solo un shell mínimo reduce el riesgo de fallos de instalación, a costa de que otras rutas dependan de haberse visitado antes.
+
+## Actualización segura
+- El service worker **no** llama a `skipWaiting()` por su cuenta. Una versión nueva se instala y queda en estado *waiting*.
+- La app detecta la versión en espera y muestra el aviso "Nueva versión disponible".
+- Al pulsar "Actualizar", la página envía `{ type: 'SKIP_WAITING' }` al SW nuevo, este toma el control, se dispara `controllerchange` y la página se recarga una sola vez.
+- Al activarse, el SW nuevo borra las cachés de versiones anteriores.
+- Motivo: evitar que un deploy cambie archivos en mitad de una inspección y mezcle recursos de dos versiones.
+- Limitación: si el usuario ignora el aviso, sigue usando la versión anterior hasta que cierre todas las pestañas.

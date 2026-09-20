@@ -1,4 +1,4 @@
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL_CACHE = `shell-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;
 const OFFLINE_URL = '/offline.html';
@@ -61,4 +61,11 @@ self.addEventListener('fetch', (event) => {
       .catch(() => cached);
     return cached || network;
   })());
+});
+
+// Actualizacion controlada: el SW nuevo solo se activa cuando la pagina lo pide
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
