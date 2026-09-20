@@ -80,3 +80,51 @@ La actividad PWA de Semana 2 usa el mismo repositorio y el commit fijado en Clas
 Después del último commit, usar su SHA completo y la ejecución **Academic Evaluation Feedback** de ese mismo SHA. El workflow **Starter Semana 1 — feedback** se conserva y ejecuta el verificador actualizado, que produce el reporte descargable `starter-week-01-evidence`. El workflow de Semana 2 puede no producir artefacto, porque sus checks no generan las rutas que declara para subir.
 
 Cada integrante entrega sus enlaces e identifica su propia sección en `evidence/individual.md`. El SHA del reporte debe coincidir y `workingTreeClean` debe ser `true`. Los reportes generados se mantienen fuera de Git. No se deben enviar `.env`, `node_modules` ni `.next`.
+
+## Semana 3 · Service worker, caché y modo sin conexión
+
+Esta sección reemplaza la afirmación «No hay service worker» de la Semana 2: desde la Semana 3 la app registra un service worker y ofrece una página de respaldo sin conexión.
+
+### Qué se entrega
+
+| Pieza | Archivo | Autor |
+|---|---|---|
+| Service worker | `public/sw.js` | Kevin (Turno 1, commit d7a92e4) |
+| Registro | `src/lib/pwa/register-service-worker.ts`, `src/components/register-sw.tsx` | Kevin (Turno 1) |
+| Página sin conexión | `public/offline.html` | Kevin (Turno 1) |
+| Estrategia de caché | `docs/cache-strategy.md` | Ismael |
+| Pruebas | `tests/service-worker.spec.ts`, `tests/offline.spec.ts`, `tests/sw-harness.ts`, `tests/pwa.spec.mjs` | Ismael |
+
+### Instalar y ejecutar
+
+Ejecutar `npm ci`, luego `npm run build` y `npm run start`, y abrir localhost:3000. Para probar el service worker conviene usar el build de producción y no `npm run dev`, para no mezclar cachés del modo desarrollo.
+
+### Verificar
+
+Ejecutar `npm ci` y después `npm run verify`. Es el equivalente exacto de `make verify` (en Windows `make` puede no estar instalado). `npm test` corre las pruebas del starter y las de esta semana.
+
+### Pruebas automatizadas
+
+Se agregaron **12 casos**. Cargan `public/sw.js` en Node con `caches`, `fetch` y `self` simulados, y disparan los eventos `install`, `activate`, `fetch` y `message`.
+
+- `tests/service-worker.spec.ts` (5): precaché al instalar, limpieza de cachés viejas con el prefijo propio, mensaje `SKIP_WAITING`, mensaje `PURGE_CACHES` y exportación del módulo de registro.
+- `tests/offline.spec.ts` (7): existencia de `offline.html`, página visitada servida sin red, respaldo para una ruta nueva, respuesta 503 si no hay respaldo, stale-while-revalidate para `/_next/static/`, cache-first para otros recursos y peticiones que no se interceptan (POST, `/api/*`, `Authorization`, otros orígenes).
+
+### Comprobación manual en el navegador
+
+ESCRIBE que viste en la prueba manual: estado del service worker, cachés, app sin conexión, ruta inventada
+
+### Evidencia
+
+- Commit de las pruebas: `e6e5617639c0252a4ff3443d1da6762149730d3c`.
+- Commit de la documentación de la estrategia: `9b7620826c4d29c66298e2fc1705c2f8b562df2b`.
+- Estado verificado (`npm test` y `npm run verify` en pass el 2026-09-20): `5be4aabb89503fcc5a88180b652544474d1d4d94`.
+- Ejecución de GitHub Actions: ESCRIBE la URL de la ejecucion de Actions en verde
+- Detalle y declaración de IA: sección «Semana 3» de Ismael en [evidence/individual.md](evidence/individual.md).
+- Estrategia documentada: [docs/cache-strategy.md](docs/cache-strategy.md).
+
+### Límites y riesgos abiertos
+
+- Las pruebas simulan el navegador: verifican la lógica de `sw.js`, no el comportamiento de un navegador real. Eso se comprobó a mano.
+- No hay sincronización de inspecciones creadas sin conexión.
+- Riesgos detectados en `sw.js` (detalle en `docs/cache-strategy.md`): `install` llama a `skipWaiting()`, por lo que una versión nueva se activa sin avisar al usuario, y todo GET del mismo origen fuera de `/_next/static/` usa cache-first.
