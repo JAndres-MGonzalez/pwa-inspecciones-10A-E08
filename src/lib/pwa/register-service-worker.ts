@@ -10,3 +10,5 @@ export async function registerServiceWorker(): Promise<ServiceWorkerRegistration
     return undefined;
   }
 }
+
+export default registerServiceWorker;
