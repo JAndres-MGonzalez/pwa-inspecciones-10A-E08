@@ -1,45 +1,12 @@
-/* src/lib/pwa/register-service-worker.ts */
-interface RegisterOptions {
-  onError?: (error: unknown) => void;
-}
-
-type DefaultExports = { default: (...args: unknown[]) => void; SW_PATH: string };
-
-export const SW_PATH = "/sw.js";
-export const SW_SCOPE = "/";
-
-function registerServiceWorker(): void;
-
-function registerServiceWorker(options?: RegisterOptions): Promise<unknown> | null;
-
-function registerServiceWorker(options: RegisterOptions = {}): Promise<unknown> | null {
-  if (typeof window === "undefined" || typeof navigator === "undefined") {
-    return null;
+export async function registerServiceWorker(): Promise<ServiceWorkerRegistration | undefined> {
+  if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) {
+    return undefined;
   }
-  if (!("serviceWorker" in navigator)) {
-    if (options.onError) {
-      const error = new Error("El navegador no soporta service workers.");
-      queueMicrotask(() => options.onError?.(error));
-    }
-    return null;
+
+  try {
+    return await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+  } catch (error) {
+    console.error('No se pudo registrar el service worker', error);
+    return undefined;
   }
-  return navigator.serviceWorker
-    .register(SW_PATH, { scope: SW_SCOPE })
-    .then((registration) => {
-      if (registration.waiting) {
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
-      }
-      return registration;
-    })
-    .catch((error: unknown) => {
-      if (options.onError) {
-        options.onError(error);
-      }
-      return null;
-    });
 }
-
-export default registerServiceWorker;
-export { registerServiceWorker };
-
-export type { DefaultExports };
