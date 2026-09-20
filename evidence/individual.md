@@ -151,3 +151,9 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Limitación o fallo diagnosticado:** el manifest y los iconos no garantizan que el botón de instalación aparezca en todos los navegadores (depende de heurísticas propias de cada uno); los iconos son generados por script con texto "UTT" sobre un fondo de color, no diseñados gráficamente. Tampoco ejecuté `npm run build` ni `npm run verify` en mi turno, ya que eso corresponde al Turno 3 (Juan Andrés).
 - **Uso declarado de IA (herramienta, propósito, validación):** no usé ninguna herramienta de IA para esta parte del turno. Seguí directamente la guía de trabajo (pasos y comandos indicados) y ejecuté yo mismo cada comando en PowerShell, comprobando los resultados en la terminal y en el navegador.
 - **Commit de mi turno (SHA):** `a6a1962340814075c49e3a77709cc40035eca010` — `feat(w02): manifest instalable y layout con app shell`, empujado a `origin/master` el 13 de septiembre de 2026.
+
+- **SHA del commit de README y evidencia (Semana 3):** 72fd6ae905bbf9bc43e20f81444dcf8ce93ff067. La entrega individual es el commit siguiente, que solo agrega esta línea.
+
+- **SHA del commit de README y evidencia (Semana 3):** 72fd6ae905bbf9bc43e20f81444dcf8ce93ff067. La entrega individual es el commit siguiente, que solo agrega esta línea.
+
+- **SHA del commit de README y evidencia (Semana 3):** 72fd6ae905bbf9bc43e20f81444dcf8ce93ff067. La entrega individual es el commit siguiente, que solo agrega esta línea.
