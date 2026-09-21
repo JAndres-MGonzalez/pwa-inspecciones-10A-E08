@@ -78,7 +78,7 @@ Esta decisión no implica conformidad integral de accesibilidad ni instalación 
 
 ## Semana 3 — Actualización automática y caché
 
-Fecha: 20 de septiembre de 2026. Equipo: 10A-E08. Estado: decisión propuesta; integración pendiente de completar.
+Fecha: 20 de septiembre de 2026. Equipo: 10A-E08. Estado: implementada y verificada técnicamente.
 
 **Contexto y supuestos:** la aplicación debe poder abrirse sin conexión después de una primera visita con red y con el Service Worker instalado. Se conservan los datos sintéticos y las dependencias del proyecto.
 
@@ -86,12 +86,14 @@ Fecha: 20 de septiembre de 2026. Equipo: 10A-E08. Estado: decisión propuesta; i
 
 Los mensajes `SKIP_WAITING` y `PURGE_CACHES` permiten activar una actualización y vaciar las cachés de la aplicación. Las pruebas del ciclo de vida y del offline deben ser reproducibles, ejecutarse desde `npm test` y usar un entorno de prueba en memoria sin agregar dependencias.
 
-**Fallo encontrado:** en `e3dc533` el Service Worker solo registra instalación y activación. No contiene el manejo de peticiones, el respaldo offline ni los mensajes previstos. También faltan el documento de estrategia y las pruebas de Semana 3. La compilación y las pruebas de Semana 2 no permiten dar esta decisión por implementada.
+**Fallo de la revisión inicial:** en `e3dc533` el Service Worker solo registraba instalación y activación. No contenía el manejo de peticiones, el respaldo offline ni los mensajes previstos. También faltaban el documento de estrategia y las pruebas de Semana 3. La compilación y las pruebas de Semana 2 no permitían dar esta decisión por implementada.
 
-**Consecuencias y límites:** se conserva Next.js y el lockfile. La entrega se cierra cuando la implementación y sus pruebas coincidan con esta decisión. La caché puede borrarse desde el navegador; no constituye un respaldo permanente ni permite guardar nuevas inspecciones o sincronizarlas.
+**Consecuencias y límites:** se conserva Next.js y el lockfile. La caché puede borrarse desde el navegador; no constituye un respaldo permanente ni permite guardar nuevas inspecciones o sincronizarlas.
 
 **Resolución en el turno de Ismael:** se completó la implementación descrita y se añadieron
 las pruebas de Semana 3. El detalle vigente está en [la estrategia de caché](cache-strategy.md)
 y los resultados locales en [la bitácora](../evidence/session-log.md#turno-2--semana-3--ismael-completar-integración).
 La revisión anterior se conserva como diagnóstico histórico; el resultado de Actions del
 SHA de publicación y la comprobación personal se registran por separado.
+
+**Revisión de integración:** sobre `2b6267b7aa2cf0c65fc5efb14aac5397164294ad` aprobaron 35 casos, el barrido, la compilación y los cuatro chequeos públicos. Los tres workflows también aprobaron. La [bitácora de Juan Andrés](../evidence/session-log.md#revisión-final-de-juan-andrés--semana-3) distingue la ejecución de Codex de la validación personal pendiente.

@@ -42,12 +42,12 @@ bash public-tests/check.sh
 | Comprobación | Alcance actual |
 |---|---|
 | Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
-| `npm.cmd test` | Suites de manifest, Service Worker y offline; reporte en `reports/week-03/tests.json` |
+| `npm.cmd test` | 35 casos: 9 de manifest y estructura, 19 de Service Worker y 7 de offline; reporte en `reports/week-03/tests.json` |
 | `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
 | `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w03-service-worker-offline` |
 | Chequeo público | Archivos presentes, barrido, suites completas y ausencia de vitest |
 
-Los resultados de ejecución y sus límites se registran en la bitácora. Un reporte anterior debe regenerarse después de modificar el código.
+La [revisión de integración](evidence/session-log.md#revisión-final-de-juan-andrés--semana-3) registra los 35 casos y cuatro chequeos aprobados, la compilación y sus límites. Un reporte anterior debe regenerarse después de modificar el código.
 
 ## Entorno del Turno 3
 
@@ -60,7 +60,7 @@ Los resultados de ejecución y sus límites se registran en la bitácora. Un rep
 
 ## Decisiones y límites
 
-La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automática-y-caché) define el funcionamiento previsto: guardar los recursos de la aplicación, intentar la red primero para las páginas y disponer de un respaldo sin conexión. La primera preparación requiere conexión y que termine la instalación del Service Worker.
+La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automática-y-caché) describe el funcionamiento implementado: guardar los recursos de la aplicación, intentar la red primero para las páginas y disponer de un respaldo sin conexión. La primera preparación requiere conexión y que termine la instalación del Service Worker.
 
 La corrección del turno de Ismael limita la limpieza al prefijo `inspecciones-`, repone las peticiones y mensajes, y añade pruebas que reproducen los fallos detectados durante la revisión anterior.
 

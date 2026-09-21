@@ -164,3 +164,25 @@ Después de sincronizar la copia local, las 35 pruebas y los cuatro chequeos pú
 aprobaron de nuevo sobre el commit publicado. Esta nota es un registro documental posterior;
 los enlaces anteriores corresponden al commit de implementación indicado. La revisión personal
 de Ismael continúa pendiente y no se sustituye por el resultado automático.
+
+## Revisión final de Juan Andrés — Semana 3
+
+Fecha: 20 de septiembre de 2026. Base: `2b6267b7aa2cf0c65fc5efb14aac5397164294ad`, con el árbol limpio. Entorno: Windows, Node v26.4.0 y npm 11.17.0. Las comprobaciones de esta entrada fueron ejecutadas por Codex a solicitud de Juan Andrés.
+
+Se revisaron los cambios de Ismael `af14463309588b2a81de63a90d153a985140ea87` y `2b6267b7aa2cf0c65fc5efb14aac5397164294ad`. Ya están presentes todos los archivos obligatorios de Semana 3. El worker atiende las peticiones, prepara el respaldo offline y limita la limpieza a las cachés de la aplicación. Las suites comprueban estos comportamientos y casos de fallo. La evidencia de Semana 3 de Kevin e Ismael está separada por integrante.
+
+| Comprobación | Resultado |
+|---|---|
+| `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Código 0; 28 paquetes instalados sin modificar el lockfile |
+| `node scripts/verify.mjs` | Código 0; estructura, pruebas, barrido y build aprobados |
+| Pruebas ejecutadas por el verificador | 35 casos aprobados: 9 de manifest y estructura, 19 del Service Worker y 7 de offline |
+| Compilación ejecutada por el verificador | Correcta; cuatro páginas generadas |
+| `bash public-tests/check.sh` con Git Bash | Código 0; `files`, `cursors`, `tests` y `package` en PASS |
+| Reportes generados | `assignmentId: w03-service-worker-offline`, `status: pass`, SHA igual a la base y `workingTreeClean: true` |
+| GitHub Actions de la base revisada | Tres workflows completados con `success` |
+
+Ejecuciones: [Semana 3](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554301129), [Semana 2](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554301137) y [Semana 1](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554301138). Se conserva la [captura de Semana 3](week-03/actions-2b6267b.png). Los logs y reportes de esta revisión se guardaron en `reports/week-03/review-2b6267b/`, fuera de Git.
+
+La comprobación visual de producción está documentada en [el registro del turno de Ismael](week-03/ismael-verification.json), con sus capturas; esta revisión no la presenta como una ejecución personal de Juan Andrés. Se actualizan el README, la decisión técnica y su sección de evidencia para reflejar los faltantes resueltos. El diagnóstico inicial se conserva como antecedente.
+
+La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión de código, ejecutó los comandos y actualizó la documentación. Las pruebas en memoria y Actions comprueban los casos definidos; no demuestran compatibilidad con todos los navegadores, sincronización ni una auditoría integral.
