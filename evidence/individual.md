@@ -29,6 +29,7 @@
 ### Semana 3 — CI y revisión de integración
 
 - **Mi commit SHA:** [dff4721120ae426ad8a5c3bef9df3bebef3fecac](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/dff4721120ae426ad8a5c3bef9df3bebef3fecac).
+- **GitHub Actions:** [Semana 3 aprobada](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35549931918) sobre `3caa6648a2845244d6e3862ad5107bc81a0aa7d7`; [captura del resultado](week-03/actions-3caa664.png). Los workflows de Semanas 1 y 2 también aprobaron sobre ese SHA, usando las pruebas disponibles de Semana 2.
 - **Contribución:** preparación del workflow de Semana 3, actualización del README y registro de la decisión de caché y los fallos de integración.
 - **Decisión técnica:** conservar el workflow de la guía con Node 20.19.6 y los comandos del proyecto. Un resultado aprobado debe acompañarse de pruebas que comprueben el funcionamiento sin conexión.
 - **Prueba ejecutada y resultado:** instalación, `npm.cmd test`, `npm.cmd run build`, `node scripts/verify.mjs` y el chequeo público ejecutados con Codex, con código 0. Pasaron nueve casos de Semana 2. La revisión adicional del Service Worker en memoria falló: no tiene manejo de peticiones, no guarda la página sin conexión y elimina una caché ajena.
