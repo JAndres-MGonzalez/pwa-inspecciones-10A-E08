@@ -1,0 +1,273 @@
+{
+  "checkedAt": "2026-09-21T02:21:42.510Z",
+  "executor": "Codex (OpenAI)",
+  "contributor": "Ismael2509",
+  "assignmentId": "w03-service-worker-offline",
+  "baseCommitSha": "d1e24519b1d84a55cdbe16b623e8fa1175f6f21b",
+  "workingTreeClean": false,
+  "publication": "Cambios locales; SHA de publicación y Actions pendientes.",
+  "runtime": {
+    "node": "v24.19.0"
+  },
+  "beforeWorkerFix": {
+    "total": 34,
+    "passed": 15,
+    "failed": 19
+  },
+  "afterWorkerFix": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "structure",
+      "status": "pass",
+      "missing": []
+    },
+    {
+      "id": "test",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "id": "check-secrets",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "id": "build",
+      "status": "pass",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "id": "service-worker-and-offline",
+      "status": "pass"
+    }
+  ],
+  "suites": [
+    {
+      "suiteId": "manifest02",
+      "duration_ms": 607,
+      "status": "pass",
+      "checks": [
+        {
+          "id": "starter-contract",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-fields",
+          "status": "pass"
+        },
+        {
+          "id": "manifest-png-icons",
+          "status": "pass"
+        },
+        {
+          "id": "shell-single-main-and-footer",
+          "status": "pass"
+        },
+        {
+          "id": "shell-navigation-targets",
+          "status": "pass"
+        },
+        {
+          "id": "inspection-list",
+          "status": "pass"
+        },
+        {
+          "id": "empty-state",
+          "status": "pass"
+        },
+        {
+          "id": "loading-state",
+          "status": "pass"
+        },
+        {
+          "id": "error-and-recovery",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suiteId": "service-worker",
+      "duration_ms": 195,
+      "status": "pass",
+      "checks": [
+        {
+          "id": "sw-install-precache-and-skip-waiting",
+          "status": "pass"
+        },
+        {
+          "id": "sw-activate-purges-stale-and-claims",
+          "status": "pass"
+        },
+        {
+          "id": "sw-navigation-network-first-caches",
+          "status": "pass"
+        },
+        {
+          "id": "sw-navigation-offline-uses-cache",
+          "status": "pass"
+        },
+        {
+          "id": "sw-navigation-offline-fallback-html",
+          "status": "pass"
+        },
+        {
+          "id": "sw-static-cached-served-when-network-fails",
+          "status": "pass"
+        },
+        {
+          "id": "sw-static-first-load-cached",
+          "status": "pass"
+        },
+        {
+          "id": "sw-api-network-only-not-cached",
+          "status": "pass"
+        },
+        {
+          "id": "sw-authorization-network-only-not-cached",
+          "status": "pass"
+        },
+        {
+          "id": "sw-purge-caches-message",
+          "status": "pass"
+        },
+        {
+          "id": "register-registers-sw-js-with-scope",
+          "status": "pass"
+        },
+        {
+          "id": "register-unsupported-returns-undefined",
+          "status": "pass"
+        },
+        {
+          "id": "sw-static-revalidates-cached-response",
+          "status": "pass"
+        },
+        {
+          "id": "sw-bypasses-other-origins-methods-and-rsc",
+          "status": "pass"
+        },
+        {
+          "id": "sw-cache-first-reuses-public-resource",
+          "status": "pass"
+        },
+        {
+          "id": "sw-does-not-store-http-errors",
+          "status": "pass"
+        },
+        {
+          "id": "sw-skip-waiting-message-and-invalid-messages",
+          "status": "pass"
+        },
+        {
+          "id": "sw-install-fails-if-required-asset-is-unavailable",
+          "status": "pass"
+        },
+        {
+          "id": "sw-network-response-survives-cache-write-failure",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suiteId": "offline",
+      "duration_ms": 63,
+      "status": "pass",
+      "checks": [
+        {
+          "id": "offline-consistency-snapshot",
+          "status": "pass"
+        },
+        {
+          "id": "offline-update-removes-previous-version",
+          "status": "pass"
+        },
+        {
+          "id": "offline-fallback-precached-and-present",
+          "status": "pass"
+        },
+        {
+          "id": "offline-dataset-remains-synthetic",
+          "status": "pass"
+        },
+        {
+          "id": "offline-first-visit-includes-html-css-and-js",
+          "status": "pass"
+        },
+        {
+          "id": "offline-repeated-reads-do-not-consume-cached-body",
+          "status": "pass"
+        },
+        {
+          "id": "offline-empty-cache-returns-503-and-ignores-foreign-data",
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "checkedAt": "2026-09-21T02:19:09.761Z",
+    "browser": "153.0.4234.48",
+    "status": "pass",
+    "checks": [
+      {
+        "id": "initial-install-html-css-js",
+        "status": "pass",
+        "cachedFiles": 15
+      },
+      {
+        "id": "offline-reload-same-data-and-css",
+        "status": "pass"
+      },
+      {
+        "id": "offline-unknown-route-fallback",
+        "status": "pass"
+      },
+      {
+        "id": "purge-preserves-foreign-and-empty-cache-503",
+        "status": "pass"
+      },
+      {
+        "id": "no-page-javascript-errors",
+        "status": "pass"
+      }
+    ]
+  },
+  "verifierNegativeChecks": [
+    {
+      "id": "public-rejects-failed-suite",
+      "status": "pass"
+    },
+    {
+      "id": "public-rejects-empty-suite",
+      "status": "pass"
+    },
+    {
+      "id": "public-rejects-wrong-commit",
+      "status": "pass"
+    },
+    {
+      "id": "public-rejects-empty-required-file",
+      "status": "pass"
+    },
+    {
+      "id": "scanner-detects-untracked-case-insensitive-probe",
+      "status": "pass"
+    },
+    {
+      "id": "runner-rejects-exception",
+      "status": "pass"
+    },
+    {
+      "id": "runner-rejects-empty",
+      "status": "pass"
+    }
+  ],
+  "humanReview": "Pendiente de la revisión personal de Ismael."
+}

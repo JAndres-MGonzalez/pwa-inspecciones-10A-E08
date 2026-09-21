@@ -8,9 +8,9 @@ Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa
 
 La aplicación muestra tres inspecciones de ejemplo, navegación, manifest, iconos y estados de carga, error y lista vacía. El layout registra `public/sw.js` con alcance `/`.
 
-La revisión del Turno 3 encontró una integración incompleta: el Service Worker guarda `/` durante la instalación, pero no tiene un manejador de peticiones que devuelva contenido sin conexión. Existe `public/offline.html`, aunque todavía no se guarda ni se utiliza como respaldo en la versión integrada.
+El Service Worker prepara el inicio, la página de respaldo, manifest, iconos y los CSS/JavaScript enlazados por el HTML inicial. Las páginas intentan la red primero y utilizan una copia guardada o el respaldo sin conexión si la red falla. La limpieza conserva las cachés ajenas.
 
-Faltan los entregables `docs/cache-strategy.md`, `tests/service-worker.spec.ts` y `tests/offline.spec.ts`. También falta `scripts/check-secrets.mjs`, indicado en la guía del equipo. No se considera terminada la entrega offline por obtener un resultado aprobado en las pruebas anteriores.
+Se completaron las pruebas y herramientas del turno de Ismael. La [estrategia de caché](docs/cache-strategy.md) describe el comportamiento implementado y sus límites; la [bitácora](evidence/session-log.md#turno-2--semana-3--ismael-completar-integración) registra el diagnóstico y la verificación.
 
 ## Instalar y ejecutar
 
@@ -28,7 +28,7 @@ npm.cmd run build
 npm.cmd run start
 ```
 
-Los scripts disponibles son `dev`, `build`, `start`, `test` y `verify`. En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`.
+Los scripts disponibles son `dev`, `build`, `start`, `test`, `check-secrets` y `verify`. En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`.
 
 ## Verificación
 
@@ -37,17 +37,17 @@ npm.cmd run verify
 bash public-tests/check.sh
 ```
 
-`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las pruebas y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y ripgrep en Windows.
+`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las tres suites, revisa palabras sensibles y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y Node en Windows.
 
-| Comprobación | Estado de la integración revisada |
+| Comprobación | Alcance actual |
 |---|---|
-| Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | 28 paquetes instalados; sin cambios en el lockfile |
-| `npm.cmd test` | Nueve casos de manifest, estructura y estados de Semana 2 aprobados |
-| Pruebas de Service Worker y offline | Archivos pendientes de integrar |
-| Comprobador de secretos | Archivo pendiente de integrar |
-| Chequeo público | Sigue siendo el de Semana 2; no contiene los cuatro casos de Semana 3 |
+| Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
+| `npm.cmd test` | Suites de manifest, Service Worker y offline; reporte en `reports/week-03/tests.json` |
+| `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
+| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w03-service-worker-offline` |
+| Chequeo público | Archivos presentes, barrido, suites completas y ausencia de vitest |
 
-La verificación de Semana 3 debe ejecutar las pruebas del Service Worker, offline, el comprobador de secretos y el build. El verificador actual todavía identifica el reporte como `w02-shell-manifest`.
+Los resultados de ejecución y sus límites se registran en la bitácora. Un reporte anterior debe regenerarse después de modificar el código.
 
 ## Entorno del Turno 3
 
@@ -62,7 +62,7 @@ La verificación de Semana 3 debe ejecutar las pruebas del Service Worker, offli
 
 La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automática-y-caché) define el funcionamiento previsto: guardar los recursos de la aplicación, intentar la red primero para las páginas y disponer de un respaldo sin conexión. La primera preparación requiere conexión y que termine la instalación del Service Worker.
 
-En la versión revisada, la activación elimina cualquier caché distinta de `shell-v1` y `runtime-v1`; falta limitar la limpieza a las cachés de esta aplicación. El cambio `0cf85bd` sustituyó el Service Worker anterior y retiró el manejo de peticiones y mensajes. Se registra el fallo para completar la integración.
+La corrección del turno de Ismael limita la limpieza al prefijo `inspecciones-`, repone las peticiones y mensajes, y añade pruebas que reproducen los fallos detectados durante la revisión anterior.
 
 Se usan únicamente inspecciones ficticias. No hay captura, almacenamiento de nuevos registros ni sincronización. Un build aprobado no comprueba el funcionamiento offline ni sustituye la revisión académica.
 
@@ -72,4 +72,4 @@ El workflow `week-03-w03-service-worker-offline.yml` ejecuta instalación, build
 
 La evidencia de cada integrante está en [evidence/individual.md](evidence/individual.md) y la bitácora en [evidence/session-log.md](evidence/session-log.md). Cada persona registra su propia contribución y sus pruebas.
 
-Antes de entregar deben integrarse los archivos faltantes, comprobarse el offline y quedar Actions en verde. Para Classroom se entrega el enlace o SHA final del repositorio, dentro del plazo asignado. La guía del equipo también pide conservar la URL y la captura del run de Semana 3. Los reportes generados y la guía de trabajo se conservan fuera de Git.
+Antes de entregar debe registrarse la revisión personal y quedar Actions en verde sobre el SHA que se entregue. Para Classroom se entrega el enlace o SHA final del repositorio, dentro del plazo asignado. La guía del equipo también pide conservar la URL y la captura del run de Semana 3. Los reportes generados y la guía de trabajo se conservan fuera de Git.

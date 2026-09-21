@@ -67,7 +67,7 @@ npm run verify
 
 Este comando comprueba archivos, ejecuta las pruebas proporcionadas y compila. Genera `reports/verification.json` con los resultados técnicos y extrae los documentos para revisión. `make verify` es equivalente, pero **no necesitan instalar Make**. El check opcional `bash public-tests/check.sh` solo verifica estructura; no es una segunda evaluación.
 
-El resultado técnico `pass` **no es una calificación**: la calidad de requisitos, comparación y evidencia sigue sujeta a la rúbrica. El reporte no certifica ausencia de secretos.
+El resultado técnico `pass` **no es una calificación**: la calidad de requisitos, comparación y evidencia sigue sujeta a la rúbrica. El reporte no certifica ausencia de información sensible.
 
 ## Entrega en Classroom: cada integrante entrega
 
@@ -194,7 +194,7 @@ CI híbrida. Instalación, build y prueba se comprueban automáticamente; los do
 
 ## Hidden tests
 
-No hay requisitos ocultos. El docente vuelve a comprobar los mismos criterios en el SHA fijado con herramientas bajo su control. Se retiran los antiguos checks que confundían palabras de documentación con secretos y no verificaban comportamiento.
+No hay requisitos ocultos. El docente vuelve a comprobar los mismos criterios en el SHA fijado con herramientas bajo su control. Se retiran los antiguos checks que confundían palabras de documentación con información sensible y no verificaban comportamiento.
 
 ## Manual review
 
@@ -210,4 +210,4 @@ Total individual = base compartida (hasta 7) + explicación individual de AC-03 
 
 ## Manual-review flags
 
-SHA o reporte incongruente, acceso pendiente, documentación sin análisis, evidencia individual ausente o contradictoria, posible dato real o secreto. Una bandera solicita revisión; no es una acusación ni una deducción automática.
+SHA o reporte incongruente, acceso pendiente, documentación sin análisis, evidencia individual ausente o contradictoria, posible dato real o dato confidencial. Una bandera solicita revisión; no es una acusación ni una deducción automática.

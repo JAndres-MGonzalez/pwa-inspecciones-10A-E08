@@ -10,7 +10,7 @@ Equipo **10A-E08**. Identificación actualizada el 5 de septiembre de 2026.
 
 La persona coordinadora consulta inspecciones en computadora o teléfono (E-01). La persona inspectora necesitará conservar capturas durante interrupciones de red y enviarlas después (E-02). Véanse escenarios y condiciones en [requirements.md](requirements.md).
 
-El alcance publicado del curso delimita el producto. **Dentro del producto:** inspecciones de laboratorio, hallazgos y seguimiento, consulta con conectividad intermitente, evidencia opcional de dispositivo, notificaciones con degradación segura y datos sintéticos versionados. **Fuera del producto:** datos reales de estudiantes o personal, integraciones institucionales reales, secretos o llaves personales, servicios de pago obligatorios y requisitos no publicados. La decisión de esta semana considera ese alcance para elegir una estrategia que permita llegar a una producción académica sin depender de servicios externos.
+El alcance publicado del curso delimita el producto. **Dentro del producto:** inspecciones de laboratorio, hallazgos y seguimiento, consulta con conectividad intermitente, evidencia opcional de dispositivo, notificaciones con degradación segura y datos sintéticos versionados. **Fuera del producto:** datos reales de estudiantes o personal, integraciones institucionales reales, información sensible o llaves personales, servicios de pago obligatorios y requisitos no publicados. La decisión de esta semana considera ese alcance para elegir una estrategia que permita llegar a una producción académica sin depender de servicios externos.
 
 Se parte de un starter obligatorio, una semana de alcance documental y datos exclusivamente sintéticos. Se asume un equipo con recursos limitados y navegadores disponibles, sin dispositivos institucionales administrados ni presupuesto aprobado para tiendas. No se necesita hardware especializado. Son supuestos que deben contrastarse antes de ampliar el producto.
 
@@ -89,3 +89,9 @@ Los mensajes `SKIP_WAITING` y `PURGE_CACHES` permiten activar una actualización
 **Fallo encontrado:** en `e3dc533` el Service Worker solo registra instalación y activación. No contiene el manejo de peticiones, el respaldo offline ni los mensajes previstos. También faltan el documento de estrategia y las pruebas de Semana 3. La compilación y las pruebas de Semana 2 no permiten dar esta decisión por implementada.
 
 **Consecuencias y límites:** se conserva Next.js y el lockfile. La entrega se cierra cuando la implementación y sus pruebas coincidan con esta decisión. La caché puede borrarse desde el navegador; no constituye un respaldo permanente ni permite guardar nuevas inspecciones o sincronizarlas.
+
+**Resolución en el turno de Ismael:** se completó la implementación descrita y se añadieron
+las pruebas de Semana 3. El detalle vigente está en [la estrategia de caché](cache-strategy.md)
+y los resultados locales en [la bitácora](../evidence/session-log.md#turno-2--semana-3--ismael-completar-integración).
+La revisión anterior se conserva como diagnóstico histórico; el resultado de Actions del
+SHA de publicación y la comprobación personal se registran por separado.
