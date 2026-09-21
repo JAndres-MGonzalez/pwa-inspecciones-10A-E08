@@ -112,3 +112,24 @@ Fecha: 18 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empez
 | Depuración de la consola | `cacheFirst` sin control de errores lanzaba `Uncaught (in promise) TypeError: Failed to fetch` para recursos no precacheados en offline; se agregó `try/catch` con `Response` 503 y la consola quedó limpia |
 
 Commits del turno: `d7a92e4` — `feat(w03): service worker con precache, runtime cache y fallback offline`; `7d7d654` — `docs(w03): evidencia y bitacora de Kevin — Turno 1`.
+
+## Turno 3 — Semana 3
+
+Fecha: 20 de septiembre de 2026. Integrante: Juan Andrés. Base revisada: `e3dc5338124c58b761656cfcac196b4f34933607`. Entorno: Windows, Node 26.4.0, npm 11.17.0 y Git 2.55.0.windows.3.
+
+Se preparó el workflow de Semana 3 con el contenido exacto de la guía, el README y la nota de decisiones. Commit: [dff4721120ae426ad8a5c3bef9df3bebef3fecac](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/dff4721120ae426ad8a5c3bef9df3bebef3fecac).
+
+| Comprobación ejecutada con Codex | Resultado |
+|---|---|
+| `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Código 0; 28 paquetes instalados |
+| `npm.cmd test` | Código 0; nueve casos de Semana 2 aprobados |
+| `npm.cmd run build` | Código 0; compilación y cuatro páginas generadas |
+| `node scripts/verify.mjs` | Código 0; reporte `pass` identificado todavía como `w02-shell-manifest` |
+| `bash public-tests/check.sh` con Git Bash | Código 0 y `PUBLIC_OK`; sigue siendo el chequeo de Semana 2, sin los cuatro casos nuevos |
+| Service Worker ejecutado en `node:vm` con caché simulada | Código 1; sin manejador de peticiones, sin precache de `offline.html` y eliminación de una caché ajena |
+
+El cambio `0cf85bd` sustituyó el Service Worker anterior. En la versión integrada faltan `docs/cache-strategy.md`, `tests/service-worker.spec.ts`, `tests/offline.spec.ts` y `scripts/check-secrets.mjs`. Los resultados aprobados de los comandos existentes no comprueban los requisitos de Semana 3.
+
+Kevin tiene una sección y bitácora de Semana 3. No se encontró la evidencia de Semana 3 de Ismael ni capturas de esta semana en los archivos versionados. Cada integrante debe registrar sus resultados.
+
+Los logs de esta revisión quedan en `reports/week-03/logs/` y el diagnóstico del Service Worker en `reports/week-03/service-worker-review.json`, fuera de Git. Se utilizó Codex para preparar los cambios, ejecutar las comprobaciones y documentarlas. La validación humana queda pendiente de la revisión personal; no se registra una ejecución personal que todavía no se ha comunicado.

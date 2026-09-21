@@ -26,6 +26,15 @@
 - **Cambio que puedo defender o modificar:** explicar por qué el layout contiene una sola área principal y cómo el enlace interno coincide con el identificador de la sección.
 - **Uso de IA y validación personal:** Codex (OpenAI) ayudó con código de integración, pruebas, documentación y comprobaciones. Después ejecuté personalmente `npm.cmd run verify` y compartí el resultado. La instalación, la comparación de pruebas antes y después y la revisión de navegador de esta integración fueron realizadas por Codex.
 
+### Semana 3 — CI y revisión de integración
+
+- **Mi commit SHA:** [dff4721120ae426ad8a5c3bef9df3bebef3fecac](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/dff4721120ae426ad8a5c3bef9df3bebef3fecac).
+- **Contribución:** preparación del workflow de Semana 3, actualización del README y registro de la decisión de caché y los fallos de integración.
+- **Decisión técnica:** conservar el workflow de la guía con Node 20.19.6 y los comandos del proyecto. Un resultado aprobado debe acompañarse de pruebas que comprueben el funcionamiento sin conexión.
+- **Prueba ejecutada y resultado:** instalación, `npm.cmd test`, `npm.cmd run build`, `node scripts/verify.mjs` y el chequeo público ejecutados con Codex, con código 0. Pasaron nueve casos de Semana 2. La revisión adicional del Service Worker en memoria falló: no tiene manejo de peticiones, no guarda la página sin conexión y elimina una caché ajena.
+- **Limitación:** faltan las pruebas de Service Worker y offline, el documento de estrategia y el comprobador de secretos de Semana 3. La entrega todavía no cumple el incremento solicitado. El detalle está en [la bitácora](session-log.md#turno-3--semana-3).
+- **Uso de IA:** Codex (OpenAI) como apoyo para configurar CI, revisar la integración, ejecutar comprobaciones y redactar documentación. Validación humana de esta semana: pendiente de registrar la revisión personal.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
