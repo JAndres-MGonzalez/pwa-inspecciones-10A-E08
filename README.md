@@ -1,82 +1,75 @@
-# Inspecciones de laboratorio · Semana 2
+# Inspecciones de laboratorio · Semana 3
 
-Aplicación de ejemplo para consultar inspecciones de mantenimiento. Esta semana se integraron la estructura de navegación, el manifest, los iconos y los estados de carga, error y lista vacía.
+Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de laboratorios con datos sintéticos.
 
-Repositorio: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08). Grupo **10A**, equipo **E08**. El repositorio está público por decisión del propietario; la actividad anterior lo solicitaba privado. Falta indicar la cuenta del docente para una invitación.
+Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
-## Integrantes
+## Estado de Semana 3
 
-| Matrícula | Nombre completo |
-|---|---|
-| 3523110131 | Medina González Juan Andrés |
-| 3523110741 | Montalvo Lopez Jose Ismael |
-| 3523110092 | Montalvo Marcial Kevin Armando |
+La aplicación muestra tres inspecciones de ejemplo, navegación, manifest, iconos y estados de carga, error y lista vacía. El layout registra `public/sw.js` con alcance `/`.
 
-## Qué funciona
+La revisión del Turno 3 encontró una integración incompleta: el Service Worker guarda `/` durante la instalación, pero no tiene un manejador de peticiones que devuelva contenido sin conexión. Existe `public/offline.html`, aunque todavía no se guarda ni se utiliza como respaldo en la versión integrada.
 
-- Encabezado, navegación principal, un área principal y un pie de página.
-- Enlace «Saltar al contenido» usable con teclado y acceso a «Inspecciones recientes».
-- Tres registros ficticios: Redes y Software sin hallazgos; Electrónica con dos.
-- Manifest con nombre, colores, inicio y alcance en `/`, y presentación `standalone`.
-- Iconos PNG de 192 y 512 píxeles, uno de 512 declarado maskable, e icono Apple de 180.
-- Estado de carga con espera simulada de 700 ms, error con botón para reintentar y mensaje para una lista sin registros.
-
-Kevin preparó la estructura y los estados. Ismael agregó el manifest, los iconos y la integración en el layout. Juan Andrés solicitó la integración final: comprobaciones, corrección de la navegación y de las áreas repetidas, workflow y evidencia. La [evidencia individual](evidence/individual.md) distingue las declaraciones personales y las comprobaciones automatizadas.
+Faltan los entregables `docs/cache-strategy.md`, `tests/service-worker.spec.ts` y `tests/offline.spec.ts`. También falta `scripts/check-secrets.mjs`, indicado en la guía del equipo. No se considera terminada la entrega offline por obtener un resultado aprobado en las pruebas anteriores.
 
 ## Instalar y ejecutar
 
-Requisitos: Git, Node.js 20.19 o posterior compatible y npm 10 o posterior. Desde la carpeta de `package.json`:
+Requisitos: Git, Node.js 20.19.6 o posterior compatible y npm. Desde la carpeta del proyecto, en PowerShell:
 
 ```powershell
-npm.cmd ci
+npm.cmd ci --ignore-scripts --no-audit --no-fund
 npm.cmd run dev
 ```
 
-Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. En otros sistemas se puede usar `npm` en lugar de `npm.cmd`.
+Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. Para ejecutar la versión de producción:
 
-## Comprobar el proyecto
+```powershell
+npm.cmd run build
+npm.cmd run start
+```
+
+Los scripts disponibles son `dev`, `build`, `start`, `test` y `verify`. En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`.
+
+## Verificación
 
 ```powershell
 npm.cmd run verify
+bash public-tests/check.sh
 ```
 
-Es el equivalente de `make verify`: comprueba los archivos, ejecuta la suite y compila. Genera `reports/verification.json` con el SHA, el estado del árbol, los resultados y los documentos. La prueba también genera `reports/week-02/tests.json`. Para ejecutar solo las pruebas: `npm.cmd test`; para compilar por separado: `npm.cmd run build`.
+`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las pruebas y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y ripgrep en Windows.
 
-La suite ejecuta **nueve casos** en `tests/manifest.spec.ts`: contrato inicial, campos del manifest, dimensiones reales de PNG, área principal y pie únicos, destinos de navegación, tres inspecciones, estado vacío, carga y error con recuperación del cargador. `tests/starter.spec.mjs` es la entrada ya configurada en el starter. Un ayudante usa el TypeScript existente para ejecutar el spec y los componentes en Node 20, sin instalar dependencias ni mantener dos versiones de las mismas pruebas.
+| Comprobación | Estado de la integración revisada |
+|---|---|
+| Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | 28 paquetes instalados; sin cambios en el lockfile |
+| `npm.cmd test` | Nueve casos de manifest, estructura y estados de Semana 2 aprobados |
+| Pruebas de Service Worker y offline | Archivos pendientes de integrar |
+| Comprobador de secretos | Archivo pendiente de integrar |
+| Chequeo público | Sigue siendo el de Semana 2; no contiene los cuatro casos de Semana 3 |
 
-Los casos renderizan los componentes con React en memoria y sustituyen únicamente datos y tiempos dentro del proceso de pruebas. No modifican los datos de la aplicación. No comprueban todos los navegadores, instalación en un teléfono real, offline ni todos los aspectos de accesibilidad.
+La verificación de Semana 3 debe ejecutar las pruebas del Service Worker, offline, el comprobador de secretos y el build. El verificador actual todavía identifica el reporte como `w02-shell-manifest`.
 
-## Evidencia de integración
+## Entorno del Turno 3
 
-La primera ejecución detectó dos problemas: dos etiquetas `main` y un enlace sin destino. Con la misma suite, después de corregir la integración, pasaron los nueve casos. El registro del [antes y después](evidence/week-02/integration-check.json) identifica el commit de partida y los resultados reales.
+| Herramienta | Comprobación local | Workflow de Semana 3 |
+|---|---|---|
+| Sistema | Windows | Ubuntu de GitHub Actions |
+| Node.js | 26.4.0 | 20.19.6 |
+| npm | 11.17.0 | Versión incluida con Node.js en Actions |
+| Git | 2.55.0.windows.3 | Versión del entorno de Actions |
 
-La comprobación de navegador revisó 1280 × 900 y 320 × 800, tres tarjetas, un área principal, un pie, enlaces internos y el foco del teclado. Las capturas y observaciones están en [el reporte de Juan Andrés](evidence/week-02/reports/3523110131.md). Estas comprobaciones las ejecutó Codex; no sustituyen la revisión personal del integrante.
+## Decisiones y límites
 
-El 13 de septiembre Juan Andrés ejecutó personalmente `npm.cmd run verify` sobre la integración: nueve pruebas y build aprobados, con el árbol de Git limpio. Su [registro de ejecución](evidence/session-log.md#verificación-personal-de-juan-andrés--semana-2) conserva la fecha y el SHA comprobado.
+La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automática-y-caché) define el funcionamiento previsto: guardar los recursos de la aplicación, intentar la red primero para las páginas y disponer de un respaldo sin conexión. La primera preparación requiere conexión y que termine la instalación del Service Worker.
 
-## Entornos registrados
+En la versión revisada, la activación elimina cualquier caché distinta de `shell-v1` y `runtime-v1`; falta limitar la limpieza a las cachés de esta aplicación. El cambio `0cf85bd` sustituyó el Service Worker anterior y retiró el manejo de peticiones y mensajes. Se registra el fallo para completar la integración.
 
-| Herramienta | Juan Andrés, Semana 1 | Kevin, Semana 2 | Ismael, Semana 1 | Integración automatizada, Semana 2 |
-|---|---|---|---|---|
-| Sistema | Windows | Windows | Windows | Windows |
-| Node.js | 26.4.0 | 22.22.0 | 24.20.0 | 26.4.0 |
-| npm | 11.17.0 | 10.9.4 | 11.19.0 | 11.17.0 |
-| Git | 2.55.0.windows.3 | 2.47.0.windows.2 | 2.55.0.windows.3 | 2.55.0.windows.3 |
+Se usan únicamente inspecciones ficticias. No hay captura, almacenamiento de nuevos registros ni sincronización. Un build aprobado no comprueba el funcionamiento offline ni sustituye la revisión académica.
 
-Next.js permanece en 14.2.35 y React en 18.3.1. Se conservan `package.json` y el lockfile. El workflow de Semana 1 utiliza Node 20.19.6; el de Semana 2 conserva la configuración del kit y usa el entorno de GitHub.
+## Entrega Semana 3
 
-## Comprobación pública e incidencias
+El workflow `week-03-w03-service-worker-offline.yml` ejecuta instalación, build y pruebas al subir a `master`. Usa el contenido indicado en la guía. Los pasos opcionales de feedback no generan un reporte porque el proyecto no tiene `test:feedback`; por sí solos no acreditan la actividad.
 
-El comando `bash public-tests/check.sh` necesita Bash y ripgrep. Se conserva exactamente el script del kit. En la integración imprimió coincidencias de palabras en documentación y en la dependencia `js-tokens`, y después `PUBLIC_OK`, con código 0. La negación de la búsqueda evita que `set -e` interrumpa el script; por tanto, ese código no demuestra que la búsqueda no encontrara coincidencias. Se registra esta limitación sin cambiar el comprobador ni retirar una dependencia para ocultar el resultado.
+La evidencia de cada integrante está en [evidence/individual.md](evidence/individual.md) y la bitácora en [evidence/session-log.md](evidence/session-log.md). Cada persona registra su propia contribución y sus pruebas.
 
-La instalación actual añadió 28 paquetes y auditó 29. `npm audit` informó una dependencia de severidad alta (PostCSS) y una crítica (Next.js). Son los resultados del momento de esta integración; las dos alertas altas anotadas en Semana 1 corresponden a aquella fecha. No se ejecutó una actualización mayor forzada. Los resultados completos están en `reports/week-02/` de la copia local.
-
-El comportamiento sin conexión, almacenamiento, sincronización, autenticación y notificaciones siguen fuera de esta entrega. No hay service worker. La presencia del manifest por sí sola no acredita todas las condiciones de instalación en cada navegador. La visualización móvil comprobada es un viewport de navegador, no un ensayo en un teléfono físico.
-
-## Entrega
-
-La actividad PWA de Semana 2 usa el mismo repositorio y el commit fijado en Classroom. El kit no utiliza los comandos ni la etiqueta de CampusOps.
-
-Después del último commit, usar su SHA completo y la ejecución **Academic Evaluation Feedback** de ese mismo SHA. El workflow **Starter Semana 1 — feedback** se conserva y ejecuta el verificador actualizado, que produce el reporte descargable `starter-week-01-evidence`. El workflow de Semana 2 puede no producir artefacto, porque sus checks no generan las rutas que declara para subir.
-
-Cada integrante entrega sus enlaces e identifica su propia sección en `evidence/individual.md`. El SHA del reporte debe coincidir y `workingTreeClean` debe ser `true`. Los reportes generados se mantienen fuera de Git. No se deben enviar `.env`, `node_modules` ni `.next`.
+Antes de entregar deben integrarse los archivos faltantes, comprobarse el offline y quedar Actions en verde. Para Classroom se entrega el enlace o SHA final del repositorio, dentro del plazo asignado. La guía del equipo también pide conservar la URL y la captura del run de Semana 3. Los reportes generados y la guía de trabajo se conservan fuera de Git.

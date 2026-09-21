@@ -75,3 +75,17 @@ Para verificar se consideraron dos opciones: añadir un ejecutor de TypeScript y
 La prueba renderiza los componentes reales, comprueba campos y dimensiones de iconos, enlaces, estructura y estados. Dos casos detectaron problemas antes de la corrección y luego pasaron junto con los otros siete. La [evidencia de integración](../evidence/week-02/integration-check.json) conserva ambos resultados. Se revisó aparte la página en navegador a 1280 y 320 px y el salto al contenido con teclado.
 
 Esta decisión no implica conformidad integral de accesibilidad ni instalación comprobada en un teléfono real. Los pasos de CampusOps no forman parte del kit PWA de esta semana. La evidencia personal de cada integrante debe describir solo las verificaciones que realmente haya realizado.
+
+## Semana 3 — Actualización automática y caché
+
+Fecha: 20 de septiembre de 2026. Equipo: 10A-E08. Estado: decisión propuesta; integración pendiente de completar.
+
+**Contexto y supuestos:** la aplicación debe poder abrirse sin conexión después de una primera visita con red y con el Service Worker instalado. Se conservan los datos sintéticos y las dependencias del proyecto.
+
+**Decisión:** guardar la estructura de la aplicación y `offline.html` en una caché versionada `inspecciones-static-vN`. Para las páginas se intenta primero la red y, si falla, se usa una copia guardada o la página sin conexión. Los recursos `/_next/static/*` usan la copia disponible mientras se actualizan en `inspecciones-runtime-vN`. Las peticiones a `/api/*` y las que llevan autorización pasan directamente a la red. La limpieza debe eliminar únicamente versiones anteriores de las cachés de esta aplicación.
+
+Los mensajes `SKIP_WAITING` y `PURGE_CACHES` permiten activar una actualización y vaciar las cachés de la aplicación. Las pruebas del ciclo de vida y del offline deben ser reproducibles, ejecutarse desde `npm test` y usar un entorno de prueba en memoria sin agregar dependencias.
+
+**Fallo encontrado:** en `e3dc533` el Service Worker solo registra instalación y activación. No contiene el manejo de peticiones, el respaldo offline ni los mensajes previstos. También faltan el documento de estrategia y las pruebas de Semana 3. La compilación y las pruebas de Semana 2 no permiten dar esta decisión por implementada.
+
+**Consecuencias y límites:** se conserva Next.js y el lockfile. La entrega se cierra cuando la implementación y sus pruebas coincidan con esta decisión. La caché puede borrarse desde el navegador; no constituye un respaldo permanente ni permite guardar nuevas inspecciones o sincronizarlas.
