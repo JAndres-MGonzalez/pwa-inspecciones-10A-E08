@@ -5,7 +5,34 @@
   "assignmentId": "w03-service-worker-offline",
   "baseCommitSha": "d1e24519b1d84a55cdbe16b623e8fa1175f6f21b",
   "workingTreeClean": false,
-  "publication": "Cambios locales; SHA de publicación y Actions pendientes.",
+  "publication": {
+    "checkedAt": "2026-09-21T02:28:00.119Z",
+    "branch": "master",
+    "commitSha": "af14463309588b2a81de63a90d153a985140ea87",
+    "commitUrl": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/af14463309588b2a81de63a90d153a985140ea87",
+    "author": "Ismael2509",
+    "treeMatchesLocal": true,
+    "workflows": [
+      {
+        "id": 35554182934,
+        "name": "week-03-w03-service-worker-offline",
+        "conclusion": "success",
+        "url": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182934"
+      },
+      {
+        "id": 35554182948,
+        "name": "Academic Evaluation Feedback",
+        "conclusion": "success",
+        "url": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182948"
+      },
+      {
+        "id": 35554182923,
+        "name": "Starter Semana 1 — feedback",
+        "conclusion": "success",
+        "url": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182923"
+      }
+    ]
+  },
   "runtime": {
     "node": "v24.19.0"
   },

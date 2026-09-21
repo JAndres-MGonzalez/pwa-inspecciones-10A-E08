@@ -145,9 +145,22 @@ Base de Git: `d1e2451`. Windows, Node v24.19.0, npm 11.17.0. Ejecutó las compro
 2. **Implementación:** se añadieron el simulador y las suites, la estrategia de caché, el barrido local, el runner de Semana 3 y los chequeos públicos. Se completó el worker que había quedado incompleto tras la integración; no se modificaron los componentes ni la API de registro. El README se actualizó para no seguir describiendo como pendientes los archivos añadidos; en documentos anteriores solo se sustituyó vocabulario del barrido, conservando resultados históricos.
 3. **Correcciones a la guía:** se comprueba la existencia de archivos directamente y el contenido estructurado del reporte; el runner falla ante excepciones, suites vacías o aserciones fallidas. Se eliminó el estado global compartido del simulador, se clonan las respuestas y se normalizan sus URLs. Las excepciones literales del barrido y el reporte histórico excluido están documentados en `public-tests/README.md`; no se altera el lockfile para ocultar nombres de dependencias.
 4. **Verificación real:** `node scripts/verify.mjs` terminó con código 0: 35 casos aprobados, barrido aprobado, build compilado y cuatro páginas generadas. Git Bash ejecutó `public-tests/check.sh`: `files`, `cursors`, `tests` y `package` en PASS. Siete comprobaciones negativas verificaron que un reporte fallido/vacío/de otro SHA, un archivo vacío, una palabra marcada, una excepción o una suite vacía devuelven fallo. Edge en producción pasó cinco comprobaciones de precache, recarga offline con estilos y datos, respaldo, purga selectiva y ausencia de errores JavaScript. Los [resultados](week-03/ismael-verification.json) y las capturas [del inicio](week-03/ismael-offline-home.png) y [del respaldo](week-03/ismael-offline-fallback.png) corresponden a esta ejecución.
-5. **Evidencia y límites:** uso declarado de Codex para código, pruebas y documentación. La revisión personal de Ismael y Actions sobre el futuro SHA de publicación están pendientes; no se atribuye a esta ejecución el resultado anterior de Actions. Los reportes completos están en `reports/week-03/` y `reports/verification.json`, ignorados por Git. La guía original no se incorpora al repositorio.
+5. **Evidencia y límites:** uso declarado de Codex para código, pruebas y documentación. La revisión personal de Ismael está pendiente. La publicación y su resultado de Actions se registran abajo, por separado de las comprobaciones locales. Los reportes completos están en `reports/week-03/` y `reports/verification.json`, ignorados por Git. La guía original no se incorpora al repositorio.
 
 Para repetir la comprobación visual: compilar, iniciar producción, abrir el inicio y esperar a
 que el Service Worker controle la página; desactivar la conexión desde las herramientas de
 desarrollo y recargar. Deben conservarse tres tarjetas y estilos. Abrir una ruta desconocida
 debe mostrar «Estás sin conexión». La conexión inicial y el fin del precache son requisitos.
+
+### Publicación del turno de Ismael
+
+El usuario autorizó el commit y la publicación después de revisar el resultado local. Se publicó
+[af14463309588b2a81de63a90d153a985140ea87](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/af14463309588b2a81de63a90d153a985140ea87) en `master`, mediante la cuenta `Ismael2509` (autor y responsable del commit). El árbol publicado coincide exactamente con los 20 archivos preparados localmente.
+
+Los tres workflows concluyeron en `success` sobre ese SHA: [Semana 3](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182934),
+[evaluación académica](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182948)
+y [Semana 1](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/35554182923).
+Después de sincronizar la copia local, las 35 pruebas y los cuatro chequeos públicos
+aprobaron de nuevo sobre el commit publicado. Esta nota es un registro documental posterior;
+los enlaces anteriores corresponden al commit de implementación indicado. La revisión personal
+de Ismael continúa pendiente y no se sustituye por el resultado automático.
