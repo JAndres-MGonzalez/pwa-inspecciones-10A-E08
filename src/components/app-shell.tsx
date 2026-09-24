@@ -21,6 +21,9 @@ export function AppShell({ children }: Readonly<{ children: React.ReactNode }>) 
             <a className="app-nav__link" href="#inspecciones-recientes">
               Inspecciones recientes
             </a>
+            <a className="app-nav__link" href="/inspecciones">
+              Inspecciones
+            </a>
           </nav>
         </div>
       </header>
