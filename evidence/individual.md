@@ -68,6 +68,52 @@
 - **Uso de IA:** usé un asistente de IA de terminal (opencode) como apoyo para redactar el service worker, el registro, la evidencia y guiar la verificación; los comandos `npm.cmd test`, `npm run build`, el servidor y la prueba manual los ejecuté y confirmé personalmente en PowerShell y en el navegador.
 - **Commit del turno (SHA):** `d7a92e4` — `feat(w03): service worker con precache, runtime cache y fallback offline`; evidencia en `7d7d654` — `docs(w03): evidencia y bitacora de Kevin — Turno 1`.
 
+### Semana 4 · Turno 1 — Rutas CSR y SSR con estados verificables
+
+- **Entregado por:** Kevin.
+- **Rama y PR:** rama `semana-4-t1-kevin-rutas`; PR `<completar>` (URL: `<completar>`); revisor y merge: Ismael (SHA del merge: `<completar>`).
+- **Descripción de lo que hice (consigna):** creé la ruta CSR `src/app/inspecciones/page.tsx`
+  (listado con estado inicial de carga idéntico en servidor y cliente, sin hydration mismatch;
+  estados de carga, error con reintento y vacío) y la ruta SSR
+  `src/app/inspecciones/[id]/page.tsx` (datos cargados en servidor con `force-dynamic` y
+  `notFound()` para identificadores inexistentes, con `not-found.tsx` propio). Agregué el
+  componente reutilizable `src/components/loading-state.tsx` y los subcomponentes del listado
+  (grid, vacío y error) en `src/components/inspecciones-view.tsx`, los `loading.tsx`/`error.tsx`
+  de ambas rutas y la navegación: enlace "Inspecciones" en el shell y "Ver detalle" en las
+  tarjetas de la home; agregué también estilos en `globals.css`.
+- **Reflexión:** el primer render del listado CSR es idéntico en servidor y cliente, lo que
+  evita el hydration mismatch; el detalle SSR entrega contenido verificable en el HTML inicial.
+  La ruta CSR mostrará la métrica de carga en ms al usuario, sin que las pruebas dependan de su valor.
+- **Archivos modificados:** `src/app/inspecciones/page.tsx`, `src/app/inspecciones/[id]/page.tsx`,
+  `src/app/inspecciones/[id]/not-found.tsx`, `src/app/inspecciones/loading.tsx`,
+  `src/app/inspecciones/error.tsx`, `src/app/inspecciones/[id]/loading.tsx`,
+  `src/app/inspecciones/[id]/error.tsx`, `src/components/loading-state.tsx`,
+  `src/components/inspecciones-view.tsx`, `src/components/app-shell.tsx`,
+  `src/app/page.tsx`, `src/app/globals.css`.
+- **Decisión técnica que puedo explicar:** el listado es CSR para cargar en cliente con
+  interacción (reintento, métrica visible) y el detalle es SSR para que el contenido llegue en el
+  HTML inicial; el estado inicial del CSR es "cargando" para que servidor y cliente coincidan.
+  Los subcomponentes del listado viven en `src/components/inspecciones-view.tsx` (fuera de la
+  ruta) porque Next.js no permite exportar componentes con nombre desde un `page.tsx`.
+- **Fallos diagnosticados y solución:** el build fallaba porque la página del listado exportaba
+  `InspeccionesGrid`/`InspeccionesEmpty`/`InspeccionesError` además del `default`
+  (`Property 'InspeccionesGrid' is incompatible with index signature`); moví esos subcomponentes
+  a `src/components/inspecciones-view.tsx` y el build compiló. También observé que la ruta
+  inexistente renderiza la página "Inspección no encontrada" pero con status HTTP 200, por el
+  streaming de `loading.tsx`: Next.js fija el status antes de saber que habrá `notFound()`; es
+  comportamiento de plataforma y la prueba del Turno 2 valida el rechazo a nivel de componente.
+- **Prueba que ejecuté y resultado:** `npm.cmd test` con `starter.spec.mjs: PASS` (3 suites,
+  35 casos previos intactos) y `npm run build` con código 0 (First Load JS 97.6 kB en
+  `/inspecciones` y 96.1 kB en `/inspecciones/[id]`). Verificación HTTP: `/` con tarjetas y
+  "Ver detalle", `/inspecciones` con estado de carga inicial, detalle SSR con "Laboratorio de
+  Redes" en el HTML y 404 renderizado. Detalle en
+  [la verificación del turno](week-04/kevin-verificacion.md).
+- **Uso de IA:** usé un asistente de IA de terminal (opencode) como apoyo para crear los
+  componentes, diagnosticar el fallo del build, ejecutar las comprobaciones y redactar la
+  evidencia; validé los resultados con las suites, el build y las respuestas HTTP que el
+  asistente me mostró, y dejaré registrada mi comprobación personal en navegador antes de cerrar
+  la semana.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08
