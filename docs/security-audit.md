@@ -15,7 +15,7 @@ sintéticos y no se publica ninguna credencial real.
 |---|---|---|---|---|
 | 1 | Los componentes de error mostraban el mensaje del error al usuario y registraban el objeto `Error` completo en consola | Información interna del proyecto (rutas y detalles de fallas) podía quedar visible en pantalla y en los registros de consola | Se muestran mensajes genéricos y se registra solo una etiqueta, sin el objeto `Error` ni su pila | `error-antes.png` y `error-despues.png` |
 | 2 | La caché de runtime del Service Worker guardaba cada página visitada sin límite alguno | El almacenamiento del dispositivo podía crecer sin control y acumular copias viejas de páginas | Se acota la caché runtime a 24 entradas con eliminación de la más antigua (`MAX_RUNTIME_ENTRIES`) y se publica la versión v2 del worker | `sw-cache-antes.png` y `sw-cache-despues.png` |
-| 3 | Se documenta en el commit correspondiente | — | — | — |
+| 3 | El servidor no enviaba cabeceras HTTP de seguridad (CSP, `X-Content-Type-Options`, `X-Frame-Options`, etc.) en las respuestas | Navegadores con protección reducida ante contenido mixto, clickjacking y otros ataques básicos | Se añadieron cabeceras de seguridad para todas las rutas en `next.config.mjs` | `headers-antes.png` y `headers-despues.png` |
 
 ---
 
@@ -141,3 +141,63 @@ al activar la nueva versión y el límite queda respaldado por una prueba que
 verifica que con 26 respuestas la caché queda en 24 entradas, eliminando las más
 antiguas.
 ![Cache Storage con runtime-v2 acotado](evidence/sw-cache-despues.png)
+
+---
+
+## Hallazgo 3 — El servidor no enviaba cabeceras HTTP de seguridad
+
+### Problema encontrado
+
+La configuración de `next.config.mjs` solo definía `Cache-Control` para `/sw.js`.
+Las respuestas del resto de la aplicación no incluían cabeceras de seguridad como
+`Content-Security-Policy`, `X-Content-Type-Options` o `X-Frame-Options`. Al
+inspeccionar los encabezados de una página en el navegador solo aparecían
+`Content-Type`, `Cache-Control` y `X-Powered-By: Next.js`.
+
+### Riesgo
+
+Sin estas cabeceras, el navegador aplica comportamientos permisivos por omisión:
+- Sin `X-Content-Type-Options: nosniff`, un navegador puede interpretar un
+  archivo con un tipo declarado incorrecto (por ejemplo, ejecutar contenido como
+  script), lo que facilita ataques como *content sniffing*.
+- Sin `X-Frame-Options` ni `frame-ancestors`, la aplicación puede incrustarse en
+  un marco de un sitio ajeno (*clickjacking*).
+- Sin `Referrer-Policy`, los enlaces pueden enviar la URL completa de origen al
+  salir de la aplicación, filtrando rutas internas.
+- Sin `Content-Security-Policy`, nada limita qué orígenes pueden cargar scripts,
+  estilos o imágenes, y no hay forma de detectar contenido inyectado.
+
+### Solución
+
+Se añadieron cabeceras de seguridad para todas las rutas en `next.config.mjs`:
+
+```js
+{
+  source: "/:path*",
+  headers: [
+    { key: "X-Content-Type-Options", value: "nosniff" },
+    { key: "X-Frame-Options", value: "DENY" },
+    { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+    { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+    { key: "Content-Security-Policy", value: "default-src 'self'; ... frame-ancestors 'none'" }
+  ]
+}
+```
+
+La CSP mantiene `'unsafe-inline'` para scripts y estilos porque Next.js hidrata la
+aplicación con scripts inline; el resto queda restringido a `'self'`. La app se
+verificó en producción después del cambio y sigue funcionando (páginas, listado,
+detalle y el Service Worker).
+
+### Evidencia
+
+Antes: la respuesta del servidor solo traía encabezados generales, sin ninguna
+cabecera de seguridad.
+![Response Headers sin cabeceras de seguridad](evidence/headers-antes.png)
+
+Después: la misma respuesta incluye `Content-Security-Policy`, `X-Content-Type-Options`,
+`X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`.
+![Response Headers con cabeceras de seguridad](evidence/headers-despues.png)
+
+Respaldo programático (salida de `Invoke-WebRequest`): `headers-antes.txt` y
+`headers-despues.txt`.

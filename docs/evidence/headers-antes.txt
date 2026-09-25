@@ -1,0 +1,8 @@
+﻿Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: text/html; charset=utf-8
+Date: Fri, 25 Sep 2026 00:56:09 GMT
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding
+X-Powered-By: Next.js
