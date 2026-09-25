@@ -1,0 +1,13 @@
+﻿Cache-Control: private, no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+Content-Type: text/html; charset=utf-8
+Date: Fri, 25 Sep 2026 01:01:16 GMT
+Keep-Alive: timeout=5
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Referrer-Policy: strict-origin-when-cross-origin
+Transfer-Encoding: chunked
+Vary: RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-Powered-By: Next.js
