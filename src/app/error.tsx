@@ -10,14 +10,14 @@ export default function GlobalErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Error al cargar la página:", error);
+    console.error("No se pudo cargar el contenido");
   }, [error]);
 
   return (
     <div className="error-state" role="alert">
       <p className="eyebrow">Contenido de prueba</p>
       <h2>No se pudo cargar el contenido</h2>
-      <p>{error.message}</p>
+      <p>Ocurrió un error inesperado. Inténtalo de nuevo.</p>
       <button className="error-state__cta" type="button" onClick={reset}>
         Inténtalo de nuevo
       </button>

@@ -11,14 +11,14 @@ export default function InspectionDetailErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Error en el detalle:", error);
+    console.error("No se pudo cargar el detalle");
   }, [error]);
 
   return (
     <div className="error-state" role="alert">
       <p className="eyebrow">Contenido de prueba</p>
       <h2>No se pudo cargar el detalle</h2>
-      <p>{error.message}</p>
+      <p>El detalle no está disponible por el momento. Inténtalo de nuevo.</p>
       <button className="error-state__cta" type="button" onClick={reset}>
         Inténtalo de nuevo
       </button>

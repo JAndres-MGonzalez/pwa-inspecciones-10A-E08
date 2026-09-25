@@ -11,14 +11,14 @@ export default function InspeccionesErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Error en el listado:", error);
+    console.error("No se pudo cargar el listado");
   }, [error]);
 
   return (
     <div className="error-state" role="alert">
       <p className="eyebrow">Contenido de prueba</p>
       <h2>No se pudo cargar el listado</h2>
-      <p>{error.message}</p>
+      <p>El listado no está disponible por el momento. Inténtalo de nuevo.</p>
       <button className="error-state__cta" type="button" onClick={reset}>
         Inténtalo de nuevo
       </button>
