@@ -14,7 +14,7 @@ sintéticos y no se publica ninguna credencial real.
 | # | Hallazgo | Riesgo | Solución aplicada | Evidencia |
 |---|---|---|---|---|
 | 1 | Los componentes de error mostraban el mensaje del error al usuario y registraban el objeto `Error` completo en consola | Información interna del proyecto (rutas y detalles de fallas) podía quedar visible en pantalla y en los registros de consola | Se muestran mensajes genéricos y se registra solo una etiqueta, sin el objeto `Error` ni su pila | `error-antes.png` y `error-despues.png` |
-| 2 | Se documenta en el commit correspondiente | — | — | — |
+| 2 | La caché de runtime del Service Worker guardaba cada página visitada sin límite alguno | El almacenamiento del dispositivo podía crecer sin control y acumular copias viejas de páginas | Se acota la caché runtime a 24 entradas con eliminación de la más antigua (`MAX_RUNTIME_ENTRIES`) y se publica la versión v2 del worker | `sw-cache-antes.png` y `sw-cache-despues.png` |
 | 3 | Se documenta en el commit correspondiente | — | — | — |
 
 ---
@@ -80,3 +80,64 @@ Antes: la consola exponía el objeto `Error` con su pila de ejecución.
 Después: el error sigue ocurriendo (se simuló a propósito), pero la consola solo muestra
 la etiqueta fija y la pantalla un mensaje general, sin detalles internos.
 ![Consola y pantalla con mensajes genéricos](evidence/error-despues.png)
+
+---
+
+## Hallazgo 2 — Caché de runtime del Service Worker sin límite
+
+### Problema encontrado
+
+En `public/sw.js`, la estrategia de navegación guardaba en
+`inspecciones-runtime-v1` **todas** las páginas visitadas y los recursos públicos
+solicitados, sin un tope de entradas. Cada visita nueva se sumaba a la caché y
+nada la eliminaba:
+
+```js
+async function fetchAndCache(request) {
+  const response = await fetch(request);
+  if (response.ok) {
+    const cache = await caches.open(RUNTIME_CACHE);
+    await cache.put(request, response.clone());
+  }
+  return response;
+}
+```
+
+### Riesgo
+
+Como la aplicación no tiene límite de páginas (cada inspección es una ruta
+distinta), el almacenamiento del dispositivo crecía sin control con copias de
+páginas ya visitadas. En equipos con poco espacio o con muchas visitas, esto
+podía llenar la cuota del navegador, degradar el rendimiento y conservar copias
+viejas de contenido que ya no debían mostrarse.
+
+### Solución
+
+Se acotó la caché de runtime a un máximo de `MAX_RUNTIME_ENTRIES = 24` entradas.
+Al guardar una respuesta que supera el tope, se elimina la entrada más antigua
+(la primera en orden de inserción). El precache de la shell no cambia: su tamaño
+lo define la aplicación. Además se publicó la versión `v2` del worker, que al
+activarse limpia las cachés `v1` anteriores.
+
+```js
+const MAX_RUNTIME_ENTRIES = 24;
+
+async function trimToMax(cache) {
+  const keys = await cache.keys();
+  const excess = keys.length - MAX_RUNTIME_ENTRIES;
+  if (excess <= 0) return;
+  await Promise.all(keys.slice(0, excess).map((key) => cache.delete(key)));
+}
+```
+
+### Evidencia
+
+Antes: `inspecciones-runtime-v1` acumulaba las URLs de las páginas visitadas sin
+ningún límite.
+![Cache Storage con runtime-v1 acumulando páginas sin límite](evidence/sw-cache-antes.png)
+
+Después: la caché runtime pasa a `inspecciones-runtime-v2`, las `v1` se eliminan
+al activar la nueva versión y el límite queda respaldado por una prueba que
+verifica que con 26 respuestas la caché queda en 24 entradas, eliminando las más
+antiguas.
+![Cache Storage con runtime-v2 acotado](evidence/sw-cache-despues.png)

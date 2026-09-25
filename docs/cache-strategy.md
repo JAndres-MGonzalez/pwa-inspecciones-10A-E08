@@ -12,8 +12,8 @@ el servidor de desarrollo contiene recursos transitorios y no es la entrega PWA.
 
 | Caché | Contenido | Estrategia |
 |---|---|---|
-| `inspecciones-static-v1` | Inicio, `/offline.html`, manifest, los tres iconos y el icono Apple; CSS y JavaScript de `/_next/static/` enlazados por el HTML inicial | Precache durante `install` |
-| `inspecciones-runtime-v1` | Páginas visitadas y recursos públicos solicitados después de la instalación | Red primero para navegación; copia y actualización de fondo para `/_next/static/`; caché primero para otros GET |
+| `inspecciones-static-v2` | Inicio, `/offline.html`, manifest, los tres iconos y el icono Apple; CSS y JavaScript de `/_next/static/` enlazados por el HTML inicial | Precache durante `install` |
+| `inspecciones-runtime-v2` | Páginas visitadas y recursos públicos solicitados después de la instalación, con un máximo de 24 entradas | Red primero para navegación; copia y actualización de fondo para `/_next/static/`; caché primero para otros GET |
 
 Durante `install` se descargan los archivos obligatorios y se leen los enlaces
 de assets del HTML generado por Next.js. Esto prepara también estilos y scripts
@@ -52,10 +52,20 @@ del prefijo y confirma con `PURGE_CACHES_DONE` en el primer puerto, cuando exist
 Tras una purga, una página desconocida puede recibir 503 hasta que se prepare
 de nuevo el precache o se visite con conexión.
 
-Para publicar una nueva shell se cambia `VERSION` de `v1` a `v2`, actualizando
-también los nombres esperados en las pruebas. Se instala primero el nuevo
-precache; al activar se borran las dos cachés de la versión anterior. El header
-`Cache-Control: public, max-age=0, no-cache` de `/sw.js` fuerza su revalidación.
+Para publicar una nueva shell se cambia `VERSION` (por ejemplo de `v2` a `v3`),
+actualizando también los nombres esperados en las pruebas. Se instala primero el
+nuevo precache; al activar se borran las dos cachés de la versión anterior. El
+header `Cache-Control: public, max-age=0, no-cache` de `/sw.js` fuerza su
+revalidación.
+
+## Límite de la caché runtime
+
+La caché `inspecciones-runtime-v2` tiene un tope de `MAX_RUNTIME_ENTRIES = 24`.
+Al guardar una respuesta que supera el tope se elimina la entrada más antigua
+(la primera en orden de inserción), para que el almacenamiento del dispositivo
+no crezca sin límite a medida que se visitan páginas. El precache de la shell
+(`inspecciones-static-v2`) no participa en este límite: su tamaño lo define la
+aplicación y solo cambia cuando se publica una versión nueva.
 
 ## Verificación y límites
 

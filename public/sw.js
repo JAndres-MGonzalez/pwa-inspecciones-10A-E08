@@ -1,5 +1,7 @@
 const CACHE_PREFIX = "inspecciones-";
-const VERSION = "v1";
+const VERSION = "v2";
+// La caché runtime se acota para no crecer sin límite en el dispositivo.
+const MAX_RUNTIME_ENTRIES = 24;
 const SHELL_CACHE = `${CACHE_PREFIX}static-${VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${VERSION}`;
 const SHELL_ASSETS = [
@@ -43,12 +45,22 @@ async function matchAppCache(request) {
   return (await runtime.match(request)) || shell.match(request);
 }
 
+// Al superar el máximo se elimina la entrada más antigua (primera en orden de
+// inserción) para que el almacenamiento del dispositivo no crezca sin límite.
+async function trimToMax(cache) {
+  const keys = await cache.keys();
+  const excess = keys.length - MAX_RUNTIME_ENTRIES;
+  if (excess <= 0) return;
+  await Promise.all(keys.slice(0, excess).map((key) => cache.delete(key)));
+}
+
 async function fetchAndCache(request) {
   const response = await fetch(request);
   if (response.ok) {
     try {
       const cache = await caches.open(RUNTIME_CACHE);
       await cache.put(request, response.clone());
+      await trimToMax(cache);
     } catch {
       // Una cuota agotada no debe descartar una respuesta de red válida.
     }
