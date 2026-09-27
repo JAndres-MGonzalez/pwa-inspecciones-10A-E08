@@ -186,3 +186,12 @@ Ejecuciones: [Semana 3](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10
 La comprobación visual de producción está documentada en [el registro del turno de Ismael](week-03/ismael-verification.json), con sus capturas; esta revisión no la presenta como una ejecución personal de Juan Andrés. Se actualizan el README, la decisión técnica y su sección de evidencia para reflejar los faltantes resueltos. El diagnóstico inicial se conserva como antecedente.
 
 La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión de código, ejecutó los comandos y actualizó la documentación. Las pruebas en memoria y Actions comprueban los casos definidos; no demuestran compatibilidad con todos los navegadores, sincronización ni una auditoría integral.
+
+## Semana 4 · Turno 2 — Ismael
+
+- Base: `master` (tras merge del PR de Kevin, Turno 1). Rama: `semana-4-t2-ismael-pruebas`.
+- Revisión Turno 1: <URL del PR de Kevin> → merge SHA <completar>.
+- PR propio: <título/URL> → revisor y merge: Juan Andrés, SHA <completar>.
+- Verificación local: `npm.cmd test` → PASS (4 suites, 44 casos); `npm.cmd run build` → código 0;
+  `node scripts/verify.mjs` → pass; `bash public-tests/check.sh` → PUBLIC_OK.
+- Evidencia: capturas guardadas en `evidence/week-04/`.

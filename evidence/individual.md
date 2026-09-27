@@ -172,3 +172,27 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Comprobación real en navegador:** Edge con la versión de producción, contexto limpio y conexión desactivada después de instalar el worker. Se guardaron 15 recursos iniciales; al recargar se conservaron datos y estilos. Una ruta sin copia mostró el respaldo; la purga conservó una caché ajena y sin respaldo se obtuvo 503. No hubo errores JavaScript de página. Evidencia: [resultados](week-03/ismael-verification.json), [inicio offline](week-03/ismael-offline-home.png) y [respaldo](week-03/ismael-offline-fallback.png).
 - **Límites y validación personal:** esta ejecución la realizó Codex; la revisión personal de Ismael queda pendiente. No acredita instalación en un teléfono, ausencia de vulnerabilidades, captura de nuevas inspecciones ni sincronización. La comprobación de palabras documenta sus excepciones y conserva el reporte histórico de Semana 2 intacto.
 - **Uso de IA:** se utilizó Codex (OpenAI) para revisar la guía, implementar correcciones, ejecutar pruebas y redactar esta evidencia. No se adopta la frase de la plantilla que negaba el uso de IA.
+
+### Semana 4 · Turno 2 — Pruebas de renderizado, verificador local y decisión
+
+- **Entregado por:** Ismael.
+- **Rama y PR:** rama `semana-4-t2-ismael-pruebas`; PR "<Título del PR>" (URL: <link>); revisor y merge: Juan Andrés (SHA del merge: <completar>). Revisión y merge del PR del Turno 1: <URL del PR de Kevin> (SHA del merge: <completar>).
+- **Descripción de lo que hice (consigna):** creé la suite determinista `tests/rendering.spec.ts`
+  (9 casos: primer render del listado CSR, ausencia de hydration mismatch, estados de error y
+  vacío mediante los subcomponentes exportados, contenido SSR del detalle, rechazo ante id
+  inexistente, enlace de navegación y componente de carga) y la integré en
+  `tests/starter.spec.mjs` (4 suites, 44 casos). Documenté la decisión en
+  `docs/rendering-decision.md` (CSR listado / SSR detalle, comparación, métrica repetible y
+  límites), actualicé `scripts/verify.mjs` y `public-tests/check.sh` + `README.md` para Semana 4.
+  Como revisor del Turno 1, verifiqué y mergeé el PR de Kevin.
+- **Reflexión:** la suite comprueba el comportamiento crítico sin navegador (determinista):
+  el primer render del CSR es idéntico en servidor y cliente y el detalle SSR entrega contenido
+  en el HTML inicial; el verificador local valida las 4 suites, el barrido y el build.
+- **Decisión técnica que puedo explicar:** el listado carga en cliente (CSR) con estado inicial
+  de carga y el detalle se renderiza en servidor (SSR); la métrica se mide con `performance.now()`
+  y se documenta sin que las pruebas afirmen su valor (siguen deterministas).
+- **Fallos diagnosticados y solución:** <completar con cualquier fallo real del runner>.
+- **Prueba que ejecuté y resultado:** `npm.cmd test` con `starter.spec.mjs: PASS` (4 suites,
+  44 casos, reporte `reports/week-04/tests.json`), `npm run build` con código 0,
+  `node scripts/verify.mjs` con resultado `pass` y `bash public-tests/check.sh` con 4/4 en PASS.
+- **Uso de IA:** <declara herramienta, propósito y validación humana reales>.
