@@ -4,8 +4,8 @@ const { readFileSync } = require("node:fs");
 const { resolve } = require("node:path");
 const ORIGIN = "https://localhost";
 const CACHE_PREFIX = "inspecciones-";
-const ENTRY_CACHE = CACHE_PREFIX + "static-v1";
-const RUNTIME_CACHE = CACHE_PREFIX + "runtime-v1";
+const ENTRY_CACHE = CACHE_PREFIX + "static-v2";
+const RUNTIME_CACHE = CACHE_PREFIX + "runtime-v2";
 const SW_SOURCE = readFileSync(resolve(__dirname, "../public/sw.js"), "utf8");
 const urlOf = (input) => new URL(typeof input === "string" ? input : input.url, ORIGIN).href;
 
@@ -39,6 +39,9 @@ class FakeCache {
   }
   async keys() {
     return [...this.entries.keys()].map((url) => new Request(url));
+  }
+  async delete(input) {
+    return this.entries.delete(urlOf(input));
   }
 }
 

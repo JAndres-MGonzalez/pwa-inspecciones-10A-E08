@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { loadInspections } from "../lib/data/inspection-loader";
 import type { Inspection } from "../lib/data/inspections";
 
@@ -55,6 +56,9 @@ export default async function HomePage() {
                     <dd>{inspection.findings}</dd>
                   </div>
                 </dl>
+                <Link className="inspection-card__link" href={`/inspecciones/${inspection.id}`}>
+                  Ver detalle
+                </Link>
               </article>
             ))}
           </div>
