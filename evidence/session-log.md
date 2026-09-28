@@ -188,7 +188,6 @@ La comprobación visual de producción está documentada en [el registro del tur
 
 La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión de código, ejecutó los comandos y actualizó la documentación. Las pruebas en memoria y Actions comprueban los casos definidos; no demuestran compatibilidad con todos los navegadores, sincronización ni una auditoría integral.
 
-<<<<<<< HEAD
 ## Semana 4 · Turno 2 — Ismael
 
 - Base: `master` (tras merge del PR de Kevin, Turno 1). Rama: `semana-4-t2-ismael-pruebas`.
@@ -197,7 +196,6 @@ La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión d
 - Verificación local: `npm.cmd test` → PASS (4 suites, 45 casos); `npm.cmd run build` → código 0;
   `node scripts/verify.mjs` → pass; `bash public-tests/check.sh` → PUBLIC_OK.
 - Evidencia: capturas guardadas en `evidence/week-04/`.
-=======
 ## Ejecución de Kevin — Semana 4 (Turno 1)
 
 Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empezar se verificó `git status` con el árbol limpio sobre `master` (HEAD `e9ff3c4`).
@@ -215,4 +213,3 @@ Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empez
 | `npm run build` + `next start -p 3100` | Producción sirve las mismas rutas con los mismos contenidos; se documenta que el status del 404 queda en 200 por el streaming de `loading.tsx` (comportamiento de plataforma) |
 
 Rama `semana-4-t1-kevin-rutas` dejada lista con los dos commits del turno, sin push: `feat(w04): rutas CSR y SSR con estados verificables` y `docs(w04): evidencia y bitacora de Kevin — Turno 1`. El push y el PR los hace Kevin manualmente; el merge lo hará Ismael como revisor. Detalle de las comprobaciones en [la verificación del turno](week-04/kevin-verificacion.md).
->>>>>>> origin/master
