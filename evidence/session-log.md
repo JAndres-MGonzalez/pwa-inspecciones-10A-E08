@@ -213,3 +213,31 @@ Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empez
 | `npm run build` + `next start -p 3100` | Producción sirve las mismas rutas con los mismos contenidos; se documenta que el status del 404 queda en 200 por el streaming de `loading.tsx` (comportamiento de plataforma) |
 
 Rama `semana-4-t1-kevin-rutas` dejada lista con los dos commits del turno, sin push: `feat(w04): rutas CSR y SSR con estados verificables` y `docs(w04): evidencia y bitacora de Kevin — Turno 1`. El push y el PR los hace Kevin manualmente; el merge lo hará Ismael como revisor. Detalle de las comprobaciones en [la verificación del turno](week-04/kevin-verificacion.md).
+
+## Turno 3 de Juan Andrés — Semana 4
+
+Fecha: 27 de septiembre de 2026. Rama: `semana-4-t3-andres-ci`. Base: `e23031420908f3ed2a913e586f0c6df1a7d64b79`. Entorno: Windows, Node v26.4.0, npm 11.17.0 y Git 2.55.0.windows.3. Codex ejecutó la revisión y preparó los archivos a solicitud de Juan Andrés.
+
+Se consultaron los PR del repositorio. Los PR [#2](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/2) y [#3](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/3) de Kevin están integrados. La rama de Ismael `8677aa9f2d63fe6042a58ef4cf42f84bdd539f53` todavía no tenía PR y partía de Semana 3.
+
+`npm.cmd ci --ignore-scripts --no-audit --no-fund` instaló 28 paquetes sin cambiar el lockfile. Las pruebas de Ismael fallaron en los nueve casos nuevos. Para revisar la integración se combinaron localmente las ramas sin crear commit; apareció un conflicto en `evidence/session-log.md`. En esa combinación, `node scripts/verify.mjs` terminó con código 1: 41 de 45 casos aprobados, cuatro fallos de importación, barrido aprobado y build correcto. El listado registró 97.6 kB y el detalle 96.1 kB de First Load JS. El chequeo público terminó con código 1, con tres apartados aprobados y `tests` fallido. Después se deshizo la combinación temporal.
+
+Se preparó el workflow exacto indicado por la guía, el README de Semana 4, la nota del ADR y la evidencia propia. La documentación distingue los resultados disponibles del cierre pendiente. El [reporte de revisión](week-04/andres-revision.md) explica los cuatro errores y el conflicto. Las entradas personales de los compañeros conservan sus declaraciones originales.
+
+### Revisión del PR #4 corregido
+
+Ismael actualizó su rama y abrió el [PR #4](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/4). Sobre `27e1d088f602eb22b501c7c47f16300b77e51309`, Codex repitió la instalación, `npm.cmd run verify` y el chequeo público: 45 casos aprobados (9 + 20 + 7 + 9), build correcto y cuatro apartados públicos aprobados. El reporte identifica `w04-csr-ssr` y un árbol limpio. El commit posterior `37185a0522d628ae01c719f1909eaf450b57fc2b` solo quitó tres marcadores de la bitácora; sobre ese SHA se repitieron las pruebas y el chequeo público con resultado aprobado.
+
+Se revisaron los diez archivos del diff: únicamente pruebas, verificador, decisión de renderizado y evidencia. Se [aprobó la revisión](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/4#pullrequestreview-5334457707) con atribución a Codex y se usó «Create a merge commit» en GitHub. Merge: `5ea3965c7caf9a9b1a537860bdab266f7e81c0ca`. La rama remota integrada se eliminó. La [captura del merge](week-04/andres-pr4-merge.png) y los logs en `reports/week-04/revision-pr4/` registran esta revisión.
+
+La rama del Turno 3 se actualizó por avance directo al merge antes de recuperar el trabajo documental. Se conserva el código de Kevin e Ismael. La evidencia de Kevin todavía contiene campos de PR sin completar; sus PR #2 y #3 ya están integrados y el merge de #3 es `e23031420908f3ed2a913e586f0c6df1a7d64b79`. Kevin debe actualizar su propia sección al revisar el Turno 3.
+
+Uso de IA: Codex para revisión, comandos, CI y documentación. La revisión humana de Juan Andrés y la aprobación y merge de Kevin siguen pendientes; no se ha entregado en Classroom.
+
+### Publicación del Turno 3
+
+Commit de implementación: `906fcaf1952da57aabb53ce5849f7281612ef904`, «feat(w04): workflow CI de la semana 4 y entrega». Se ejecutaron, en orden, `npm.cmd ci --ignore-scripts --no-audit --no-fund`, `npm.cmd test`, `npm.cmd run build`, `npm.cmd run verify` y `bash public-tests/check.sh` con Git Bash. Todos terminaron con código 0; 45 casos y cuatro chequeos aprobados. `reports/verification.json` identifica `w04-csr-ssr`, ese commit y `workingTreeClean: true`. Los reportes originales quedan en `reports/week-04/turno3/` y la [captura del registro local](week-04/andres-verificacion-local.png) muestra las salidas guardadas y el historial.
+
+Se abrió el [PR #5](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/5), dirigido a `master`, y se solicitó la revisión de Kevin (`KevMon007`). [Actions de Semana 4](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/36383715983) terminó en `success` para la propuesta `906fcaf`, disparado por `pull_request`; [captura del run](week-04/andres-actions-pr5.png). Los workflows de Semanas 1 y 2 también aprobaron en el PR. El de Semana 3 solo se dispara al subir a `master` y se comprobará después del merge.
+
+Se registra la URL del PR y esta primera ejecución en un commit documental posterior, porque ambos resultados se conocen después de publicar el commit de implementación. Kevin debe revisar y crear el merge. El SHA final de Classroom será el del merge comprobado; no se entrega todavía el SHA de esta rama como cierre del equipo.

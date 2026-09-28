@@ -36,6 +36,17 @@
 - **Limitación:** las pruebas automáticas del worker usan un navegador simulado en memoria. El funcionamiento sin conexión necesita una primera visita con red y la instalación completa del worker; no hay captura de nuevas inspecciones ni sincronización. Los fallos de la revisión inicial quedaron corregidos en el turno de Ismael.
 - **Uso de IA:** Codex (OpenAI) como apoyo para configurar CI, revisar la integración, ejecutar comprobaciones y redactar documentación. Validación humana de esta semana: pendiente de registrar la revisión personal.
 
+### Semana 4 · Turno 3 — Workflow CI, README y ADR
+
+- **Rama y base:** `semana-4-t3-andres-ci`, actualizada al merge del Turno 2 `5ea3965c7caf9a9b1a537860bdab266f7e81c0ca` antes del commit propio. La revisión y el merge del Turno 3 corresponden a Kevin.
+- **Mi commit y PR:** [906fcaf1952da57aabb53ce5849f7281612ef904](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/906fcaf1952da57aabb53ce5849f7281612ef904), «feat(w04): workflow CI de la semana 4 y entrega»; [PR #5](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/5). Kevin está solicitado como revisor; el merge permanece pendiente.
+- **Contribución:** workflow de Semana 4 con `pull_request` y `push` a `master`, README y nota de decisión de CSR y SSR. Revisión del [PR #4 de Ismael](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/4), aprobado e integrado desde mi cuenta con apoyo de Codex; SHA del merge: `5ea3965c7caf9a9b1a537860bdab266f7e81c0ca`.
+- **Decisión técnica:** ejecutar instalación, build y pruebas también en cada PR para revisar los cambios antes del merge. El resultado debe incluir las cuatro suites de Semana 4; aprobar las suites anteriores no acredita el incremento.
+- **Prueba y resultado:** Codex ejecutó instalación, `npm.cmd run verify` y `bash public-tests/check.sh` en el PR corregido: 45 casos aprobados, build correcto y cuatro chequeos públicos aprobados. La última revisión `37185a0` solo retiró marcadores de la bitácora; se repitieron las pruebas y el chequeo público sobre ese SHA con árbol limpio.
+- **Verificación de mi rama:** sobre `906fcaf` se ejecutaron instalación, test, build, verify y chequeo público: código 0, 45 casos aprobados y árbol limpio. La [captura del registro local](week-04/andres-verificacion-local.png) muestra el SHA y los resultados. [Actions de Semana 4](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/36383715983) aprobó mediante `pull_request`; [captura](week-04/andres-actions-pr5.png). Esta ejecución corresponde al PR, no al futuro merge en `master`.
+- **Fallo y límite:** la revisión inicial detectó cuatro importaciones incorrectas y un conflicto, corregidos por Ismael. El [reporte de revisión](week-04/andres-revision.md) conserva el antes y después. Los renderizados de ReactDOMServer no prueban la hidratación en navegador; la métrica depende del equipo y no es un umbral de rendimiento.
+- **Uso de IA:** Codex (OpenAI) apoyó la revisión, ejecutó las comprobaciones y preparó CI y documentación. Mi validación personal de Semana 4 está pendiente.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
