@@ -192,9 +192,9 @@ La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión d
 ## Semana 4 · Turno 2 — Ismael
 
 - Base: `master` (tras merge del PR de Kevin, Turno 1). Rama: `semana-4-t2-ismael-pruebas`.
-- Revisión Turno 1: <URL del PR de Kevin> → merge SHA <completar>.
-- PR propio: <título/URL> → revisor y merge: Juan Andrés, SHA <completar>.
-- Verificación local: `npm.cmd test` → PASS (4 suites, 44 casos); `npm.cmd run build` → código 0;
+- Revisión Turno 1: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/3 → merge SHA e230314.
+- PR propio: feat(w04): pruebas de renderizado, verificador y decision de renderizado (https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/4) → revisor y merge: Juan Andrés, tras su revisión.
+- Verificación local: `npm.cmd test` → PASS (4 suites, 45 casos); `npm.cmd run build` → código 0;
   `node scripts/verify.mjs` → pass; `bash public-tests/check.sh` → PUBLIC_OK.
 - Evidencia: capturas guardadas en `evidence/week-04/`.
 =======
