@@ -1,34 +1,34 @@
-# Inspecciones de laboratorio · Semana 3
+# Inspecciones de laboratorio · Semana 4
 
 Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de laboratorios con datos sintéticos.
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
-## Estado de Semana 3
+## Estado de Semana 4
 
-La aplicación muestra tres inspecciones de ejemplo, navegación, manifest, iconos y estados de carga, error y lista vacía. El layout registra `public/sw.js` con alcance `/`.
+La página principal muestra tres inspecciones de ejemplo y enlaces al detalle. El listado `/inspecciones` carga los datos en el cliente (CSR), con estados de carga, error con reintento y vacío. Muestra el tiempo de carga de los datos en milisegundos. El detalle `/inspecciones/[id]` obtiene los datos en el servidor (SSR) e incluye el contenido en el HTML inicial.
 
-El Service Worker prepara el inicio, la página de respaldo, manifest, iconos y los CSS/JavaScript enlazados por el HTML inicial. Las páginas intentan la red primero y utilizan una copia guardada o el respaldo sin conexión si la red falla. La limpieza conserva las cachés ajenas.
+Se conservan el manifest, los iconos y el Service Worker. La primera preparación offline requiere conexión y la instalación completa del worker. No hay captura ni sincronización de nuevas inspecciones.
 
-Se completaron las pruebas y herramientas del turno de Ismael. La [estrategia de caché](docs/cache-strategy.md) describe el comportamiento implementado y sus límites; la [bitácora](evidence/session-log.md#turno-2--semana-3--ismael-completar-integración) registra el diagnóstico y la verificación.
+Las rutas, las cuatro suites y el verificador de Semana 4 están integrados. La [decisión de renderizado](docs/rendering-decision.md) compara CSR y SSR; el [registro del Turno 3](evidence/session-log.md#turno-3-de-juan-andrés--semana-4) conserva los resultados y las correcciones de integración.
 
 ## Instalar y ejecutar
 
-Requisitos: Git, Node.js 20.19.6 o posterior compatible y npm. Desde la carpeta del proyecto, en PowerShell:
+Requisitos: Git, Node.js 20.19.6 o posterior compatible y npm. En PowerShell:
 
 ```powershell
 npm.cmd ci --ignore-scripts --no-audit --no-fund
 npm.cmd run dev
 ```
 
-Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. Para ejecutar la versión de producción:
+Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. Para ejecutar en producción:
 
 ```powershell
 npm.cmd run build
 npm.cmd run start
 ```
 
-Los scripts disponibles son `dev`, `build`, `start`, `test`, `check-secrets` y `verify`. En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`.
+En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`. Los scripts disponibles son `dev`, `build`, `start`, `test`, `check-secrets` y `verify`.
 
 ## Verificación
 
@@ -37,39 +37,37 @@ npm.cmd run verify
 bash public-tests/check.sh
 ```
 
-`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las tres suites, revisa palabras sensibles y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y Node en Windows.
+`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las suites, revisa palabras sensibles y compila. Genera `reports/verification.json`. En Windows, el chequeo público requiere Git Bash y Node.
 
-| Comprobación | Alcance actual |
+| Comprobación | Alcance |
 |---|---|
-| Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
-| `npm.cmd test` | 35 casos: 9 de manifest y estructura, 19 de Service Worker y 7 de offline; reporte en `reports/week-03/tests.json` |
-| `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
-| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w03-service-worker-offline` |
-| Chequeo público | Archivos presentes, barrido, suites completas y ausencia de vitest |
+| Instalación | 28 paquetes instalados sin modificar el lockfile |
+| `npm.cmd test` | 45 casos: 9 de manifest y estructura, 20 del Service Worker, 7 de offline y 9 de renderizado; reporte en `reports/week-04/tests.json` |
+| `npm.cmd run check-secrets` | Barrido de palabras con las excepciones documentadas en `public-tests/README.md` |
+| `npm.cmd run verify` | Estructura, cuatro suites, barrido y build; reporte `w04-csr-ssr` |
+| Chequeo público de Semana 4 | `files`, `cursors`, `tests` y `package`; devuelve `PUBLIC_OK` cuando todos aprueban |
 
-La [revisión de integración](evidence/session-log.md#revisión-final-de-juan-andrés--semana-3) registra los 35 casos y cuatro chequeos aprobados, la compilación y sus límites. Un reporte anterior debe regenerarse después de modificar el código.
+La revisión del Turno 2 aprobó las 45 pruebas, la compilación y los cuatro chequeos públicos. El total incluye una prueba del límite de caché añadida por Kevin. Los reportes se regeneran después de cambiar el código y deben corresponder al SHA revisado. Un resultado del verificador anterior de Semana 3 no acredita Semana 4.
 
 ## Entorno del Turno 3
 
-| Herramienta | Comprobación local | Workflow de Semana 3 |
+| Herramienta | Comprobación local | Workflow de Semana 4 |
 |---|---|---|
 | Sistema | Windows | Ubuntu de GitHub Actions |
 | Node.js | 26.4.0 | 20.19.6 |
-| npm | 11.17.0 | Versión incluida con Node.js en Actions |
-| Git | 2.55.0.windows.3 | Versión del entorno de Actions |
+| npm | 11.17.0 | Incluido con Node.js en Actions |
+| Git | 2.55.0.windows.3 | Incluido en el entorno de Actions |
 
 ## Decisiones y límites
 
-La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automática-y-caché) describe el funcionamiento implementado: guardar los recursos de la aplicación, intentar la red primero para las páginas y disponer de un respaldo sin conexión. La primera preparación requiere conexión y que termine la instalación del Service Worker.
+La [nota de decisiones](docs/decision-record.md#semana-4--renderizado-csr-para-listado-y-ssr-para-detalle) explica el listado CSR y el detalle SSR. El listado empieza en estado de carga y utiliza `useEffect` para obtener los datos. El detalle usa `force-dynamic` y `notFound()` cuando el identificador no existe. Con el streaming de Next.js, mostrar la página de no encontrado no garantiza un estado HTTP 404.
 
-La corrección del turno de Ismael limita la limpieza al prefijo `inspecciones-`, repone las peticiones y mensajes, y añade pruebas que reproducen los fallos detectados durante la revisión anterior.
+La medición del listado usa `performance.now()` y depende del equipo; incluye los 700 ms de espera del cargador sintético. El build de la integración registró First Load JS de 97.6 kB para el listado y 96.1 kB para el detalle. Estos tamaños no son tiempos de carga. Comparar dos renderizados con ReactDOMServer comprueba que el HTML inicial es repetible; no ejecuta la hidratación de un navegador.
 
-Se usan únicamente inspecciones ficticias. No hay captura, almacenamiento de nuevos registros ni sincronización. Un build aprobado no comprueba el funcionamiento offline ni sustituye la revisión académica.
+## Entrega Semana 4
 
-## Entrega Semana 3
+El workflow `week-04-w04-csr-ssr.yml` ejecuta instalación, build y pruebas al subir a `master` y en los pull requests dirigidos a `master`. Los pasos opcionales de feedback no producen un reporte porque no existe el script `test:feedback`; no acreditan la actividad por sí solos.
 
-El workflow `week-03-w03-service-worker-offline.yml` ejecuta instalación, build y pruebas al subir a `master`. Usa el contenido indicado en la guía. Los pasos opcionales de feedback no generan un reporte porque el proyecto no tiene `test:feedback`; por sí solos no acreditan la actividad.
+La [evidencia individual](evidence/individual.md) y la [bitácora](evidence/session-log.md) mantienen las aportaciones separadas. Cada integrante debe completar su revisión personal, enlace al PR y datos de integración reales.
 
-La evidencia de cada integrante está en [evidence/individual.md](evidence/individual.md) y la bitácora en [evidence/session-log.md](evidence/session-log.md). Cada persona registra su propia contribución y sus pruebas.
-
-Antes de entregar debe registrarse la revisión personal y quedar Actions en verde sobre el SHA que se entregue. Para Classroom se entrega el enlace o SHA final del repositorio, dentro del plazo asignado. La guía del equipo también pide conservar la URL y la captura del run de Semana 3. Los reportes generados y la guía de trabajo se conservan fuera de Git.
+Kevin revisa y mergea el PR del Turno 3. Después se comprueban los cuatro workflows sobre el SHA del merge y se entrega en Classroom el enlace o SHA final, dentro del plazo asignado. La guía y los reportes generados se conservan fuera de Git.

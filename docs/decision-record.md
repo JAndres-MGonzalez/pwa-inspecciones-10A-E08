@@ -97,3 +97,17 @@ La revisión anterior se conserva como diagnóstico histórico; el resultado de 
 SHA de publicación y la comprobación personal se registran por separado.
 
 **Revisión de integración:** sobre `2b6267b7aa2cf0c65fc5efb14aac5397164294ad` aprobaron 35 casos, el barrido, la compilación y los cuatro chequeos públicos. Los tres workflows también aprobaron. La [bitácora de Juan Andrés](../evidence/session-log.md#revisión-final-de-juan-andrés--semana-3) distingue la ejecución de Codex de la validación personal pendiente.
+
+## Semana 4 — Renderizado CSR para listado y SSR para detalle
+
+Fecha: 27 de septiembre de 2026. Equipo: 10A-E08. Estado: rutas y pruebas integradas y verificadas técnicamente.
+
+**Contexto y supuestos:** se requieren una ruta con interacción en cliente y otra con contenido preparado en el servidor, usando datos sintéticos, estados verificables y una métrica de carga repetible. Se conservan Next.js y las dependencias existentes.
+
+**Decisión:** el listado `/inspecciones` comienza en estado de carga y obtiene los datos con `loadInspections()` dentro de `useEffect`. El primer render es estable y el cliente permite reintentar un error. La medición con `performance.now()` muestra el tiempo de carga de los datos e incluye la espera sintética del cargador. El detalle `/inspecciones/[id]` usa `force-dynamic`, carga los datos en el servidor y llama a `notFound()` para identificadores inexistentes. Ambas rutas tienen estados locales de carga y error.
+
+**Consecuencias y límites:** el contenido del detalle llega en el HTML inicial; el listado necesita JavaScript para completar la carga. La métrica depende del equipo y no equivale al tiempo total de navegación. El build informa First Load JS de 97.6 kB para el listado y 96.1 kB para el detalle. Los renderizados estáticos repetidos no prueban la hidratación real. El streaming puede devolver HTTP 200 aunque se muestre la página de no encontrado.
+
+**Fallo y corrección:** la primera combinación de ramas dejó cuatro pruebas con importaciones incorrectas y un conflicto en la bitácora. Ismael actualizó su rama, corrigió las importaciones y conservó las entradas de ambos integrantes. La nueva revisión aprobó los 45 casos, el barrido, la compilación y los cuatro chequeos públicos. El PR #4 se integró mediante el merge `5ea3965c7caf9a9b1a537860bdab266f7e81c0ca`.
+
+**CI y cierre:** el workflow del Turno 3 conserva Node 20.19.6 y los comandos de la guía; usa `pull_request` y `push` a `master` para comprobar los cambios antes y después del merge. Kevin debe revisar el PR del Turno 3. La entrega final usará el SHA de ese merge, tras confirmar Actions. Los resultados y sus límites están en [la bitácora de Juan Andrés](../evidence/session-log.md#turno-3-de-juan-andrés--semana-4).
