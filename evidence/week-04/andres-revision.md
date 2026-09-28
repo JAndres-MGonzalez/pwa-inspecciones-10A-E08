@@ -2,6 +2,8 @@
 
 Fecha: 27 de septiembre de 2026. Comprobaciones ejecutadas por Codex.
 
+Estado actual: los fallos iniciales quedaron resueltos y el PR #4 está integrado. Los apartados siguientes conservan el diagnóstico y el resultado posterior.
+
 - Base de `master`: `e23031420908f3ed2a913e586f0c6df1a7d64b79`.
 - Rama de Ismael: `semana-4-t2-ismael-pruebas`, SHA `8677aa9f2d63fe6042a58ef4cf42f84bdd539f53`.
 - La rama de Ismael parte de Semana 3 y no incluye las rutas del Turno 1. No había PR de esta rama al consultar GitHub.
@@ -16,7 +18,7 @@ Fecha: 27 de septiembre de 2026. Comprobaciones ejecutadas por Codex.
 | Verificador de Semana 4 | Código 1; `w04-csr-ssr`, pruebas fallidas; estructura, barrido y build aprobados |
 | Chequeo público de Semana 4 | `files`, `cursors` y `package` en PASS; `tests` en FAIL, código 1 |
 
-## Correcciones del Turno 2
+## Correcciones solicitadas al Turno 2
 
 1. Actualizar la rama de Ismael con `origin/master` y resolver el conflicto de `evidence/session-log.md` conservando las entradas de ambos integrantes.
 2. En `tests/rendering.spec.ts`, cargar `InspeccionesGrid`, `InspeccionesEmpty` e `InspeccionesError` desde `src/components/inspecciones-view.tsx`. La página solo exporta el componente principal; Next.js impide exportar estos subcomponentes desde una página de ruta.

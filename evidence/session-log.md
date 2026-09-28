@@ -233,3 +233,11 @@ Se revisaron los diez archivos del diff: únicamente pruebas, verificador, decis
 La rama del Turno 3 se actualizó por avance directo al merge antes de recuperar el trabajo documental. Se conserva el código de Kevin e Ismael. La evidencia de Kevin todavía contiene campos de PR sin completar; sus PR #2 y #3 ya están integrados y el merge de #3 es `e23031420908f3ed2a913e586f0c6df1a7d64b79`. Kevin debe actualizar su propia sección al revisar el Turno 3.
 
 Uso de IA: Codex para revisión, comandos, CI y documentación. La revisión humana de Juan Andrés y la aprobación y merge de Kevin siguen pendientes; no se ha entregado en Classroom.
+
+### Publicación del Turno 3
+
+Commit de implementación: `906fcaf1952da57aabb53ce5849f7281612ef904`, «feat(w04): workflow CI de la semana 4 y entrega». Se ejecutaron, en orden, `npm.cmd ci --ignore-scripts --no-audit --no-fund`, `npm.cmd test`, `npm.cmd run build`, `npm.cmd run verify` y `bash public-tests/check.sh` con Git Bash. Todos terminaron con código 0; 45 casos y cuatro chequeos aprobados. `reports/verification.json` identifica `w04-csr-ssr`, ese commit y `workingTreeClean: true`. Los reportes originales quedan en `reports/week-04/turno3/` y la [captura del registro local](week-04/andres-verificacion-local.png) muestra las salidas guardadas y el historial.
+
+Se abrió el [PR #5](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/5), dirigido a `master`, y se solicitó la revisión de Kevin (`KevMon007`). [Actions de Semana 4](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/36383715983) terminó en `success` para la propuesta `906fcaf`, disparado por `pull_request`; [captura del run](week-04/andres-actions-pr5.png). Los workflows de Semanas 1 y 2 también aprobaron en el PR. El de Semana 3 solo se dispara al subir a `master` y se comprobará después del merge.
+
+Se registra la URL del PR y esta primera ejecución en un commit documental posterior, porque ambos resultados se conocen después de publicar el commit de implementación. Kevin debe revisar y crear el merge. El SHA final de Classroom será el del merge comprobado; no se entrega todavía el SHA de esta rama como cierre del equipo.
