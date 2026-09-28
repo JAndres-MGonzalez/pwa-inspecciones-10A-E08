@@ -45,7 +45,7 @@ export async function runChecks(): Promise<Check[]> {
   });
 
   await check("rendering-csr-grid", async () => {
-    const { InspeccionesGrid } = loadSource("src/app/inspecciones/page.tsx", overrides);
+    const { InspeccionesGrid } = loadSource("src/components/inspecciones-view.tsx", overrides);
     const html = renderToStaticMarkup(createElement(InspeccionesGrid, { items: DATA }));
     for (const name of ["Laboratorio de Redes", "Laboratorio de Electrónica"]) {
       assert.ok(html.includes(name), `la lista debe incluir ${name}`);
@@ -56,13 +56,13 @@ export async function runChecks(): Promise<Check[]> {
   });
 
   await check("rendering-csr-empty", async () => {
-    const { InspeccionesEmpty } = loadSource("src/app/inspecciones/page.tsx", overrides);
+    const { InspeccionesEmpty } = loadSource("src/components/inspecciones-view.tsx", overrides);
     const html = renderToStaticMarkup(createElement(InspeccionesEmpty));
     assert.match(html, /Sin inspecciones/);
   });
 
   await check("rendering-csr-error", async () => {
-    const { InspeccionesError } = loadSource("src/app/inspecciones/page.tsx", overrides);
+    const { InspeccionesError } = loadSource("src/components/inspecciones-view.tsx", overrides);
     const html = renderToStaticMarkup(
       createElement(InspeccionesError, { message: "Falla de prueba", onRetry() {} })
     );
@@ -90,7 +90,7 @@ export async function runChecks(): Promise<Check[]> {
   });
 
   await check("rendering-shell-navigation", async () => {
-    const { default: AppShell } = loadSource("src/components/app-shell.tsx");
+    const { AppShell } = loadSource("src/components/app-shell.tsx");
     const html = renderToStaticMarkup(createElement(AppShell, { children: null }));
     assert.match(html, /href="\/inspecciones"/, "el shell debe enlazar al listado CSR");
   });
