@@ -1,3 +1,4 @@
+/* tests/starter.spec.mjs */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -8,7 +9,8 @@ const suites = [];
 for (const [suiteId, file] of [
   ["manifest02", "manifest.spec.ts"],
   ["service-worker", "service-worker.spec.ts"],
-  ["offline", "offline.spec.ts"]
+  ["offline", "offline.spec.ts"],
+  ["rendering", "rendering.spec.ts"]
 ]) {
   const start = Date.now();
   let checks;
@@ -26,14 +28,14 @@ for (const [suiteId, file] of [
 const passed = suites.every((suite) => suite.status === "pass");
 const report = {
   schemaVersion: 2,
-  assignmentId: "w03-service-worker-offline",
+  assignmentId: "w04-csr-ssr",
   checkedAt: new Date().toISOString(),
   commitSha: execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
   workingTreeClean: execFileSync("git", ["status", "--porcelain"], { cwd: root, encoding: "utf8" }).trim() === "",
   status: passed ? "pass" : "fail",
   suites
 };
-mkdirSync(resolve(root, "reports/week-03"), { recursive: true });
-writeFileSync(resolve(root, "reports/week-03/tests.json"), JSON.stringify(report, null, 2) + "\n");
+mkdirSync(resolve(root, "reports/week-04"), { recursive: true });
+writeFileSync(resolve(root, "reports/week-04/tests.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(`starter.spec.mjs: ${passed ? "PASS" : "FAIL"}`);
 process.exitCode = passed ? 0 : 1;

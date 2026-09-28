@@ -68,6 +68,7 @@ Commit del turno: `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app
 - Comandos: git pull, npm ci, script de PowerShell para generar iconos, npm run dev
 - Resultado: git pull y npm ci sin cambios en el lockfile; se generaron 4 iconos PNG (192, 512, 512-maskable, apple-touch-icon); se creó public/manifest.webmanifest; se reemplazó src/app/layout.tsx integrando AppShell y el manifest; npm run dev compiló sin errores (Compiled / in 15.6s, GET / 200); verificado visualmente en http://localhost:3000 y http://localhost:3000/manifest.webmanifest.
 
+
 ## Integración de Juan Andrés — Semana 2
 
 Fecha: 13 de septiembre de 2026. La integración se hizo a solicitud de Juan Andrés, mediante Codex. Los comandos y la revisión de navegador de esta entrada fueron ejecutados por la herramienta. No se atribuyen a una ejecución personal del estudiante.
@@ -187,6 +188,14 @@ La comprobación visual de producción está documentada en [el registro del tur
 
 La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión de código, ejecutó los comandos y actualizó la documentación. Las pruebas en memoria y Actions comprueban los casos definidos; no demuestran compatibilidad con todos los navegadores, sincronización ni una auditoría integral.
 
+## Semana 4 · Turno 2 — Ismael
+
+- Base: `master` (tras merge del PR de Kevin, Turno 1). Rama: `semana-4-t2-ismael-pruebas`.
+- Revisión Turno 1: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/3 → merge SHA e230314.
+- PR propio: feat(w04): pruebas de renderizado, verificador y decision de renderizado (https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/4) → revisor y merge: Juan Andrés, tras su revisión.
+- Verificación local: `npm.cmd test` → PASS (4 suites, 45 casos); `npm.cmd run build` → código 0;
+  `node scripts/verify.mjs` → pass; `bash public-tests/check.sh` → PUBLIC_OK.
+- Evidencia: capturas guardadas en `evidence/week-04/`.
 ## Ejecución de Kevin — Semana 4 (Turno 1)
 
 Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empezar se verificó `git status` con el árbol limpio sobre `master` (HEAD `e9ff3c4`).
