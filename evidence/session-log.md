@@ -68,6 +68,7 @@ Commit del turno: `3f3f0754c297424f069c6bc554b3e2a9958ce3bd` — `feat(w02): app
 - Comandos: git pull, npm ci, script de PowerShell para generar iconos, npm run dev
 - Resultado: git pull y npm ci sin cambios en el lockfile; se generaron 4 iconos PNG (192, 512, 512-maskable, apple-touch-icon); se creó public/manifest.webmanifest; se reemplazó src/app/layout.tsx integrando AppShell y el manifest; npm run dev compiló sin errores (Compiled / in 15.6s, GET / 200); verificado visualmente en http://localhost:3000 y http://localhost:3000/manifest.webmanifest.
 
+
 ## Integración de Juan Andrés — Semana 2
 
 Fecha: 13 de septiembre de 2026. La integración se hizo a solicitud de Juan Andrés, mediante Codex. Los comandos y la revisión de navegador de esta entrada fueron ejecutados por la herramienta. No se atribuyen a una ejecución personal del estudiante.
@@ -187,6 +188,7 @@ La comprobación visual de producción está documentada en [el registro del tur
 
 La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión de código, ejecutó los comandos y actualizó la documentación. Las pruebas en memoria y Actions comprueban los casos definidos; no demuestran compatibilidad con todos los navegadores, sincronización ni una auditoría integral.
 
+<<<<<<< HEAD
 ## Semana 4 · Turno 2 — Ismael
 
 - Base: `master` (tras merge del PR de Kevin, Turno 1). Rama: `semana-4-t2-ismael-pruebas`.
@@ -195,3 +197,22 @@ La revisión humana de Juan Andrés sigue pendiente. Codex apoyó la revisión d
 - Verificación local: `npm.cmd test` → PASS (4 suites, 44 casos); `npm.cmd run build` → código 0;
   `node scripts/verify.mjs` → pass; `bash public-tests/check.sh` → PUBLIC_OK.
 - Evidencia: capturas guardadas en `evidence/week-04/`.
+=======
+## Ejecución de Kevin — Semana 4 (Turno 1)
+
+Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empezar se verificó `git status` con el árbol limpio sobre `master` (HEAD `e9ff3c4`).
+
+| Acción | Resultado real |
+|---|---|
+| `git checkout -b semana-4-t1-kevin-rutas` | Rama creada desde `master` limpio en `e9ff3c4` |
+| `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Código 0; 28 paquetes añadidos |
+| Crear rutas CSR/SSR, estados y navegación | 8 archivos creados (`inspecciones/*`, `loading-state.tsx`, `inspecciones-view.tsx`, `not-found.tsx`) y 3 modificados (`app-shell.tsx`, `page.tsx`, `globals.css`); sin tocar `tests/`, `scripts/`, `public-tests/`, `.github/`, `README.md` ni `docs/` |
+| `npm.cmd test` | `starter.spec.mjs: PASS` (3 suites, 35 casos de Semanas 1–3), código 0 |
+| `npm run build` (1er intento) | Código 1: la página `inspecciones/page.tsx` exportaba subcomponentes con nombre y Next.js los rechaza (`Property 'InspeccionesGrid' is incompatible`) |
+| Solución del fallo | Subcomponentes movidos a `src/components/inspecciones-view.tsx`; la página queda con solo el `default` |
+| `npm run build` (2º intento) | Código 0; `/inspecciones` estática 97.6 kB y `/inspecciones/[id]` dinámica 96.1 kB de First Load JS |
+| `npm.cmd run dev` + `curl` | `/` 200 con tarjetas y "Ver detalle"; `/inspecciones` 200 con estado "Cargando listado"; `/inspecciones/inspection-001` 200 con "Laboratorio de Redes" en el HTML (SSR); `/inspecciones/inspection-999` renderiza "Inspección no encontrada" |
+| `npm run build` + `next start -p 3100` | Producción sirve las mismas rutas con los mismos contenidos; se documenta que el status del 404 queda en 200 por el streaming de `loading.tsx` (comportamiento de plataforma) |
+
+Rama `semana-4-t1-kevin-rutas` dejada lista con los dos commits del turno, sin push: `feat(w04): rutas CSR y SSR con estados verificables` y `docs(w04): evidencia y bitacora de Kevin — Turno 1`. El push y el PR los hace Kevin manualmente; el merge lo hará Ismael como revisor. Detalle de las comprobaciones en [la verificación del turno](week-04/kevin-verificacion.md).
+>>>>>>> origin/master

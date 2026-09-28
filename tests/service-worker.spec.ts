@@ -242,5 +242,20 @@ export async function runChecks(): Promise<Check[]> {
     assert.equal(await response.text(), "HTML DISPONIBLE");
   });
 
+  await check("sw-runtime-cache-bounded-evicts-oldest", async () => {
+    const urls = Array.from({ length: 26 }, (_, i) => `https://localhost/pagina-${i}`);
+    const routes = Object.fromEntries(urls.map((url) => [url, { body: "OK" }]));
+    const { self, cacheStorage } = evaluateSw(routes);
+    for (const url of urls) {
+      await fire(self, "fetch", { request: new Request(url, { method: "GET" }) });
+    }
+    const runtime = await cacheStorage.open(RUNTIME_CACHE);
+    const paths = (await runtime.keys()).map((request: Request) => new URL(request.url).pathname);
+    assert.equal(paths.length, 24, "la caché runtime debe quedar acotada al máximo permitido");
+    assert.ok(!paths.includes("/pagina-0"), "se elimina la entrada más antigua");
+    assert.ok(!paths.includes("/pagina-1"), "se elimina también la segunda más antigua");
+    assert.ok(paths.includes("/pagina-25"), "las entradas más recientes se conservan");
+  });
+
   return checks;
 }
