@@ -213,3 +213,53 @@ Fecha: 23 de septiembre de 2026. Entorno: Windows, Node v22.22.0. Antes de empez
 | `npm run build` + `next start -p 3100` | Producción sirve las mismas rutas con los mismos contenidos; se documenta que el status del 404 queda en 200 por el streaming de `loading.tsx` (comportamiento de plataforma) |
 
 Rama `semana-4-t1-kevin-rutas` dejada lista con los dos commits del turno, sin push: `feat(w04): rutas CSR y SSR con estados verificables` y `docs(w04): evidencia y bitacora de Kevin — Turno 1`. El push y el PR los hace Kevin manualmente; el merge lo hará Ismael como revisor. Detalle de las comprobaciones en [la verificación del turno](week-04/kevin-verificacion.md).
+
+## Arranque compartido de la Semana 5 — Kevin
+
+Fecha: 29 de septiembre de 2026. Entorno: Windows, Node v22.22.0. La copia local estaba en la
+rama `week4/security-audit-kevin` (`4c9f79f`) y su `master` local 15 commits detrás de
+`origin/master`; el trabajo de la Semana 4 ya estaba mergeado en `master` mediante el PR #3.
+
+| Acción | Resultado real |
+|---|---|
+| `git fetch origin` + `git checkout master` + `git pull --ff-only origin master` | `master` pasó de `e9ff3c4` a `5ea3965` (merge del PR #4), árbol limpio |
+| **Línea base antes de tocar nada** | `npm.cmd test` → `starter.spec.mjs: PASS`, 4 suites, **45 checks** (`manifest02` 9, `service-worker` 20, `offline` 7, `rendering` 9), reporte `assignmentId: w04-csr-ssr`, `workingTreeClean: true` |
+| Línea base de `npm.cmd run verify` | `pass` en estructura, prueba, barrido y compilación |
+| Línea base de `bash public-tests/check.sh` | `files`, `cursors`, `tests` y `package` en PASS, `PUBLIC_OK` |
+| `git checkout -b semana-5-arranque` | Rama creada desde `master` en `5ea3965` |
+| Crear `src/lib/storage/schema.ts` | Contrato congelado: `ASSIGNMENT_ID`, `SCHEMA_VERSION`, `SyncEnvelope`, `QueueEntry`, `ConflictRecord`, `InspectionStore`, `idempotencyKey`, `migrate`, `MemoryInspectionStore` |
+| Reescribir `tests/starter.spec.mjs` | Autodescubrimiento de `tests/*.spec.ts`; desaparece la lista de suites escrita a mano |
+| Parametrizar `scripts/verify.mjs` | Lee `ASSIGNMENT_ID` del contrato; la ruta del reporte y la lista de suites se derivan |
+| Fusionar el bloque w05 en `public-tests/check.sh` | `tests:` parametrizado + bloque `sync:` nuevo; los cuatro chequeos anteriores se conservan |
+| `npm.cmd test` tras el cambio | **Los mismos 45 checks en verde**, ids de suite idénticos incluido `manifest02`; reporte en `reports/w05-sync-data/tests.json` |
+| `npm.cmd run verify` (1er intento) | **fail**: `TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher` |
+| Diagnóstico | El `tsconfig.json` del starter de Next declara `target: "es5"`. Los identificadores privados `#` exigen ES2015 y el spread sobre un iterador exige `downlevelIteration` |
+| Solución | Reescribir `MemoryInspectionStore` con `private` de TypeScript y `Array.from`, **sin tocar el `tsconfig.json` compartido** |
+| `npx.cmd tsc --noEmit` | Sin errores de tipos |
+| `npm.cmd run verify` (2º intento) | `pass` en las cinco comprobaciones: `structure`, `test`, `check-secrets`, `build`, `w05-sync-data-and-suites` |
+| `bash public-tests/check.sh` | `files`, `cursors`, `tests`, `package` y `sync` en PASS, `PUBLIC_OK` |
+| Comandos del workflow probados en local | AC-02 (modo arranque), AC-03 (`find` + `npm run test -- --run`), `verify.mjs` y `check.sh`: todos correctos |
+
+### Dos decisiones que conviene que el equipo conozca
+
+**La puerta se endurece en dos etapas.** El lunes `files` y `verify.mjs` exigen el contrato y la
+política, no `queue.ts`, `conflict-policy.ts` ni `sync.spec.ts`, porque esos archivos no existen
+hasta el viernes o el sábado. Exigirlos el lunes dejaría `master` en rojo y los tres
+trabajarían sobre una base que no pasa. El sábado suben a la puerta, junto con
+`W05_ENTREGABLES_COMPLETOS: 'true'` en el workflow. Está marcado en el código y en
+`public-tests/README.md`.
+
+**El `target: "es5"` del `tsconfig.json` no es un detalle menor.** Si alguien usa campos privados
+`#x` o hace spread sobre un iterador en `src/`, el build falla con un error que no menciona el
+tsconfig. Usar `private` de TypeScript y `Array.from`.
+
+### Límites de este arranque
+
+- La persistencia es `MemoryInspectionStore`. La interfaz `InspectionStore` declara el contrato
+  pero la conexión real con IndexedDB **no está implementada**.
+- No hay servidor: la cola y la política se probarán contra un transporte simulado en memoria.
+- `tests/*.spec.ts` no entran en el `include` de `tsconfig.json` (solo `src/**`), igual que las
+  suites de Semanas 3 y 4: no las comprueba el build. Es el comportamiento previo del repo.
+- Esta entrada la ejecutó un asistente de IA de terminal (opencode). La validación personal de
+  Kevin —incluida la comprobación en navegador— queda pendiente de registrar.
+
