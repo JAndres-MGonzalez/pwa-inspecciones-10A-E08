@@ -36,6 +36,15 @@
 - **Limitación:** las pruebas automáticas del worker usan un navegador simulado en memoria. El funcionamiento sin conexión necesita una primera visita con red y la instalación completa del worker; no hay captura de nuevas inspecciones ni sincronización. Los fallos de la revisión inicial quedaron corregidos en el turno de Ismael.
 - **Uso de IA:** Codex (OpenAI) como apoyo para configurar CI, revisar la integración, ejecutar comprobaciones y redactar documentación. Validación humana de esta semana: pendiente de registrar la revisión personal.
 
+### Semana 5 — Bloque C: política explícita de conflictos
+
+- **Rama y PR:** `semana-5-c-andres-conflictos`; PR y SHA de merge: `<completar>`.
+- **Qué hice:** <completar: `src/lib/sync/conflict-policy.ts`, `docs/sync/02-conflictos.md`, `tests/sync.conflictos.spec.ts`>.
+- **Decisión técnica que puedo explicar y por qué:** <completar: qué estrategia por defecto y por qué esa en este dominio>.
+- **Prueba que ejecuté y resultado:** <completar>.
+- **Limitación o fallo que diagnosticé:** <completar>.
+- **Uso de IA:** <completar: herramienta, propósito, fragmentos influenciados, validación humana>.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
@@ -113,6 +122,35 @@
   evidencia; validé los resultados con las suites, el build y las respuestas HTTP que el
   asistente me mostró, y dejaré registrada mi comprobación personal en navegador antes de cerrar
   la semana.
+
+### Semana 5 — Arranque compartido y Bloque A: modelo y persistencia local
+
+- **Rama y PR:** `semana-5-arranque` y `semana-5-a-kevin-modelo`; PR y SHA de merge: `<completar>`.
+- **Qué hice:** arranque compartido de la semana (contrato congelado, suites autodetectadas,
+  verificación parametrizada, bloque `sync:` del chequeo público y workflow agregado sin
+  modificar) más mi Bloque A: `src/lib/storage/schema.ts`, `docs/sync-policy.md`,
+  `docs/sync/01-modelo.md` y `tests/sync.modelo.spec.ts`.
+- **Decisiones que puedo explicar y por qué:** (1) la clave de idempotencia es `id::vN` y no solo
+  `id`, porque con solo el identificador un reintento de una actualización ya aplicada se vería
+  como la misma operación y el cambio se perdería en silencio; (2) `starter.spec.mjs` descubre
+  `tests/*.spec.ts` en vez de tener una lista escrita a mano, para que tres personas entregando
+  en paralelo no editen el mismo archivo; (3) el `assignmentId` se lee del contrato, lo que
+  elimina ocho valores escritos a mano que hubo que editar a mano en la transición w03 → w04.
+- **Prueba que ejecuté y resultado:** línea base de 4 suites y 45 checks en verde antes de
+  modificar nada; después, `npm test` con las mismas 45 comprobaciones en verde,
+  `npm run verify` con las cinco comprobaciones en `pass`, y `bash public-tests/check.sh` con
+  `PUBLIC_OK`. Detalle en `<completar>`.
+- **Limitación o fallo que diagnosticé:** el primer `npm run build` falló con
+  `TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher`,
+  porque el `tsconfig.json` del starter declara `target: "es5"`. Se resolvió usando `private` de
+  TypeScript y `Array.from` en lugar de identificadores `#` y spread sobre iteradores, en vez de
+  modificar el `tsconfig.json` compartido. Segunda limitación: la persistencia se implementa con
+  un adapter en memoria; la conexión real con IndexedDB queda declarada en la interfaz pero no
+  implementada.
+- **Uso de IA:** usé un asistente de IA de terminal (opencode) para diseñar el contrato,
+  parametrizar el verificador y corregir el fallo del build. Validé cada paso contra la línea base
+  de 45 checks, `npm run verify` y `bash public-tests/check.sh`; la decisión de no tocar
+  `tsconfig.json` y la de no exigir en el arranque los artefactos de los bloques B y C son mías.
 
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
@@ -241,4 +279,18 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Prueba que ejecuté y resultado:** `npm.cmd test` con `starter.spec.mjs: PASS` (4 suites,
   45 casos, reporte `reports/week-04/tests.json`), `npm run build` con código 0,
   `node scripts/verify.mjs` con resultado `pass` y `bash public-tests/check.sh` con 4/4 en PASS.
-- **Uso de IA:** Claude (Anthropic), en chat: guía de comandos Git/PowerShell y borradores de tests/rendering.spec.ts, docs/rendering-decision.md, scripts/verify.mjs y public-tests/check.sh a partir de mi guía. Validación humana: ejecuté npm.cmd run verify y check.sh en Git Bash, revisé el diff, resolví el conflicto y corregí las importaciones tras la revisión..
+- **Uso de IA:** Claude (Anthropic), en chat: guía de comandos Git/PowerShell y borradores de tests/rendering.spec.ts, docs/rendering-decision.md, scripts/verify.mjs y public-tests/check.sh a partir de mi guía. Validación humana: ejecuté npm.cmd run verify y check.sh en Git Bash, revisé el diff, resolví el conflicto y corregí las importaciones tras la revisión.
+
+### Semana 5 — Bloque B: cola idempotente y reintentos
+
+- **Entregado por:** Ismael.
+- **Rama y PR:** `semana-5-b-ismael-cola`; PR y SHA de merge: `<completar>`.
+- **Descripción de lo que hice (consigna):** <completar: `src/lib/sync/queue.ts`,
+  `docs/sync/03-cola.md` y `tests/sync.cola.spec.ts`>.
+- **Reflexión:** <completar>.
+- **Decisión técnica que puedo explicar y por qué:** <completar: por qué backoff exponencial con
+  tope, por qué la cola se persiste y por qué `syncing` vuelve a `pending` al reabrir>.
+- **Fallos diagnosticados y solución:** <completar>.
+- **Prueba que ejecuté y resultado:** <completar>.
+- **Uso de IA:** <completar: herramienta, propósito, fragmentos influenciados, validación
+  humana>..
