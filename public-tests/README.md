@@ -55,9 +55,10 @@ El bloque `sync:` acepta los tres artefactos del Bloque B y C **si ya existen** 
 tengan contenido real; si no existen, no falla. Eso separa "todavía no lo escribí" de "lo
 escribí mal". En la entrega los tres están.
 
-El workflow `.github/workflows/week-05-w05-sync-data.yml` tiene el mismo criterio, gobernado por
-`W05_ENTREGABLES_COMPLETOS`. Ponerlo en `true` el sábado restituye la exigencia completa de los
-cinco artefactos en AC-02.
+El workflow `.github/workflows/week-05-w05-sync-data.yml` queda fuera de este mecanismo: se agregó
+copiado sin modificar del kit de la actividad y su `AC-02` exige los cinco artefactos desde el
+primer día. Saldrá en rojo mientras la actividad no esté terminada y se pondrá verde el sábado por
+sí solo. Los workflows del profesor no se editan.
 
 ## Lo que esta puerta no comprueba
 

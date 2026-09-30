@@ -127,8 +127,8 @@
 
 - **Rama y PR:** `semana-5-arranque` y `semana-5-a-kevin-modelo`; PR y SHA de merge: `<completar>`.
 - **Qué hice:** arranque compartido de la semana (contrato congelado, suites autodetectadas,
-  verificación parametrizada, bloque `sync:` del chequeo público y workflow con el `ref:` del
-  checkout) más mi Bloque A: `src/lib/storage/schema.ts`, `docs/sync-policy.md`,
+  verificación parametrizada, bloque `sync:` del chequeo público y workflow agregado sin
+  modificar) más mi Bloque A: `src/lib/storage/schema.ts`, `docs/sync-policy.md`,
   `docs/sync/01-modelo.md` y `tests/sync.modelo.spec.ts`.
 - **Decisiones que puedo explicar y por qué:** (1) la clave de idempotencia es `id::vN` y no solo
   `id`, porque con solo el identificador un reintento de una actualización ya aplicada se vería

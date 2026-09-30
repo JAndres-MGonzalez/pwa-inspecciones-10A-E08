@@ -238,16 +238,27 @@ rama `week4/security-audit-kevin` (`4c9f79f`) y su `master` local 15 commits det
 | `npx.cmd tsc --noEmit` | Sin errores de tipos |
 | `npm.cmd run verify` (2º intento) | `pass` en las cinco comprobaciones: `structure`, `test`, `check-secrets`, `build`, `w05-sync-data-and-suites` |
 | `bash public-tests/check.sh` | `files`, `cursors`, `tests`, `package` y `sync` en PASS, `PUBLIC_OK` |
-| Comandos del workflow probados en local | AC-02 (modo arranque), AC-03 (`find` + `npm run test -- --run`), `verify.mjs` y `check.sh`: todos correctos |
+| Copia del workflow de la semana | `.github/workflows/week-05-w05-sync-data.yml` agregado **idéntico al kit**, verificado con `Get-FileHash` (SHA256 coincidente). Sin ediciones |
 
 ### Dos decisiones que conviene que el equipo conozca
 
-**La puerta se endurece en dos etapas.** El lunes `files` y `verify.mjs` exigen el contrato y la
-política, no `queue.ts`, `conflict-policy.ts` ni `sync.spec.ts`, porque esos archivos no existen
-hasta el viernes o el sábado. Exigirlos el lunes dejaría `master` en rojo y los tres
-trabajarían sobre una base que no pasa. El sábado suben a la puerta, junto con
-`W05_ENTREGABLES_COMPLETOS: 'true'` en el workflow. Está marcado en el código y en
-`public-tests/README.md`.
+**La puerta local se endurece en dos etapas.** El lunes `files` y `verify.mjs` exigen el contrato
+y la política, no `queue.ts`, `conflict-policy.ts` ni `sync.spec.ts`, porque esos archivos no
+existen hasta el viernes o el sábado. Exigirlos el lunes dejaría `master` en rojo y los tres
+trabajarían sobre una base que no pasa. El sábado suben a la puerta. Está marcado en el código y
+en `public-tests/README.md`.
+
+**El workflow de la semana se agregó sin modificar.** Los workflows de `.github/workflows/` son el
+evaluador automático del profesor: no se editan ni se eliminan, y los nuevos se agregan idénticos
+al kit. Los tres de Semanas 1 a 3 quedaron intactos y el de la Semana 5 es una copia byte a byte
+del kit, comprobada por hash. Por eso su `AC-02` exige los cinco artefactos desde el día uno y
+sale en rojo hasta el sábado, cuando la actividad está realmente terminada. Esa asimetría es la
+correcta: el evaluador mide la actividad terminada; la puerta local, que es del equipo, mide la
+salud diaria del repositorio. Son dos cosas distintas y viven en dos archivos distintos.
+
+La evidencia de entrega es la ejecución del `push` a `master`, donde el SHA reportado sí
+corresponde al commit entregado. Las ejecuciones de `pull_request` usan el SHA de fusión y no se
+citan.
 
 **El `target: "es5"` del `tsconfig.json` no es un detalle menor.** Si alguien usa campos privados
 `#x` o hace spread sobre un iterador en `src/`, el build falla con un error que no menciona el
