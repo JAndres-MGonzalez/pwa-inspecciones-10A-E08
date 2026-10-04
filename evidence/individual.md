@@ -284,7 +284,7 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 ### Semana 5 — Bloque B: cola idempotente y reintentos
 
 - **Entregado por:** Ismael.
-- **Rama y PR:** `semana-5-b-ismael-cola`; PR y SHA de merge: `<completar>`.
+- **Rama y PR:** `semana-5-b-ismael-cola`; [PR #7](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/7); SHA de merge: se registra cuando Kevin lo integre.
 - **Descripción de lo que hice (consigna):** <completar: `src/lib/sync/queue.ts`,
   `docs/sync/03-cola.md` y `tests/sync.cola.spec.ts`>.
 - **Reflexión:** <completar>.
