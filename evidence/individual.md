@@ -39,6 +39,8 @@
 ### Semana 5 — Bloque C: política explícita de conflictos
 
 - **Rama:** `semana-5-c-andres-conflictos`, creada desde el arranque integrado de Kevin (`b7a1128`).
+- **Mi commit SHA:** [b191b7743870d47f8e3cc93c142353ebd1d60f50](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/b191b7743870d47f8e3cc93c142353ebd1d60f50).
+- **PR:** [#8](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/8), para revisión de Kevin; integración en `master` pendiente.
 - **Contribución:** política de conflictos en [conflict-policy.ts](../src/lib/sync/conflict-policy.ts),
   explicación en [02-conflictos.md](../docs/sync/02-conflictos.md) y 14 pruebas en
   [sync.conflictos.spec.ts](../tests/sync.conflictos.spec.ts). Incluye las tres estrategias,
