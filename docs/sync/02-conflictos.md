@@ -104,7 +104,6 @@ Los reportes quedan en `reports/verification.json` y `reports/w05-sync-data/test
   algoritmo de consenso entre varios dispositivos.
 - El módulo compara campos planos. No valida relaciones entre campos, como `status` y
   `statusLabel`, ni resuelve borrados o cambios dentro de un texto.
-- Es una política aislada: no envía peticiones, no guarda los registros en IndexedDB y todavía
-  no está conectada a la cola ni a la interfaz. Las pruebas no acreditan sincronización real.
-- El workflow de semana 5 exige también `queue.ts` y `tests/sync.spec.ts`. La comprobación
-  completa de Actions requiere integrar los otros bloques y la suite conjunta.
+- El módulo no envía peticiones, no guarda los registros en IndexedDB ni está conectado a la
+  interfaz. La suite conjunta `tests/sync.spec.ts` combina la política y la cola con un
+  servidor simulado; sus pruebas no acreditan sincronización real.
