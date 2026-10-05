@@ -38,12 +38,28 @@
 
 ### Semana 5 — Bloque C: política explícita de conflictos
 
-- **Rama y PR:** `semana-5-c-andres-conflictos`; PR y SHA de merge: `<completar>`.
-- **Qué hice:** <completar: `src/lib/sync/conflict-policy.ts`, `docs/sync/02-conflictos.md`, `tests/sync.conflictos.spec.ts`>.
-- **Decisión técnica que puedo explicar y por qué:** <completar: qué estrategia por defecto y por qué esa en este dominio>.
-- **Prueba que ejecuté y resultado:** <completar>.
-- **Limitación o fallo que diagnosticé:** <completar>.
-- **Uso de IA:** <completar: herramienta, propósito, fragmentos influenciados, validación humana>.
+- **Rama:** `semana-5-c-andres-conflictos`, creada desde el arranque integrado de Kevin (`b7a1128`).
+- **Mi commit SHA:** [b191b7743870d47f8e3cc93c142353ebd1d60f50](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/b191b7743870d47f8e3cc93c142353ebd1d60f50).
+- **PR:** [#8](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/8), para revisión de Kevin; integración en `master` pendiente.
+- **Contribución:** política de conflictos en [conflict-policy.ts](../src/lib/sync/conflict-policy.ts),
+  explicación en [02-conflictos.md](../docs/sync/02-conflictos.md) y 14 pruebas en
+  [sync.conflictos.spec.ts](../tests/sync.conflictos.spec.ts). Incluye las tres estrategias,
+  registro de diferencias y descarte de respuestas viejas.
+- **Decisión técnica:** usar `field-level-merge` para conservar, por ejemplo, un cambio local
+  del resumen y otro remoto del laboratorio. Si ambos cambian el mismo campo, gana la copia
+  con fecha mayor; en empate se conserva la local. Si falta información, se marca para revisión.
+- **Prueba y resultado:** el 3 de octubre de 2026 Codex ejecutó
+  `npm.cmd ci --ignore-scripts --no-audit --no-fund`, `npm.cmd test`, `npm.cmd run verify`
+  y `bash public-tests/check.sh` en Git Bash. Instalación correcta, 59 casos aprobados
+  (45 anteriores y 14 de conflictos), build correcto, verificación `pass` y cinco apartados
+  públicos aprobados con `PUBLIC_OK`. `npm.cmd run verify` equivale a `make verify`.
+- **Limitación o fallo identificado:** `Inspection` no tiene versión ni fecha de edición.
+  El módulo recibe esos datos del sobre local y una copia anterior para comparar campos,
+  sin cambiar `schema.ts`. No guarda conflictos en disco ni está conectado a la cola o a la
+  interfaz. La integración del equipo necesita `queue.ts` y `tests/sync.spec.ts` para cumplir
+  la comprobación de archivos del workflow de semana 5.
+- **Uso de IA:** Codex (OpenAI) ayudó a implementar la política, escribir pruebas y documentación
+  y ejecutar las comprobaciones. Validación humana de esta semana: pendiente de mi revisión personal.
 
 ## Integrante: Montalvo Marcial Kevin Armando
 
