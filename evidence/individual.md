@@ -139,34 +139,68 @@
   asistente me mostró, y dejaré registrada mi comprobación personal en navegador antes de cerrar
   la semana.
 
-### Semana 5 — Arranque compartido y Bloque A: modelo y persistencia local
+### Semana 5 — Arranque compartido, Bloque A e integración de los tres bloques
 
-- **Rama y PR:** `semana-5-arranque` y `semana-5-a-kevin-modelo`; PR y SHA de merge: `<completar>`.
+- **Rama y PR:** arranque compartido en `semana-5-arranque`, mergeado con el PR #6
+  (`b7a1128`); Bloque A e integración en `semana-5-a-kevin-modelo`, PR y SHA de merge: `<completar>`.
 - **Qué hice:** arranque compartido de la semana (contrato congelado, suites autodetectadas,
   verificación parametrizada, bloque `sync:` del chequeo público y workflow agregado sin
-  modificar) más mi Bloque A: `src/lib/storage/schema.ts`, `docs/sync-policy.md`,
-  `docs/sync/01-modelo.md` y `tests/sync.modelo.spec.ts`.
+  modificar), mi Bloque A (`src/lib/storage/schema.ts`, `docs/sync-policy.md`,
+  `docs/sync/01-modelo.md`, `tests/sync.modelo.spec.ts`) y la integración del equipo:
+  `tests/sync.spec.ts`, la suite que prueba que los tres bloques funcionan juntos y el
+  endurecimiento de la puerta a los cinco artefactos de AC-02.
 - **Decisiones que puedo explicar y por qué:** (1) la clave de idempotencia es `id::vN` y no solo
   `id`, porque con solo el identificador un reintento de una actualización ya aplicada se vería
   como la misma operación y el cambio se perdería en silencio; (2) `starter.spec.mjs` descubre
   `tests/*.spec.ts` en vez de tener una lista escrita a mano, para que tres personas entregando
   en paralelo no editen el mismo archivo; (3) el `assignmentId` se lee del contrato, lo que
-  elimina ocho valores escritos a mano que hubo que editar a mano en la transición w03 → w04.
+  elimina ocho valores escritos a mano que hubo que editar a mano en la transición w03 → w04;
+  (4) la suite de integración no reimplementa lo que ya prueban las otras tres: combina el contrato
+  en uso, y por eso es la única que detecta que los tres bloques dejen de estar de acuerdo.
 - **Prueba que ejecuté y resultado:** línea base de 4 suites y 45 checks en verde antes de
-  modificar nada; después, `npm test` con las mismas 45 comprobaciones en verde,
-  `npm run verify` con las cinco comprobaciones en `pass`, y `bash public-tests/check.sh` con
-  `PUBLIC_OK`. Detalle en `<completar>`.
+  modificar nada. Después del arranque, `npm test` mantuvo esas mismas 45 comprobaciones en verde
+  con idénticos `suiteId` (incluido el histórico `manifest02`), `npm run verify` dio `pass` en las
+  cinco comprobaciones y `bash public-tests/check.sh` terminó en `PUBLIC_OK` con código de salida
+  0. Con los tres bloques integrados, `npm test` reporta 8 suites y 83 checks sin fallos —las 45
+  previas sin cambios, más 8 de `sync.modelo`, 10 de `sync.cola`, 14 de `sync.conflictos` y 6 de
+  `sync`—, `npm run build` sale con código 0, `npx tsc --noEmit` sin errores de tipos y `check.sh`
+  vuelve a `PUBLIC_OK` con la puerta ya endurecida.
+- **Cómo comprobé que las pruebas no son vacías:** una suite en verde no prueba nada si sus
+  aserciones no atrapan nada. Rompí el contrato a propósito en cinco puntos y revisé que fallara
+  el check correcto en cada caso: `idempotencyKey` devolviendo solo el identificador →
+  `idempotency-version-sensitive`; `migrate` adivinando en vez de lanzar en la migración
+  descendente → `migrate-downgrade-rejected`; `migrate` mutando el registro que recibe →
+  `migrate-noop`; el almacén devolviendo la referencia interna en vez de una copia →
+  `store-roundtrip`; y `saveQueue`/`loadQueue` reiniciando los intentos acumulados →
+  `queue-persists`. En los cinco casos falló el check previsto y ninguno otro. `schema.ts` quedó
+  restaurado idéntico al original, confirmado con `git status`. Repetí el procedimiento sobre los
+  tres bloques con cinco casos más: la clave sin versión → `resolution-is-a-new-operation`; la
+  cola calculando su propia clave en vez de usar el contrato → `one-contract-two-consumers`; la
+  política aceptando cualquier clave → `one-contract-two-consumers`; la rehidratación dejando en
+  `syncing` lo que quedó a medio enviar → `queue-survives-reopen`; y el drain aceptando una
+  respuesta más vieja que la aplicada → `stale-response-cannot-clobber`. Los tres archivos
+  quedaron restaurados idénticos.
 - **Limitación o fallo que diagnosticé:** el primer `npm run build` falló con
   `TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher`,
   porque el `tsconfig.json` del starter declara `target: "es5"`. Se resolvió usando `private` de
   TypeScript y `Array.from` en lugar de identificadores `#` y spread sobre iteradores, en vez de
   modificar el `tsconfig.json` compartido. Segunda limitación: la persistencia se implementa con
   un adapter en memoria; la conexión real con IndexedDB queda declarada en la interfaz pero no
-  implementada.
+  implementada. La más importante la encontré al endurecer la puerta: el marcador de
+  `public-tests/check.sh` estaba situado **dentro del cuerpo del `for`**, no en la lista de
+  archivos. Descomentarlo tal cual no exigía los archivos nuevos: bash intentaba *ejecutar*
+  `queue.ts` como un script y el `files: PASS` salía verde sin haberlos comprobado nunca. Lo
+  moví a la lista y lo verifiqué ocultando los archivos uno por uno: sin `tests/sync.spec.ts` y sin
+  `src/lib/sync/queue.ts` la puerta ahora falla con `files: FAIL` y código de salida 1.
 - **Uso de IA:** usé un asistente de IA de terminal (opencode) para diseñar el contrato,
   parametrizar el verificador y corregir el fallo del build. Validé cada paso contra la línea base
-  de 45 checks, `npm run verify` y `bash public-tests/check.sh`; la decisión de no tocar
-  `tsconfig.json` y la de no exigir en el arranque los artefactos de los bloques B y C son mías.
+  de 45 checks, `npm run verify` y `bash public-tests/check.sh`, y añadí las pruebas negativas del
+  contrato para comprobar que las aserciones fallan cuando el contrato falla. La decisión de no
+  tocar `tsconfig.json`, la de no exigir en el arranque los artefactos de los bloques B y C y la
+  de agregar el workflow del kit sin modificar son mías. En la integración, el asistente escribió
+  `tests/sync.spec.ts`; los tres fallos iniciales y la prueba vacía que las pruebas negativas
+  detectaron eran errores de esa suite, no de los bloques de mis compañeros, y los corregí antes
+  de dar por buena la integración.
 
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
