@@ -40,7 +40,8 @@
 
 - **Rama:** `semana-5-c-andres-conflictos`, creada desde el arranque integrado de Kevin (`b7a1128`).
 - **Mi commit SHA:** [b191b7743870d47f8e3cc93c142353ebd1d60f50](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/b191b7743870d47f8e3cc93c142353ebd1d60f50).
-- **PR:** [#8](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/8), para revisión de Kevin; integración en `master` pendiente.
+- **PR:** [#8](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/8), integrado en
+  `master` con el merge [a5fa7efbd4325f39075adc9ef2c7f2055054e69e](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/a5fa7efbd4325f39075adc9ef2c7f2055054e69e).
 - **Contribución:** política de conflictos en [conflict-policy.ts](../src/lib/sync/conflict-policy.ts),
   explicación en [02-conflictos.md](../docs/sync/02-conflictos.md) y 14 pruebas en
   [sync.conflictos.spec.ts](../tests/sync.conflictos.spec.ts). Incluye las tres estrategias,
@@ -53,11 +54,19 @@
   y `bash public-tests/check.sh` en Git Bash. Instalación correcta, 59 casos aprobados
   (45 anteriores y 14 de conflictos), build correcto, verificación `pass` y cinco apartados
   públicos aprobados con `PUBLIC_OK`. `npm.cmd run verify` equivale a `make verify`.
+- **Verificación integrada:** el 4 de octubre de 2026 Codex comprobó
+  `7ab6a2cf26851c8f147a62ec431c6715b2bee385`, después de los PR #7, #8 y #9.
+  La instalación terminó correctamente; `npm.cmd run verify` aprobó 8 suites y 83 casos,
+  barrido y build, con árbol limpio. Git Bash aprobó los cinco apartados y mostró `PUBLIC_OK`.
+  [Actions de semana 5 aprobado](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/37266734172)
+  sobre ese SHA. De los 83 casos, 14 corresponden a mi política; los demás verifican los otros
+  bloques y la integración.
 - **Limitación o fallo identificado:** `Inspection` no tiene versión ni fecha de edición.
   El módulo recibe esos datos del sobre local y una copia anterior para comparar campos,
-  sin cambiar `schema.ts`. No guarda conflictos en disco ni está conectado a la cola o a la
-  interfaz. La integración del equipo necesita `queue.ts` y `tests/sync.spec.ts` para cumplir
-  la comprobación de archivos del workflow de semana 5.
+  sin cambiar `schema.ts`. No guarda conflictos en disco ni está conectado a la interfaz.
+  La falta de `queue.ts` y `tests/sync.spec.ts` en la primera revisión quedó resuelta al
+  integrar los otros bloques. La suite conjunta prueba el ciclo con un servidor simulado;
+  no acredita sincronización con un servidor real ni persistencia en IndexedDB.
 - **Uso de IA:** Codex (OpenAI) ayudó a implementar la política, escribir pruebas y documentación
   y ejecutar las comprobaciones. Validación humana de esta semana: pendiente de mi revisión personal.
 

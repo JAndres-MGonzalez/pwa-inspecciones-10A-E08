@@ -28,7 +28,10 @@ Las tres secciones se apoyan en un contrato único, congelado en
 - **Idempotencia.** La clave es `id::vN`: identifica una **operación**, no un registro. Reintentar
   la misma operación no crea un segundo registro; un cambio nuevo sí genera una operación nueva.
   Determinista: no depende de `Math.random()` ni de `Date.now()`.
-- **Conflictos.** *Pendiente de la sección de Juan Andrés.*
+- **Conflictos.** `field-level-merge` conserva los cambios de cada lado respecto a una base
+  común. Si ambos cambian el mismo campo, gana la fecha mayor; en empate se conserva lo local.
+  Cada diferencia queda registrada. Sin datos suficientes se marca para revisión manual y una
+  versión remota vieja no reemplaza la local. Detalle en [Política de conflictos](sync/02-conflictos.md).
 - **Reintentos.** *Pendiente de la sección de Ismael.*
 - **Cierre de pestaña.** *Pendiente de la sección de Ismael.*
 
