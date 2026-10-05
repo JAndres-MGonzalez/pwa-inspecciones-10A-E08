@@ -274,3 +274,18 @@ tsconfig. Usar `private` de TypeScript y `Array.from`.
 - Esta entrada la ejecutó un asistente de IA de terminal (opencode). La validación personal de
   Kevin —incluida la comprobación en navegador— queda pendiente de registrar.
 
+
+## Semana 5 · Bloque B — Ismael
+
+Fecha: 2 al 4 de octubre de 2026. Entorno: Windows, PowerShell. Base: `master` en `b7a1128` (merge del PR #6, arranque de Kevin). Rama: `semana-5-b-ismael-cola`; PR #7. La rama se rehízo una vez desde `master` (con respaldo previo de los tres archivos) tras trabajar un rato en una carpeta equivocada; no hubo commits ni push en este repositorio antes del PR.
+
+| Acción | Resultado real |
+|---|---|
+| `git fetch origin`, `git checkout master`, `git pull --ff-only origin master` y `npm.cmd ci --ignore-scripts --no-audit --no-fund` | `master` actualizado con el arranque de Kevin; 28 paquetes añadidos |
+| Crear `src/lib/sync/queue.ts` | Archivo nuevo; `npm.cmd run build` con código 0, `Compiled successfully` y tipos validados con `target: es5` (sin `#privado` ni spread sobre iteradores) |
+| Crear `tests/sync.cola.spec.ts` | Archivo nuevo; el runner lo descubre solo, sin editar `starter.spec.mjs` |
+| `npm.cmd test` | `starter.spec.mjs: PASS`; 5 suites y 55 checks (45 previos y 10 de `sync.cola`) |
+| Crear `docs/sync/03-cola.md` | Sustituye el esqueleto de Kevin; cubre ciclo de la entrada, idempotencia, reintentos, cierre de pestaña, respuestas fuera de orden, observabilidad y límites |
+| `npm.cmd run verify` | `Verificación técnica: pass` |
+
+No se tocaron `tsconfig.json`, `package.json`, el lockfile, `starter.spec.mjs`, `verify.mjs`, `check.sh`, `schema.ts` ni `docs/sync-policy.md`. Esta entrada se apoyó en Claude (Anthropic), en chat, para redactar los borradores; los comandos y sus resultados los ejecuté y revisé yo en PowerShell. Pendiente: revisión de Kevin y Juan Andrés y su comprobación cruzada.
