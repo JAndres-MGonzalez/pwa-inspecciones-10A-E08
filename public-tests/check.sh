@@ -12,9 +12,10 @@ for file in public/manifest.webmanifest public/sw.js public/offline.html \
   docs/sync-policy.md docs/sync/01-modelo.md docs/sync/02-conflictos.md docs/sync/03-cola.md \
   tests/manifest.spec.ts tests/source-loader.cjs tests/sw-harness.cjs \
   tests/service-worker.spec.ts tests/offline.spec.ts tests/rendering.spec.ts \
-  scripts/check-secrets.mjs scripts/verify.mjs README.md; do
-  # Semana 5, dia de integrar: descomentar para exigir tambien los bloques B y C.
-  # "src/lib/sync/queue.ts" "src/lib/sync/conflict-policy.ts" "tests/sync.spec.ts"
+  scripts/check-secrets.mjs scripts/verify.mjs README.md \
+  src/lib/sync/queue.ts src/lib/sync/conflict-policy.ts tests/sync.spec.ts; do
+  # Nota: los archivos van en la lista de arriba, no en este cuerpo. Puestos aqui bash los
+  # intentaria EJECUTAR, y el `files: PASS` seguiria verde sin haberlos comprobado nunca.
   if [ ! -s "$file" ]; then
     echo "Falta archivo: $file" >&2
     FILES_OK=0
@@ -83,8 +84,10 @@ assert.notEqual(idempotencyKey(base, 1), idempotencyKey(base, 2), "una version n
 assert.equal(migrate({ a: 1 }, SCHEMA_VERSION, SCHEMA_VERSION).a, 1, "migrar a la misma version no debe cambiar nada");
 assert.throws(() => migrate({ a: 1 }, SCHEMA_VERSION, 0), /descendente/, "la migracion descendente debe fallar");
 
-// 3. Los artefactos de la semana 5, cuando ya existan.
-//    Presentes: separan el fallo real del "todavia no lo escribi".
+// 3. Los artefactos de la semana 5: que no sean archivos vacios.
+//    La EXISTENCIA ya no se comprueba aqui, sino en la lista de archivos de arriba (linea 16),
+//    que desde el dia de integrar exige los cinco. Este paso solo evita que un archivo exista
+//    pero este vacio, porque `test -s` de arriba ya cubre el caso contrario.
 const optional = ["src/lib/sync/queue.ts", "src/lib/sync/conflict-policy.ts", "tests/sync.spec.ts"];
 for (const f of optional) {
   if (existsSync(f)) {

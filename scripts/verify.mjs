@@ -31,10 +31,9 @@ const required = [
   "tests/starter.spec.mjs", "tests/manifest.spec.ts", "tests/source-loader.cjs",
   "tests/sw-harness.cjs", "tests/service-worker.spec.ts", "tests/offline.spec.ts", "tests/rendering.spec.ts",
   "scripts/check-secrets.mjs", "public-tests/check.sh", "public-tests/README.md",
-  "evidence/individual.md", "evidence/session-log.md"
-  // Semana 5: cuando terminen los bloques B y C, descomentar. hasta entonces el arranque
-  // debe dejar master en verde para que los tres trabajen sobre una base que pasa.
-  // "src/lib/sync/queue.ts", "src/lib/sync/conflict-policy.ts", "tests/sync.spec.ts"
+  "evidence/individual.md", "evidence/session-log.md",
+  // Semana 5, dia de integrar: la puerta sube a los cinco artefactos de AC-02.
+  "src/lib/sync/queue.ts", "src/lib/sync/conflict-policy.ts", "tests/sync.spec.ts"
 ];
 const missing = required.filter((file) => !existsSync(resolve(root, file)));
 const structureOnly = process.argv.includes("--structure");

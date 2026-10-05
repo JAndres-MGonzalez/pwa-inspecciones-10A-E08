@@ -275,6 +275,62 @@ tsconfig. Usar `private` de TypeScript y `Array.from`.
   Kevin —incluida la comprobación en navegador— queda pendiente de registrar.
 
 
+## Bloque A de la Semana 5 — Kevin
+
+El arranque quedó mergeado en `master` con el PR #6 (`b7a1128`). Este bloque cierra la parte
+que le toca a Kevin del reparto: la suite propia de su Bloque A.
+
+| Acción | Resultado |
+|---|---|
+| `git checkout -b semana-5-a-kevin-modelo` desde `master` actualizado | Rama con base en el arranque ya mergeado |
+| Crear `tests/sync.modelo.spec.ts` | 8 checks que ejercitan solo el contrato, sin depender de los bloques B ni C |
+| `npm test` | **5 suites, 53 checks**: las 45 previas idénticas más 8 nuevos |
+| `npm run build` | Código 0 |
+| `npx tsc --noEmit` | Sin errores de tipos |
+| `npm run verify` | `pass` en las cinco comprobaciones |
+| `bash public-tests/check.sh` | `PUBLIC_OK`, y el bloque `sync:` ya reconoce la suite `sync.modelo` |
+
+### Por qué la suite se escribió antes que los bloques B y C
+
+Los ocho checks dependen únicamente de `src/lib/storage/schema.ts`, así que escribirlos no obliga
+a esperar a nadie. La ventaja no es de orden sino de detección: si el contrato congelado tuviera
+un defecto, esta suite lo revela de inmediato, y no el sábado cuando ya haya que integrar tres
+bloques. El contrato es la frontera compartida —si falla, fallan los tres— y probarlo primero es
+lo más barato que se puede hacer.
+
+### Las pruebas se comprobaron contra un contrato roto
+
+Una suite en verde no demuestra nada si sus aserciones no atrapan nada. Se rompió el contrato a
+propósito en cinco puntos y se verificó que fallara el check previsto en cada caso:
+
+| Contrato roto | Check que debió fallar |
+|---|---|
+| `idempotencyKey` devolviendo solo `inspection.id` | `idempotency-version-sensitive` |
+| `migrate` adivinando en vez de lanzar hacia atrás | `migrate-downgrade-rejected` |
+| `migrate` mutando el registro que recibe | `migrate-noop` |
+| Almacén devolviendo la referencia interna en vez de copia | `store-roundtrip` |
+| `saveQueue`/`loadQueue` reiniciando los intentos acumulados | `queue-persists` |
+
+En los cinco casos falló el check esperado y ningún otro. `schema.ts` se restauró y se comprobó
+con `git status` que quedó idéntico al original.
+
+Un detalle sobre el harness de estas pruebas: en Windows `npm.cmd` no arranca con `execFileSync`
+sin shell (falla con `EINVAL`), así que el primer intento de la comprobación dio cinco falsos
+negativos. Se resolvió invocándolo a través de `cmd.exe`. Merece la pena anotarlo porque el
+síntoma —"ninguna prueba detectó nada"— es exactamente el que hace creer que una puerta está
+rota cuando lo roto es el medidor.
+
+### Límites de este bloque
+
+- La suite prueba el contrato, no el comportamiento en navegador: `MemoryInspectionStore` es un
+  adapter en memoria, no IndexedDB.
+- No cubre la interacción con `queue.ts` ni con `conflict-policy.ts`. Esa integración es
+  `tests/sync.spec.ts`, que se escribe al final de la semana cuando los tres bloques estén en
+  `master`.
+- El `suiteId` de esta suite se deriva del nombre del archivo (`sync.modelo`), igual que el de
+  los compañeros. Los identificadores históricos siguen declarados aparte en `starter.spec.mjs`.
+- Esta entrada la ejecutó un asistente de IA de terminal (opencode).
+
 ## Semana 5 · Bloque B — Ismael
 
 Fecha: 2 al 4 de octubre de 2026. Entorno: Windows, PowerShell. Base: `master` en `b7a1128` (merge del PR #6, arranque de Kevin). Rama: `semana-5-b-ismael-cola`; PR #7. La rama se rehízo una vez desde `master` (con respaldo previo de los tres archivos) tras trabajar un rato en una carpeta equivocada; no hubo commits ni push en este repositorio antes del PR.
@@ -289,3 +345,106 @@ Fecha: 2 al 4 de octubre de 2026. Entorno: Windows, PowerShell. Base: `master` e
 | `npm.cmd run verify` | `Verificación técnica: pass` |
 
 No se tocaron `tsconfig.json`, `package.json`, el lockfile, `starter.spec.mjs`, `verify.mjs`, `check.sh`, `schema.ts` ni `docs/sync-policy.md`. Esta entrada se apoyó en Claude (Anthropic), en chat, para redactar los borradores; los comandos y sus resultados los ejecuté y revisé yo en PowerShell. Pendiente: revisión de Kevin y Juan Andrés y su comprobación cruzada.
+
+## Semana 5 · Integración de los tres bloques y endurecimiento de la puerta — Kevin
+
+Fecha: 4 de octubre de 2026. Esta entrada cubre lo que ninguno de los tres bloques entregó por
+separado: la suite que prueba que funcionan juntos y el subida de la puerta a los cinco artefactos
+de AC-02. No incluye el push ni los PR, que hacen a mano Kevin.
+
+### Qué se integró y en qué orden
+
+- `semana-5-b-ismael-cola` (`60fc802`): `src/lib/sync/queue.ts`, `docs/sync/03-cola.md`,
+  `tests/sync.cola.spec.ts` (10 checks) y `evidence/week-05/ismael-verificacion.md`.
+- `semana-5-c-andres-conflictos` (`37bbf8e`): `src/lib/sync/conflict-policy.ts`,
+  `docs/sync/02-conflictos.md` y `tests/sync.conflictos.spec.ts` (14 checks).
+- Mío: `tests/sync.modelo.spec.ts` (8 checks) y `tests/sync.spec.ts` (6 checks).
+
+Antes de integrar revisé qué archivos había tocado cada rama, porque un bloque que edita un
+archivo compartido rompe a los demás sin que nadie lo note. Ninguno de los dos tocaron
+`starter.spec.mjs`, `verify.mjs`, `check.sh`, `tsconfig.json`, `package.json`, el lockfile,
+los workflows ni el contrato `schema.ts`. Los dos se mergean entre sí sin conflicto, y ambos
+son diffsSubset limpios de `master`. El único archivo en conflicto de toda la semana es
+`evidence/session-log.md`, porque los dos anexan su entrada al final del mismo archivo.
+
+### La suite de integración
+
+`tests/sync.spec.ts` no reimplementa lo que ya prueban las otras tres suites: combina el contrato
+en uso. Las otras tres comprueban cada bloque por separado contra el contrato; si los tres dejaran
+de estar de acuerdo, el sistema duplicaría o perdería cambios en silencio y ninguna de ellas lo
+detectaría. Los seis checks:
+
+1. `one-contract-two-consumers` — la clave que calcula el Bloque A es exactamente la que usa el
+   Bloque B al encolar y la que exige el Bloque C al resolver; una clave manipulada se rechaza.
+2. `retry-is-the-same-operation` — tres intentos, la misma clave en los tres: un reintento es la
+   misma operación y no duplica.
+3. `resolution-is-a-new-operation` — el motivo de `id::vN`. El envío falla por conflicto, se
+   resuelve y se reenvía con versión nueva, así que su clave es **distinta** de la que falló. Con
+   una clave basada solo en `id`, el servidor vería el reenvío como el reintento de la operación
+   anterior y se lo tragaría: la resolución se perdería sin que nadie lo notara.
+4. `stale-response-cannot-clobber` — la regla de antigüedad del Bloque C aplicada por el Bloque B:
+   una respuesta vieja que llega tarde no baja la versión ya aplicada.
+5. `queue-survives-reopen` — una entrada a medio enviar persiste, vuelve a `pending` al reabrir y
+   se completa sin duplicar.
+6. `migration-does-not-orphan-the-queue` — una cola migrada por `migrate` sigue siendo coherente
+   con la clave del contrato y es aceptable para la política de conflictos.
+
+### Tres fallos que eran míos, no de los bloques
+
+La primera corrida dio tres checks en rojo. Los tres eran errores de la suite que yo estaba
+escribiendo, no de `queue.ts` ni de `conflict-policy.ts`:
+
+- `all()` devuelve las referencias vivas del mapa, no copias. Guardé la entrada para observar su
+  estado después del segundo drain y leí el valor ya mutado por el segundo drain.
+- `isStale(local, remote)` es verdadera cuando lo **remoto** es más viejo que lo local. invertí
+  los argumentos y la comprobación pasaba por el motivo equivocado.
+- Escribí el transporte del servidor simulado usando `this.guardados` dentro de un método de objeto
+  literal, donde `this` es el propio objeto `transport` y no tiene esa propiedad. La cola captura
+  cualquier excepción del envío como fallo de red, así que el error se disfrazaba de problema del
+  Bloque B. Ahora el servidor simulado cierra sobre la variable en vez de usar `this`.
+
+### La prueba que pasaba por la razón equivocada
+
+Las pruebas negativas detectaron que `stale-response-cannot-clobber` era una prueba vacía: solo
+encolaba una entrada, así que el guardia de antigüedad nunca se evaluaba (la versión aplicada
+seguía en 0 y cualquier respuesta parecía más nueva). Pasaba en verde sin comprobar nada. Lo
+corregí encolando **dos** entradas y haciendo que la segunda respuesta llegue vieja: entonces el
+guardia sí se evalúa y el check comprueba que se omitió en vez de contarse como enviada. Sin las
+pruebas negativas habría entregado esa prueba como si sirviera.
+
+### La puerta: un verde falso
+
+Al subir la puerta a los cinco artefactos, `check.sh` siguió dando `PUBLIC_OK` con código 0 pero
+imprimiendo `command not found` y `syntax error`. El marcador que había dejado en el arranque
+estaba **dentro del cuerpo del `for`**, no en la lista de archivos de la línea 6. Descomentarlo
+tal cual no añadía los archivos a la comprobación: bash intentaba *ejecutar* `queue.ts` como un
+script de shell, y el `files: PASS` salía verde sin haberlos comprobado nunca. Es el peor tipo de
+fallo posible en una puerta: verde y falsa.
+
+Lo corregí moviendo los tres archivos a la lista del `for` y dejé escrito por qué no deben ir en
+el cuerpo. Después lo verifiqué de la única forma que sirve: ocultando los archivos uno por uno.
+Sin `src/lib/sync/queue.ts` la puerta da `files: FAIL` y salida 1; sin `tests/sync.spec.ts` da
+`Falta archivo` y `tests: FAIL`. Una puerta que no se ha visto fallar no es una puerta. Lo mismo
+con `scripts/verify.mjs`: sin `src/lib/sync/conflict-policy.ts` reporta `Faltan archivos` y
+sale con código 1.
+
+Durante esa comprobación moví `conflict-policy.ts` a un temporal con un nombre mal escrito y el
+restaurado falló; el archivo se recuperó intacto y `git diff` confirmó que es byte a byte el de
+`semana-5-c-andres-conflictos`. Queda anotado porque una evidencia que se restaura "a ojo" no es
+una evidencia.
+
+### Estado verificado de la integración
+
+- `npm test`: 8 suites, 83 checks, 0 fallos — 45 previos sin cambios, más 8 de `sync.modelo`,
+  10 de `sync.cola`, 14 de `sync.conflictos` y 6 de `sync`.
+- `npm run build`: código 0. `npx tsc --noEmit`: sin errores de tipos.
+- `npm run verify`: `Verificación técnica: pass`.
+- `bash public-tests/check.sh`: `PUBLIC_OK`, código 0, con la puerta ya exigiendo los cinco
+  artefactos y las cuatro suites `sync` detectadas.
+- Pruebas negativas: 10 casos rotos en total (5 del contrato, 5 de los tres bloques), cada uno
+  atrapado por el check previsto. `schema.ts`, `queue.ts` y `conflict-policy.ts` restaurados
+  idénticos, confirmado con `git status`.
+
+Lo que queda a mano de Kevin y no se hizo aquí: el commit, el push, el PR y el merge de los tres
+bloques, resolver en `master` el conflicto de `evidence/session-log.md` conservando las tres
+entradas, y rellenar el `<completar>` de la rama con el PR y el SHA de merge.
