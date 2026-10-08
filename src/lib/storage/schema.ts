@@ -11,7 +11,7 @@ export type { Inspection };
  * hubo que editar a mano en la transicion de w03 a w04, y que habria que volver a editar
  * en w05, w06 y siguientes.
  */
-export const ASSIGNMENT_ID = "w05-sync-data";
+export const ASSIGNMENT_ID = "w06-device-push";
 
 /**
  * Version del esquema local. Sube cuando cambie la forma de un registro persistido.

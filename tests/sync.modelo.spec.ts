@@ -50,7 +50,11 @@ export async function runChecks() {
     loadSource("src/lib/storage/schema.ts");
 
   await check("contract-exports", () => {
-    assert.equal(ASSIGNMENT_ID, "w05-sync-data");
+    // La forma, no el valor de la semana: el literal exacto convertia el identificador en
+    // dos lugares con el mismo valor, justo cuando el punto del contrato era una sola fuente.
+    // Con la forma, este check sigue exigiendo una actividad declarada y con estructura sin
+    // volver a fallar por calendario.
+    assert.match(ASSIGNMENT_ID, /^w\d{2}-[a-z0-9-]+$/, "el contrato debe declarar la actividad vigente");
     assert.equal(SCHEMA_VERSION, 1);
     assert.equal(typeof idempotencyKey, "function");
     assert.equal(typeof migrate, "function");
