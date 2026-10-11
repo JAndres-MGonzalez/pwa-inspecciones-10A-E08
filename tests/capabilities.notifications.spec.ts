@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { loadSource } from "./source-loader.cjs";
 import type { DeviceEnv } from "../src/lib/device/types";
 
@@ -158,6 +160,25 @@ export async function runChecks() {
       else delete (globalThis as { Notification?: unknown }).Notification;
     }
     assert.equal(calls, 0);
+  });
+  await check("device-first-render-does-not-use-browser", () => {
+    let browserCalls = 0;
+    let supported = false;
+    const called = () => { browserCalls += 1; };
+    const { DeviceEvidence } = loadSource("src/components/device-evidence.tsx", {
+      "src/lib/device/camera.ts": {
+        captureEvidence: called, evidenceFromFile: called, getCameraPermission: called,
+        isCameraSupported: () => { browserCalls += 1; return supported; }
+      },
+      "src/lib/notifications/client.ts": { requestPermission: called, notifyChange: called }
+    });
+    const server = renderToStaticMarkup(createElement(DeviceEvidence, { inspectionId: "inspection-synthetic" }));
+    supported = true;
+    const clientFirst = renderToStaticMarkup(createElement(DeviceEvidence, { inspectionId: "inspection-synthetic" }));
+    assert.equal(clientFirst, server);
+    assert.equal(browserCalls, 0);
+    for (const label of ["Adjuntar foto", "Adjuntar archivo", "Avisar cambio", "Permitir notificaciones"]) assert.ok(server.includes(label));
+    assert.match(server, /aria-live="polite"/);
   });
   return checks;
 }

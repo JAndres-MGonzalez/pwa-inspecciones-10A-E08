@@ -8,6 +8,10 @@
 Si ya está concedido o denegado, conserva ese estado sin volver a solicitarlo. Importar el
 módulo o llamar a `notifyChange()` no abre el diálogo.
 
+En la interfaz, **Permitir notificaciones** abre esa solicitud opcional y **Avisar cambio**
+envía el aviso con el permiso disponible. Así también se puede avisar en pantalla sin abrir
+un diálogo ni esperar a que la persona acepte un permiso.
+
 `notifyChange({ title, body })` lee el permiso. Si está concedido, busca el registro del
 Service Worker mediante `navigator.serviceWorker.getRegistration()` y utiliza su
 `showNotification()`. Si no existe un registro, usa `new Notification()` como respaldo.
@@ -43,6 +47,8 @@ generales sobre la inspección y reservar el detalle para la aplicación.
 dobles del constructor y del contenedor del Service Worker, sin navegador ni red. Comprueba
 los ocho casos de la guía y además: constructor sin registro, permiso ya decidido, estado
 desconocido y ausencia de llamadas al importar. Incluye fallos de lectura, solicitud y envío.
+También comprueba que el componente presenta el mismo HTML inicial con o sin soporte de
+cámara y que no llama a las capacidades durante el render.
 
 Los resultados se reproducen desde la raíz con `npm.cmd test` y `npm.cmd run verify`.
 La prueba del módulo no demuestra que el sistema operativo haya mostrado o que una persona

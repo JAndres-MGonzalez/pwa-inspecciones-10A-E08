@@ -70,6 +70,38 @@
 - **Uso de IA:** Codex (OpenAI) ayudó a implementar la política, escribir pruebas y documentación
   y ejecutar las comprobaciones. Validación humana de esta semana: pendiente de mi revisión personal.
 
+### Semana 6 — Notificaciones e integración
+
+- **Mi commit SHA:** [a650c66962d197b5b4434a2ca6aedac6e1bc7358](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/a650c66962d197b5b4434a2ca6aedac6e1bc7358).
+- **Contribución y PRs:** módulo de notificaciones, documentación y pruebas del
+  [PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/15), integrado
+  con el merge `794663c`. Revisé y mergeé el harness del
+  [PR #13](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/13).
+  Conecté el aviso en el detalle y mantuve estable el primer render del componente.
+- **Decisión técnica:** pedir permiso desde un botón separado y avisar con el permiso que
+  ya exista. Si falta soporte o permiso, el mensaje sigue en pantalla. Para usar el Service
+  Worker se obtiene su registro con `getRegistration()`, sin esperar indefinidamente a `ready`.
+- **Pruebas y resultado:** el 11 de octubre de 2026 Codex ejecutó instalación limpia,
+  `npm.cmd run verify` y Git Bash. El bloque inicial aprobó 12 pruebas propias y 103 casos
+  en total, con build correcto, `pass` y `PUBLIC_OK`. Las cinco roturas de la guía fueron
+  detectadas y el archivo quedó restaurado. Con el botón integrado pasaron 13 pruebas propias
+  y 104 casos en 10 suites, incluido el primer render sin llamadas al navegador.
+- **Actions:** [checks existentes aprobados para el PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/38183788406)
+  sobre `a650c66962d197b5b4434a2ca6aedac6e1bc7358`. El workflow específico de semana 6 queda
+  pendiente de recibir el archivo original del kit; estos checks no acreditan el cierre completo.
+- **Prueba en navegador:** Codex probó producción en `localhost:3006`, adjuntó el icono
+  sintético del proyecto y comprobó el aviso en pantalla. El permiso de notificaciones quedó
+  en `default` antes y después de avisar, sin errores nuevos de JavaScript.
+  Capturas: [aviso sin permiso](week-06/andres-aviso-sin-permiso.jpg) y
+  [archivo y aviso](week-06/andres-archivo-y-aviso.jpg).
+- **Limitación y fallo identificado:** `next dev` queda bloqueado por la política de
+  seguridad heredada; se comprobó `next build` y `next start` sin cambiar esa política.
+  Geolocalización necesita manejar una excepción síncrona antes de integrar el PR #14.
+  El aviso del sistema, los tres permisos denegados en navegador y el cierre de la semana
+  todavía no están comprobados. La evidencia solo permanece en memoria.
+- **Uso de IA:** Codex (OpenAI) apoyó implementación, revisión de PRs, pruebas, documentación
+  y comprobación en navegador. Validación humana: pendiente de mi revisión personal.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.

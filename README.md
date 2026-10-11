@@ -1,8 +1,23 @@
-# Inspecciones de laboratorio · Semanas 1 a 5
+# Inspecciones de laboratorio · Semanas 1 a 6
 
 Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de laboratorios con datos sintéticos.
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
+
+## Estado de Semana 6 · `w06-device-push`
+
+La semana 6 incorpora evidencia opcional por cámara o archivo y notificaciones locales de
+cambio. Los permisos se solicitan desde un clic. **Avisar cambio** muestra el mensaje en
+pantalla si no hay permiso; **Permitir notificaciones** abre la solicitud opcional.
+
+El contrato está en `src/lib/device/types.ts` y el índice en
+[docs/capabilities.md](docs/capabilities.md). La evidencia y los avisos usan datos sintéticos.
+El adjunto permanece en memoria y no se envía a un servidor.
+
+**Integración pendiente:** el PR #14 de geolocalización necesita manejar una excepción
+síncrona antes del merge. Todavía faltan la ubicación en la interfaz, la suite conjunta
+`tests/capabilities.spec.ts`, la puerta completa, el workflow original del kit y la prueba
+manual de los tres permisos denegados. Esta versión no representa el cierre de la semana.
 
 ## Estado de Semana 5 · `w05-sync-data`
 
@@ -51,6 +66,11 @@ npm.cmd run start
 
 Los scripts disponibles son `dev`, `build`, `start`, `test`, `check-secrets` y `verify`. En otros sistemas se puede escribir `npm` en lugar de `npm.cmd`.
 
+Para probar los botones de dispositivo utiliza **producción**, con `npm.cmd run build` y
+`npm.cmd run start`. La política de seguridad heredada bloquea la evaluación de scripts de
+`next dev`, de modo que en ese modo puede verse el HTML sin que los botones funcionen.
+La comprobación en producción se realizó sin cambiar esa política.
+
 ## Verificación
 
 ```powershell
@@ -58,15 +78,15 @@ npm.cmd run verify
 bash public-tests/check.sh
 ```
 
-`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, ejecuta las tres suites, revisa palabras sensibles y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y Node en Windows.
+`npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, descubre y ejecuta todas las suites presentes, revisa palabras sensibles y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y Node en Windows.
 
 | Comprobación | Alcance actual |
 |---|---|
 | Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
-| `npm.cmd test` | 45 casos: 9 de manifest y estructura, 20 de Service Worker, 7 de offline y 9 de renderizado; más las suites de sincronización que se agreguen. Reporte en `reports/w05-sync-data/tests.json` |
+| `npm.cmd test` | 104 casos en 10 suites: 83 heredados, 8 de cámara y 13 de notificaciones e interfaz. Reporte en `reports/w06-device-push/tests.json` |
 | `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
-| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w05-sync-data` |
-| Chequeo público | `files`, `cursors`, `tests`, `package` y `sync`: archivos presentes, barrido, suites completas, ausencia de vitest y contrato de idempotencia |
+| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w06-device-push` |
+| Chequeo público | `files`, `cursors`, `tests`, `package`, `sync` y `capabilities`: archivos presentes, barrido, suites completas, dependencias conservadas, contrato de idempotencia y capacidades disponibles |
 
 Ejecuta `npm.cmd test` **antes** del chequeo público: el reporte vive en `reports/`, que está
 ignorado por Git, y el chequeo falla si no corresponde al SHA actual.

@@ -448,3 +448,41 @@ una evidencia.
 Lo que queda a mano de Kevin y no se hizo aquí: el commit, el push, el PR y el merge de los tres
 bloques, resolver en `master` el conflicto de `evidence/session-log.md` conservando las tres
 entradas, y rellenar el `<completar>` de la rama con el PR y el SHA de merge.
+
+## Semana 6 — Notificaciones y revisión de integración — Juan Andrés
+
+Fecha: 11 de octubre de 2026. Comprobaciones ejecutadas por Codex en Windows.
+
+| Acción | Resultado observado |
+|---|---|
+| Instalar con npm.cmd ci --ignore-scripts --no-audit --no-fund | 28 paquetes; código 0; dependencias conservadas |
+| Revisar el harness del PR #13 | Solo sus tres archivos; 83 casos, build y verify aprobados; PUBLIC_OK; merge 166a745 |
+| Probar excepción síncrona en getCurrentPosition del PR #14 | SecurityError rechaza la promesa; cambios solicitados en la rama de Ismael |
+| Implementar notificaciones contra el contrato real | Importación desde device/types.ts y envío mediante ServiceWorkerRegistration |
+| Verificar el PR #15 | 10 suites, 103 casos, build y barrido aprobados; PUBLIC_OK; merge 794663c |
+| Pruebas negativas | Las cinco roturas causaron los fallos previstos; archivo restaurado; suite completa aprobada |
+| Probar el detalle con next dev | La política de seguridad impidió ejecutar el paquete de desarrollo; los botones no respondían |
+| Probar producción en localhost:3006 | Archivo sintético adjuntado y aviso en pantalla; permiso default conservado; sin errores nuevos de JavaScript |
+| Mantener estable el primer render | Texto inicial constante y prueba de render sin llamadas de dispositivo |
+
+### Pruebas negativas del bloque de notificaciones
+
+| Rotura temporal | Prueba que detectó el fallo |
+|---|---|
+| Pedir permiso al notificar | notify-never-prompts |
+| Marcar el respaldo como fallido | unsupported-still-notifies-in-app y denied-notifies-in-app |
+| Abrir el constructor antes del registro | granted-sends-via-service-worker |
+| Propagar la excepción del sistema | system-failure-falls-back-to-in-app |
+| Lanzar al importar el módulo | Fallo de carga de la suite |
+
+Los registros de ejecución están en reports/w06-device-push/notificaciones/; son salidas
+locales excluidas de Git. Las capturas del detalle están en evidence/week-06/.
+La comprobación de notificación con permiso default demuestra el respaldo sin concesión,
+no una prueba manual con los tres permisos denegados.
+
+### Pendientes de integración
+
+- Workflow original del kit de semana 6, para conservar su copia literal y comprobar el hash.
+- Corrección de la excepción síncrona en geolocalización y revisión del PR #14 actualizado.
+- Suite conjunta, ubicación en el detalle, puerta completa, prueba de los tres respaldos y cierre.
+- Revisión personal de cada integrante; no se atribuye la ejecución de Codex como ejecución humana.
