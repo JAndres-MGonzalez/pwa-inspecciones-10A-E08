@@ -51,8 +51,13 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
     let dataUrl = "";
     try {
       dataUrl = await readAsDataUrl(file);
-    } catch (error) {
-      dataUrl = "";
+    } catch {
+      setEstado({ tone: "warn", text: "No fue posible leer el archivo. Intenta con otro archivo." });
+      return;
+    }
+    if (!dataUrl) {
+      setEstado({ tone: "warn", text: "El archivo no contiene una imagen utilizable." });
+      return;
     }
     const res = evidenceFromFile(
       { name: file.name, size: file.size, type: file.type, dataUrl },
