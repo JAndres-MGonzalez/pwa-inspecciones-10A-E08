@@ -28,6 +28,14 @@ const required = [
   "public/sw.js", "public/offline.html",
   "docs/requirements.md", "docs/decision-record.md", "docs/cache-strategy.md", "docs/rendering-decision.md",
   "docs/sync-policy.md", "docs/sync/01-modelo.md", "docs/sync/02-conflictos.md", "docs/sync/03-cola.md",
+  // Semana 6 (w06-device-push): presente desde la Fase 0 (contrato e índice de la semana).
+  "src/lib/device/types.ts", "docs/capabilities.md",
+  // Semana 6, Fase 2 (integración): descomentar cuando los tres bloques, las tres
+  // secciones de documentación y la suite de integración existan. Exigirlos en la Fase 0
+  // dejaría master en rojo para los tres desde el primer día.
+  // "src/lib/device/camera.ts", "src/lib/device/geolocation.ts", "src/lib/notifications/client.ts",
+  // "docs/capabilities/01-camara.md", "docs/capabilities/02-geolocalizacion.md",
+  // "docs/capabilities/03-notificaciones.md", "tests/capabilities.spec.ts",
   "tests/starter.spec.mjs", "tests/manifest.spec.ts", "tests/source-loader.cjs",
   "tests/sw-harness.cjs", "tests/service-worker.spec.ts", "tests/offline.spec.ts", "tests/rendering.spec.ts",
   "scripts/check-secrets.mjs", "public-tests/check.sh", "public-tests/README.md",
@@ -78,7 +86,7 @@ const suitesOk = checks.find((check) => check.id === "test")?.status === "pass" 
   suitesOnDisk.every((id) => testReport.suites.some((s) => s.suiteId === id));
 checks.push({ id: `${ASSIGNMENT_ID}-and-suites`, status: suitesOk ? "pass" : "fail" });
 const gitStatus = git(["status", "--porcelain"]);
-const documents = ["docs/requirements.md", "docs/decision-record.md", "docs/cache-strategy.md", "docs/rendering-decision.md", "docs/sync-policy.md", "evidence/individual.md", "README.md"].map((file) => ({ file, content: existsSync(resolve(root, file)) ? readFileSync(resolve(root, file), "utf8") : null }));
+const documents = ["docs/requirements.md", "docs/decision-record.md", "docs/cache-strategy.md", "docs/rendering-decision.md", "docs/sync-policy.md", "docs/capabilities.md", "evidence/individual.md", "README.md"].map((file) => ({ file, content: existsSync(resolve(root, file)) ? readFileSync(resolve(root, file), "utf8") : null }));
 const result = {
   schemaVersion: 2,
   assignmentId: ASSIGNMENT_ID,

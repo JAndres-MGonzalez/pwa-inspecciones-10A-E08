@@ -1,11 +1,11 @@
-# Public tests: w05-sync-data
+# Public tests: w06-device-push
 
 Ejecuta `npm test` y después `bash public-tests/check.sh` desde la raíz del repositorio.
 En Windows utiliza Git Bash (el `bash` de WSL requiere su propio entorno de Node).
 
-- `files`: exige archivos no vacíos de la aplicación y los entregables de Semana 5.
+- `files`: exige archivos no vacíos de la aplicación y los entregables de Semana 6.
 - `cursors`: ejecuta el mismo comprobador de palabras que la verificación local.
-- `tests`: exige el reporte del SHA actual (`reports/w05-sync-data/tests.json`), con **todas**
+- `tests`: exige el reporte del SHA actual (`reports/w06-device-push/tests.json`), con **todas**
   las suites presentes en `tests/*.spec.ts`, no vacías y sin fallos. Debe regenerarse con
   `npm test`. Las rutas y la lista de suites salen de `src/lib/storage/schema.ts` y de los
   archivos presentes: nadie las escribe a mano.
@@ -13,6 +13,10 @@ En Windows utiliza Git Bash (el `bash` de WSL requiere su propio entorno de Node
 - `sync`: comprueba que el contrato expone los símbolos compartidos, que la clave de
   idempotencia es determinista y que distingue versiones, y que la migración descendente
   falla en vez de adivinar. Imprime cuántas suites de sincronización hay.
+- `capabilities`: comprueba que el contrato de la Semana 6 expone sus tipos compartidos, carga de
+  verdad los módulos de dispositivo que ya existan (`camera.ts`, `geolocation.ts`, `client.ts`),
+  exige que no sean triviales y que exporten su firma, y ejecuta el fallback de la cámara sin
+  API. El `if (existsSync)` separa "todavía no lo escribí" de "lo escribí mal".
 
 Una comprobación fallida produce salida 1. Estos archivos están versionados;
 `reports/` y las guías del equipo permanecen fuera de Git.
@@ -46,19 +50,20 @@ con archivo y línea.
 Durante la semana la puerta se endurece por etapas, para no dejar `master` en rojo mientras los
 tres integrantes entregan en paralelo:
 
-| Momento | `files` y `verify.mjs` exigen | `check.sh` `sync:` exige |
+| Momento | `files` y `verify.mjs` exigen | `check.sh` `capabilities:` exige |
 |---|---|---|
-| Arranque (lunes) | contrato, política y las tres secciones | símbolos del contrato, comportamiento de la clave y de la migración |
-| Integración (sábado) | además `queue.ts`, `conflict-policy.ts` y `sync.spec.ts` | además, que esos archivos no sean triviales |
+| Arranque | `types.ts` y `capabilities.md`, más todo lo de w05 | símbolos del contrato; módulos solo si existen |
+| Integración | además los tres módulos, las tres secciones y `tests/capabilities.spec.ts` | además, que no sean triviales, exporten su firma y el fallback degrade |
 
-El bloque `sync:` acepta los tres artefactos del Bloque B y C **si ya existen** y valida que
-tengan contenido real; si no existen, no falla. Eso separa "todavía no lo escribí" de "lo
-escribí mal". En la entrega los tres están.
+El `check.sh` docente **no** se copió, por dos motivos verificables: (1) su línea de comprobación
+de palabras usa `rg`, que no está instalado en nuestras máquinas, y `scripts/check-secrets.mjs`
+cubre exactamente el mismo patrón con el mismo alcance; (2) el kit trae un archivo de 7 líneas
+que reemplazaría los checks de cinco semanas. Este es el verificador local del equipo, no una
+copia del kit docente.
 
-El workflow `.github/workflows/week-05-w05-sync-data.yml` queda fuera de este mecanismo: se agregó
-copiado sin modificar del kit de la actividad y su `AC-02` exige los cinco artefactos desde el
-primer día. Saldrá en rojo mientras la actividad no esté terminada y se pondrá verde el sábado por
-sí solo. Los workflows del profesor no se editan.
+El workflow `week-06-w06-device-push.yml` queda fuera de este mecanismo: se agregó copiado sin
+modificar y su `AC-02` exige los cinco artefactos desde el primer día (rojo hasta la integración,
+verde solo). Los workflows no se editan.
 
 ## Lo que esta puerta no comprueba
 

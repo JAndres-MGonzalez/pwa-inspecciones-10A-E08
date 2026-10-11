@@ -13,7 +13,14 @@ for file in public/manifest.webmanifest public/sw.js public/offline.html \
   tests/manifest.spec.ts tests/source-loader.cjs tests/sw-harness.cjs \
   tests/service-worker.spec.ts tests/offline.spec.ts tests/rendering.spec.ts \
   scripts/check-secrets.mjs scripts/verify.mjs README.md \
-  src/lib/sync/queue.ts src/lib/sync/conflict-policy.ts tests/sync.spec.ts; do
+  src/lib/sync/queue.ts src/lib/sync/conflict-policy.ts tests/sync.spec.ts \
+  src/lib/device/types.ts docs/capabilities.md; do
+  # Semana 6, Fase 2: mover a la lista de arriba, cuando existan:
+  #   src/lib/device/camera.ts src/lib/device/geolocation.ts src/lib/notifications/client.ts
+  #   docs/capabilities/01-camara.md docs/capabilities/02-geolocalizacion.md docs/capabilities/03-notificaciones.md
+  #   tests/capabilities.spec.ts
+  # El comentario va AQUÍ dentro del cuerpo del `for`: en la lista de arriba bash no admite
+  # comentarios a media lista (los intentaría ejecutar como archivos).
   # Nota: los archivos van en la lista de arriba, no en este cuerpo. Puestos aqui bash los
   # intentaria EJECUTAR, y el `files: PASS` seguiria verde sin haberlos comprobado nunca.
   if [ ! -s "$file" ]; then
@@ -101,6 +108,46 @@ const sync = report.suites.filter((s) => s.suiteId.startsWith("sync"));
 console.log(`sync: contrato ${ASSIGNMENT_ID} v${SCHEMA_VERSION}; suites sync: ${sync.length ? sync.map((s) => s.suiteId).join(", ") : "ninguna aun"}`);
 NODE
 then echo "sync: PASS"; else echo "sync: FAIL"; STATUS=1; fi
+
+if node --input-type=module <<'NODE'
+import assert from "node:assert/strict";
+import { readFileSync, existsSync } from "node:fs";
+import { createRequire } from "node:module";
+const { loadSource } = createRequire(import.meta.url)("./tests/source-loader.cjs");
+
+// 1. El contrato de la semana 6 debe existir y exponer los tipos compartidos.
+const types = readFileSync("src/lib/device/types.ts", "utf8");
+for (const symbol of ["PermissionState", "CapabilityError", "CapabilityResult",
+                      "GeoCoordinates", "EvidenceRecord", "DeviceEnv"]) {
+  assert.ok(types.includes(symbol), `Falta el simbolo del contrato: ${symbol}`);
+}
+
+// 2. Carga REAL de cada modulo. Si el archivo existe pero no compila o no exporta lo que
+//    declara la firma, esto truena aqui y no en la suite de integracion del sabado.
+const modulos = [
+  ["src/lib/device/camera.ts", ["isCameraSupported", "captureEvidence", "evidenceFromFile", "getCameraPermission"]],
+  ["src/lib/device/geolocation.ts", ["isGeolocationSupported", "getCurrentPosition"]],
+  ["src/lib/notifications/client.ts", ["isNotificationSupported", "requestPermission", "notifyChange"]]
+];
+for (const [file, simbolos] of modulos) {
+  if (!existsSync(file)) continue;   // hoy no existen; en cuanto aparezcan, exigen contenido real
+  assert.ok(readFileSync(file, "utf8").trim().length > 40, `Archivo trivial: ${file}`);
+  const modulo = loadSource(file);
+  for (const s of simbolos) assert.equal(typeof modulo[s], "function", `${file} no exporta ${s}`);
+}
+
+// 3. Fallback ejecutado de verdad, sin navegador: camara sin mediaDevices. Es el corazon
+//    de la consigna ("fallback cuando la API no existe") y no basta con que el archivo exista.
+if (existsSync("src/lib/device/camera.ts")) {
+  const camara = loadSource("src/lib/device/camera.ts");
+  const res = await camara.captureEvidence({ inspectionId: "cap-check" }, { mediaDevices: null });
+  assert.equal(res.ok, false, "sin API la captura no puede darse por exitosa");
+  assert.equal(res.error, "unsupported");
+  assert.ok(res.degraded === true && res.message.length > 10, "el fallback debe declararse y explicarse");
+}
+console.log("capabilities: contrato w06 presente; modulos validados si existen");
+NODE
+then echo "capabilities: PASS"; else echo "capabilities: FAIL"; STATUS=1; fi
 
 if [ "$STATUS" -eq 0 ]; then echo "PUBLIC_OK"; fi
 exit "$STATUS"
