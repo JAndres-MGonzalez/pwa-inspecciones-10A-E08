@@ -27,4 +27,10 @@ y se escribio de forma independiente. El contrato compartido vive en
 
 ## Limites conocidos
 
-- < completar en el cierre: que no cubre esta solucion (persistencia, servidores, etc.) >
+- La evidencia vive en memoria: recargar la pagina la descarta. No hay envio de fotos o
+  coordenadas a un servidor ni persistencia real de esos adjuntos.
+- Las notificaciones son locales. Sin permiso concedido, el cambio se muestra en pantalla.
+- El modulo de geolocalizacion sigue en el PR #14 hasta corregir el manejo de una excepcion
+  sincrona. La ubicacion y la suite conjunta quedan pendientes de esa integracion.
+- Las pruebas automaticas usan dobles del dispositivo. La captura disponible comprueba archivo
+  sintetico y aviso con permiso sin conceder; no sustituye la prueba manual de los tres permisos denegados.

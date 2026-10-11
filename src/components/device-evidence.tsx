@@ -5,9 +5,9 @@ import { useRef, useState } from "react";
 import {
   captureEvidence,
   evidenceFromFile,
-  getCameraPermission,
-  isCameraSupported
+  getCameraPermission
 } from "@/lib/device/camera";
+import { notifyChange, requestPermission } from "@/lib/notifications/client";
 import type { EvidenceRecord } from "@/lib/device/types";
 
 interface Estado {
@@ -27,6 +27,9 @@ function readAsDataUrl(file: File): Promise<string> {
 export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
   const [estado, setEstado] = useState<Estado | null>(null);
   const [evidencia, setEvidencia] = useState<EvidenceRecord | null>(null);
+  const [aviso, setAviso] = useState("");
+  const [avisando, setAvisando] = useState(false);
+  const [permisoAviso, setPermisoAviso] = useState("");
   const archivo = useRef<HTMLInputElement>(null);
 
   // Todos los permisos se piden DENTRO de estos manejadores: cada uno nace de un clic.
@@ -59,6 +62,28 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
     setEstado({ tone: res.ok ? "ok" : "warn", text: res.message });
   }
 
+  async function avisarCambio() {
+    setAvisando(true);
+    try {
+      const result = await notifyChange({
+        title: "Cambio en la inspección",
+        body: evidencia
+          ? `Evidencia opcional adjuntada a ${inspectionId}.`
+          : `Aviso de cambio de prueba para ${inspectionId}.`
+      });
+      setAviso(result.message);
+    } finally {
+      setAvisando(false);
+    }
+  }
+
+  async function permitirNotificaciones() {
+    const permission = await requestPermission();
+    setPermisoAviso(permission === "granted"
+      ? "Notificaciones permitidas. Puedes enviar el aviso al sistema."
+      : "El aviso seguirá disponible en pantalla.");
+  }
+
   return (
     <section className="content-section" aria-labelledby="evidencia-heading">
       <div className="section-heading">
@@ -69,17 +94,21 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
       </div>
 
       <p>
-        {isCameraSupported()
-          ? "La cámara se usa solo cuando presionas el botón."
-          : "Este navegador no ofrece cámara: usa el respaldo de archivo."}
+        Puedes adjuntar una foto o un archivo. La cámara se usa solo cuando presionas el botón.
       </p>
 
-      <div className="detail-actions">
+      <div className="detail-actions" style={{ flexWrap: "wrap" }}>
         <button type="button" onClick={tomarFoto}>
           Adjuntar foto
         </button>
         <button type="button" onClick={() => archivo.current?.click()}>
           Adjuntar archivo
+        </button>
+        <button type="button" onClick={avisarCambio} disabled={avisando}>
+          {avisando ? "Enviando aviso…" : "Avisar cambio"}
+        </button>
+        <button type="button" onClick={permitirNotificaciones}>
+          Permitir notificaciones
         </button>
         <input
           ref={archivo}
@@ -101,6 +130,8 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
       <p role="status" aria-live="polite">
         {estado?.text ?? ""}
       </p>
+      <p role="status" aria-live="polite">{aviso}</p>
+      <p role="status" aria-live="polite">{permisoAviso}</p>
     </section>
   );
 }
