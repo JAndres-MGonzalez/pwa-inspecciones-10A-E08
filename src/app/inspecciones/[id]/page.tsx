@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { loadInspections } from "../../../lib/data/inspection-loader";
 import type { Inspection } from "../../../lib/data/inspections";
+import { DeviceEvidence } from "../../../components/device-evidence";
 
 export const dynamic = "force-dynamic";
 
@@ -54,6 +55,8 @@ export default async function InspectionDetailPage({
             <dd>{inspection.summary}</dd>
           </div>
         </dl>
+
+        <DeviceEvidence inspectionId={inspection.id} />
 
         <Link className="inspection-card__link" href="/inspecciones">
           ← Volver al listado
