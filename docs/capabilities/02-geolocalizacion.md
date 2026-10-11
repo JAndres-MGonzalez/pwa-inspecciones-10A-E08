@@ -74,7 +74,7 @@ queda anotado en `evidence/individual.md`.
 
 - El timeout lo aplica el navegador; si la ventana de permiso queda abierta, no hay timeout
   propio que la cierre.
-- Las suites usan un doble: no demuestran el comportamiento de un navegador real. Esa prueba
-  se hizo a mano bloqueando el permiso y comprobando que la página sigue funcionando.
+- Las suites usan un doble: no demuestran el comportamiento de un navegador real, y la interfaz todavía no llama a este módulo: no hay una prueba de punta a punta desde la página. Eso queda para la integración.
+- La cabecera `Permissions-Policy` de `next.config.mjs` declara `geolocation=()`: mientras siga así, el navegador negará la ubicación en cualquier página del proyecto aunque la persona la acepte.
 - La posición cacheada puede tener hasta 60 segundos de antigüedad.
 - Las coordenadas viven solo en memoria durante la sesión: no hay servidor ni persistencia.
