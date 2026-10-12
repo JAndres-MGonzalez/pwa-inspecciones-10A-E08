@@ -73,6 +73,9 @@
 ### Semana 6 — Notificaciones e integración
 
 - **Mi commit SHA:** [a650c66962d197b5b4434a2ca6aedac6e1bc7358](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/a650c66962d197b5b4434a2ca6aedac6e1bc7358).
+- **Commit de integración:** [ee2af97bddae65ef18c8e7b923b17597be00107a](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/ee2af97bddae65ef18c8e7b923b17597be00107a).
+- **Integración:** [PR #19](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/19), merge `f8bcd2bc441aeaa26530a56e1a474f537bdd4441`.
+- **Actions de semana 6:** [run aprobado](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/38189134480) sobre ese merge; los cinco workflows existentes aprobaron.
 - **Contribución:** módulo de notificaciones y sus pruebas, botones de aviso y ubicación,
   suite conjunta, verificación completa, workflow original, README y cierre de integración.
   La cámara y la geolocalización conservan sus autores; añadí el manejo de una excepción
@@ -400,8 +403,8 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 ### Semana 6 — Bloque B: geolocalización opcional con fallback
 
 - **Entregado por:** Ismael.
-- **Rama y PR:** `semana-6-b-ismael-geo` (commits `46dd713` y `bfe9b1b`); PR: PENDIENTE (número y URL); SHA de merge: PENDIENTE (se registra cuando Juan Andrés lo integre).
-- **Fase 0 (harness):** rama `semana-6-harness-ismael`, commit `f5fc2b4d64c639e32d3eb2729e51fa353dd5eae6` (`scripts/verify.mjs`, `public-tests/check.sh` y `public-tests/README.md`). PR: PENDIENTE (número y URL). Resultado de `check.sh`: PENDIENTE (pegar la salida con `PUBLIC_OK`).
+- **Rama y PR:** `semana-6-b-ismael-geo` (commits `46dd713` y `bfe9b1b`); PR: [#14](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/14); merge de integración: `06f9c683308a25d70c29336ae30a5ba4d4b5a667`. La corrección síncrona posterior corresponde al commit de integración de Juan Andrés.
+- **Fase 0 (harness):** rama `semana-6-harness-ismael`, commit `f5fc2b4d64c639e32d3eb2729e51fa353dd5eae6` (`scripts/verify.mjs`, `public-tests/check.sh` y `public-tests/README.md`). PR: [#13](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/13), merge `166a745f0fbc883eb4b0550688ee145c4d817d41`. Revisión de integración ejecutada por Codex: `PUBLIC_OK`.
 - **Descripción de lo que hice (consigna):** creé `src/lib/device/geolocation.ts` (`isGeolocationSupported` y `getCurrentPosition`, que nunca lanza y devuelve un `CapabilityResult` con `error`, `degraded` y un mensaje sin coordenadas), `docs/capabilities/02-geolocalizacion.md` (ocho apartados: qué hace, precisión, timeout, tres fallos, registro sin coordenadas, privacidad, pruebas y límites) y `tests/capabilities.geolocation.spec.ts` (8 checks con un doble de `navigator.geolocation` inyectado, sin navegador ni red).
 - **Reflexión:** si el dispositivo no tiene geolocalización o la persona niega el permiso, la inspección se registra igual, sin coordenadas, con un mensaje claro y sin excepciones. La ubicación mejora la evidencia pero nunca es condición para completar la inspección.
 - **Decisión técnica que puedo explicar y por qué:** (1) `enableHighAccuracy` apagado por defecto: la consigna pide limitar los datos recolectados y para una inspección de laboratorio basta una ubicación aproximada; la precisión alta gasta batería sin aportar. (2) El `timeout` se declara en `PositionOptions` (5000 ms por defecto) y lo aplica el navegador, en vez de un temporizador propio: evita relojes falsos en las pruebas, a costa de un límite que dejé documentado. (3) `mapFailure` separa `denied`, `timeout` y `error`, y existe `unsupported` para la API inexistente: son problemas distintos para la persona (uno se arregla en la configuración, otro se reintenta). (4) Los mensajes de fallo nunca llevan coordenadas: si se niega el permiso, no queda ni un resto de la ubicación.

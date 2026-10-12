@@ -524,3 +524,14 @@ Fecha: 11 de octubre de 2026. Rama semana-6-integracion-andres.
   y no se añadieron dependencias ni cambios al contrato congelado.
 
 Las comprobaciones son de Codex. La validación humana de cada integrante queda separada.
+
+
+## Semana 6 — Cierre de integración — Juan Andrés
+
+La integración del PR #19 llegó a master en f8bcd2bc441aeaa26530a56e1a474f537bdd4441.
+Los cinco workflows existentes aprobaron sobre ese SHA. Semana 6:
+https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/38189134480
+La documentación de cierre conserva ese punto de comprobación; el SHA final se obtiene
+después del merge de este registro y se entrega por separado, sin referencias circulares.
+Kevin conserva sus campos de evidencia para completar personalmente. Las comprobaciones
+de Codex no se presentan como ejecución personal de los integrantes.
