@@ -497,3 +497,30 @@ en la guía. Se añadieron campos vacíos de evidencia en las zonas de Kevin e I
 la evidencia de Juan Andrés ya estaba registrada y las semanas anteriores permanecen intactas.
 La verificación previa de la base aprobó 10 suites y 104 casos. AC-02 de semana 6
 queda pendiente mientras no se integre geolocalización y la suite conjunta.
+
+
+## Semana 6 — Integración de capacidades — Juan Andrés
+
+Fecha: 11 de octubre de 2026. Rama semana-6-integracion-andres.
+
+- Se integraron los commits de geolocalización de Ismael conservando su autoría y su
+  declaración de evidencia. La ruta duplicada de su captura se corrigió al integrar.
+- La invocación de geolocalización recibió manejo de excepciones síncronas en la rama de
+  Juan Andrés. La prueba nueva comprueba SecurityError y un fallo genérico sin coordenadas.
+- La suite conjunta aprobó seis casos: exports, APIs ausentes, respaldos, ausencia de
+  referencias de red, contrato compartido y fallo síncrono. El parser ignora comentarios;
+  las palabras de documentación no se confunden con llamadas de red.
+- La puerta exige ya los siete artefactos de integración. La suite completa aprobó
+  118 casos en 12 suites; build y barrido correctos; Git Bash imprimió PUBLIC_OK.
+- En producción, con la política anterior camera=() y geolocation=(), ambos botones
+  devolvieron la denegación correspondiente. Se adjuntó el icono sintético del proyecto,
+  se conservó después de una captura denegada y se avisó en pantalla con permiso default.
+  Las capturas no se presentan como una denegación elegida por una persona.
+- La política final pasa a camera=(self) y geolocation=(self), sin habilitar micrófono.
+  Habilitar una API no concede su permiso: solo se solicita al presionar su botón.
+- Los fallos de lectura y el resultado vacío del archivo fueron comprobados con un lector
+  simulado: se muestra aviso de error y se conserva la evidencia anterior.
+- El workflow original del kit mantiene su SHA256. Ningún workflow anterior cambió,
+  y no se añadieron dependencias ni cambios al contrato congelado.
+
+Las comprobaciones son de Codex. La validación humana de cada integrante queda separada.

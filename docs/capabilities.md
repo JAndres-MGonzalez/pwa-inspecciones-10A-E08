@@ -30,7 +30,13 @@ y se escribio de forma independiente. El contrato compartido vive en
 - La evidencia vive en memoria: recargar la pagina la descarta. No hay envio de fotos o
   coordenadas a un servidor ni persistencia real de esos adjuntos.
 - Las notificaciones son locales. Sin permiso concedido, el cambio se muestra en pantalla.
-- El modulo de geolocalizacion sigue en el PR #14 hasta corregir el manejo de una excepcion
-  sincrona. La ubicacion y la suite conjunta quedan pendientes de esa integracion.
-- Las pruebas automaticas usan dobles del dispositivo. La captura disponible comprueba archivo
-  sintetico y aviso con permiso sin conceder; no sustituye la prueba manual de los tres permisos denegados.
+- La integracion añade manejo de excepciones sincronas de geolocalizacion: la inspeccion
+  continua sin coordenadas. La suite conjunta comprueba ese fallo y los tres modulos.
+- Las pruebas automaticas usan dobles del dispositivo. La captura de navegador comprueba
+  camara y ubicacion bloqueadas por la politica del documento, archivo sintetico conservado
+  y aviso en pantalla con notificaciones en estado `default`. No acredita una foto real,
+  un GPS real ni la visualizacion de una notificacion del sistema operativo.
+- La politica final permite camara y geolocalizacion solo a este origen y mantiene el
+  microfono bloqueado. Esto habilita la API, pero no concede permisos: la persona decide
+  cuando presiona el boton. La prueba de bloqueo se realizo con la politica anterior mas
+  restrictiva; queda registrada en `evidence/week-06/andres-browser.json`.

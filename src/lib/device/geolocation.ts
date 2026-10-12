@@ -47,25 +47,30 @@ export function getCurrentPosition(
   }
 
   return new Promise((resolve) => {
-    obtener(
-      (position) =>
-        resolve({
-          ok: true,
-          degraded: false,
-          message: "Ubicación capturada.",
-          value: {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-            accuracy: position.coords.accuracy
-          }
-        }),
-      (failure) => resolve(mapFailure(failure)),
-      {
-        enableHighAccuracy: options.enableHighAccuracy ?? false,
-        timeout: options.timeoutMs ?? 5000,
-        maximumAge: options.maxAgeMs ?? 60000
-      }
-    );
+    try {
+      obtener(
+        (position) =>
+          resolve({
+            ok: true,
+            degraded: false,
+            message: "Ubicación capturada.",
+            value: {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+              accuracy: position.coords.accuracy
+            }
+          }),
+        (failure) => resolve(mapFailure(failure)),
+        {
+          enableHighAccuracy: options.enableHighAccuracy ?? false,
+          timeout: options.timeoutMs ?? 5000,
+          maximumAge: options.maxAgeMs ?? 60000
+        }
+      );
+    } catch (error) {
+      const name = (error as { name?: string } | null)?.name;
+      resolve(mapFailure({ code: name === "SecurityError" || name === "NotAllowedError" ? 1 : 2 }));
+    }
   });
 }
 

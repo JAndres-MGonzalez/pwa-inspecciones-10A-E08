@@ -75,3 +75,7 @@ verde solo). Los workflows no se editan.
   compartido; el comportamiento de los Bloques B y C se valida cuando sus suites existan y
   mediante la suite de integración del sábado.
 - **No es el verificador docente.** Este es el verificador local del equipo.
+
+
+La etapa vigente es **Integración**: `verify.mjs` y `files` exigen los tres módulos,
+las tres secciones y la suite conjunta. No se omiten artefactos ausentes en esta etapa.

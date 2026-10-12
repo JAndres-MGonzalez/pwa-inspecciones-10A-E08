@@ -74,7 +74,13 @@ queda anotado en `evidence/individual.md`.
 
 - El timeout lo aplica el navegador; si la ventana de permiso queda abierta, no hay timeout
   propio que la cierre.
-- Las suites usan un doble: no demuestran el comportamiento de un navegador real, y la interfaz todavía no llama a este módulo: no hay una prueba de punta a punta desde la página. Eso queda para la integración.
-- La cabecera `Permissions-Policy` de `next.config.mjs` declara `geolocation=()`: mientras siga así, el navegador negará la ubicación en cualquier página del proyecto aunque la persona la acepte.
+- Las suites usan un doble para el camino concedido. La integración también probó el botón
+  del detalle con ubicación bloqueada por la política del documento, sin obtener coordenadas reales.
+- La política final permite `geolocation=(self)`: habilita la API solo al propio origen, pero
+  no concede el permiso. La persona decide desde el botón de ubicación.
 - La posición cacheada puede tener hasta 60 segundos de antigüedad.
 - Las coordenadas viven solo en memoria durante la sesión: no hay servidor ni persistencia.
+
+La integración añadió manejo de excepciones síncronas de la API. Si la llamada lanza,
+se devuelve el resultado degradado correspondiente en lugar de rechazar la promesa.
+`tests/capabilities.spec.ts` comprueba ese caso junto con los tres módulos.

@@ -14,13 +14,10 @@ for file in public/manifest.webmanifest public/sw.js public/offline.html \
   tests/service-worker.spec.ts tests/offline.spec.ts tests/rendering.spec.ts \
   scripts/check-secrets.mjs scripts/verify.mjs README.md \
   src/lib/sync/queue.ts src/lib/sync/conflict-policy.ts tests/sync.spec.ts \
-  src/lib/device/types.ts docs/capabilities.md; do
-  # Semana 6, Fase 2: mover a la lista de arriba, cuando existan:
-  #   src/lib/device/camera.ts src/lib/device/geolocation.ts src/lib/notifications/client.ts
-  #   docs/capabilities/01-camara.md docs/capabilities/02-geolocalizacion.md docs/capabilities/03-notificaciones.md
-  #   tests/capabilities.spec.ts
-  # El comentario va AQUÍ dentro del cuerpo del `for`: en la lista de arriba bash no admite
-  # comentarios a media lista (los intentaría ejecutar como archivos).
+  src/lib/device/types.ts docs/capabilities.md \
+  src/lib/device/camera.ts src/lib/device/geolocation.ts src/lib/notifications/client.ts \
+  docs/capabilities/01-camara.md docs/capabilities/02-geolocalizacion.md docs/capabilities/03-notificaciones.md \
+  tests/capabilities.spec.ts; do
   # Nota: los archivos van en la lista de arriba, no en este cuerpo. Puestos aqui bash los
   # intentaria EJECUTAR, y el `files: PASS` seguiria verde sin haberlos comprobado nunca.
   if [ ! -s "$file" ]; then

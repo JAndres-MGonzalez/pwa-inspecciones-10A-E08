@@ -170,7 +170,8 @@ export async function runChecks() {
         captureEvidence: called, evidenceFromFile: called, getCameraPermission: called,
         isCameraSupported: () => { browserCalls += 1; return supported; }
       },
-      "src/lib/notifications/client.ts": { requestPermission: called, notifyChange: called }
+      "src/lib/notifications/client.ts": { requestPermission: called, notifyChange: called },
+      "src/lib/device/geolocation.ts": { getCurrentPosition: called }
     });
     const server = renderToStaticMarkup(createElement(DeviceEvidence, { inspectionId: "inspection-synthetic" }));
     supported = true;

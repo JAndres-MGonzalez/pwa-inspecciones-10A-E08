@@ -73,33 +73,35 @@
 ### Semana 6 — Notificaciones e integración
 
 - **Mi commit SHA:** [a650c66962d197b5b4434a2ca6aedac6e1bc7358](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/a650c66962d197b5b4434a2ca6aedac6e1bc7358).
-- **Contribución y PRs:** módulo de notificaciones, documentación y pruebas del
-  [PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/15), integrado
-  con el merge `794663c`. Revisé y mergeé el harness del
-  [PR #13](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/13).
-  Conecté el aviso en el detalle y mantuve estable el primer render del componente.
-- **Decisión técnica:** pedir permiso desde un botón separado y avisar con el permiso que
-  ya exista. Si falta soporte o permiso, el mensaje sigue en pantalla. Para usar el Service
-  Worker se obtiene su registro con `getRegistration()`, sin esperar indefinidamente a `ready`.
-- **Pruebas y resultado:** el 11 de octubre de 2026 Codex ejecutó instalación limpia,
-  `npm.cmd run verify` y Git Bash. El bloque inicial aprobó 12 pruebas propias y 103 casos
-  en total, con build correcto, `pass` y `PUBLIC_OK`. Las cinco roturas de la guía fueron
-  detectadas y el archivo quedó restaurado. Con el botón integrado pasaron 13 pruebas propias
-  y 104 casos en 10 suites, incluido el primer render sin llamadas al navegador.
-- **Actions:** [checks existentes aprobados para el PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/38183788406)
-  sobre `a650c66962d197b5b4434a2ca6aedac6e1bc7358`. El workflow específico de semana 6 queda
-  pendiente de recibir el archivo original del kit; estos checks no acreditan el cierre completo.
-- **Prueba en navegador:** Codex probó producción en `localhost:3006`, adjuntó el icono
-  sintético del proyecto y comprobó el aviso en pantalla. El permiso de notificaciones quedó
-  en `default` antes y después de avisar, sin errores nuevos de JavaScript.
-  Capturas: [aviso sin permiso](week-06/andres-aviso-sin-permiso.jpg) y
-  [archivo y aviso](week-06/andres-archivo-y-aviso.jpg).
-- **Limitación y fallo identificado:** `next dev` queda bloqueado por la política de
-  seguridad heredada; se comprobó `next build` y `next start` sin cambiar esa política.
-  Geolocalización necesita manejar una excepción síncrona antes de integrar el PR #14.
-  El aviso del sistema, los tres permisos denegados en navegador y el cierre de la semana
-  todavía no están comprobados. La evidencia solo permanece en memoria.
-- **Uso de IA:** Codex (OpenAI) apoyó implementación, revisión de PRs, pruebas, documentación
+- **Contribución:** módulo de notificaciones y sus pruebas, botones de aviso y ubicación,
+  suite conjunta, verificación completa, workflow original, README y cierre de integración.
+  La cámara y la geolocalización conservan sus autores; añadí el manejo de una excepción
+  síncrona de ubicación y la conservación del archivo cuando falla otra captura.
+- **PRs:** [notificaciones #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/15),
+  [interfaz y evidencia #16](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/16),
+  [lectura de archivo #17](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/17)
+  y [workflow #18](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/18).
+  Revisé y mergeé el harness del PR #13.
+- **Decisión técnica:** pedir permiso desde un botón separado y avisar con el permiso
+  disponible. Sin permiso, el cambio sigue en pantalla. El Service Worker se usa mediante
+  su registro, sin esperar indefinidamente a ready. Cámara y ubicación se permiten solo
+  al propio origen; el micrófono sigue bloqueado.
+- **Pruebas y resultado:** Codex ejecutó instalación limpia, npm.cmd run verify y Git Bash
+  el 11 de octubre de 2026. La integración aprobó 118 casos en 12 suites, build y barrido.
+  De ellos, 13 son de notificaciones e interfaz y 6 de la suite conjunta. Las cinco roturas
+  de notificaciones fallaron donde se esperaba y el archivo se restauró. npm.cmd run verify
+  equivale exactamente a make verify.
+- **Prueba en navegador:** en producción, Codex comprobó cámara y ubicación denegadas por
+  la política anterior del documento, archivo sintético conservado y aviso en pantalla.
+  Las notificaciones permanecieron en estado default: no se afirma una denegación humana.
+  [Captura de respaldos](week-06/andres-respaldos-dispositivo.jpg) y
+  [registro del contexto](week-06/andres-browser.json).
+- **Fallo y límite:** next dev quedó bloqueado por la política de seguridad heredada;
+  las pruebas de interfaz se hicieron con next build y next start sin cambiar esa política.
+  La excepción síncrona de ubicación se corrigió en mi rama de integración. La evidencia
+  vive en memoria: no hay servidor ni avisos remotos. Los caminos concedidos de cámara,
+  ubicación y notificación del sistema se probaron con dobles, sin recoger datos reales.
+- **Uso de IA:** Codex (OpenAI) apoyó implementación, integración, pruebas, documentación
   y comprobación en navegador. Validación humana: pendiente de mi revisión personal.
 
 ## Integrante: Montalvo Marcial Kevin Armando

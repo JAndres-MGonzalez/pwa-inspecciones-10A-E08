@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-11",
+  "browser": "Codex in-app browser",
+  "url": "http://localhost:3006/inspecciones/inspection-001",
+  "mode": "production",
+  "testPolicy": "camera=(), microphone=(), geolocation=()",
+  "observedPermissions": {
+    "permissions": [
+      {
+        "name": "camera",
+        "state": "denied"
+      },
+      {
+        "name": "geolocation",
+        "state": "denied"
+      }
+    ],
+    "notification": "default"
+  },
+  "checks": [
+    "camera denial shown",
+    "location denial shown without coordinates",
+    "synthetic icon attached as file",
+    "file preserved after failed camera attempt",
+    "change displayed in app without granted notification permission"
+  ],
+  "limits": [
+    "Camera and location were blocked by document policy, not by a human permission choice.",
+    "The browser notification permission stayed default, not denied.",
+    "Operating-system notification display was not verified."
+  ],
+  "logs": []
+}
