@@ -486,3 +486,14 @@ no una prueba manual con los tres permisos denegados.
 - Corrección de la excepción síncrona en geolocalización y revisión del PR #14 actualizado.
 - Suite conjunta, ubicación en el detalle, puerta completa, prueba de los tres respaldos y cierre.
 - Revisión personal de cada integrante; no se atribuye la ejecución de Codex como ejecución humana.
+
+
+## Semana 6 — Workflow original — Juan Andrés
+
+Fecha: 11 de octubre de 2026. Se localizó PWA-w06-kit-estudiante.zip en Descargas.
+El workflow se copió desde el archivo original, sin modificar los existentes. Su SHA256
+es CDA79B0A9547EC24DA3EE5D6FDE05E1744EAE3159BDB007A3A866080BCE0F6A9, igual al indicado
+en la guía. Se añadieron campos vacíos de evidencia en las zonas de Kevin e Ismael;
+la evidencia de Juan Andrés ya estaba registrada y las semanas anteriores permanecen intactas.
+La verificación previa de la base aprobó 10 suites y 104 casos. AC-02 de semana 6
+queda pendiente mientras no se integre geolocalización y la suite conjunta.

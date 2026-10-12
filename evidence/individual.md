@@ -243,6 +243,16 @@
   detectaron eran errores de esa suite, no de los bloques de mis compañeros, y los corregí antes
   de dar por buena la integración.
 
+
+### Semana 6 — w06-device-push
+
+- **Mi commit SHA:** <completar>.
+- **Contribución y PR:** <completar>.
+- **Decisión técnica:** <completar>.
+- **Prueba y resultado:** <completar>.
+- **Limitación:** <completar>.
+- **Uso de IA y validación humana:** <completar>.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08
@@ -384,3 +394,13 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Qué verifica y qué no:** las pruebas comprueban el comportamiento de la cola contra un transporte simulado y un almacenamiento en memoria. No prueban un servidor real, IndexedDB ni el uso desde la interfaz.
 - **Limitación o riesgo que identifiqué:** la cola no se despierta sola: alguien debe llamar a `drain()`; las entradas `failed` no se reintentan sin una acción explícita y las `synced` no se purgan. No hay exclusión entre pestañas, y la idempotencia solo protege si el servidor deduplica por la clave. Tampoco detecta conflictos: eso es del bloque de la política de conflictos.
 - **Uso de IA:** usé Claude (Anthropic), en chat, para la guía de comandos de Git y PowerShell y para redactar borradores de `src/lib/sync/queue.ts`, `tests/sync.cola.spec.ts` y `docs/sync/03-cola.md` a partir de mi guía, corrigiendo los defectos del esqueleto descritos arriba. Validación humana: copié los archivos, ejecuté `npm.cmd test`, `npm.cmd run build` y `npm.cmd run verify` y revisé el resultado de cada uno.
+
+### Semana 6 — w06-device-push
+
+- **Mi commit SHA:** <completar>.
+- **Contribución y PR:** <completar>.
+- **Decisión técnica:** <completar>.
+- **Prueba y resultado:** <completar>.
+- **Limitación:** <completar>.
+- **Uso de IA y validación humana:** <completar>.
+
