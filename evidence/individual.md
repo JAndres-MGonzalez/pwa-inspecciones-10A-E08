@@ -403,4 +403,3 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Prueba y resultado:** <completar>.
 - **Limitación:** <completar>.
 - **Uso de IA y validación humana:** <completar>.
-
