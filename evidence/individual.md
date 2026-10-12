@@ -73,33 +73,35 @@
 ### Semana 6 — Notificaciones e integración
 
 - **Mi commit SHA:** [a650c66962d197b5b4434a2ca6aedac6e1bc7358](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/a650c66962d197b5b4434a2ca6aedac6e1bc7358).
-- **Contribución y PRs:** módulo de notificaciones, documentación y pruebas del
-  [PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/15), integrado
-  con el merge `794663c`. Revisé y mergeé el harness del
-  [PR #13](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/13).
-  Conecté el aviso en el detalle y mantuve estable el primer render del componente.
-- **Decisión técnica:** pedir permiso desde un botón separado y avisar con el permiso que
-  ya exista. Si falta soporte o permiso, el mensaje sigue en pantalla. Para usar el Service
-  Worker se obtiene su registro con `getRegistration()`, sin esperar indefinidamente a `ready`.
-- **Pruebas y resultado:** el 11 de octubre de 2026 Codex ejecutó instalación limpia,
-  `npm.cmd run verify` y Git Bash. El bloque inicial aprobó 12 pruebas propias y 103 casos
-  en total, con build correcto, `pass` y `PUBLIC_OK`. Las cinco roturas de la guía fueron
-  detectadas y el archivo quedó restaurado. Con el botón integrado pasaron 13 pruebas propias
-  y 104 casos en 10 suites, incluido el primer render sin llamadas al navegador.
-- **Actions:** [checks existentes aprobados para el PR #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/38183788406)
-  sobre `a650c66962d197b5b4434a2ca6aedac6e1bc7358`. El workflow específico de semana 6 queda
-  pendiente de recibir el archivo original del kit; estos checks no acreditan el cierre completo.
-- **Prueba en navegador:** Codex probó producción en `localhost:3006`, adjuntó el icono
-  sintético del proyecto y comprobó el aviso en pantalla. El permiso de notificaciones quedó
-  en `default` antes y después de avisar, sin errores nuevos de JavaScript.
-  Capturas: [aviso sin permiso](week-06/andres-aviso-sin-permiso.jpg) y
-  [archivo y aviso](week-06/andres-archivo-y-aviso.jpg).
-- **Limitación y fallo identificado:** `next dev` queda bloqueado por la política de
-  seguridad heredada; se comprobó `next build` y `next start` sin cambiar esa política.
-  Geolocalización necesita manejar una excepción síncrona antes de integrar el PR #14.
-  El aviso del sistema, los tres permisos denegados en navegador y el cierre de la semana
-  todavía no están comprobados. La evidencia solo permanece en memoria.
-- **Uso de IA:** Codex (OpenAI) apoyó implementación, revisión de PRs, pruebas, documentación
+- **Contribución:** módulo de notificaciones y sus pruebas, botones de aviso y ubicación,
+  suite conjunta, verificación completa, workflow original, README y cierre de integración.
+  La cámara y la geolocalización conservan sus autores; añadí el manejo de una excepción
+  síncrona de ubicación y la conservación del archivo cuando falla otra captura.
+- **PRs:** [notificaciones #15](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/15),
+  [interfaz y evidencia #16](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/16),
+  [lectura de archivo #17](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/17)
+  y [workflow #18](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/18).
+  Revisé y mergeé el harness del PR #13.
+- **Decisión técnica:** pedir permiso desde un botón separado y avisar con el permiso
+  disponible. Sin permiso, el cambio sigue en pantalla. El Service Worker se usa mediante
+  su registro, sin esperar indefinidamente a ready. Cámara y ubicación se permiten solo
+  al propio origen; el micrófono sigue bloqueado.
+- **Pruebas y resultado:** Codex ejecutó instalación limpia, npm.cmd run verify y Git Bash
+  el 11 de octubre de 2026. La integración aprobó 118 casos en 12 suites, build y barrido.
+  De ellos, 13 son de notificaciones e interfaz y 6 de la suite conjunta. Las cinco roturas
+  de notificaciones fallaron donde se esperaba y el archivo se restauró. npm.cmd run verify
+  equivale exactamente a make verify.
+- **Prueba en navegador:** en producción, Codex comprobó cámara y ubicación denegadas por
+  la política anterior del documento, archivo sintético conservado y aviso en pantalla.
+  Las notificaciones permanecieron en estado default: no se afirma una denegación humana.
+  [Captura de respaldos](week-06/andres-respaldos-dispositivo.jpg) y
+  [registro del contexto](week-06/andres-browser.json).
+- **Fallo y límite:** next dev quedó bloqueado por la política de seguridad heredada;
+  las pruebas de interfaz se hicieron con next build y next start sin cambiar esa política.
+  La excepción síncrona de ubicación se corrigió en mi rama de integración. La evidencia
+  vive en memoria: no hay servidor ni avisos remotos. Los caminos concedidos de cámara,
+  ubicación y notificación del sistema se probaron con dobles, sin recoger datos reales.
+- **Uso de IA:** Codex (OpenAI) apoyó implementación, integración, pruebas, documentación
   y comprobación en navegador. Validación humana: pendiente de mi revisión personal.
 
 ## Integrante: Montalvo Marcial Kevin Armando
@@ -395,11 +397,28 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Limitación o riesgo que identifiqué:** la cola no se despierta sola: alguien debe llamar a `drain()`; las entradas `failed` no se reintentan sin una acción explícita y las `synced` no se purgan. No hay exclusión entre pestañas, y la idempotencia solo protege si el servidor deduplica por la clave. Tampoco detecta conflictos: eso es del bloque de la política de conflictos.
 - **Uso de IA:** usé Claude (Anthropic), en chat, para la guía de comandos de Git y PowerShell y para redactar borradores de `src/lib/sync/queue.ts`, `tests/sync.cola.spec.ts` y `docs/sync/03-cola.md` a partir de mi guía, corrigiendo los defectos del esqueleto descritos arriba. Validación humana: copié los archivos, ejecuté `npm.cmd test`, `npm.cmd run build` y `npm.cmd run verify` y revisé el resultado de cada uno.
 
-### Semana 6 — w06-device-push
+### Semana 6 — Bloque B: geolocalización opcional con fallback
 
-- **Mi commit SHA:** <completar>.
-- **Contribución y PR:** <completar>.
-- **Decisión técnica:** <completar>.
-- **Prueba y resultado:** <completar>.
-- **Limitación:** <completar>.
-- **Uso de IA y validación humana:** <completar>.
+- **Entregado por:** Ismael.
+- **Rama y PR:** `semana-6-b-ismael-geo` (commits `46dd713` y `bfe9b1b`); PR: PENDIENTE (número y URL); SHA de merge: PENDIENTE (se registra cuando Juan Andrés lo integre).
+- **Fase 0 (harness):** rama `semana-6-harness-ismael`, commit `f5fc2b4d64c639e32d3eb2729e51fa353dd5eae6` (`scripts/verify.mjs`, `public-tests/check.sh` y `public-tests/README.md`). PR: PENDIENTE (número y URL). Resultado de `check.sh`: PENDIENTE (pegar la salida con `PUBLIC_OK`).
+- **Descripción de lo que hice (consigna):** creé `src/lib/device/geolocation.ts` (`isGeolocationSupported` y `getCurrentPosition`, que nunca lanza y devuelve un `CapabilityResult` con `error`, `degraded` y un mensaje sin coordenadas), `docs/capabilities/02-geolocalizacion.md` (ocho apartados: qué hace, precisión, timeout, tres fallos, registro sin coordenadas, privacidad, pruebas y límites) y `tests/capabilities.geolocation.spec.ts` (8 checks con un doble de `navigator.geolocation` inyectado, sin navegador ni red).
+- **Reflexión:** si el dispositivo no tiene geolocalización o la persona niega el permiso, la inspección se registra igual, sin coordenadas, con un mensaje claro y sin excepciones. La ubicación mejora la evidencia pero nunca es condición para completar la inspección.
+- **Decisión técnica que puedo explicar y por qué:** (1) `enableHighAccuracy` apagado por defecto: la consigna pide limitar los datos recolectados y para una inspección de laboratorio basta una ubicación aproximada; la precisión alta gasta batería sin aportar. (2) El `timeout` se declara en `PositionOptions` (5000 ms por defecto) y lo aplica el navegador, en vez de un temporizador propio: evita relojes falsos en las pruebas, a costa de un límite que dejé documentado. (3) `mapFailure` separa `denied`, `timeout` y `error`, y existe `unsupported` para la API inexistente: son problemas distintos para la persona (uno se arregla en la configuración, otro se reintenta). (4) Los mensajes de fallo nunca llevan coordenadas: si se niega el permiso, no queda ni un resto de la ubicación.
+- **Fallos diagnosticados y solución:** (a) en el esqueleto de la guía, el check `never-prompts-on-import` creaba un doble de geolocalización que nunca se conectaba al módulo, así que no habría fallado aunque el módulo pidiera la posición al importarse; lo reescribí para instalar un `navigator` falso antes de recargar el módulo y contar las llamadas, y comprobé con la prueba negativa 5 que ahora sí falla. (b) `git checkout -- <archivo>` solo restaura archivos que Git ya conoce y mis tres archivos eran nuevos; hice `git add` antes de las pruebas negativas para poder restaurar entre una y otra. (c) El `tsconfig.json` tiene `target: "es5"`: en `src/` solo usé spread sobre objetos (`{ ...base, ...env }`), sin `#privado` ni spread sobre iteradores, y no toqué el `tsconfig.json`.
+- **Prueba que ejecuté y resultado:** el 11 de octubre de 2026, `npm.cmd test` terminó con `starter.spec.mjs: PASS`, 9 suites y 91 checks (83 previos y 8 de `capabilities.geolocation`); `npm.cmd run build` terminó con código 0 y tipos validados; `npm.cmd run verify` terminó con `Verificación técnica: pass`; `npm.cmd run check-secrets` terminó en `PASS`.
+- **Pruebas negativas (rompí `geolocation.ts` a propósito y restauré con `git checkout --`):**
+
+| Cambio que introduje | Checks que fallaron |
+|---|---|
+| `mapFailure` devuelve `ok: true` | `denied-code-1` y `timeout-code-3` |
+| `enableHighAccuracy` en `true` por defecto | `defaults-limit-data` |
+| Quité el `timeout` de las opciones | `granted-returns-coords` y `defaults-limit-data` |
+| Agregué `lat: 18.4567` al mensaje de permiso denegado | `failure-message-leaks-no-coordinates` |
+| Llamé a `getCurrentPosition` al importar el módulo | `never-prompts-on-import` |
+
+  Cada fallo coincidió con lo esperado; al terminar `git status` quedó solo con los tres archivos nuevos y `npm.cmd test` volvió a verde.
+- **Comprobación real en navegador:** el 11 de octubre de 2026, con `npm.cmd run dev`, abrí `/inspecciones/inspection-001` y ejecuté en la consola `navigator.geolocation.getCurrentPosition(...)`. El navegador respondió `fallo 1 Geolocation has been disabled in this document by permissions policy`: el código 1 es el que `mapFailure` traduce a `denied`. No fue una persona negando el permiso: lo bloquea la cabecera `Permissions-Policy` de `next.config.mjs` (`geolocation=()`). La interfaz todavía no llama a `getCurrentPosition`, así que no probé en pantalla el mensaje de "sin coordenadas". Evidencia: [captura](week-06/ismael-geolocalizacion-politica.png).
+- **Qué verifica y qué no:** las pruebas comprueban el comportamiento del módulo contra un doble de `navigator.geolocation` en Node: fallback sin API, permiso denegado, tiempo agotado, opciones declaradas, privacidad del mensaje y que importar no pide permiso. No prueban un navegador real, un GPS real ni el uso desde la interfaz.
+- **Limitación o riesgo que identifiqué:** el timeout lo aplica el navegador; si la ventana de permiso queda abierta, no existe un timeout propio que la cierre. Además, la cabecera `Permissions-Policy` de `next.config.mjs` (`geolocation=()`) hace que el navegador niegue la ubicación a toda la página aunque la persona la acepte; hay que cambiarla a `geolocation=(self)` (y `camera=(self)` para el Bloque A) al conectar la interfaz. La posición cacheada puede tener hasta 60 segundos de antigüedad y las coordenadas viven solo en memoria durante la sesión.
+- **Uso de IA:** usé Claude (Anthropic), en chat, para la guía de comandos de Git y PowerShell y para redactar borradores de `src/lib/device/geolocation.ts`, `tests/capabilities.geolocation.spec.ts` y `docs/capabilities/02-geolocalizacion.md` a partir de mi guía, corrigiendo el check `never-prompts-on-import` descrito arriba. Validación humana: pegué los archivos con comandos de PowerShell, ejecuté `npm.cmd test`, `npm.cmd run build`, `npm.cmd run verify` y `npm.cmd run check-secrets`, corrí las cinco pruebas negativas y revisé el resultado de cada una.

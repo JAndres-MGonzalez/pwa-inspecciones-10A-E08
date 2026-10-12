@@ -6,18 +6,19 @@ Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa
 
 ## Estado de Semana 6 · `w06-device-push`
 
-La semana 6 incorpora evidencia opcional por cámara o archivo y notificaciones locales de
-cambio. Los permisos se solicitan desde un clic. **Avisar cambio** muestra el mensaje en
-pantalla si no hay permiso; **Permitir notificaciones** abre la solicitud opcional.
+La semana 6 incorpora evidencia opcional por cámara o archivo, ubicación opcional y
+notificaciones locales de cambio. Los permisos se solicitan desde un clic. **Avisar cambio**
+muestra el mensaje en pantalla si no hay permiso; **Permitir notificaciones** abre la solicitud
+opcional. **Adjuntar ubicación** conserva el flujo sin coordenadas cuando la API falla.
 
 El contrato está en `src/lib/device/types.ts` y el índice en
 [docs/capabilities.md](docs/capabilities.md). La evidencia y los avisos usan datos sintéticos.
 El adjunto permanece en memoria y no se envía a un servidor.
 
-**Integración pendiente:** el PR #14 de geolocalización necesita manejar una excepción
-síncrona antes del merge. Todavía faltan la ubicación en la interfaz, la suite conjunta
-`tests/capabilities.spec.ts`, la puerta completa, el workflow original del kit y la prueba
-manual de los tres permisos denegados. Esta versión no representa el cierre de la semana.
+La suite `tests/capabilities.spec.ts` comprueba los tres módulos bajo el mismo contrato.
+La verificación exige todos los entregables. El workflow de semana 6 es la copia original
+del kit, con SHA256 `CDA79B0A9547EC24DA3EE5D6FDE05E1744EAE3159BDB007A3A866080BCE0F6A9`.
+La política permite cámara y ubicación solo a este origen; el micrófono permanece bloqueado.
 
 ## Estado de Semana 5 · `w05-sync-data`
 
@@ -54,7 +55,8 @@ Requisitos: Git, Node.js 20.19.6 o posterior compatible y npm. Desde la carpeta 
 
 ```powershell
 npm.cmd ci --ignore-scripts --no-audit --no-fund
-npm.cmd run dev
+npm.cmd run build
+npm.cmd run start
 ```
 
 Abrir [localhost:3000](http://localhost:3000). Detener con Ctrl+C antes de compilar. Para ejecutar la versión de producción:
@@ -83,7 +85,7 @@ bash public-tests/check.sh
 | Comprobación | Alcance actual |
 |---|---|
 | Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
-| `npm.cmd test` | 104 casos en 10 suites: 83 heredados, 8 de cámara y 13 de notificaciones e interfaz. Reporte en `reports/w06-device-push/tests.json` |
+| `npm.cmd test` | 118 casos en 12 suites: 83 heredados, 8 de cámara, 8 de ubicación, 13 de notificaciones e interfaz y 6 de integración. Reporte en `reports/w06-device-push/tests.json` |
 | `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
 | `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w06-device-push` |
 | Chequeo público | `files`, `cursors`, `tests`, `package`, `sync` y `capabilities`: archivos presentes, barrido, suites completas, dependencias conservadas, contrato de idempotencia y capacidades disponibles |
@@ -128,3 +130,20 @@ El workflow `week-05-w05-sync-data.yml` corre en cada `push` y en cada `pull_req
 el SHA del commit de fusión sintético y las comprobaciones de `commitSha` describirían un commit
 que nadie commiteó. Sus correcciones respecto del kit y el criterio de endurecimiento de la puerta
 por etapas están documentados en [`public-tests/README.md`](public-tests/README.md).
+
+
+## Entrega Semana 6
+
+El workflow week-06-w06-device-push.yml es la copia literal del kit. Comprueba instalación
+limpia y build (AC-01), presencia de los cinco artefactos (AC-02) y pruebas ejecutables
+(AC-03). El criterio de ingeniería se documenta en capacidades, README y evidencia individual;
+el workflow no calcula una calificación completa.
+
+La evidencia de Juan Andrés está en evidence/individual.md. La prueba en navegador usa
+una imagen sintética, cámara y ubicación bloqueadas por la política de prueba y avisos sin
+permiso concedido. El contexto exacto está en evidence/week-06/andres-browser.json.
+No demuestra captura real, GPS real ni visualización de un aviso del sistema operativo.
+
+Para entregar se usa el enlace o SHA integrado que coincida con Actions y con el reporte
+reports/verification.json. Ese reporte se genera con npm.cmd run verify y no se versiona.
+La revisión personal de cada integrante se registra por separado.

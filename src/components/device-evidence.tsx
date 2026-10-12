@@ -8,7 +8,8 @@ import {
   getCameraPermission
 } from "@/lib/device/camera";
 import { notifyChange, requestPermission } from "@/lib/notifications/client";
-import type { EvidenceRecord } from "@/lib/device/types";
+import { getCurrentPosition } from "@/lib/device/geolocation";
+import type { EvidenceRecord, GeoCoordinates } from "@/lib/device/types";
 
 interface Estado {
   tone: "ok" | "warn";
@@ -30,13 +31,16 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
   const [aviso, setAviso] = useState("");
   const [avisando, setAvisando] = useState(false);
   const [permisoAviso, setPermisoAviso] = useState("");
+  const [ubicacion, setUbicacion] = useState("");
+  const [localizando, setLocalizando] = useState(false);
+  const coordenadas = useRef<GeoCoordinates | null>(null);
   const archivo = useRef<HTMLInputElement>(null);
 
   // Todos los permisos se piden DENTRO de estos manejadores: cada uno nace de un clic.
   async function tomarFoto() {
     const permiso = await getCameraPermission();
     const res = await captureEvidence({ inspectionId, note: "Foto de evidencia" });
-    setEvidencia(res.ok && res.value ? res.value : null);
+    if (res.ok && res.value) setEvidencia({ ...res.value, coords: coordenadas.current });
     setEstado({
       tone: res.ok ? "ok" : "warn",
       text: res.ok
@@ -63,7 +67,7 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
       { name: file.name, size: file.size, type: file.type, dataUrl },
       { inspectionId }
     );
-    setEvidencia(res.ok && res.value ? res.value : null);
+    if (res.ok && res.value) setEvidencia({ ...res.value, coords: coordenadas.current });
     setEstado({ tone: res.ok ? "ok" : "warn", text: res.message });
   }
 
@@ -87,6 +91,21 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
     setPermisoAviso(permission === "granted"
       ? "Notificaciones permitidas. Puedes enviar el aviso al sistema."
       : "El aviso seguirá disponible en pantalla.");
+  }
+
+  async function pedirUbicacion() {
+    setLocalizando(true);
+    try {
+      const result = await getCurrentPosition({ timeoutMs: 5000 });
+      const value = result.ok && result.value ? result.value : null;
+      coordenadas.current = value;
+      setEvidencia(previous => previous ? { ...previous, coords: value } : previous);
+      setUbicacion(value
+        ? `${value.lat.toFixed(4)}, ${value.lon.toFixed(4)} (±${Math.round(value.accuracy)} m)`
+        : result.message);
+    } finally {
+      setLocalizando(false);
+    }
   }
 
   return (
@@ -115,6 +134,9 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
         <button type="button" onClick={permitirNotificaciones}>
           Permitir notificaciones
         </button>
+        <button type="button" onClick={pedirUbicacion} disabled={localizando}>
+          {localizando ? "Solicitando ubicación…" : "Adjuntar ubicación"}
+        </button>
         <input
           ref={archivo}
           type="file"
@@ -137,6 +159,7 @@ export function DeviceEvidence({ inspectionId }: { inspectionId: string }) {
       </p>
       <p role="status" aria-live="polite">{aviso}</p>
       <p role="status" aria-live="polite">{permisoAviso}</p>
+      <p role="status" aria-live="polite">{ubicacion}</p>
     </section>
   );
 }

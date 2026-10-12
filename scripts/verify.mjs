@@ -30,12 +30,10 @@ const required = [
   "docs/sync-policy.md", "docs/sync/01-modelo.md", "docs/sync/02-conflictos.md", "docs/sync/03-cola.md",
   // Semana 6 (w06-device-push): presente desde la Fase 0 (contrato e índice de la semana).
   "src/lib/device/types.ts", "docs/capabilities.md",
-  // Semana 6, Fase 2 (integración): descomentar cuando los tres bloques, las tres
-  // secciones de documentación y la suite de integración existan. Exigirlos en la Fase 0
-  // dejaría master en rojo para los tres desde el primer día.
-  // "src/lib/device/camera.ts", "src/lib/device/geolocation.ts", "src/lib/notifications/client.ts",
-  // "docs/capabilities/01-camara.md", "docs/capabilities/02-geolocalizacion.md",
-  // "docs/capabilities/03-notificaciones.md", "tests/capabilities.spec.ts",
+  // Semana 6 integrada: los módulos, la documentación y la suite conjunta son obligatorios.
+  "src/lib/device/camera.ts", "src/lib/device/geolocation.ts", "src/lib/notifications/client.ts",
+  "docs/capabilities/01-camara.md", "docs/capabilities/02-geolocalizacion.md",
+  "docs/capabilities/03-notificaciones.md", "tests/capabilities.spec.ts",
   "tests/starter.spec.mjs", "tests/manifest.spec.ts", "tests/source-loader.cjs",
   "tests/sw-harness.cjs", "tests/service-worker.spec.ts", "tests/offline.spec.ts", "tests/rendering.spec.ts",
   "scripts/check-secrets.mjs", "public-tests/check.sh", "public-tests/README.md",
