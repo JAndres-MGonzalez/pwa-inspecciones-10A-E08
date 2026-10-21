@@ -10,14 +10,15 @@ for file in public/manifest.webmanifest public/sw.js public/offline.html \
   src/lib/pwa/register-service-worker.ts src/lib/storage/schema.ts \
   docs/cache-strategy.md docs/rendering-decision.md \
   docs/sync-policy.md docs/sync/01-modelo.md docs/sync/02-conflictos.md docs/sync/03-cola.md \
-  tests/manifest.spec.ts tests/source-loader.cjs tests/sw-harness.cjs \
+  tests/manifest.spec.ts tests/source-loader.cjs tests/sw-harness.cjs tests/discover.cjs \
   tests/service-worker.spec.ts tests/offline.spec.ts tests/rendering.spec.ts \
   scripts/check-secrets.mjs scripts/verify.mjs README.md \
   src/lib/sync/queue.ts src/lib/sync/conflict-policy.ts tests/sync.spec.ts \
   src/lib/device/types.ts docs/capabilities.md \
   src/lib/device/camera.ts src/lib/device/geolocation.ts src/lib/notifications/client.ts \
   docs/capabilities/01-camara.md docs/capabilities/02-geolocalizacion.md docs/capabilities/03-notificaciones.md \
-  tests/capabilities.spec.ts; do
+  tests/capabilities.spec.ts \
+  tests/unit/README.md tests/integration/README.md tests/e2e/README.md; do
   # Nota: los archivos van en la lista de arriba, no en este cuerpo. Puestos aqui bash los
   # intentaria EJECUTAR, y el `files: PASS` seguiria verde sin haberlos comprobado nunca.
   if [ ! -s "$file" ]; then
@@ -31,19 +32,21 @@ if node scripts/check-secrets.mjs; then echo "cursors: PASS"; else echo "cursors
 
 if node --input-type=module <<'NODE'
 import assert from "node:assert/strict";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
 // La identidad de la actividad y la ruta del reporte salen del contrato, no de aqui.
-const { ASSIGNMENT_ID } = createRequire(import.meta.url)("./tests/source-loader.cjs").loadSource("src/lib/storage/schema.ts");
+const { ASSIGNMENT_ID } = require("./tests/source-loader.cjs").loadSource("src/lib/storage/schema.ts");
 const report = JSON.parse(readFileSync(`reports/${ASSIGNMENT_ID}/tests.json`, "utf8"));
 assert.equal(report.assignmentId, ASSIGNMENT_ID);
 assert.equal(report.status, "pass");
 assert.equal(report.commitSha, execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim());
-// Suites esperadas derivadas de los archivos presentes, no de una lista escrita a mano.
-const legacy = { "manifest.spec.ts": "manifest02" };
-const expected = readdirSync("tests").filter((f) => f.endsWith(".spec.ts"))
-  .map((f) => legacy[f] ?? f.replace(/\.spec\.ts$/, ""));
+// Suites esperadas derivadas de los archivos presentes (incluidas las capas unit,
+// integration y e2e) mediante el MISMO descubridor que usa el runner y verify; una lista
+// escrita a mano aqui seria un cuarto lector que podria desincronizarse.
+const { discoverSuites } = require("./tests/discover.cjs");
+const expected = discoverSuites(".").map((entry) => entry.suiteId);
 assert.equal(report.suites.length, expected.length, "Faltan suites en el reporte");
 for (const id of expected) {
   const suite = report.suites.find((item) => item.suiteId === id);
