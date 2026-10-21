@@ -258,6 +258,15 @@
 - **Limitación:** <completar>.
 - **Uso de IA y validación humana:** <completar>.
 
+### Semana 8 — w08-testing-ci
+
+- **Mi commit SHA:** <completar con `git rev-parse HEAD` al cerrar>.
+- **Mi evidencia completa:** [evidence/week-08/kevin.md](week-08/kevin.md) — arranque compartido (assignmentId w08, descubrimiento de suites centralizado en `tests/discover.cjs`, guardia anti falso-verde) y Bloque A: 50 checks unitarios en `tests/unit/` (`schema-idempotencia`, `sync-bordes`, `dataset-sintetico` — esta última automatiza el RNF-04 de datos sintéticos).
+- **Decisión que puedo explicar:** un solo descubridor de suites compartido por runner, verify y check.sh, porque tres escaneos independientes podían dejar una suite fuera del reporte sin que nadie lo notara.
+- **Prueba y resultado real:** `npm.cmd test` 15 suites / 168 checks en verde; `npm.cmd run verify` pass; `bash public-tests/check.sh` `PUBLIC_OK` código 0. Regresión inyectada (clave sin versión): FAIL con 9 checks en 4 suites; restaurada, verde completo. Cuatro pruebas negativas adicionales del bloque extra (last-write-wins, jitter, migrate, PII) cayeron cada una donde se esperaba. Prueba negativa de la puerta: sin `tests/unit/` el check.sh falla con código 1. Salidas en [evidence/week-08/](week-08/).
+- **Limitación o fallo diagnosticado:** mi primera versión de `discoverSuites` escaneaba la raíz en vez de `tests/` y produjo un verde con 0 suites; lo detecté en el reporte y lo corregí con la guardia de cero suites. Sin navegador ni red en esta capa.
+- **Uso de IA y validación humana:** opencode (asistente de terminal) para redactar suites, el helper y esta evidencia; validé personalmente cada comando en PowerShell y Git Bash, revisé la salida completa de la rotura y confirmé con `git diff` que la demostración no dejó cambios en `schema.ts`.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08
