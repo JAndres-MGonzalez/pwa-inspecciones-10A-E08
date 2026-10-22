@@ -584,3 +584,26 @@ Cuatro pruebas negativas, cada una capturada y restaurada: remoteIsNewer=false �
 Hallazgo honesto: mi primer intento de rotura del dataset puso el correo en un comentario del codigo, que la suite (correctamente) no escanea; repiti la rotura dentro del campo summary, que es el caso real.
 
 Verificacion final: git diff src/ solo con ASSIGNMENT_ID, verify pass, check.sh PUBLIC_OK (codigo 0). Sin commits aun.
+
+
+## Semana 8 — Bloque B (pruebas de integración) — Ismael (22 de octubre)
+
+### Qué hice
+
+Creé `tests/integration/sync-ciclo-completo.spec.ts` (5 checks) y `tests/integration/sw-registro.spec.ts` (4 checks). Combinan cola, política de conflictos y schema con un servidor falso, y el registro del Service Worker con `public/sw.js` y el harness. Omití los escenarios ya cubiertos en `service-worker.spec.ts`.
+
+### Comandos y resultados reales
+
+`npm.cmd test`: 194 suites y 195 checks en PASS. `npm.cmd run verify`: pass. `check.sh` en Git Bash: `PUBLIC_OK`.
+
+### Prueba negativa
+
+Quité la versión de `idempotencyKey`: fallaron 12 checks en 5 suites (3 de mi suite, 2 de `unit/schema-idempotencia`, y históricos de `sync.cola`, `sync.modelo` y `sync`). Dos checks míos no cayeron a propósito: comprueban el acuerdo cola–política, no el formato de la clave. Restaurado con `git checkout --`: verde sin ningún `fail`. Capturas en `evidence/week-08/ismael-01..05*.txt`.
+
+### Hallazgo
+
+La guía suponía que una segunda invocación de `registerServiceWorker` no duplica el registro, pero el módulo no guarda estado: la deduplicación es del navegador. El check documenta el comportamiento real.
+
+### Estado
+
+Evidencia completa: `evidence/week-08/ismael.md`. PR pendiente de abrir.
