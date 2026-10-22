@@ -594,7 +594,7 @@ Creé `tests/integration/sync-ciclo-completo.spec.ts` (5 checks) y `tests/integr
 
 ### Comandos y resultados reales
 
-`npm.cmd test`: 194 suites y 195 checks en PASS. `npm.cmd run verify`: pass. `check.sh` en Git Bash: `PUBLIC_OK`.
+`npm.cmd test`: 17 suites y 177 checks en PASS. `npm.cmd run verify`: pass. `check.sh` en Git Bash: `PUBLIC_OK`.
 
 ### Prueba negativa
 

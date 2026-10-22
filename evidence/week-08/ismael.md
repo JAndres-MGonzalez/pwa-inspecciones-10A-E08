@@ -35,8 +35,8 @@ Ejecutado el 22 de octubre de 2026 en Windows PowerShell con `npm.cmd`; `check.s
 | Comando | Resultado |
 |---|---|
 | Cada suite en aislado (`loadSource(...).runChecks()`) | 5 checks `pass` en `sync-ciclo-completo` y 4 en `sw-registro` |
-| `npm.cmd test` | `starter.spec.mjs: PASS`, **194 suites y 195 checks** (168 anteriores, según la evidencia de Kevin, más mis 9) |
-| `npm.cmd run verify` | `Verificación técnica: pass` (tests, barrido de secretos y build) |
+| `npm.cmd test` | `starter.spec.mjs: PASS`, **17 suites y 177 checks** (168 anteriores, según la evidencia de Kevin, más mis 9) |
+| `npm.cmd run verify` | `Verificación técnica: pass` (tests, barrido de datos sensibles y build) |
 | `bash public-tests/check.sh` | `PUBLIC_OK` |
 
 ### Prueba negativa
