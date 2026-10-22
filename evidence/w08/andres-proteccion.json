@@ -1,0 +1,9 @@
+{
+  "checkedOn": "2026-10-21",
+  "branch": "master",
+  "requiresPullRequest": true,
+  "enforceAdmins": true,
+  "requiredApprovals": 0,
+  "forcePushAllowed": false,
+  "deletionAllowed": false
+}

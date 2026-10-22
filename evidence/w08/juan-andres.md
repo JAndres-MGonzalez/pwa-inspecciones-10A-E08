@@ -6,6 +6,9 @@ Pruebas HTTP contra la compilación de producción, arranque y cierre automátic
 workflow de CI, reportes de resultados y cobertura V8, estrategia de pruebas y documentación
 de entrega. Rama `codex/semana-8-andres-e2e-ci`.
 
+Commit de implementación:
+[`f48033e`](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e).
+
 Revisión técnica del [PR #21 de Kevin](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/21):
 instalación limpia, 168 comprobaciones en 15 suites, build, `npm run verify` y `PUBLIC_OK`.
 Merge `85fd5fd5de37f0cf8435e77b57564873b527e5f7`. Las pruebas y la evidencia de Kevin
@@ -29,6 +32,16 @@ Primera ejecución de desarrollo: lint de sintaxis y comprobación de tipos apro
 V8 real. El primer intento del check de inexistente suponía un encabezado h1; la página
 usa h2 y el streaming entrega parte de la respuesta como datos de Next. Se corrigió el
 check para exigir el texto de inexistente y `NEXT_NOT_FOUND`, sin afirmar un render visual.
+
+Prueba negativa en la rama temporal `codex/w08-regresion-http`: se quitó `start_url` del
+manifest. Resultado esperado y observado: `manifest-accesible` falla, código 1. Tras
+restaurar, los ocho checks pasan y el manifest coincide con el original. Salidas reales:
+[fallo](andres-http-fallo.txt) y [recuperación](andres-http-recuperacion.txt).
+
+También se comprobó que un servidor externo ausente produce código 1, sin omitir casos.
+La [protección de master](andres-proteccion.json) se volvió a consultar en GitHub:
+PR obligatorio para administradores, sin push forzado ni borrado; no exige aprobaciones
+automáticas adicionales. No se hizo una escritura de prueba a la rama principal.
 
 ## Qué demuestra y qué falta
 

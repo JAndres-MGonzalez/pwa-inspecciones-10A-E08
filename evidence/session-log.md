@@ -597,3 +597,10 @@ Se activó la protección de master: PR requerido incluso para administradores, 
 Se implementaron ocho comprobaciones HTTP con servidor de producción local y cierre automático, lint de sintaxis, cobertura V8, resumen de evaluación y CI. En desarrollo aprobaron 176 comprobaciones en 16 suites, lint y tipos.
 
 La consigna requiere interacción desde la interfaz, mientras la guía propone HTTP. Se documentó la diferencia: faltan captura, persistencia durable y sincronización consumida por la interfaz, integración de Ismael y pruebas E2E del flujo completo. El cierre permanece incompleto; no se inventó evidencia de compañeros ni ejecución humana.
+
+
+### Demostración HTTP y protección — Semana 8
+
+Codex ejecutó una rotura controlada en la rama temporal codex/w08-regresion-http: quitar start_url del manifest hizo fallar manifest-accesible con código 1. El archivo restaurado aprobó los ocho checks. La rama se eliminó después de comprobar git diff del manifest vacío. Salidas: evidence/w08/andres-http-fallo.txt y andres-http-recuperacion.txt.
+
+Con E2E_BASE_URL apuntando a un servidor ausente, la suite devolvió código 1 y ocho casos fallidos, sin saltarlos. La configuración de protección se volvió a leer en GitHub y quedó guardada en evidence/w08/andres-proteccion.json.

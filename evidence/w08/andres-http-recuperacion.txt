@@ -1,0 +1,35 @@
+Recuperacion: manifest original restaurado.
+[
+  {
+    "id": "home-200-con-titulo",
+    "status": "pass"
+  },
+  {
+    "id": "home-enlaza-a-inspecciones",
+    "status": "pass"
+  },
+  {
+    "id": "listado-estado-carga-inicial",
+    "status": "pass"
+  },
+  {
+    "id": "detalle-ssr-muestra-laboratorio",
+    "status": "pass"
+  },
+  {
+    "id": "detalle-inexistente-contenido-404",
+    "status": "pass"
+  },
+  {
+    "id": "manifest-accesible",
+    "status": "pass"
+  },
+  {
+    "id": "sw-accesible",
+    "status": "pass"
+  },
+  {
+    "id": "offline-html-accesible",
+    "status": "pass"
+  }
+]

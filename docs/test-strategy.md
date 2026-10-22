@@ -68,6 +68,12 @@ Es evidencia proporcionada por Kevin; no se atribuye a Juan Andrés. La integrac
 la prueba negativa de Ismael todavía no están publicadas. No se inventan resultados para ellas.
 La prueba negativa HTTP de Juan Andrés se registra en [su evidencia](../evidence/w08/juan-andres.md).
 
+En la rama temporal `codex/w08-regresion-http`, Codex quitó `start_url` del manifest servido:
+`e2e/camino-critico/manifest-accesible` falló y la suite terminó con código 1. Tras restaurar
+el archivo, los ocho checks HTTP aprobaron. [Fallo](../evidence/w08/andres-http-fallo.txt) y
+[recuperación](../evidence/w08/andres-http-recuperacion.txt). La rama temporal se eliminó
+después de comprobar que el manifest original no tenía cambios; el defecto no se integró.
+
 ## Ejecución
 
 En Windows se usa `npm.cmd`; en Ubuntu, `npm`. Node local y Node de CI se registran por separado.

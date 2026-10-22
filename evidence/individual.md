@@ -109,6 +109,7 @@
 
 ### Semana 8 — w08-testing-ci
 
+- **Mi commit SHA:** [f48033e](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e).
 - **Mi contribución:** pruebas HTTP de producción, CI, reportes y estrategia de pruebas,
   en la rama `codex/semana-8-andres-e2e-ci`.
 - **Mi evidencia completa:** [evidence/w08/juan-andres.md](w08/juan-andres.md).

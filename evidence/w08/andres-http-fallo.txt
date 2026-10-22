@@ -1,0 +1,37 @@
+Rotura controlada: falta start_url en el manifest.
+[
+  {
+    "id": "home-200-con-titulo",
+    "status": "pass"
+  },
+  {
+    "id": "home-enlaza-a-inspecciones",
+    "status": "pass"
+  },
+  {
+    "id": "listado-estado-carga-inicial",
+    "status": "pass"
+  },
+  {
+    "id": "detalle-ssr-muestra-laboratorio",
+    "status": "pass"
+  },
+  {
+    "id": "detalle-inexistente-contenido-404",
+    "status": "pass"
+  },
+  {
+    "id": "manifest-accesible",
+    "status": "fail",
+    "detail": "AssertionError [ERR_ASSERTION]: Falta start_url\n+ actual - expected\n\n+ 'undefined'\n- 'string'\n"
+  },
+  {
+    "id": "sw-accesible",
+    "status": "pass"
+  },
+  {
+    "id": "offline-html-accesible",
+    "status": "pass"
+  }
+]
+Codigo observado: 1
