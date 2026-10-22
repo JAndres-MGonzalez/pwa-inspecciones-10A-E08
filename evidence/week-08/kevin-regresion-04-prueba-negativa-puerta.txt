@@ -1,0 +1,53 @@
+﻿PRUEBA NEGATIVA (w08): tests/unit movida temporalmente a tests/unit-oculta y restaurada.
+Captura generada por: cmd /c bash public-tests/check.sh 2>&1
+
+=== Salida real SIN tests/unit ===
+Falta archivo: tests/unit/README.md
+files: FAIL
+check-secrets: PASS
+cursors: PASS
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Faltan suites en el reporte
+
+14 !== 12
+
+    at file:///C:/Users/Kevin/OneDrive/Documentos/IDGS%20SEP-DIC%2026/Aplicaciones%20Web%20Progresivas/Proyecto/pwa-inspecciones-10A-E08/[eval1]:17:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:272:26)
+    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:268:20)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 14,
+  expected: 12,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.0
+tests: FAIL (ejecuta npm test y revisa el reporte)
+package: PASS
+sync: contrato w08-testing-ci v1; suites sync: sync.cola, sync.conflictos, sync.modelo, sync
+sync: PASS
+capabilities: contrato w06 presente; modulos validados si existen
+capabilities: PASS
+
+Exit code: 1
+
+=== Salida real tras RESTAURAR tests/unit ===
+files: PASS
+check-secrets: PASS
+cursors: PASS
+tests: PASS
+package: PASS
+sync: contrato w08-testing-ci v1; suites sync: sync.cola, sync.conflictos, sync.modelo, sync
+sync: PASS
+capabilities: contrato w06 presente; modulos validados si existen
+capabilities: PASS
+PUBLIC_OK
+
+Exit code: 0

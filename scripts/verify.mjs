@@ -1,10 +1,13 @@
 /* scripts/verify.mjs */
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { loadSource } from "../tests/source-loader.cjs";
 
 const root = resolve(import.meta.dirname, "..");
+const require = createRequire(import.meta.url);
+const { discoverSuites } = require("../tests/discover.cjs");
 
 /**
  * Identificador de la actividad leido del contrato, no escrito a mano.
@@ -68,14 +71,11 @@ const git = (args) => {
 const testReportPath = resolve(root, "reports", ASSIGNMENT_ID, "tests.json");
 const testReport = existsSync(testReportPath) ? JSON.parse(readFileSync(testReportPath, "utf8")) : null;
 /**
- * Suites esperadas, derivadas de los archivos presentes en tests/ en vez de una lista
- * escrita a mano. Asi agregar una suite no obliga a tocar este archivo, que era el punto
- * de conflicto entre integrantes en semanas anteriores.
+ * Suites esperadas, derivadas de los archivos presentes en tests/ (incluidas las capas
+ * unit/integration/e2e) via el mismo descubridor que usa el runner, en vez de una lista
+ * escrita a mano. Asi agregar una suite no obliga a tocar este archivo.
  */
-const LEGACY_SUITE_IDS = { "manifest.spec.ts": "manifest02" };
-const suitesOnDisk = readdirSync(resolve(root, "tests"))
-  .filter((f) => f.endsWith(".spec.ts"))
-  .map((f) => LEGACY_SUITE_IDS[f] ?? f.replace(/\.spec\.ts$/, ""));
+const suitesOnDisk = discoverSuites(root).map((entry) => entry.suiteId);
 const suitesOk = checks.find((check) => check.id === "test")?.status === "pass" &&
   testReport?.assignmentId === ASSIGNMENT_ID && testReport?.status === "pass" &&
   testReport?.commitSha === git(["rev-parse", "HEAD"]) && Array.isArray(testReport?.suites) &&

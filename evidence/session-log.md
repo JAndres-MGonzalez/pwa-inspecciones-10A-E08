@@ -535,3 +535,52 @@ La documentación de cierre conserva ese punto de comprobación; el SHA final se
 después del merge de este registro y se entrega por separado, sin referencias circulares.
 Kevin conserva sus campos de evidencia para completar personalmente. Las comprobaciones
 de Codex no se presentan como ejecución personal de los integrantes.
+
+## Semana 8 — Arranque y Bloque A (pirámide unitaria) — Kevin
+
+**Fecha:** 20 de octubre de 2026. **Rama:** semana-8-kevin-testing-ci (creada desde master actualizado).
+
+### Qué hice
+
+- Actualicé ASSIGNMENT_ID a "w08-testing-ci" en src/lib/storage/schema.ts (única fuente de verdad del harness).
+- Creé 	ests/discover.cjs: descubrimiento de suites centralizado para las capas 	ests/{unit,integration,e2e} con ids prefijados (unit/<nombre>), consumido por starter.spec.mjs, scripts/verify.mjs y el bloque 	ests: de public-tests/check.sh (antes cada uno escaneaba por su cuenta).
+- Agregué la guardia anti falso-verde del runner: cero suites descubiertas = FAIL.
+- README de las tres carpetas de la pirámide, registradas en la lista de archivos de check.sh.
+- Bloque A: 	ests/unit/schema-idempotencia.spec.ts (15 checks) y 	ests/unit/sync-bordes.spec.ts (22 checks).
+
+### Comandos y resultados reales
+
+- 
+pm.cmd test línea base (antes del Bloque A): starter.spec.mjs: PASS, 12 suites / 118 checks.
+- 
+pm.cmd test con el Bloque A: starter.spec.mjs: PASS, 14 suites / 155 checks.
+- 
+pm.cmd run verify: Verificación técnica: pass (estructura + test + barrido + build).
+- ash public-tests/check.sh (Git Bash): PUBLIC_OK, código 0.
+
+### Regresión demostrada
+
+Rompí idempotencyKey quitando la versión de la clave: 
+pm.cmd test FAIL con 9 checks en 4 suites (unit/schema-idempotencia, sync.modelo, sync.cola, sync). Restaurada: verde completo. Capturas en evidence/week-08/kevin-regresion-01..03*.txt.
+
+### Prueba negativa de la puerta
+
+	ests/unit/ movida a 	ests/unit-oculta: check.sh → iles: FAIL + 	ests: FAIL, código 1. Restaurada: PUBLIC_OK, código 0. Captura real en kevin-regresion-04-prueba-negativa-puerta.txt.
+
+### Fallo diagnosticado durante el arranque
+
+Mi primera versión de discoverSuites escaneaba oot en vez de oot/tests: el runner aprobó con 0 suites ([].every() === true). Detectado al inspeccionar el reporte, no al fiarme del PASS; corregido con la lectura correcta y la guardia de cero suites.
+
+### Estado
+
+Sin commit aún (pendiente de la instrucción de cierre). Evidencia completa: evidence/week-08/kevin.md.
+
+### Semana 8 — Bloque A extra: unitarias de alto valor — Kevin (20 de octubre)
+
+Añadí 13 checks (155 → 168, ahora 15 suites): last-write-wins completo (3 casos), jitter medido dentro de SyncQueue con reloj inyectado, migrate v0 conservando summary, y el archivo nuevo tests/unit/dataset-sintetico.spec.ts (8 checks que automatizan el RNF-04: ids únicos, fechas ISO no futuras, coherencia findings/status, alias genéricos y cero PII en campos de texto).
+
+Cuatro pruebas negativas, cada una capturada y restaurada: remoteIsNewer=false → cayó el check nuevo + 2 historicos de sync.conflictos; jitter=0 → cayo SOLO queue-jitter-range; summary fijo en migrate → cayo SOLO migrate-v0-keeps-existing-summary; correo dentro del summary del dataset → cayo SOLO sin-datos-personales. Los archivos kevin-negativo-1..4*.txt guardan la salida real y kevin-negativo-00-final-restaurado.txt el verde final.
+
+Hallazgo honesto: mi primer intento de rotura del dataset puso el correo en un comentario del codigo, que la suite (correctamente) no escanea; repiti la rotura dentro del campo summary, que es el caso real.
+
+Verificacion final: git diff src/ solo con ASSIGNMENT_ID, verify pass, check.sh PUBLIC_OK (codigo 0). Sin commits aun.

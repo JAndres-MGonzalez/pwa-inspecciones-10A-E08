@@ -1,30 +1,33 @@
 /* tests/starter.spec.mjs */
-import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { execFileSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { loadSource } from "./source-loader.cjs";
 
 const root = resolve(import.meta.dirname, "..");
 const { ASSIGNMENT_ID } = loadSource("src/lib/storage/schema.ts");
 
 /**
- * Ids historicos que NO coinciden con el nombre del archivo. Se conservan porque
- * `public-tests/check.sh` y la evidencia de w04 los referencian por nombre; renombrarlos
- * seria una regresion silenciosa. Las suites nuevas se derivan del nombre del archivo.
+ * Descubre cualquier tests/*.spec.ts y las capas tests/{unit,integration,e2e}/*.spec.ts.
+ *
+ * Nadie edita esta lista: cada quien deja su archivo en su carpeta y aparece solo. La
+ * logica vive una sola vez en tests/discover.cjs, compartida con scripts/verify.mjs y
+ * public-tests/check.sh, para que los tres lectores no puedan desincronizarse.
  */
-const LEGACY_SUITE_IDS = { "manifest.spec.ts": "manifest02" };
+const require = createRequire(import.meta.url);
+const { discoverSuites } = require("./discover.cjs");
+const suites = discoverSuites(root).map((entry) => [entry.suiteId, entry.file]);
 
 /**
- * Descubre cualquier tests/*.spec.ts.
- *
- * Nadie edita esta lista: cada quien deja su archivo en tests/ y aparece solo. Ese es el
- * punto de la semana 5, donde tres personas entregan en paralelo y un archivo de suites
- * compartido las habria hecho chocar en cada merge.
+ * Guardia anti falso-verde: una corrida que no descubre NINGUNA suite no puede aprobarse.
+ * Un descubrimiento roto (por ejemplo, un helper que escanea la raiz en vez de tests/)
+ * pasaria inadvertido si compararamos con `every` sobre una lista vacia.
  */
-const suites = readdirSync(resolve(root, "tests"))
-  .filter((file) => file.endsWith(".spec.ts"))
-  .sort()
-  .map((file) => [LEGACY_SUITE_IDS[file] ?? file.replace(/\.spec\.ts$/, ""), `tests/${file}`]);
+if (suites.length === 0) {
+  console.error("starter.spec.mjs: FAIL — discoverSuites no encontró ninguna suite en tests/");
+  process.exit(1);
+}
 
 const results = [];
 for (const [suiteId, file] of suites) {
