@@ -1,0 +1,92 @@
+{
+  "checkedOn": "2026-10-21",
+  "headSha": "fad3dd83de8c4d3e96e24b116e0c1241edbd838f",
+  "runUrl": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160",
+  "status": "completed",
+  "conclusion": "failure",
+  "environment": "Ubuntu 26.04.1 / Node 20.19.6",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Instalación limpia",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Lint de sintaxis",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Tipos",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build de producción",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Pruebas y cobertura V8",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verificación completa",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Chequeo público",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reporte y alcance de la semana",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Guardar resultados y cobertura",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "artifactId": 12393013525,
+  "artifactUrl": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160/artifacts/12393013525",
+  "artifactSha256": "ede42d99fba8a28cd6d6ac1466bece8653c513838d4a1ee14be23af851a08934",
+  "testSuites": 16,
+  "testChecks": 176,
+  "closure": "incomplete",
+  "reason": "Falta integracion nueva y los dos escenarios de interfaz; resultados y cobertura guardados."
+}

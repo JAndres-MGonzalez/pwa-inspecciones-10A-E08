@@ -7,7 +7,8 @@ workflow de CI, reportes de resultados y cobertura V8, estrategia de pruebas y d
 de entrega. Rama `codex/semana-8-andres-e2e-ci`.
 
 Commit de implementación:
-[`f48033e`](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e).
+[`f48033e0812bf0c645026ace77ea540d2243b41b`](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e0812bf0c645026ace77ea540d2243b41b).
+Avance publicado en el [PR #22](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/22), en borrador.
 
 Revisión técnica del [PR #21 de Kevin](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/21):
 instalación limpia, 168 comprobaciones en 15 suites, build, `npm run verify` y `PUBLIC_OK`.
@@ -42,6 +43,26 @@ También se comprobó que un servidor externo ausente produce código 1, sin omi
 La [protección de master](andres-proteccion.json) se volvió a consultar en GitHub:
 PR obligatorio para administradores, sin push forzado ni borrado; no exige aprobaciones
 automáticas adicionales. No se hizo una escritura de prueba a la rama principal.
+
+## Verificación del avance publicado
+
+Punto comprobado: `fad3dd83de8c4d3e96e24b116e0c1241edbd838f`, árbol limpio.
+Codex ejecutó lint, tipos, pruebas con cobertura, `npm.cmd run verify` y chequeo público:
+176 comprobaciones en 16 suites, build correcto y `PUBLIC_OK`. El reporte de cierre devolvió
+código 1 y `incomplete` por ausencia de integración y de los dos escenarios de interfaz.
+
+En [Actions](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160),
+Ubuntu 26.04.1 con Node 20.19.6, instalación, lint, tipos, build, pruebas, verificación y
+chequeo público aprobaron. Solo falló el cierre de alcance con los mismos tres motivos.
+La subida de [resultados y cobertura](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160/artifacts/12393013525)
+aprobó también después del fallo. [Registro de la ejecución](andres-ci-candidato.json).
+
+Se descargó el artefacto y se comprobó que sus reportes coinciden con el SHA, árbol limpio,
+16 suites y 176 comprobaciones; el JSON de cierre indica `incomplete`. El ZIP contiene
+resultados, verificación, resumen de cobertura y dos JSON V8. El resumen de cobertura solo
+atribuye archivos JS del runner y auxiliares; no declara cobertura fiable del TypeScript.
+
+Este SHA es el punto de comprobación del avance, no el SHA final común para Classroom.
 
 ## Qué demuestra y qué falta
 

@@ -109,14 +109,15 @@
 
 ### Semana 8 — w08-testing-ci
 
-- **Mi commit SHA:** [f48033e](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e).
+- **Mi commit SHA:** [f48033e0812bf0c645026ace77ea540d2243b41b](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/f48033e0812bf0c645026ace77ea540d2243b41b).
 - **Mi contribución:** pruebas HTTP de producción, CI, reportes y estrategia de pruebas,
   en la rama `codex/semana-8-andres-e2e-ci`.
 - **Mi evidencia completa:** [evidence/w08/juan-andres.md](w08/juan-andres.md).
 - **Decisión técnica:** comprobar las rutas con HTTP sin agregar dependencias y distinguir
   ese alcance del flujo de captura offline exigido por el profesor.
-- **Pruebas y resultado:** comprobaciones ejecutadas por Codex; salidas y resultado del
-  commit candidato en la evidencia de la semana.
+- **Pruebas y resultado:** Codex comprobó 176 casos en 16 suites, build, tipos, lint,
+  verify y PUBLIC_OK. Actions repitió esos resultados; el cierre quedó incompleto por
+  los escenarios faltantes. [CI del avance](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160).
 - **Limitación:** integración y E2E de interfaz pendientes; este registro corresponde a un avance.
 - **Uso de IA y validación humana:** Codex ayudó con código, documentación y comprobaciones;
   revisión personal pendiente.

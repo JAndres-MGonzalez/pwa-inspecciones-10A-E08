@@ -6,6 +6,10 @@ La entrega de esta semana es individual en Classroom. Todavía no hay un SHA fin
 faltan la integración del Bloque B y el E2E de captura offline desde la interfaz. No se usa
 el commit de una rama como si fuera la entrega final integrada.
 
+El avance está en el [PR #22](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/22).
+El [run comprobado](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160)
+aprobó pruebas y build, pero el cierre informa `incomplete` por los escenarios pendientes.
+
 ```text
 Semana / actividad: Semana 8 / w08-testing-ci
 Grupo y equipo: 10A-E08

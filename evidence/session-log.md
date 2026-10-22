@@ -604,3 +604,10 @@ La consigna requiere interacción desde la interfaz, mientras la guía propone H
 Codex ejecutó una rotura controlada en la rama temporal codex/w08-regresion-http: quitar start_url del manifest hizo fallar manifest-accesible con código 1. El archivo restaurado aprobó los ocho checks. La rama se eliminó después de comprobar git diff del manifest vacío. Salidas: evidence/w08/andres-http-fallo.txt y andres-http-recuperacion.txt.
 
 Con E2E_BASE_URL apuntando a un servidor ausente, la suite devolvió código 1 y ocho casos fallidos, sin saltarlos. La configuración de protección se volvió a leer en GitHub y quedó guardada en evidence/w08/andres-proteccion.json.
+
+
+### CI del avance — Semana 8
+
+Sobre fad3dd83de8c4d3e96e24b116e0c1241edbd838f, Codex comprobó el árbol limpio, 176 casos en 16 suites, build, lint, tipos, verify y PUBLIC_OK. Actions 39701089160 repitió los resultados en Ubuntu 26.04.1 y Node 20.19.6. Solo falló el cierre porque falta integración y los dos escenarios de interfaz. Los artefactos se guardaron igualmente. Se descargó el ZIP y se contrastaron SHA, estado y conteos de sus reportes. Registro: evidence/w08/andres-ci-candidato.json.
+
+El PR #22 queda en borrador. No hay SHA final común de semana 8 ni entrega académica completa. La revisión humana propia y la evidencia de Ismael siguen pendientes.
