@@ -1,5 +1,35 @@
 # Entrega de Medina González Juan Andrés
 
+## Semana 8 · avance, pendiente de cierre
+
+La entrega de esta semana es individual en Classroom. Todavía no hay un SHA final común:
+faltan la integración del Bloque B y el E2E de captura offline desde la interfaz. No se usa
+el commit de una rama como si fuera la entrega final integrada.
+
+```text
+Semana / actividad: Semana 8 / w08-testing-ci
+Grupo y equipo: 10A-E08
+Mi nombre: Medina González Juan Andrés
+Repositorio: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08
+SHA final común del equipo: pendiente de integrar y verificar la semana completa
+Actions de ese SHA: pendiente de la versión final integrada
+Documentos y reporte de esta semana: docs/test-strategy.md y artefacto academic-evidence-w08-testing-ci
+Mi sección de evidencia individual: evidence/individual.md, Juan Andrés, Semana 8
+Mi contribución y enlace: tests/e2e/, .github/workflows/academic-evaluation.yml y evidence/w08/juan-andres.md
+Acceso del docente: repositorio actualmente público; falta confirmar el acceso del docente
+Incidencias o limitaciones: integración de Ismael y flujo de captura offline pendientes; pruebas HTTP sin navegador
+```
+
+Después del último merge se obtiene el SHA con `git rev-parse HEAD` y se comprueba que
+coincida con Actions y con los reportes. Ese SHA se registra en Classroom sin crear otro
+commit solo para escribirlo dentro de sí mismo. No se requiere tag.
+
+Adjuntar el `verification.json` del SHA final y `evidence/individual.md`, identificando la
+sección propia. Incluir enlaces a estrategia, evidencia y artefactos de la ejecución. Si el
+cierre falla antes del plazo, entregar su enlace y explicar el fallo; no declararlo aprobado.
+
+## Registro de la entrega inicial
+
 Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
 Grupo **10A**, equipo **E08** (**10A-E08**). Matrícula: **3523110131**.

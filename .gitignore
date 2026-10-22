@@ -12,3 +12,4 @@ referencias/
 # Salidas locales, excluidas del commit que identifican.
 reports/
 *.tsbuildinfo
+evaluation-result.json

@@ -1,0 +1,47 @@
+name: academic-evaluation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  week08:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.6
+          cache: npm
+      - name: Instalación limpia
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Lint de sintaxis
+        run: node scripts/lint.mjs
+      - name: Tipos
+        run: node node_modules/typescript/bin/tsc --noEmit
+      - name: Build de producción
+        run: npm run build
+      - name: Pruebas y cobertura V8
+        run: node scripts/test-with-coverage.mjs
+      - name: Verificación completa
+        run: npm run verify
+      - name: Chequeo público
+        run: bash public-tests/check.sh
+      - name: Reporte y alcance de la semana
+        if: always()
+        run: node scripts/evaluation-result.mjs
+      - name: Guardar resultados y cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: academic-evidence-w08-testing-ci
+          if-no-files-found: error
+          path: |
+            evaluation-result.json
+            reports/
+            coverage/

@@ -584,3 +584,16 @@ Cuatro pruebas negativas, cada una capturada y restaurada: remoteIsNewer=false �
 Hallazgo honesto: mi primer intento de rotura del dataset puso el correo en un comentario del codigo, que la suite (correctamente) no escanea; repiti la rotura dentro del campo summary, que es el caso real.
 
 Verificacion final: git diff src/ solo con ASSIGNMENT_ID, verify pass, check.sh PUBLIC_OK (codigo 0). Sin commits aun.
+
+
+## Semana 8 — Pruebas HTTP y CI — Juan Andrés
+
+Fecha: 21 de octubre de 2026. Comprobaciones ejecutadas por Codex en Windows.
+
+Se revisó el PR #21 de Kevin en f0ef1f268893da2b3d59ecd334a4f7c76533a343: npm ci, 168 comprobaciones en 15 suites, build, verify y PUBLIC_OK aprobados. Se integró por PR en 85fd5fd5de37f0cf8435e77b57564873b527e5f7 conservando su autoría.
+
+Se activó la protección de master: PR requerido incluso para administradores, sin push forzado ni borrado. El avance de Juan Andrés usa su propia rama. No se tocaron dependencias, contrato, runner ni workflows anteriores.
+
+Se implementaron ocho comprobaciones HTTP con servidor de producción local y cierre automático, lint de sintaxis, cobertura V8, resumen de evaluación y CI. En desarrollo aprobaron 176 comprobaciones en 16 suites, lint y tipos.
+
+La consigna requiere interacción desde la interfaz, mientras la guía propone HTTP. Se documentó la diferencia: faltan captura, persistencia durable y sincronización consumida por la interfaz, integración de Ismael y pruebas E2E del flujo completo. El cierre permanece incompleto; no se inventó evidencia de compañeros ni ejecución humana.

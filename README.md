@@ -1,8 +1,58 @@
-# Inspecciones de laboratorio · Semanas 1 a 6
+# Inspecciones de laboratorio · Semanas 1 a 8
 
 Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de laboratorios con datos sintéticos.
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
+
+## Semana 8 · `w08-testing-ci` · avance
+
+El PR #21 integra el arranque y las unitarias de Kevin. Se agregan ocho comprobaciones HTTP
+contra el servidor de producción, CI con etapas separadas y reportes de resultados/cobertura.
+La [estrategia de pruebas](docs/test-strategy.md) relaciona riesgos, capas y límites.
+
+**La semana no está cerrada.** Falta la integración nueva de Ismael. La aplicación aún no
+tiene el flujo de creación, guardado durable y sincronización desde la interfaz que solicita
+`ACTIVIDAD.txt`. Los checks HTTP no sustituyen el E2E de ese flujo ni su variante sin capacidad.
+
+Comandos de esta semana en PowerShell, con Node.js 20.19.6 o posterior compatible:
+
+```powershell
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+node scripts/lint.mjs
+node node_modules/typescript/bin/tsc --noEmit
+npm.cmd run build
+node scripts/test-with-coverage.mjs
+npm.cmd run verify
+& 'C:\Program Files\Git\bin\bash.exe' public-tests/check.sh
+node scripts/evaluation-result.mjs
+```
+
+`npm run verify` equivale a `make verify`: estructura, pruebas, barrido de información sensible,
+build y consistencia del reporte. Se hace build antes del primer test. Las suites se descubren
+en `tests/*.spec.ts` y `tests/{unit,integration,e2e}/*.spec.ts` sin listas manuales. `npm test`
+también ejecuta HTTP: inicia un servidor de producción en puerto libre y lo detiene al terminar.
+Con un `next start` ya abierto se puede usar `E2E_BASE_URL=http://127.0.0.1:3000`.
+
+El lint revisa sintaxis JS/TS con Node y TypeScript existentes; la comprobación de tipos es
+otra etapa. No se incorporan ESLint ni dependencias nuevas. La CI usa Ubuntu y Node 20.19.6.
+
+El workflow `.github/workflows/academic-evaluation.yml` conserva resultados y cobertura incluso
+cuando falla una etapa. El ZIP de instrucciones no contiene otro workflow original de semana 8;
+se documenta este equivalente. Artefacto: `academic-evidence-w08-testing-ci`.
+
+Los resultados quedan en `reports/w08-testing-ci/tests.json`, `reports/verification.json`,
+`coverage/` y `evaluation-result.json`. La cobertura V8 identifica el JS del runner y auxiliares;
+no tiene un mapa fiable al TypeScript ejecutado dinámicamente. No se declara un porcentaje de
+cobertura de `src/`. El resumen de cierre devuelve código 1 e `incomplete` si falta alguna capa
+o los escenarios de interfaz, aunque las comprobaciones existentes estén verdes.
+
+La evidencia de Juan Andrés está [separada por semana](evidence/w08/juan-andres.md). Kevin
+conserva la suya en [evidence/week-08/kevin.md](evidence/week-08/kevin.md). No se modifica su
+ruta histórica ni se escribe la evidencia personal de Ismael. `master` está protegida:
+cambios mediante PR incluso para administradores, sin push forzado ni borrado.
+
+La entrega se prepara en [ENTREGA.md](ENTREGA.md). Cada integrante entrega por separado en
+Classroom el mismo SHA integrado y su sección personal. La consigna de semana 8 no requiere tag.
 
 ## Estado de Semana 6 · `w06-device-push`
 

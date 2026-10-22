@@ -107,6 +107,19 @@
 - **Uso de IA:** Codex (OpenAI) apoyó implementación, integración, pruebas, documentación
   y comprobación en navegador. Validación humana: pendiente de mi revisión personal.
 
+### Semana 8 — w08-testing-ci
+
+- **Mi contribución:** pruebas HTTP de producción, CI, reportes y estrategia de pruebas,
+  en la rama `codex/semana-8-andres-e2e-ci`.
+- **Mi evidencia completa:** [evidence/w08/juan-andres.md](w08/juan-andres.md).
+- **Decisión técnica:** comprobar las rutas con HTTP sin agregar dependencias y distinguir
+  ese alcance del flujo de captura offline exigido por el profesor.
+- **Pruebas y resultado:** comprobaciones ejecutadas por Codex; salidas y resultado del
+  commit candidato en la evidencia de la semana.
+- **Limitación:** integración y E2E de interfaz pendientes; este registro corresponde a un avance.
+- **Uso de IA y validación humana:** Codex ayudó con código, documentación y comprobaciones;
+  revisión personal pendiente.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
