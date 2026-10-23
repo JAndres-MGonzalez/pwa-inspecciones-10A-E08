@@ -141,8 +141,10 @@ La comprobación en producción se realizó sin cambiar esa política.
 ## Verificación
 
 ```powershell
+npm.cmd run build
 npm.cmd run verify
-bash public-tests/check.sh
+& 'C:\Program Files\Git\bin\bash.exe' public-tests/check.sh
+node scripts/evaluation-result.mjs
 ```
 
 `npm.cmd run verify` es el equivalente exacto de `make verify`: el Makefile llama a `npm run verify`. El script comprueba archivos, descubre y ejecuta todas las suites presentes, revisa palabras sensibles y compila. Genera `reports/verification.json`. El chequeo público necesita Git Bash y Node en Windows.
@@ -150,9 +152,9 @@ bash public-tests/check.sh
 | Comprobación | Alcance actual |
 |---|---|
 | Instalación con `npm.cmd ci --ignore-scripts --no-audit --no-fund` | Conserva las dependencias y el lockfile |
-| `npm.cmd test` | 118 casos en 12 suites: 83 heredados, 8 de cámara, 8 de ubicación, 13 de notificaciones e interfaz y 6 de integración. Reporte en `reports/w06-device-push/tests.json` |
+| `npm.cmd test` | 200 casos en 21 suites: históricas, 4 unitarias, 3 de integración y 2 E2E. Reporte en `reports/w08-testing-ci/tests.json` |
 | `npm.cmd run check-secrets` | Barrido de palabras con excepciones literales documentadas en `public-tests/README.md` |
-| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w06-device-push` |
+| `npm.cmd run verify` | Estructura, suites, barrido y build; reporte `w08-testing-ci` |
 | Chequeo público | `files`, `cursors`, `tests`, `package`, `sync` y `capabilities`: archivos presentes, barrido, suites completas, dependencias conservadas, contrato de idempotencia y capacidades disponibles |
 
 Ejecuta `npm.cmd test` **antes** del chequeo público: el reporte vive en `reports/`, que está
@@ -175,10 +177,10 @@ La [nota de decisiones](docs/decision-record.md#semana-3--actualización-automá
 
 La corrección del turno de Ismael limita la limpieza al prefijo `inspecciones-`, repone las peticiones y mensajes, y añade pruebas que reproducen los fallos detectados durante la revisión anterior.
 
-Se usan únicamente inspecciones ficticias. No hay captura de inspecciones nuevas desde la interfaz
-ni un servidor real contra el que sincronizar: la capa de datos y la cola de la Semana 5 se
-prueban en memoria. Un build aprobado no comprueba el funcionamiento offline ni sustituye la
-revisión académica.
+Se usan únicamente inspecciones ficticias. La captura de semana 8 conserva datos y cola en
+localStorage y sincroniza con una API de demostración en memoria. El E2E comprueba recarga
+offline y reintento sin duplicados en navegador local. No demuestra despliegue, almacenamiento
+remoto permanente, permisos físicos ni instalación en teléfono. No sustituye la revisión académica.
 
 ## Entrega Semana 3
 
