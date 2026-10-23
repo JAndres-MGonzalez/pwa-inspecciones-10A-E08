@@ -635,3 +635,14 @@ La guía suponía que una segunda invocación de `registerServiceWorker` no dupl
 ### Estado
 
 Evidencia completa: `evidence/week-08/ismael.md`. PR pendiente de abrir.
+
+
+## Semana 8 — Integración y flujo de captura — Juan Andrés
+
+Fecha: 22 de octubre de 2026. Ejecución técnica: Codex.
+
+Se revisó el PR #23 de Ismael en 2e135343d89301c6ad1460e483140bb8a62c8acd: 177 comprobaciones en 17 suites, verify, build y PUBLIC_OK aprobados con árbol limpio. Se integró en adacf957be2d0fdd0da5c0f0ea97f45f0c0724cd y se conservó su evidencia. La bitácora se combinó preservando ambos bloques.
+
+La captura pendiente se implementó en d4acc2fc37f3712b563c8eab03d15336ccb44a2a: validación, adaptador localStorage, API de demostración y pruebas de interfaz. La instalación limpia, build y 200 checks en 21 suites aprobaron. El navegador real recuperó el registro tras recargar offline y conservó una sola inspección remota al perder y reintentar una respuesta. El mismo flujo aprobó sin geolocalización.
+
+En rama temporal se hizo que el adaptador guardara listas vacías: dos checks de persistencia fallaron. Se restauró y la suite de seis checks aprobó; el blob del adaptador coincide con su commit. Salidas en evidence/w08/andres-persistencia-*.txt. No se integró el defecto. Se fijó la fecha de referencia del dataset y se mantuvo el lockfile. La revisión humana sigue pendiente, separada de los resultados de Codex.

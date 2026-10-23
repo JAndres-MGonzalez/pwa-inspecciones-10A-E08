@@ -59,6 +59,8 @@ Kevin quitó la versión de `idempotencyKey` y nueve checks detectaron el defect
 
 Durante el arranque local de Edge se evitó su relanzamiento de compatibilidad para conservar la conexión con el proceso de prueba. Los perfiles son independientes del navegador personal; se cerraron normalmente los navegadores de prueba.
 
+Codex comprobó además el adaptador persistente en una rama temporal: cambiar la serialización para guardar listas vacías hizo fallar recuperación y reintento. Restaurado el adaptador, los seis checks aprobaron. [Fallo](../evidence/w08/andres-persistencia-fallo.txt) y [recuperación](../evidence/w08/andres-persistencia-recuperacion.txt).
+
 ## Comandos reproducibles
 
 Requisitos: Node 20.19.6 o posterior compatible, npm, Git, Chrome/Edge instalado y Git Bash en Windows. `CHROME_PATH` permite elegir el ejecutable. Si falta navegador, el E2E falla y no se omite. CI usa el Chrome instalado en Ubuntu.
