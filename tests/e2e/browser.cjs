@@ -1,5 +1,5 @@
 const { spawn } = require("node:child_process");
-const { existsSync, mkdtempSync, mkdirSync, writeFileSync, realpathSync, rmSync } = require("node:fs");
+const { existsSync, mkdtempSync, mkdirSync, writeFileSync, readFileSync, watch, realpathSync, rmSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join, sep, basename } = require("node:path");
 const WebSocket = require("next/dist/compiled/ws");
@@ -16,6 +16,7 @@ async function startBrowser(name) {
   const child = spawn(executable, ["--headless=new", "--remote-debugging-port=0",
     "--remote-debugging-address=127.0.0.1", `--user-data-dir=${profile}`,
     "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--edge-skip-compat-layer-relaunch",
+    "--disable-background-networking", "--disable-default-apps", "--disable-sync", "--disable-dev-shm-usage",
     ...(process.platform === "linux" ? ["--no-sandbox"] : []), "about:blank"],
   { stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
   let socket;
@@ -65,17 +66,31 @@ async function startBrowser(name) {
   try {
     const endpoint = await new Promise((resolve, reject) => {
       let output = "";
-      const timer = setTimeout(() => reject(new Error(`No inició el navegador: ${output.slice(-1000)}`)), 15000);
-      child.once("error", error => { clearTimeout(timer); reject(error); });
+      let finished = false;
+      const finish = (error, url) => {
+        if (finished) return;
+        finished = true; clearTimeout(timer); watcher.close();
+        if (error) reject(error); else resolve(url);
+      };
+      const inspectPort = () => {
+        try {
+          const [port, target] = readFileSync(join(profile, "DevToolsActivePort"), "utf8").trim().split(/\r?\n/);
+          if (/^\d+$/.test(port) && target?.startsWith("/devtools/browser/")) finish(null, `ws://127.0.0.1:${port}${target}`);
+        } catch {}
+      };
+      const watcher = watch(profile, inspectPort);
+      const timer = setTimeout(() => finish(new Error(`No inició el navegador en 45 s: ${output.slice(-1500)}`)), 45000);
+      child.once("error", error => finish(error));
       child.once("exit", code => {
-        if (code !== 0) { clearTimeout(timer); reject(new Error(`El navegador terminó (${code}). ${output.slice(-1500)}`)); }
+        if (code !== 0) finish(new Error(`El navegador terminó (${code}). ${output.slice(-1500)}`));
       });
-      child.stdout.on("data", chunk => { output += chunk; });
-      child.stderr.on("data", chunk => {
+      const inspectOutput = chunk => {
         output += chunk;
         const match = output.match(/DevTools listening on (ws:\/\/127\.0\.0\.1:\d+\/\S+)/);
-        if (match) { clearTimeout(timer); resolve(match[1]); }
-      });
+        if (match) finish(null, match[1]);
+      };
+      child.stdout.on("data", inspectOutput); child.stderr.on("data", inspectOutput);
+      inspectPort();
     });
     socket = new WebSocket(endpoint);
     socket.on("message", raw => {
