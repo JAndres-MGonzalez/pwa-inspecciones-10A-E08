@@ -30,8 +30,8 @@ npm.cmd run verify
 node scripts/evaluation-result.mjs
 ```
 
-`npm run verify` equivale a `make verify`: estructura, pruebas, barrido de información sensible,
-build y consistencia del reporte. Se hace build antes del primer test. Las suites se descubren
+`npm run verify` equivale a `make verify`: estructura, build, pruebas, barrido de información
+sensible y consistencia del reporte. Compila antes de probar, también en un clon limpio. Las suites se descubren
 en `tests/*.spec.ts` y `tests/{unit,integration,e2e}/*.spec.ts` sin listas manuales. `npm test`
 también ejecuta HTTP y navegador: inicia servidores en puertos libres y los detiene al terminar.
 Con un `next start` ya abierto se puede usar `E2E_BASE_URL=http://127.0.0.1:3000`.

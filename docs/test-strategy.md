@@ -84,13 +84,22 @@ npm.cmd run verify
 node scripts/evaluation-result.mjs
 ```
 
-En Ubuntu se usa `npm`. `npm run verify` equivale exactamente a `make verify`: estructura, pruebas, barrido de información sensible, build y consistencia del reporte con HEAD. Se compila antes del primer test. `npm test` también ejecuta HTTP y navegador con inicio y cierre automático de servidores. No se compila sobre un servidor en uso.
+En Ubuntu se usa `npm`. `npm run verify` equivale exactamente a `make verify`: estructura,
+build de producción, pruebas, barrido de información sensible y consistencia del reporte con
+HEAD. El build se ejecuta antes de los E2E para que el comando funcione en un clon limpio.
+`npm test` por separado requiere haber compilado. Las pruebas gestionan sus servidores y no
+se compila sobre un servidor en uso.
 
 Para usar un `npm run start` ya iniciado: definir `E2E_BASE_URL=http://127.0.0.1:3000`. Solo se admiten direcciones locales y quien inició ese servidor lo detiene con Ctrl+C. Sin esa variable, las suites gestionan sus procesos.
 
 ## CI, resultados y cobertura
 
 `.github/workflows/academic-evaluation.yml` ejecuta instalación limpia, lint sintáctico JS/TS, tipos, build, navegador, pruebas con cobertura, verificación y chequeo público. No usa `continue-on-error`. Resumen y artefactos usan `always()` para conservar fallos. No se modifican los workflows históricos. El ZIP solo contenía instrucciones y plantilla; no incluía otro workflow original de semana 8.
+
+El workflow histórico de semana 1 solo llama a `npm run verify`. Al añadir E2E de producción,
+su [ejecución](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885971515)
+detectó que faltaba el build inicial. Se ordenó `verify.mjs` para compilar primero; no se
+relajaron pruebas ni se cambió el workflow.
 
 El artefacto `academic-evidence-w08-testing-ci` contiene:
 

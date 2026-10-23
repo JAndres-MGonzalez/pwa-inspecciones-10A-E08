@@ -651,3 +651,8 @@ En rama temporal se hizo que el adaptador guardara listas vacías: dos checks de
 ### CI de integración de Semana 8
 
 Codex confirmó Actions 39885685342 en verde sobre 1a98d562e32be8dea69a4779354b4668bcc20b7b: instalación, lint, tipos, build, Chrome, pruebas, verify, chequeo público, resumen y artefactos. En los intentos previos 39885027179 y 39885338490 se diagnosticaron cierre/limpieza temporal de Chrome y arranque en frío; se corrigió la espera del puerto real y el cierre normal, conservando los fallos y sus artefactos. El conteo integrado es 200 comprobaciones en 21 suites. Registro: evidence/w08/andres-ci-integracion.json.
+
+
+### Verificación desde instalación limpia — Semana 8
+
+El workflow académico de la semana aprobó, pero el de semana 1 (run 39885971515) detectó la dependencia de build: verify intentaba ejecutar E2E antes de compilar. Se ordenó scripts/verify.mjs para construir antes de probar. Se conservan el descubrimiento, todas las comprobaciones y los workflows anteriores. Así npm ci seguido de npm run verify es el equivalente reproducible de make verify.
