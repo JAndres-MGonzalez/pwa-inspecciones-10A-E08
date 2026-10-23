@@ -107,6 +107,21 @@
 - **Uso de IA:** Codex (OpenAI) apoyó implementación, integración, pruebas, documentación
   y comprobación en navegador. Validación humana: pendiente de mi revisión personal.
 
+### Semana 8 — w08-testing-ci
+
+- **Mi commit SHA:** [d4acc2fc37f3712b563c8eab03d15336ccb44a2a](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/d4acc2fc37f3712b563c8eab03d15336ccb44a2a).
+- **Mi contribución:** captura, validación, persistencia, API sintética, E2E, CI y estrategia,
+  integradas mediante el [PR #22](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/22).
+- **Mi evidencia completa:** [evidence/w08/juan-andres.md](w08/juan-andres.md).
+- **Decisión técnica:** reutilizar la cola con localStorage y probar el flujo desde un navegador
+  real sin agregar paquetes npm. HTTP se conserva como comprobación adicional.
+- **Pruebas y resultado:** Codex ejecutó instalación limpia, build y 200 checks en 21 suites,
+  incluidos recarga offline, respuesta perdida, reintento sin duplicados y capacidad ausente.
+- **Limitación:** API de demostración en memoria, cuota de localStorage y cobertura sin
+  porcentaje fiable del TypeScript original. La revisión humana personal sigue pendiente.
+- **Uso de IA y validación humana:** Codex ayudó con código, documentación y comprobaciones;
+  revisión personal pendiente.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.

@@ -253,3 +253,8 @@ main:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   font-weight: 600;
   min-width: 8rem;
 }
+/* Captura sintética: controles legibles y disponibles con teclado. */
+.capture-fields { display: grid; gap: 1rem; padding: 1rem; max-width: 42rem; }
+.capture-fields label { display: grid; gap: .4rem; }
+.capture-fields input, .capture-fields select, .capture-fields textarea { font: inherit; padding: .6rem; width: 100%; box-sizing: border-box; }
+.capture-fields textarea { min-height: 6rem; }

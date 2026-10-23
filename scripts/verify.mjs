@@ -53,9 +53,9 @@ if (structureOnly) {
 const checks = [{ id: "structure", status: missing.length ? "fail" : "pass", missing }];
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 for (const [id, args] of [
+  ["build", ["run", "build"]],
   ["test", ["test"]],
-  ["check-secrets", ["run", "check-secrets"]],
-  ["build", ["run", "build"]]
+  ["check-secrets", ["run", "check-secrets"]]
 ]) {
   console.log(`\nVerificando ${id}...`);
   const run = spawnSync(npm, args, { cwd: root, encoding: "utf8", shell: process.platform === "win32", maxBuffer: 20 * 1024 * 1024 });

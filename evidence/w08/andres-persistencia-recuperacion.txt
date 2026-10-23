@@ -1,0 +1,27 @@
+Adaptador original restaurado.
+[
+  {
+    "id": "offline-persiste-al-recrear-almacen-y-cola",
+    "status": "pass"
+  },
+  {
+    "id": "respuesta-perdida-reintenta-sin-duplicar",
+    "status": "pass"
+  },
+  {
+    "id": "almacen-corrupto-no-se-presenta-como-vacio",
+    "status": "pass"
+  },
+  {
+    "id": "cuota-agotada-no-confirma-guardado",
+    "status": "pass"
+  },
+  {
+    "id": "api-idempotente-rechaza-contenido-diferente",
+    "status": "pass"
+  },
+  {
+    "id": "api-rechaza-captura-invalida-y-clave-ajena",
+    "status": "pass"
+  }
+]

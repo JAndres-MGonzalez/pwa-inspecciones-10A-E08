@@ -586,6 +586,34 @@ Hallazgo honesto: mi primer intento de rotura del dataset puso el correo en un c
 Verificacion final: git diff src/ solo con ASSIGNMENT_ID, verify pass, check.sh PUBLIC_OK (codigo 0). Sin commits aun.
 
 
+## Semana 8 — Pruebas HTTP y CI — Juan Andrés
+
+Fecha: 21 de octubre de 2026. Comprobaciones ejecutadas por Codex en Windows.
+
+Se revisó el PR #21 de Kevin en f0ef1f268893da2b3d59ecd334a4f7c76533a343: npm ci, 168 comprobaciones en 15 suites, build, verify y PUBLIC_OK aprobados. Se integró por PR en 85fd5fd5de37f0cf8435e77b57564873b527e5f7 conservando su autoría.
+
+Se activó la protección de master: PR requerido incluso para administradores, sin push forzado ni borrado. El avance de Juan Andrés usa su propia rama. No se tocaron dependencias, contrato, runner ni workflows anteriores.
+
+Se implementaron ocho comprobaciones HTTP con servidor de producción local y cierre automático, lint de sintaxis, cobertura V8, resumen de evaluación y CI. En desarrollo aprobaron 176 comprobaciones en 16 suites, lint y tipos.
+
+La consigna requiere interacción desde la interfaz, mientras la guía propone HTTP. Se documentó la diferencia: faltan captura, persistencia durable y sincronización consumida por la interfaz, integración de Ismael y pruebas E2E del flujo completo. El cierre permanece incompleto; no se inventó evidencia de compañeros ni ejecución humana.
+
+
+### Demostración HTTP y protección — Semana 8
+
+Codex ejecutó una rotura controlada en la rama temporal codex/w08-regresion-http: quitar start_url del manifest hizo fallar manifest-accesible con código 1. El archivo restaurado aprobó los ocho checks. La rama se eliminó después de comprobar git diff del manifest vacío. Salidas: evidence/w08/andres-http-fallo.txt y andres-http-recuperacion.txt.
+
+Con E2E_BASE_URL apuntando a un servidor ausente, la suite devolvió código 1 y ocho casos fallidos, sin saltarlos. La configuración de protección se volvió a leer en GitHub y quedó guardada en evidence/w08/andres-proteccion.json.
+
+
+### CI del avance — Semana 8
+
+Sobre fad3dd83de8c4d3e96e24b116e0c1241edbd838f, Codex comprobó el árbol limpio, 176 casos en 16 suites, build, lint, tipos, verify y PUBLIC_OK. Actions 39701089160 repitió los resultados en Ubuntu 26.04.1 y Node 20.19.6. Solo falló el cierre porque falta integración y los dos escenarios de interfaz. Los artefactos se guardaron igualmente. Se descargó el ZIP y se contrastaron SHA, estado y conteos de sus reportes. Registro: evidence/w08/andres-ci-candidato.json.
+
+El PR #22 queda en borrador. No hay SHA final común de semana 8 ni entrega académica completa. La revisión humana propia y la evidencia de Ismael siguen pendientes.
+
+
+
 ## Semana 8 — Bloque B (pruebas de integración) — Ismael (22 de octubre)
 
 ### Qué hice
@@ -607,3 +635,24 @@ La guía suponía que una segunda invocación de `registerServiceWorker` no dupl
 ### Estado
 
 Evidencia completa: `evidence/week-08/ismael.md`. PR pendiente de abrir.
+
+
+## Semana 8 — Integración y flujo de captura — Juan Andrés
+
+Fecha: 22 de octubre de 2026. Ejecución técnica: Codex.
+
+Se revisó el PR #23 de Ismael en 2e135343d89301c6ad1460e483140bb8a62c8acd: 177 comprobaciones en 17 suites, verify, build y PUBLIC_OK aprobados con árbol limpio. Se integró en adacf957be2d0fdd0da5c0f0ea97f45f0c0724cd y se conservó su evidencia. La bitácora se combinó preservando ambos bloques.
+
+La captura pendiente se implementó en d4acc2fc37f3712b563c8eab03d15336ccb44a2a: validación, adaptador localStorage, API de demostración y pruebas de interfaz. La instalación limpia, build y 200 checks en 21 suites aprobaron. El navegador real recuperó el registro tras recargar offline y conservó una sola inspección remota al perder y reintentar una respuesta. El mismo flujo aprobó sin geolocalización.
+
+En rama temporal se hizo que el adaptador guardara listas vacías: dos checks de persistencia fallaron. Se restauró y la suite de seis checks aprobó; el blob del adaptador coincide con su commit. Salidas en evidence/w08/andres-persistencia-*.txt. No se integró el defecto. Se fijó la fecha de referencia del dataset y se mantuvo el lockfile. La revisión humana sigue pendiente, separada de los resultados de Codex.
+
+
+### CI de integración de Semana 8
+
+Codex confirmó Actions 39885685342 en verde sobre 1a98d562e32be8dea69a4779354b4668bcc20b7b: instalación, lint, tipos, build, Chrome, pruebas, verify, chequeo público, resumen y artefactos. En los intentos previos 39885027179 y 39885338490 se diagnosticaron cierre/limpieza temporal de Chrome y arranque en frío; se corrigió la espera del puerto real y el cierre normal, conservando los fallos y sus artefactos. El conteo integrado es 200 comprobaciones en 21 suites. Registro: evidence/w08/andres-ci-integracion.json.
+
+
+### Verificación desde instalación limpia — Semana 8
+
+El workflow académico de la semana aprobó, pero el de semana 1 (run 39885971515) detectó la dependencia de build: verify intentaba ejecutar E2E antes de compilar. Se ordenó scripts/verify.mjs para construir antes de probar. Se conservan el descubrimiento, todas las comprobaciones y los workflows anteriores. Así npm ci seguido de npm run verify es el equivalente reproducible de make verify.

@@ -17,6 +17,7 @@ export default async function HomePage() {
           Los datos mostrados son sintéticos.
         </p>
         <span className="status">App shell · estados de carga, error y vacío</span>
+        <p><Link className="inspection-card__link" href="/captura">Nueva inspección</Link></p>
       </header>
 
       <section id="inspecciones-recientes" aria-labelledby="inspections-heading" className="content-section">

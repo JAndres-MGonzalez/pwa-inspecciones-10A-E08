@@ -1,5 +1,38 @@
 # Entrega de Medina González Juan Andrés
 
+## Semana 8 · w08-testing-ci
+
+Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
+Grupo y equipo: **10A-E08**. Mi sección: [Juan Andrés](evidence/individual.md#integrante-medina-gonzález-juan-andrés).
+
+La entrega es individual en Classroom. Los tres integrantes utilizan el mismo SHA final integrado y cada quien identifica su propia evidencia. No se requiere tag.
+
+Después del último merge, obtener `git rev-parse HEAD` y confirmar que coincide con Actions y con los reportes. El SHA final se escribe en Classroom o en el TXT de entrega generado fuera de Git; no se crea otro commit solo para incluirlo dentro de sí mismo.
+
+Formato para copiar después de verificar la versión integrada:
+
+```text
+Semana / actividad: Semana 8 / w08-testing-ci
+Grupo y equipo: 10A-E08
+Mi nombre: Medina González Juan Andrés
+Repositorio: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08
+SHA final común del equipo: obtener después del último merge
+Actions de ese SHA: ejecución de academic-evaluation correspondiente a ese commit
+Documentos y reporte: docs/test-strategy.md, README.md y artefacto academic-evidence-w08-testing-ci
+Mi sección de evidencia individual: evidence/individual.md, Juan Andrés, Semana 8
+Mi contribución y enlace: captura, persistencia, validación, E2E y CI; evidence/w08/juan-andres.md
+Acceso del docente: repositorio público; acceso personal del docente no confirmado
+Incidencias o limitaciones: API de demostración en memoria; localStorage con cuota; revisión humana personal pendiente
+```
+
+Adjuntar `verification.json` del SHA final y `evidence/individual.md`. Incluir enlaces a estrategia, evidencia y resultados/cobertura de CI. El JSON debe indicar `status: pass`, árbol limpio y el mismo SHA.
+
+Comprobaciones: `npm ci --ignore-scripts --no-audit --no-fund`, `npm run build`, `npm test`, `npm run verify` (equivalente exacto de `make verify`), chequeo público y resumen de evaluación. Los comandos completos están en el README. El E2E requiere Chrome/Edge instalado.
+
+El plazo es el que indique Classroom y la actividad dura como máximo siete días. Si alguna ejecución falla antes del plazo, conservar el enlace y describir el error; el color verde técnico no fija una calificación.
+
+## Registro de la entrega inicial
+
 Repositorio privado: [JAndres-MGonzalez/pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
 Grupo **10A**, equipo **E08** (**10A-E08**). Matrícula: **3523110131**.

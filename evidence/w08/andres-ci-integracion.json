@@ -1,0 +1,104 @@
+{
+  "checkedOn": "2026-10-22",
+  "headSha": "1a98d562e32be8dea69a4779354b4668bcc20b7b",
+  "runUrl": "https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885685342",
+  "status": "completed",
+  "conclusion": "success",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Instalación limpia",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Lint de sintaxis",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Tipos",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build de producción",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Navegador para E2E",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Pruebas y cobertura V8",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verificación completa",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Chequeo público",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reporte y alcance de la semana",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Guardar resultados y cobertura",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12472163246,
+      "name": "academic-evidence-w08-testing-ci",
+      "size_in_bytes": 3052709,
+      "expired": false
+    }
+  ],
+  "testSuites": 21,
+  "testChecks": 200,
+  "earlierFailureRuns": [
+    39885027179,
+    39885338490
+  ],
+  "correction": "Cierre normal y deteccion del puerto de depuracion; espera de disponibilidad acotada, sin omitir pruebas."
+}

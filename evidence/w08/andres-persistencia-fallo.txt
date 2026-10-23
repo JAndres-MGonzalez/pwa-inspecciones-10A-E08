@@ -1,0 +1,29 @@
+Defecto controlado: el adaptador descarta los registros antes de serializar.
+[
+  {
+    "id": "offline-persiste-al-recrear-almacen-y-cola",
+    "status": "fail",
+    "detail": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ []\n- [\n-   {\n-     date: '2026-10-20',\n-     findings: 0,\n-     id: 'inspection-persistencia',\n-     inspector: 'Técnica A',\n-     location: 'Laboratorio de Redes',\n-     status: 'ok',\n-     statusLabel: 'Sin incidencias',\n-     summary: 'Registro sintético.'\n-   }\n- ]\n"
+  },
+  {
+    "id": "respuesta-perdida-reintenta-sin-duplicar",
+    "status": "fail",
+    "detail": "TypeError: Cannot read properties of undefined (reading 'state')"
+  },
+  {
+    "id": "almacen-corrupto-no-se-presenta-como-vacio",
+    "status": "pass"
+  },
+  {
+    "id": "cuota-agotada-no-confirma-guardado",
+    "status": "pass"
+  },
+  {
+    "id": "api-idempotente-rechaza-contenido-diferente",
+    "status": "pass"
+  },
+  {
+    "id": "api-rechaza-captura-invalida-y-clave-ajena",
+    "status": "pass"
+  }
+]
