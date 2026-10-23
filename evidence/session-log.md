@@ -611,3 +611,27 @@ Con E2E_BASE_URL apuntando a un servidor ausente, la suite devolvió código 1 y
 Sobre fad3dd83de8c4d3e96e24b116e0c1241edbd838f, Codex comprobó el árbol limpio, 176 casos en 16 suites, build, lint, tipos, verify y PUBLIC_OK. Actions 39701089160 repitió los resultados en Ubuntu 26.04.1 y Node 20.19.6. Solo falló el cierre porque falta integración y los dos escenarios de interfaz. Los artefactos se guardaron igualmente. Se descargó el ZIP y se contrastaron SHA, estado y conteos de sus reportes. Registro: evidence/w08/andres-ci-candidato.json.
 
 El PR #22 queda en borrador. No hay SHA final común de semana 8 ni entrega académica completa. La revisión humana propia y la evidencia de Ismael siguen pendientes.
+
+
+
+## Semana 8 — Bloque B (pruebas de integración) — Ismael (22 de octubre)
+
+### Qué hice
+
+Creé `tests/integration/sync-ciclo-completo.spec.ts` (5 checks) y `tests/integration/sw-registro.spec.ts` (4 checks). Combinan cola, política de conflictos y schema con un servidor falso, y el registro del Service Worker con `public/sw.js` y el harness. Omití los escenarios ya cubiertos en `service-worker.spec.ts`.
+
+### Comandos y resultados reales
+
+`npm.cmd test`: 17 suites y 177 checks en PASS. `npm.cmd run verify`: pass. `check.sh` en Git Bash: `PUBLIC_OK`.
+
+### Prueba negativa
+
+Quité la versión de `idempotencyKey`: fallaron 12 checks en 5 suites (3 de mi suite, 2 de `unit/schema-idempotencia`, y históricos de `sync.cola`, `sync.modelo` y `sync`). Dos checks míos no cayeron a propósito: comprueban el acuerdo cola–política, no el formato de la clave. Restaurado con `git checkout --`: verde sin ningún `fail`. Capturas en `evidence/week-08/ismael-01..05*.txt`.
+
+### Hallazgo
+
+La guía suponía que una segunda invocación de `registerServiceWorker` no duplica el registro, pero el módulo no guarda estado: la deduplicación es del navegador. El check documenta el comportamiento real.
+
+### Estado
+
+Evidencia completa: `evidence/week-08/ismael.md`. PR pendiente de abrir.
