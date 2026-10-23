@@ -22,7 +22,7 @@ Documentos y reporte: docs/test-strategy.md, README.md y artefacto academic-evid
 Mi sección de evidencia individual: evidence/individual.md, Juan Andrés, Semana 8
 Mi contribución y enlace: captura, persistencia, validación, E2E y CI; evidence/w08/juan-andres.md
 Acceso del docente: repositorio público; acceso personal del docente no confirmado
-Incidencias o limitaciones: API de demostración en memoria; localStorage con cuota; revisión humana personal pendiente
+Incidencias o limitaciones: API de demostración en memoria; localStorage con cuota y sujeto a borrado
 ```
 
 Adjuntar `verification.json` del SHA final y `evidence/individual.md`. Incluir enlaces a estrategia, evidencia y resultados/cobertura de CI. El JSON debe indicar `status: pass`, árbol limpio y el mismo SHA.
