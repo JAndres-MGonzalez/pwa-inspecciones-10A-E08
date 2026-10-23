@@ -28,6 +28,19 @@ Comprobaciones ejecutadas por Codex el 22 de octubre de 2026 en Windows, Node v2
 
 Los comandos exactos y la correspondencia por capa están en [la estrategia](../../docs/test-strategy.md). El cierre exige reportes del SHA actual, árbol limpio, entregables y escenarios E2E aprobados. Los reportes generados se adjuntan o descargan de Actions; no se versionan dentro del commit que identifican.
 
+## CI de la integración
+
+[Actions 39885685342](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885685342)
+aprobó todas las etapas sobre `1a98d562e32be8dea69a4779354b4668bcc20b7b`: instalación, lint,
+tipos, build, Chrome, pruebas, verificación, chequeo público, resumen y subida de artefactos.
+[Registro verificable](andres-ci-integracion.json). El SHA final de entrega se obtiene después
+del último merge y se conserva junto al run de esa versión.
+
+Dos ejecuciones anteriores detectaron problemas del auxiliar en Ubuntu: limpieza del perfil
+antes del cierre completo y arranque en frío con límite insuficiente. Se esperó el cierre
+normal y se detecta el puerto real del navegador con límite de 45 segundos. No se omitieron
+escenarios ni se ocultó un fallo del flujo.
+
 ## Defecto controlado
 
 En la rama temporal `codex/w08-regresion-persistencia`, Codex cambió el adaptador para serializar siempre una lista vacía. Fallaron recuperación de datos y reintento tras respuesta perdida; código 1. Se restauró el archivo original y aprobaron los seis checks de esa suite. Se comprobó que el archivo coincide con el blob del commit y se eliminó la rama temporal.

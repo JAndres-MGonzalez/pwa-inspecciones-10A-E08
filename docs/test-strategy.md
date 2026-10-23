@@ -59,6 +59,14 @@ Kevin quitó la versión de `idempotencyKey` y nueve checks detectaron el defect
 
 Durante el arranque local de Edge se evitó su relanzamiento de compatibilidad para conservar la conexión con el proceso de prueba. Los perfiles son independientes del navegador personal; se cerraron normalmente los navegadores de prueba.
 
+En Ubuntu se diagnosticaron limpieza prematura del perfil y arranque en frío:
+[fallo inicial](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885027179)
+y [diagnóstico de arranque](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885338490).
+Se espera el cierre normal y se lee el puerto de depuración para comprobar disponibilidad,
+con límite de 45 segundos. La limpieza temporal no oculta un error de la prueba.
+La [recuperación en CI](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885685342)
+aprobó todas las etapas y conservó resultados y cobertura.
+
 Codex comprobó además el adaptador persistente en una rama temporal: cambiar la serialización para guardar listas vacías hizo fallar recuperación y reintento. Restaurado el adaptador, los seis checks aprobaron. [Fallo](../evidence/w08/andres-persistencia-fallo.txt) y [recuperación](../evidence/w08/andres-persistencia-recuperacion.txt).
 
 ## Comandos reproducibles

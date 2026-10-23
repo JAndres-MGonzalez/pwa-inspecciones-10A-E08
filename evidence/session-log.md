@@ -646,3 +646,8 @@ Se revisó el PR #23 de Ismael en 2e135343d89301c6ad1460e483140bb8a62c8acd: 177 
 La captura pendiente se implementó en d4acc2fc37f3712b563c8eab03d15336ccb44a2a: validación, adaptador localStorage, API de demostración y pruebas de interfaz. La instalación limpia, build y 200 checks en 21 suites aprobaron. El navegador real recuperó el registro tras recargar offline y conservó una sola inspección remota al perder y reintentar una respuesta. El mismo flujo aprobó sin geolocalización.
 
 En rama temporal se hizo que el adaptador guardara listas vacías: dos checks de persistencia fallaron. Se restauró y la suite de seis checks aprobó; el blob del adaptador coincide con su commit. Salidas en evidence/w08/andres-persistencia-*.txt. No se integró el defecto. Se fijó la fecha de referencia del dataset y se mantuvo el lockfile. La revisión humana sigue pendiente, separada de los resultados de Codex.
+
+
+### CI de integración de Semana 8
+
+Codex confirmó Actions 39885685342 en verde sobre 1a98d562e32be8dea69a4779354b4668bcc20b7b: instalación, lint, tipos, build, Chrome, pruebas, verify, chequeo público, resumen y artefactos. En los intentos previos 39885027179 y 39885338490 se diagnosticaron cierre/limpieza temporal de Chrome y arranque en frío; se corrigió la espera del puerto real y el cierre normal, conservando los fallos y sus artefactos. El conteo integrado es 200 comprobaciones en 21 suites. Registro: evidence/w08/andres-ci-integracion.json.
