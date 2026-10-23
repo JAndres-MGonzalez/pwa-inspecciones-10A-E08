@@ -110,6 +110,8 @@
 ### Semana 8 — w08-testing-ci
 
 - **Mi commit SHA:** [d4acc2fc37f3712b563c8eab03d15336ccb44a2a](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/d4acc2fc37f3712b563c8eab03d15336ccb44a2a).
+- **Versión integrada comprobada:** [50b44edd40f769e63503613dbc2593b459ea2ea2](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/50b44edd40f769e63503613dbc2593b459ea2ea2), anterior a este cierre documental.
+- **Actions y reportes:** [ejecución aprobada](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39886721439) y [resultados con cobertura](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39886721439/artifacts/12473356103).
 - **Mi contribución:** captura, validación, persistencia, API sintética, E2E, CI y estrategia,
   integradas mediante el [PR #22](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/22).
 - **Mi evidencia completa:** [evidence/w08/juan-andres.md](w08/juan-andres.md).
@@ -117,10 +119,12 @@
   real sin agregar paquetes npm. HTTP se conserva como comprobación adicional.
 - **Pruebas y resultado:** Codex ejecutó instalación limpia, build y 200 checks en 21 suites,
   incluidos recarga offline, respuesta perdida, reintento sin duplicados y capacidad ausente.
+  `npm.cmd run verify` terminó en `pass` y es el equivalente de `make verify`.
+  Actions confirmó el mismo SHA y árbol limpio; el chequeo público terminó en `PUBLIC_OK`.
 - **Limitación:** API de demostración en memoria, cuota de localStorage y cobertura sin
   porcentaje fiable del TypeScript original. La revisión humana personal sigue pendiente.
-- **Uso de IA y validación humana:** Codex ayudó con código, documentación y comprobaciones;
-  revisión personal pendiente.
+- **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
+  Comprobación técnica con Codex y Actions; validación personal pendiente.
 
 ## Integrante: Montalvo Marcial Kevin Armando
 

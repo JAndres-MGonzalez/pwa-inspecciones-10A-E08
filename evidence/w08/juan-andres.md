@@ -1,5 +1,9 @@
 # Semana 8 · Juan Andrés
 
+- **Nombre:** Medina González Juan Andrés.
+- **Matrícula:** 3523110131.
+- **Grupo y equipo:** 10A-E08.
+
 ## Contribución y commit
 
 Implementé con apoyo de Codex la captura `/captura`, validación compartida, almacenamiento local conectado a la cola existente, API sintética idempotente, pruebas HTTP y de interfaz, CI y documentación de entrega.
@@ -18,11 +22,13 @@ Las peticiones HTTP se conservan para las rutas, pero el flujo crítico se prueb
 
 ## Pruebas y resultados
 
-Comprobaciones ejecutadas por Codex el 22 de octubre de 2026 en Windows, Node v26.4.0 y Edge 155.0.4283.62. La CI utiliza Ubuntu y Node 20.19.6; sus ejecuciones están en los checks del PR #22 y el SHA final común se entrega después del último merge.
+Comprobaciones ejecutadas por Codex el 22 de octubre de 2026 en Windows, Node v26.4.0 y Edge 155.0.4283.62. GitHub Actions confirmó los resultados en Ubuntu con Node 20.19.6 y Chrome 155.0.8059.39.
 
 - `npm.cmd ci --ignore-scripts --no-audit --no-fund`: instalación limpia aprobada.
 - `npm.cmd run build`: compilación aprobada, con `/captura` y `/api/inspecciones`.
 - `node scripts/test-with-coverage.mjs`: 200 comprobaciones en 21 suites aprobadas, con cobertura V8 y de navegador.
+- `npm.cmd run verify`: resultado `pass`, con build, pruebas y revisión de archivos sensibles aprobados. Es el equivalente de `make verify`, porque ese objetivo del Makefile ejecuta `npm run verify`.
+- `bash public-tests/check.sh`: resultado `PUBLIC_OK`.
 - Escenarios E2E: rechazar captura inválida; guardar offline, recargar, reconectar y reintentar sin duplicar; repetir con geolocalización ausente.
 - Se descarta la primera respuesta de un POST ya aplicado. Se observa un registro remoto antes y después del reintento y una sola inspección local.
 
@@ -30,11 +36,20 @@ Los comandos exactos y la correspondencia por capa están en [la estrategia](../
 
 ## CI de la integración
 
-[Actions 39885685342](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39885685342)
-aprobó todas las etapas sobre `1a98d562e32be8dea69a4779354b4668bcc20b7b`: instalación, lint,
-tipos, build, Chrome, pruebas, verificación, chequeo público, resumen y subida de artefactos.
-[Registro verificable](andres-ci-integracion.json). El SHA final de entrega se obtiene después
-del último merge y se conserva junto al run de esa versión.
+La versión integrada comprobada antes de este cierre documental es
+[`50b44edd40f769e63503613dbc2593b459ea2ea2`](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/50b44edd40f769e63503613dbc2593b459ea2ea2).
+[Actions 39886721439](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39886721439)
+aprobó instalación, lint, tipos, build, navegador, pruebas, verificación, chequeo público y reporte.
+Las seis ejecuciones de Actions de esa versión terminaron correctamente.
+
+El [artefacto de resultados y cobertura](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39886721439/artifacts/12473356103)
+contiene `verification.json` con `status: pass`, `workingTreeClean: true` y ese mismo SHA.
+El resumen registra 200 comprobaciones en 21 suites: cuatro suites unitarias, tres de
+integración, dos E2E y doce de las semanas anteriores. El cierre técnico indica `pass`.
+
+Se conserva el [registro de la comprobación anterior](andres-ci-integracion.json).
+Después de integrar esta actualización documental, el TXT de entrega y los adjuntos se
+generan con el nuevo SHA y su ejecución de Actions.
 
 Dos ejecuciones anteriores detectaron problemas del auxiliar en Ubuntu: limpieza del perfil
 antes del cierre completo y arranque en frío con límite insuficiente. Se esperó el cierre
@@ -60,4 +75,4 @@ La [protección de master](andres-proteccion.json) exige PR incluso para adminis
 
 ## Uso de IA
 
-Codex apoyó implementación, pruebas, diagnóstico y documentación, y ejecutó las comprobaciones indicadas. La revisión y ejecución humana personal de Juan Andrés están pendientes; no se presentan los comandos de Codex como ejecución propia.
+Codex (OpenAI): apoyo en código, pruebas y documentación. Las comprobaciones técnicas fueron ejecutadas por Codex y GitHub Actions. Validación personal de Juan Andrés: pendiente.
