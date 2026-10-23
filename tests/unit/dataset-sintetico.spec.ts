@@ -71,7 +71,7 @@ export async function runChecks() {
 
   await check("fechas-validas-y-no-futuras", () => {
     // Formato ISO y no en el futuro (datos sintéticos de un histórico de mantenimiento).
-    const today = new Date().toISOString().slice(0, 10);
+    const today = "2026-10-22"; // Fecha de referencia del fixture, independiente del reloj del equipo.
     for (const row of rows) {
       assert.match(row.date, /^\d{4}-\d{2}-\d{2}$/, `fecha no ISO: ${row.date}`);
       assert.ok(row.date <= today, `fecha futura en ${row.id}: ${row.date}`);

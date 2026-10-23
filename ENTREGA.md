@@ -1,36 +1,35 @@
 # Entrega de Medina González Juan Andrés
 
-## Semana 8 · avance, pendiente de cierre
+## Semana 8 · w08-testing-ci
 
-La entrega de esta semana es individual en Classroom. Todavía no hay un SHA final común:
-faltan la integración del Bloque B y el E2E de captura offline desde la interfaz. No se usa
-el commit de una rama como si fuera la entrega final integrada.
+Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
+Grupo y equipo: **10A-E08**. Mi sección: [Juan Andrés](evidence/individual.md#integrante-medina-gonzález-juan-andrés).
 
-El avance está en el [PR #22](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/22).
-El [run comprobado](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/actions/runs/39701089160)
-aprobó pruebas y build, pero el cierre informa `incomplete` por los escenarios pendientes.
+La entrega es individual en Classroom. Los tres integrantes utilizan el mismo SHA final integrado y cada quien identifica su propia evidencia. No se requiere tag.
+
+Después del último merge, obtener `git rev-parse HEAD` y confirmar que coincide con Actions y con los reportes. El SHA final se escribe en Classroom o en el TXT de entrega generado fuera de Git; no se crea otro commit solo para incluirlo dentro de sí mismo.
+
+Formato para copiar después de verificar la versión integrada:
 
 ```text
 Semana / actividad: Semana 8 / w08-testing-ci
 Grupo y equipo: 10A-E08
 Mi nombre: Medina González Juan Andrés
 Repositorio: https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08
-SHA final común del equipo: pendiente de integrar y verificar la semana completa
-Actions de ese SHA: pendiente de la versión final integrada
-Documentos y reporte de esta semana: docs/test-strategy.md y artefacto academic-evidence-w08-testing-ci
+SHA final común del equipo: obtener después del último merge
+Actions de ese SHA: ejecución de academic-evaluation correspondiente a ese commit
+Documentos y reporte: docs/test-strategy.md, README.md y artefacto academic-evidence-w08-testing-ci
 Mi sección de evidencia individual: evidence/individual.md, Juan Andrés, Semana 8
-Mi contribución y enlace: tests/e2e/, .github/workflows/academic-evaluation.yml y evidence/w08/juan-andres.md
-Acceso del docente: repositorio actualmente público; falta confirmar el acceso del docente
-Incidencias o limitaciones: integración de Ismael y flujo de captura offline pendientes; pruebas HTTP sin navegador
+Mi contribución y enlace: captura, persistencia, validación, E2E y CI; evidence/w08/juan-andres.md
+Acceso del docente: repositorio público; acceso personal del docente no confirmado
+Incidencias o limitaciones: API de demostración en memoria; localStorage con cuota; revisión humana personal pendiente
 ```
 
-Después del último merge se obtiene el SHA con `git rev-parse HEAD` y se comprueba que
-coincida con Actions y con los reportes. Ese SHA se registra en Classroom sin crear otro
-commit solo para escribirlo dentro de sí mismo. No se requiere tag.
+Adjuntar `verification.json` del SHA final y `evidence/individual.md`. Incluir enlaces a estrategia, evidencia y resultados/cobertura de CI. El JSON debe indicar `status: pass`, árbol limpio y el mismo SHA.
 
-Adjuntar el `verification.json` del SHA final y `evidence/individual.md`, identificando la
-sección propia. Incluir enlaces a estrategia, evidencia y artefactos de la ejecución. Si el
-cierre falla antes del plazo, entregar su enlace y explicar el fallo; no declararlo aprobado.
+Comprobaciones: `npm ci --ignore-scripts --no-audit --no-fund`, `npm run build`, `npm test`, `npm run verify` (equivalente exacto de `make verify`), chequeo público y resumen de evaluación. Los comandos completos están en el README. El E2E requiere Chrome/Edge instalado.
+
+El plazo es el que indique Classroom y la actividad dura como máximo siete días. Si alguna ejecución falla antes del plazo, conservar el enlace y describir el error; el color verde técnico no fija una calificación.
 
 ## Registro de la entrega inicial
 

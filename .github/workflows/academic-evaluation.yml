@@ -26,6 +26,8 @@ jobs:
         run: node node_modules/typescript/bin/tsc --noEmit
       - name: Build de producción
         run: npm run build
+      - name: Navegador para E2E
+        run: google-chrome --version
       - name: Pruebas y cobertura V8
         run: node scripts/test-with-coverage.mjs
       - name: Verificación completa

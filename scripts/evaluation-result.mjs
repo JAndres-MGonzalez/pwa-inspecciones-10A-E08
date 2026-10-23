@@ -12,6 +12,9 @@ const layers = Object.fromEntries(["unit", "integration", "e2e"].map((layer) => 
   (tests?.suites ?? []).filter((suite) => suite.suiteId.startsWith(layer + "/")).length
 ]));
 const blockers = [];
+for (const path of ["docs/test-strategy.md", ".github/workflows/academic-evaluation.yml", "README.md", "evidence/individual.md"]) {
+  if (!existsSync(path) || !readFileSync(path, "utf8").trim()) blockers.push(`Falta un entregable: ${path}.`);
+}
 for (const [label, report] of [["pruebas", tests], ["verificación", verification]]) {
   if (!report || report.status !== "pass" || report.commitSha !== sha || report.workingTreeClean !== true) {
     blockers.push(`Falta un reporte aprobado, limpio y del SHA actual: ${label}.`);

@@ -4,17 +4,20 @@ Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de l
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
 
-## Semana 8 · `w08-testing-ci` · avance
+## Semana 8 · `w08-testing-ci`
 
-El PR #21 integra el arranque y las unitarias de Kevin. Se agregan ocho comprobaciones HTTP
-contra el servidor de producción, CI con etapas separadas y reportes de resultados/cobertura.
+Los PR #21 y #23 integran unitarias de Kevin e integración de Ismael. El PR #22 agrega
+captura con persistencia local, E2E desde la interfaz, comprobaciones HTTP y CI con reportes.
 La [estrategia de pruebas](docs/test-strategy.md) relaciona riesgos, capas y límites.
 
-**La semana no está cerrada.** Falta la integración nueva de Ismael. La aplicación aún no
-tiene el flujo de creación, guardado durable y sincronización desde la interfaz que solicita
-`ACTIVIDAD.txt`. Los checks HTTP no sustituyen el E2E de ese flujo ni su variante sin capacidad.
+Desde **Nueva inspección** en el inicio, abrir `/captura`, llenar datos sintéticos y pulsar
+**Guardar inspección**. Datos y cola se guardan en localStorage, incluso sin red. Al recargar
+se recuperan y **Sincronizar** envía la misma operación a la API de demostración sin duplicar.
+La geolocalización es opcional. La API conserva datos en memoria y se reinicia con el servidor;
+el registro local permanece en el navegador. Los adjuntos opcionales siguen siendo temporales.
 
-Comandos de esta semana en PowerShell, con Node.js 20.19.6 o posterior compatible:
+Requisitos: Git, Node.js 20.19.6 o posterior compatible, npm y Chrome/Edge instalado. En
+PowerShell, usar `npm.cmd`; para el chequeo público, Git Bash:
 
 ```powershell
 npm.cmd ci --ignore-scripts --no-audit --no-fund
@@ -30,8 +33,10 @@ node scripts/evaluation-result.mjs
 `npm run verify` equivale a `make verify`: estructura, pruebas, barrido de información sensible,
 build y consistencia del reporte. Se hace build antes del primer test. Las suites se descubren
 en `tests/*.spec.ts` y `tests/{unit,integration,e2e}/*.spec.ts` sin listas manuales. `npm test`
-también ejecuta HTTP: inicia un servidor de producción en puerto libre y lo detiene al terminar.
+también ejecuta HTTP y navegador: inicia servidores en puertos libres y los detiene al terminar.
 Con un `next start` ya abierto se puede usar `E2E_BASE_URL=http://127.0.0.1:3000`.
+`CHROME_PATH` permite seleccionar Chrome/Edge. El E2E usa un perfil temporal y falla si no hay
+navegador; no descarga uno ni utiliza el perfil personal. CI usa Chrome de Ubuntu.
 
 El lint revisa sintaxis JS/TS con Node y TypeScript existentes; la comprobación de tipos es
 otra etapa. No se incorporan ESLint ni dependencias nuevas. La CI usa Ubuntu y Node 20.19.6.
@@ -43,16 +48,26 @@ se documenta este equivalente. Artefacto: `academic-evidence-w08-testing-ci`.
 Los resultados quedan en `reports/w08-testing-ci/tests.json`, `reports/verification.json`,
 `coverage/` y `evaluation-result.json`. La cobertura V8 identifica el JS del runner y auxiliares;
 no tiene un mapa fiable al TypeScript ejecutado dinámicamente. No se declara un porcentaje de
-cobertura de `src/`. El resumen de cierre devuelve código 1 e `incomplete` si falta alguna capa
+cobertura de `src/`. También se conserva cobertura precisa del JS del navegador, capturas y
+versiones en `reports/w08-testing-ci/browser/`. El resumen devuelve código 1 si falta alguna capa
 o los escenarios de interfaz, aunque las comprobaciones existentes estén verdes.
 
 La evidencia de Juan Andrés está [separada por semana](evidence/w08/juan-andres.md). Kevin
 conserva la suya en [evidence/week-08/kevin.md](evidence/week-08/kevin.md). No se modifica su
-ruta histórica ni se escribe la evidencia personal de Ismael. `master` está protegida:
+ruta histórica. Ismael conserva [su evidencia propia](evidence/week-08/ismael.md). `master` está protegida:
 cambios mediante PR incluso para administradores, sin push forzado ni borrado.
 
 La entrega se prepara en [ENTREGA.md](ENTREGA.md). Cada integrante entrega por separado en
 Classroom el mismo SHA integrado y su sección personal. La consigna de semana 8 no requiere tag.
+
+| Entregable | Uso |
+|---|---|
+| `tests/unit/` | Validación, claves, migración y bordes de sincronización |
+| `tests/integration/` | Cola, conflictos, almacenamiento persistente y contrato del SW |
+| `tests/e2e/` | Rutas HTTP e interfaz: offline, recarga, reconexión, reintento y capacidad ausente |
+| `docs/test-strategy.md` | Riesgos, decisiones, comandos, defectos y límites |
+| `.github/workflows/academic-evaluation.yml` | CI y artefacto de resultados/cobertura |
+| `evidence/individual.md` | Una sección por persona, enlazada a su evidencia semanal |
 
 ## Estado de Semana 6 · `w06-device-push`
 
