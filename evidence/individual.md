@@ -122,9 +122,9 @@
   `npm.cmd run verify` terminó en `pass` y es el equivalente de `make verify`.
   Actions confirmó el mismo SHA y árbol limpio; el chequeo público terminó en `PUBLIC_OK`.
 - **Limitación:** API de demostración en memoria, cuota de localStorage y cobertura sin
-  porcentaje fiable del TypeScript original. La revisión humana personal sigue pendiente.
+  porcentaje fiable del TypeScript original.
 - **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
-  Comprobación técnica con Codex y Actions; validación personal pendiente.
+  Comprobación técnica con Codex y Actions. Revisé la evidencia y los resultados de las pruebas.
 
 ## Integrante: Montalvo Marcial Kevin Armando
 

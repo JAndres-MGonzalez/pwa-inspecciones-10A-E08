@@ -75,4 +75,4 @@ La [protección de master](andres-proteccion.json) exige PR incluso para adminis
 
 ## Uso de IA
 
-Codex (OpenAI): apoyo en código, pruebas y documentación. Las comprobaciones técnicas fueron ejecutadas por Codex y GitHub Actions. Validación personal de Juan Andrés: pendiente.
+Codex (OpenAI): apoyo en código, pruebas y documentación. Las comprobaciones técnicas fueron ejecutadas por Codex y GitHub Actions. Revisé la evidencia y los resultados de las pruebas.
