@@ -24,12 +24,14 @@ async function startBrowser(name) {
   const pending = new Map();
   const listeners = new Map();
   const close = async () => {
+    let closingNormally = false;
     if (socket?.readyState === WebSocket.OPEN) {
       try {
         const coverage = await call("Profiler.takePreciseCoverage");
         mkdirSync("reports/w08-testing-ci/browser", { recursive: true });
         writeFileSync(`reports/w08-testing-ci/browser/${name}-coverage.json`, JSON.stringify(coverage));
       } catch {}
+      closingNormally = true;
       await call("Browser.close", {}, false).catch(() => {});
     }
     socket?.terminate();
@@ -37,7 +39,8 @@ async function startBrowser(name) {
       await new Promise(done => {
         const timer = setTimeout(() => child.kill("SIGKILL"), 3000);
         child.once("exit", () => { clearTimeout(timer); done(); });
-        child.kill();
+        // Browser.close ya inició el cierre de Chrome y sus procesos hijos.
+        if (!closingNormally) child.kill();
       });
     }
     // Se elimina únicamente el perfil temporal que creó esta ejecución.
@@ -45,7 +48,11 @@ async function startBrowser(name) {
     if (!actual.startsWith(realpathSync(tmpdir()) + sep) || !basename(actual).startsWith("pwa-w08-")) {
       throw new Error("El perfil temporal no está en la carpeta esperada.");
     }
-    rmSync(actual, { recursive: true, force: true, maxRetries: 15, retryDelay: 100 });
+    try { rmSync(actual, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 }); }
+    catch (error) {
+      // Un archivo temporal aún abierto no debe ocultar el resultado de la prueba.
+      console.warn(`El navegador se cerró; limpieza temporal pendiente (${error.code}).`);
+    }
   };
   function call(method, params = {}, page = true) {
     return new Promise((resolve, reject) => {
