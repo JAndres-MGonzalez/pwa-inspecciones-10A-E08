@@ -676,3 +676,5 @@ El workflow académico de la semana aprobó, pero el de semana 1 (run 3988597151
 ### Prueba negativa
 - Modificación temporal en `sanitizeString` para devolver la cadena sin procesar: fallaron 3 checks de sanitización (`sanitize-strips-script-tags`, `sanitize-escapes-html-entities`, `validate-sanitizes-summary-content`), produciendo `security: FAIL`.
 - Restauración de la función: recuperación total en verde (`security: PASS`).
+
+- 2026-10-28 | Ismael | Bloque B semana 9: inventario LGPDPPSO, privacy-controls.ts, suite unitaria y prueba negativa.
