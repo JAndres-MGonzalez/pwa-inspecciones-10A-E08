@@ -286,6 +286,15 @@
 - **Limitación o fallo diagnosticado:** mi primera versión de `discoverSuites` escaneaba la raíz en vez de `tests/` y produjo un verde con 0 suites; lo detecté en el reporte y lo corregí con la guardia de cero suites. Sin navegador ni red en esta capa.
 - **Uso de IA y validación humana:** opencode (asistente de terminal) para redactar suites, el helper y esta evidencia; validé personalmente cada comando en PowerShell y Git Bash, revisé la salida completa de la rotura y confirmé con `git diff` que la demostración no dejó cambios en `schema.ts`.
 
+### Semana 9 — w09-security-privacy
+
+- **Mi commit SHA:** `<pendiente de commit tras revisión>`
+- **Mi evidencia completa:** [evidence/week-09/kevin.md](week-09/kevin.md).
+- **Decisión que puedo explicar:** Implementación de validación defensiva en TypeScript sin dependencias externas para inspecciones, garantizando sanitización de XSS y rechazo de identificadores inseguros antes de persistir en almacenamiento.
+- **Prueba y resultado real:** 8 checks en `tests/security.spec.ts` pasando al 100%, más prueba de regresión controlada que detectó la desactivación de la sanitización (`kevin-negativo-rotura.txt` vs `kevin-restaurado.txt`).
+- **Limitación:** La sanitización basada en expresiones regulares nativas mitiga vectores de script comunes en texto plano, pero para renderizar HTML enriquecido se requeriría un parser DOM más complejo (innecesario dado que solo manejamos texto sintético).
+- **Uso de IA y validación humana:** Estructuración de expresiones regulares y diseño de casos de prueba asistido por IA; validación de ejecución determinista y pruebas negativas realizadas manualmente en entorno local.
+
 # Evidencia individual — Jose Ismael Montalvo Lopez
 
 - **Grupo y equipo:** 10A-E08
