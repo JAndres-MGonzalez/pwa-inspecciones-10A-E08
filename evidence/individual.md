@@ -478,7 +478,7 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 
 ### Semana 9 - w09-security-privacy (Ismael)
 
-- **Mi commit SHA:** PENDIENTE_SHA
+- **Mi commit SHA:** 19961de
 - **Mi evidencia completa:** [evidence/week-09/ismael.md](week-09/ismael.md).
 - **Decision que puedo explicar:** Inventario de datos conforme a la LGPDPPSO para la UTT como sujeto obligado, e implementacion de controles de minimizacion de datos de dispositivo (truncado de GPS a radio de campus y bloqueo de imagenes SVG vulnerables a XSS).
 - **Prueba y resultado real:** Suite unitaria tests/unit/security-privacy.spec.ts con 5 checks deterministas en verde, y verificacion negativa reproducible del truncado de coordenadas.
