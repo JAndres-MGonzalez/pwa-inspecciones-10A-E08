@@ -31,8 +31,8 @@ export function truncateCoordinatesForPrivacy(
   }
 
   const factor = Math.pow(10, decimals);
-  const truncatedLat = lat;
-  const truncatedLng = lng;
+  const truncatedLat = Math.trunc(lat * factor) / factor;
+  const truncatedLng = Math.trunc(lng * factor) / factor;
 
   return {
     latitude: truncatedLat,
