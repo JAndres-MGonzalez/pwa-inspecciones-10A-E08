@@ -656,3 +656,23 @@ Codex confirmó Actions 39885685342 en verde sobre 1a98d562e32be8dea69a4779354b4
 ### Verificación desde instalación limpia — Semana 8
 
 El workflow académico de la semana aprobó, pero el de semana 1 (run 39885971515) detectó la dependencia de build: verify intentaba ejecutar E2E antes de compilar. Se ordenó scripts/verify.mjs para construir antes de probar. Se conservan el descubrimiento, todas las comprobaciones y los workflows anteriores. Así npm ci seguido de npm run verify es el equivalente reproducible de make verify.
+
+
+## Semana 9 — Bloque A (Validación de Entradas y Suite Base de Seguridad) — Kevin (28 de octubre)
+
+### Qué hice
+- Inicialicé la rama de arranque `semana-9-arranque-seguridad` a partir de `master` actualizado.
+- Actualicé el identificador de la actividad en `src/lib/storage/schema.ts` (`ASSIGNMENT_ID = "w09-security-privacy"`).
+- Implementé `src/lib/security/input-validation.ts`: módulo TypeScript nativo sin dependencias externas para validación defensiva de inspecciones (regex segura para IDs, enumeración estricta de estatus, sanitización contra XSS y límites de longitud).
+- Expuse las utilidades en `src/lib/security/index.ts`.
+- Creé la suite de pruebas `tests/security.spec.ts` con 8 checks automatizados (AC-02 / AC-03).
+- Generé la evidencia de regresión negativa (`kevin-negativo-rotura.txt` vs `kevin-restaurado.txt`) y la documentación en `evidence/week-09/kevin.md`.
+
+### Comandos y resultados reales
+- `npm.cmd run build`: compilación limpia y optimizada de producción (`Compiled successfully`).
+- `npm.cmd test`: 22 suites ejecutadas con paso exitoso determinista (`starter.spec.mjs: PASS`). La suite `security` ejecutó sus 8 checks en verde (`PASS`).
+- `npm.cmd run check-secrets`: `check-secrets: PASS`.
+
+### Prueba negativa
+- Modificación temporal en `sanitizeString` para devolver la cadena sin procesar: fallaron 3 checks de sanitización (`sanitize-strips-script-tags`, `sanitize-escapes-html-entities`, `validate-sanitizes-summary-content`), produciendo `security: FAIL`.
+- Restauración de la función: recuperación total en verde (`security: PASS`).
