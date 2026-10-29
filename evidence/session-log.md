@@ -679,6 +679,7 @@ El workflow académico de la semana aprobó, pero el de semana 1 (run 3988597151
 
 - 2026-10-28 | Ismael | Bloque B semana 9: inventario LGPDPPSO, privacy-controls.ts, suite unitaria y prueba negativa.
 
+
 ## Semana 9 — Juan Andrés — 29 de octubre de 2026
 
 Integración local de master 7ae9f209194ef2b48d891827dabe0d9247824e2a y rama de Ismael
