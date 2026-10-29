@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  week08:
+  week09:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -41,7 +41,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: academic-evidence-w08-testing-ci
+          name: academic-evidence-w09-integration
           if-no-files-found: error
           path: |
             evaluation-result.json

@@ -1,0 +1,9 @@
+# Solicitud de no rastreo; no sustituye controles de acceso.
+User-agent: *
+Disallow: /inspecciones
+Disallow: /captura
+Disallow: /api/
+Disallow: /evidence/
+Allow: /
+Allow: /manifest.webmanifest
+Allow: /offline.html
