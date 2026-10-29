@@ -1,0 +1,11 @@
+{
+  "command": "bash referencias/PWA-w09-kit-estudiante/public-tests/check.sh",
+  "exitCode": 0,
+  "printedPublicOk": true,
+  "lexicalMatches": 28,
+  "examples": [
+    ".\\evidence\\week-09\\andres-linea-base.txt:288:Verificando check-secrets...",
+    ".\\evidence\\week-09\\andres-linea-base.txt:290:> pwa-inspecciones-laboratorio@0.1.0 check-secrets"
+  ],
+  "originalScriptSha256": "4A7DB14FACD65C2DA919AEAB2D762428F86872A2990D561E27EA5980874479BE"
+}

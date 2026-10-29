@@ -103,6 +103,11 @@ vida con esta implementación: localStorage, registros conservados tras el enví
 controles nuevos todavía aislados. Se conserva la autoría de ese documento y se
 registra la diferencia para su corrección por el responsable.
 
+La [auditoría de dependencias](../evidence/week-09/andres-auditoria.txt) informó dos
+avisos altos y uno crítico en la base instalada. No se considera apta para publicar
+un servicio real con esa auditoría pendiente. Una actualización mayor del framework
+requiere su propia comprobación de compatibilidad; las cabeceras no corrigen esos avisos.
+
 ## Pruebas y trazabilidad
 
 | Riesgo | Comprobación reproducible |

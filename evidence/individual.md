@@ -126,6 +126,20 @@
 - **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
   Comprobación técnica con Codex y Actions. Revisé la evidencia y los resultados de las pruebas.
 
+### Semana 9 — w09-security-privacy
+
+- **Mi commit SHA:** [de7a554e6f64f230b08a1e6d1144b534b5bdb346](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/de7a554e6f64f230b08a1e6d1144b534b5bdb346).
+- **Mi evidencia completa:** [evidence/week-09/juan-andres.md](week-09/juan-andres.md).
+- **Decisión técnica:** separar CSP de desarrollo y producción y comprobar las cabeceras
+  por HTTP. El modelo STRIDE describe riesgos reales y `robots.txt` solo pide no rastreo.
+- **Prueba y resultado:** Codex ejecutó instalación limpia, build y 221 comprobaciones en
+  24 suites; verify y el chequeo acumulado terminaron en 0. La rotura temporal de una
+  cabecera produjo fallo y, al restaurarla, aprobaron las siete comprobaciones nuevas.
+- **Limitación:** scripts inline permitidos, utilidades de privacidad todavía aisladas,
+  inventario por alinear y tres avisos de auditoría de dependencias, uno crítico.
+- **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
+  Comprobaciones técnicas ejecutadas por Codex; revisión personal de esta semana pendiente.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
