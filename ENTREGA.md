@@ -1,5 +1,28 @@
 # Entrega de Medina González Juan Andrés
 
+## Semana 9 · w09-security-privacy
+
+Grupo y equipo: **10A-E08**. Nombre: **Medina González Juan Andrés**.
+
+Entregar en Classroom el enlace al repositorio o el SHA evaluado y adjuntar:
+
+- `verification.json`, generado por CI para el SHA final integrado.
+- `evidence/individual.md`, con mi sección de semana 9.
+
+Conservar el enlace a Actions de esa misma versión y la etiqueta del equipo
+`week-09-final`. El SHA final se obtiene después del último merge y se escribe en el
+TXT de entrega generado fuera de Git, junto con el enlace a la etiqueta y a los reportes.
+
+Mi evidencia detallada está en [evidence/week-09/juan-andres.md](evidence/week-09/juan-andres.md).
+Mi commit de implementación es `de7a554e6f64f230b08a1e6d1144b534b5bdb346`.
+El reporte debe indicar `assignmentId: w09-security-privacy`, `status: pass`, árbol
+limpio y el mismo SHA que se entrega. `npm run verify` es el equivalente exacto de
+`make verify`; los comandos de instalación y ejecución están en el README.
+
+La revisión personal del modelo y de los resultados está registrada. Los avisos de
+dependencias quedan documentados como limitación; la actualización mayor propuesta
+por la auditoría es una mejora separada, no una condición añadida a la rúbrica.
+
 ## Semana 8 · w08-testing-ci
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).

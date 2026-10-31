@@ -98,10 +98,11 @@ enmascara algunos patrones de contacto y rechaza SVG. No está conectado al guar
 del formulario. Truncar no anonimiza una ubicación y el filtro de imágenes no elimina
 metadatos ni valida completamente los bytes.
 
-El [inventario del Bloque B](privacy-data-inventory.md) necesita alinear su ciclo de
-vida con esta implementación: localStorage, registros conservados tras el envío y
-controles nuevos todavía aislados. Se conserva la autoría de ese documento y se
-registra la diferencia para su corrección por el responsable.
+El [inventario del Bloque B](privacy-data-inventory.md), corregido en el
+[PR #28](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/28), describe
+localStorage, registros conservados tras el envío y controles nuevos todavía aislados.
+El documento y este modelo mantienen esos límites sin atribuir controles al formulario
+que aún no utiliza.
 
 La [auditoría de dependencias](../evidence/week-09/andres-auditoria.txt) informó dos
 avisos altos y uno crítico en la base instalada. No se considera apta para publicar

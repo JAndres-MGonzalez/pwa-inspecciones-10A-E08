@@ -50,16 +50,26 @@ blob original `eab09263aa94e1f42028fc6355a9c8d021b1712a`; la rotura no se integr
 Los reportes finales se generan después del último commit y se conservan en el artefacto
 de Actions con el mismo SHA. No se incorpora un reporte dentro del commit que identifica.
 
+## Cierre de integración
+
+El 31 de octubre se integró el [PR #28 de Ismael](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/28),
+con el inventario y su evidencia corregidos. El inventario ahora describe localStorage,
+la conservación de registros y las utilidades de privacidad todavía aisladas. Actualicé
+el README, el modelo y mi sección individual para reflejar ese estado.
+
+Revisé el modelo de amenazas y los resultados de las pruebas. La ejecución técnica de
+los comandos se conserva atribuida a Codex y a GitHub Actions.
+
 ## Límites
 
 Scripts y estilos inline siguen permitidos; no hay autenticación, cifrado local ni
 backend persistente. Las utilidades nuevas de privacidad no están conectadas a la
-captura. El inventario del Bloque B necesita alinear almacenamiento y retención con
+captura. El inventario del Bloque B documenta almacenamiento y retención conforme a
 la implementación. El filtro de imágenes no elimina EXIF. No se declara una auditoría
 integral ni cumplimiento institucional. La actualización de dependencias con avisos
 de auditoría queda pendiente; el incremento no los resuelve.
 
 ## Uso de IA
 
-Codex (OpenAI): apoyo en código, pruebas y documentación. Validación humana de este
-incremento: pendiente de mi revisión.
+Codex (OpenAI): apoyo en código, pruebas y documentación. Revisé el modelo de amenazas
+y los resultados de las pruebas.
