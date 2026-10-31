@@ -704,3 +704,19 @@ Bloque B aún describe almacenamiento y retención distintos del código real.
 
 Los comandos fueron ejecutados por Codex. La revisión personal de esta semana está
 pendiente; no se atribuye ejecución humana ni trabajo de otros integrantes.
+
+
+## Semana 9 — Cierre de integración — 31 de octubre de 2026
+
+Se revisaron las correcciones del PR #28 de Ismael: inventario de datos y evidencia
+consistentes con localStorage, retención después de sincronizar y utilidades aisladas.
+Las seis comprobaciones del PR sobre la integración aprobaron. La ejecución aislada
+de su rama utilizaba el resumen de semana 8; la combinación con master contiene el
+resumen actualizado de semana 9. Se integró preservando sus commits y su autoría.
+
+Juan Andrés confirmó la revisión del modelo de amenazas y de los resultados. Se
+actualizaron únicamente su evidencia, el README, el modelo y la guía de entrega.
+Las comprobaciones técnicas siguen atribuidas a Codex y Actions. La auditoría de
+dependencias del 29 de octubre se conserva como riesgo documentado, sin exigir una
+actualización mayor para este cierre. El SHA y los adjuntos se fijan tras el último
+merge y la comprobación de sus workflows; la etiqueta del equipo es week-09-final.

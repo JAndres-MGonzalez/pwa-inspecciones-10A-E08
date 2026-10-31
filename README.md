@@ -20,11 +20,12 @@ Los scripts y estilos inline siguen permitidos para hidratación; CSP no elimina
 riesgo de XSS. `robots.txt` pide no rastrear rutas operativas y no sustituye autenticación.
 El despliegue con HTTPS, autenticación y almacenamiento protegido queda fuera de esta demo.
 
-El [inventario de privacidad](docs/privacy-data-inventory.md) pertenece al Bloque B.
-Necesita ajustar su descripción a localStorage y a los registros conservados después
-del envío. Las utilidades nuevas de validación y privacidad tienen pruebas propias,
+El [inventario de privacidad](docs/privacy-data-inventory.md) del Bloque B describe
+localStorage y los registros conservados después del envío. La corrección quedó integrada
+mediante el [PR #28](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/28).
+Las utilidades nuevas de validación y privacidad tienen pruebas propias,
 pero aún no están conectadas al formulario. La API mantiene la validación ya existente.
-El filtro de imágenes no elimina EXIF. Estas diferencias están registradas en el modelo.
+El filtro de imágenes no elimina EXIF. Estos límites están registrados en el modelo.
 
 Instalación y comprobación, con Chrome/Edge instalado y Git Bash en Windows:
 
@@ -64,6 +65,12 @@ La auditoría de dependencias ejecutada el 29 de octubre informó dos avisos alt
 crítico en la base instalada. La propuesta automática incluye un cambio mayor de Next.js;
 queda pendiente una migración comprobada. El build y las pruebas aprobadas no resuelven
 esos avisos. [Resultado registrado](evidence/week-09/andres-auditoria.txt).
+
+La entrega de semana 9 se prepara con el SHA final integrado, su ejecución de Actions y
+los adjuntos `verification.json` y `evidence/individual.md`. La etiqueta del equipo es
+`week-09-final`; se publica sobre esa misma versión después de comprobar la integración.
+El [formato de entrega](ENTREGA.md) y la evidencia separada de cada integrante permiten
+identificar contribución, decisión, prueba, limitación y uso de IA.
 
 ## Semana 8 · `w08-testing-ci`
 

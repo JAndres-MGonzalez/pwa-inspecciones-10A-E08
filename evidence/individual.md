@@ -136,9 +136,11 @@
   24 suites; verify y el chequeo acumulado terminaron en 0. La rotura temporal de una
   cabecera produjo fallo y, al restaurarla, aprobaron las siete comprobaciones nuevas.
 - **Limitación:** scripts inline permitidos, utilidades de privacidad todavía aisladas,
-  inventario por alinear y tres avisos de auditoría de dependencias, uno crítico.
+  EXIF sin eliminar y tres avisos de la auditoría de dependencias del 29 de octubre, uno crítico.
+- **Cierre de integración:** [PR #28](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/pull/28),
+  inventario y evidencia del Bloque B corregidos. Mi evidencia documenta el cierre.
 - **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
-  Comprobaciones técnicas ejecutadas por Codex; revisión personal de esta semana pendiente.
+  Comprobaciones técnicas ejecutadas por Codex. Revisé el modelo de amenazas y los resultados.
 
 ## Integrante: Montalvo Marcial Kevin Armando
 
