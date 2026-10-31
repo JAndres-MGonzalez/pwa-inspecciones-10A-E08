@@ -6,7 +6,7 @@
 
 ## Decision tecnica
 
-Se adopto el principio de minimizacion de datos de la LGPDPPSO. Las coordenadas se truncan a 3 decimales (~110 m) para permitir auditar presencia en el campus sin revelar la posicion exacta del inspector. Se rechazan imagenes SVG por riesgo de scripts embebidos (XSS). Se enmascaran correos y telefonos en notas.
+Se adopto el principio de minimizacion de datos de la LGPDPPSO. La funcion de privacidad trunca las coordenadas a 3 decimales (~110 m) para permitir auditar presencia en el campus sin revelar la posicion exacta del inspector. La funcion de imagenes rechaza SVG por riesgo de scripts embebidos (XSS). Otra funcion enmascara correos y telefonos en notas. Estas funciones se prueban por separado y aun no estan conectadas al formulario.
 
 ## Pruebas
 
