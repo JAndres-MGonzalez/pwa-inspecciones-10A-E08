@@ -126,6 +126,20 @@
 - **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
   Comprobación técnica con Codex y Actions. Revisé la evidencia y los resultados de las pruebas.
 
+### Semana 9 — w09-security-privacy
+
+- **Mi commit SHA:** [de7a554e6f64f230b08a1e6d1144b534b5bdb346](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/de7a554e6f64f230b08a1e6d1144b534b5bdb346).
+- **Mi evidencia completa:** [evidence/week-09/juan-andres.md](week-09/juan-andres.md).
+- **Decisión técnica:** separar CSP de desarrollo y producción y comprobar las cabeceras
+  por HTTP. El modelo STRIDE describe riesgos reales y `robots.txt` solo pide no rastreo.
+- **Prueba y resultado:** Codex ejecutó instalación limpia, build y 221 comprobaciones en
+  24 suites; verify y el chequeo acumulado terminaron en 0. La rotura temporal de una
+  cabecera produjo fallo y, al restaurarla, aprobaron las siete comprobaciones nuevas.
+- **Limitación:** scripts inline permitidos, utilidades de privacidad todavía aisladas,
+  inventario por alinear y tres avisos de auditoría de dependencias, uno crítico.
+- **Uso de IA y validación humana:** Codex (OpenAI): apoyo en código, pruebas y documentación.
+  Comprobaciones técnicas ejecutadas por Codex; revisión personal de esta semana pendiente.
+
 ## Integrante: Montalvo Marcial Kevin Armando
 
 - **Matrícula:** 3523110092.
@@ -475,3 +489,12 @@ La comprobación personal consistió en ejecutar directamente `npm ci` y `npm ru
 - **Prueba y resultado real:** el 22 de octubre de 2026, `npm.cmd test` terminó con `starter.spec.mjs: PASS`, 17 suites y 177 checks (168 anteriores y 9 míos); `npm.cmd run verify` terminó en `pass` y `check.sh` en `PUBLIC_OK`. Prueba negativa: al quitar la versión de `idempotencyKey` fallaron 12 checks en 5 suites (3 de mi suite y 2 de la de Kevin); al restaurar volvió a verde.
 - **Limitación o fallo diagnosticado:** dos de mis checks no caen cuando la clave pierde la versión porque comprueban que cola y política coincidan entre sí, no el formato de la clave (eso lo cubren las unitarias). Además, `registerServiceWorker` no deduplica por sí mismo: la deduplicación la hace el navegador. Los transportes, el almacén y el harness del SW son dobles en memoria: no acreditan un servidor real, IndexedDB ni un navegador.
 - **Uso de IA y validación humana:** usé Claude (Anthropic), en chat, para redactar las suites y la evidencia y para la guía de comandos. Validación humana: ejecuté yo mismo las suites, `npm.cmd test`, `npm.cmd run verify`, `check.sh` y la prueba negativa, y revisé los checks que fallaron y la restauración.
+
+### Semana 9 - w09-security-privacy (Ismael)
+
+- **Mi commit SHA:** 28f4c6e
+- **Mi evidencia completa:** [evidence/week-09/ismael.md](week-09/ismael.md).
+- **Decision que puedo explicar:** Inventario de datos conforme a la LGPDPPSO para la UTT como sujeto obligado, e implementacion de controles de minimizacion de datos de dispositivo (truncado de GPS a radio de campus y bloqueo de imagenes SVG vulnerables a XSS).
+- **Prueba y resultado real:** Suite unitaria tests/unit/security-privacy.spec.ts con 6 checks deterministas en verde, y verificacion negativa reproducible del truncado de coordenadas.
+- **Limitacion:** El enmascaramiento opera con expresiones regulares sobre texto; para adjuntos binarios requeriria procesamiento adicional. Tampoco se eliminan metadatos EXIF.
+- **Uso de IA y validacion humana:** Estructura LGPDPPSO y casos de prueba generados con IA; revision manual de cumplimiento y determinismo.

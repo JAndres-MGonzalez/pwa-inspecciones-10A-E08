@@ -676,3 +676,31 @@ El workflow académico de la semana aprobó, pero el de semana 1 (run 3988597151
 ### Prueba negativa
 - Modificación temporal en `sanitizeString` para devolver la cadena sin procesar: fallaron 3 checks de sanitización (`sanitize-strips-script-tags`, `sanitize-escapes-html-entities`, `validate-sanitizes-summary-content`), produciendo `security: FAIL`.
 - Restauración de la función: recuperación total en verde (`security: PASS`).
+
+- 2026-10-28 | Ismael | Bloque B semana 9: inventario LGPDPPSO, privacy-controls.ts, suite unitaria y prueba negativa.
+
+
+## Semana 9 — Juan Andrés — 29 de octubre de 2026
+
+Integración local de master 7ae9f209194ef2b48d891827dabe0d9247824e2a y rama de Ismael
+0813967573d0f739f76170c509f33db00e853d8b, conservando su autoría. Codex ejecutó
+instalación limpia y verify sobre 8e6ca6e3efab428a4b2d279c2aef7cbb0101a1b7:
+214 comprobaciones en 23 suites, build y barrido aprobados, árbol limpio.
+
+El commit de implementación de7a554e6f64f230b08a1e6d1144b534b5bdb346 añade modelo
+STRIDE, contrato y aplicación de CSP, robots, siete comprobaciones de cabeceras,
+workflows y rutas de reportes derivadas de la actividad. Verify, cobertura y chequeo
+público acumulado aprobaron: 221 comprobaciones en 24 suites y PUBLIC_OK.
+
+La regresión temporal DENY -> ALLOWALL produjo código 1. Restaurar el archivo
+original recuperó las siete comprobaciones, código 0 y blob idéntico. Las salidas
+están en evidence/week-09/andres-negativo.txt y andres-restaurado.txt.
+
+El script original del kit imprimió PUBLIC_OK pese a coincidencias léxicas con nombres
+de herramientas; no se reemplazó con ese resultado la comprobación acumulada.
+La auditoría de dependencias informó dos avisos altos y uno crítico, código 1.
+Quedan registrados el riesgo y la actualización mayor pendiente. El inventario del
+Bloque B aún describe almacenamiento y retención distintos del código real.
+
+Los comandos fueron ejecutados por Codex. La revisión personal de esta semana está
+pendiente; no se atribuye ejecución humana ni trabajo de otros integrantes.

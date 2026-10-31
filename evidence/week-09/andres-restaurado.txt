@@ -1,0 +1,8 @@
+csp-produccion-restringe-origenes-y-enmarcado: pass
+config-produccion-coincide-con-contrato: pass
+config-desarrollo-separa-eval-y-websocket: pass
+headers-http-en-paginas-api-y-worker: pass
+worker-conserva-revalidacion: pass
+api-no-guarda-respuesta-en-cache: pass
+robots-servido-incluye-rutas-operativas: pass
+security-headers: PASS

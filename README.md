@@ -1,8 +1,69 @@
-# Inspecciones de laboratorio · Semanas 1 a 8
+# Inspecciones de laboratorio · Semanas 1 a 9
 
 Proyecto del equipo **10A-E08** para consultar inspecciones y mantenimiento de laboratorios con datos sintéticos.
 
 Repositorio: [pwa-inspecciones-10A-E08](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08).
+
+## Semana 9 · `w09-security-privacy`
+
+El [modelo de amenazas](docs/threat-model.md) describe los activos, las seis categorías
+STRIDE, los controles comprobados y los riesgos que siguen abiertos. Las inspecciones
+son sintéticas; no se afirma un despliegue institucional ni cumplimiento legal certificado.
+
+La política de producción limita recursos y conexiones al mismo origen, permite vistas
+previas de imágenes locales y bloquea objetos y marcos externos. Cámara y ubicación
+son opcionales y del mismo origen; el micrófono está bloqueado. Desarrollo incorpora
+las excepciones de evaluación y WebSocket para Next.js. Las pruebas comparan el contrato
+de `headers-csp.ts`, la configuración y las cabeceras recibidas por HTTP.
+
+Los scripts y estilos inline siguen permitidos para hidratación; CSP no elimina todo
+riesgo de XSS. `robots.txt` pide no rastrear rutas operativas y no sustituye autenticación.
+El despliegue con HTTPS, autenticación y almacenamiento protegido queda fuera de esta demo.
+
+El [inventario de privacidad](docs/privacy-data-inventory.md) pertenece al Bloque B.
+Necesita ajustar su descripción a localStorage y a los registros conservados después
+del envío. Las utilidades nuevas de validación y privacidad tienen pruebas propias,
+pero aún no están conectadas al formulario. La API mantiene la validación ya existente.
+El filtro de imágenes no elimina EXIF. Estas diferencias están registradas en el modelo.
+
+Instalación y comprobación, con Chrome/Edge instalado y Git Bash en Windows:
+
+```powershell
+npm.cmd ci --ignore-scripts --no-audit --no-fund
+node scripts/lint.mjs
+node node_modules/typescript/bin/tsc --noEmit
+npm.cmd run verify
+node scripts/test-with-coverage.mjs
+& 'C:\Program Files\Git\bin\bash.exe' public-tests/check.sh
+node scripts/evaluation-result.mjs
+```
+
+Para iniciar la app: `npm.cmd run dev` y abrir `http://localhost:3000`.
+`npm run verify` es el equivalente exacto de `make verify`; construye antes de ejecutar
+las suites. Para `npm test` por separado se necesita primero `npm run build`.
+No se agregan dependencias ni se modifica el lockfile.
+
+Los dos workflows de la semana usan Node 20.19.6. El de semana 9 conserva las condiciones
+AC-01 a AC-03 del kit y añade comprobación de evidencia y reporte; `academic-evaluation` conserva
+lint, tipos, cobertura, build, navegador y verificación de las suites acumuladas.
+Artefactos: `academic-evidence-w09-security-privacy` y `academic-evidence-w09-integration`.
+Los reportes de pruebas y cobertura usan `reports/w09-security-privacy/`; el verificador
+genera `reports/verification.json` y el resumen `evaluation-result.json`, ligados al SHA.
+La cobertura continúa siendo de JS ejecutado, sin porcentaje fiable de líneas TS originales.
+
+El chequeo público acumulado del proyecto se conserva. El script público original del
+kit está separado en `referencias/`: en la ejecución local imprimió `PUBLIC_OK` y terminó
+en 0 aunque encontró coincidencias con nombres de herramientas. Su negación de la búsqueda
+no detiene el script. Esa salida no equivale a una auditoría aprobada. Se conserva el
+barrido del proyecto, que sí devuelve un código de fallo cuando detecta contenido fuera
+de sus excepciones literales. La evidencia del incremento está en
+[evidence/week-09/juan-andres.md](evidence/week-09/juan-andres.md) y en mi sección de
+[evidence/individual.md](evidence/individual.md).
+
+La auditoría de dependencias ejecutada el 29 de octubre informó dos avisos altos y uno
+crítico en la base instalada. La propuesta automática incluye un cambio mayor de Next.js;
+queda pendiente una migración comprobada. El build y las pruebas aprobadas no resuelven
+esos avisos. [Resultado registrado](evidence/week-09/andres-auditoria.txt).
 
 ## Semana 8 · `w08-testing-ci`
 

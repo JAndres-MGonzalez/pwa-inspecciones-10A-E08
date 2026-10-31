@@ -1,0 +1,48 @@
+csp-produccion-restringe-origenes-y-enmarcado: fail - AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'ALLOWALL' !== 'DENY'
+
+config-produccion-coincide-con-contrato: fail - AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    {
+      key: 'X-Content-Type-Options',
+      value: 'nosniff'
+    },
+    {
+      key: 'X-Frame-Options',
++     value: 'DENY'
+-     value: 'ALLOWALL'
+    },
+    {
+      key: 'Referrer-Policy',
+      value: 'strict-origin-when-cross-origin'
+    },
+
+config-desarrollo-separa-eval-y-websocket: fail - AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    {
+      key: 'X-Content-Type-Options',
+      value: 'nosniff'
+    },
+    {
+      key: 'X-Frame-Options',
++     value: 'DENY'
+-     value: 'ALLOWALL'
+    },
+    {
+      key: 'Referrer-Policy',
+      value: 'strict-origin-when-cross-origin'
+    },
+
+headers-http-en-paginas-api-y-worker: fail - AssertionError [ERR_ASSERTION]: /: X-Frame-Options
+
+'DENY' !== 'ALLOWALL'
+
+worker-conserva-revalidacion: pass
+api-no-guarda-respuesta-en-cache: pass
+robots-servido-incluye-rutas-operativas: pass
+security-headers: FAIL

@@ -1,0 +1,38 @@
+{
+  "command": "npm.cmd audit --omit=dev --json",
+  "exitCode": 1,
+  "runtime": "v26.4.0",
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 2,
+    "critical": 1,
+    "total": 3
+  },
+  "packages": [
+    {
+      "name": "next",
+      "severity": "critical",
+      "fixAvailable": {
+        "name": "next",
+        "version": "16.4.3",
+        "isSemVerMajor": true
+      }
+    },
+    {
+      "name": "postcss",
+      "severity": "high",
+      "fixAvailable": {
+        "name": "next",
+        "version": "16.4.3",
+        "isSemVerMajor": true
+      }
+    },
+    {
+      "name": "source-map-js",
+      "severity": "high",
+      "fixAvailable": true
+    }
+  ]
+}
