@@ -39,7 +39,11 @@ export async function runChecks() {
       assert.ok([200, 404].includes(response.status));
       const body = await response.text();
       assert.ok(body.includes("Inspección no encontrada"));
-      assert.ok(body.includes("NEXT_NOT_FOUND"), "La respuesta debe indicar notFound, no un detalle válido.");
+      // Next 14 marca el digest como NEXT_NOT_FOUND; desde Next 16 usa NEXT_HTTP_ERROR_FALLBACK;404.
+      assert.ok(
+        body.includes("NEXT_NOT_FOUND") || body.includes("NEXT_HTTP_ERROR_FALLBACK;404"),
+        "La respuesta debe indicar notFound, no un detalle válido."
+      );
     });
     await check("manifest-accesible", async () => {
       const response = await request("/manifest.webmanifest");

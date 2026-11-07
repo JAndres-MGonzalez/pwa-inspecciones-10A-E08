@@ -304,12 +304,13 @@
 
 ### Semana 9 — w09-security-privacy
 
-- **Mi commit SHA:** `<pendiente de commit tras revisión>`
+- **Mi commit SHA:** [`19515939563f66230ab8626dc36c16c39bff27e5`](https://github.com/JAndres-MGonzalez/pwa-inspecciones-10A-E08/commit/19515939563f66230ab8626dc36c16c39bff27e5) — Bloque A de la Semana 9 (validación de entradas, sanitización y suite base de seguridad).
 - **Mi evidencia completa:** [evidence/week-09/kevin.md](week-09/kevin.md).
 - **Decisión que puedo explicar:** Implementación de validación defensiva en TypeScript sin dependencias externas para inspecciones, garantizando sanitización de XSS y rechazo de identificadores inseguros antes de persistir en almacenamiento.
 - **Prueba y resultado real:** 8 checks en `tests/security.spec.ts` pasando al 100%, más prueba de regresión controlada que detectó la desactivación de la sanitización (`kevin-negativo-rotura.txt` vs `kevin-restaurado.txt`).
-- **Limitación:** La sanitización basada en expresiones regulares nativas mitiga vectores de script comunes en texto plano, pero para renderizar HTML enriquecido se requeriría un parser DOM más complejo (innecesario dado que solo manejamos texto sintético).
-- **Uso de IA y validación humana:** Estructuración de expresiones regulares y diseño de casos de prueba asistido por IA; validación de ejecución determinista y pruebas negativas realizadas manualmente en entorno local.
+- **Seguimiento de dependencias (Semana 10):** Revisé la auditoría reportada por Andrés (2 altas + 1 crítica en `next@14.2.35`) en la rama `semana-10-kevin-dependencias`. La línea 14.x termina en `14.2.35`, así que no existe patch que corrija los CVEs; la única ruta real es `next@16.4.5`. Tras la migración obtuve build PASS, 246/246 checks en verde (mismo conteo que la línea base), `npm audit` con **0 vulnerabilidades**, `verify` en pass y `public-tests/check.sh` en `PUBLIC_OK`. Requirió 3 ajustes mínimos: `await params` en el detalle SSR (Next 16 ya no entrega `params` sincrónico), tolerar el nuevo digest `NEXT_HTTP_ERROR_FALLBACK;404` en el check del 404 y aceptar la reconfiguración automática de `tsconfig.json`/`next-env.d.ts`. Evidencia detallada en [evidence/week-09/kevin-dependencias.md](week-09/kevin-dependencias.md).
+- **Limitación:** La sanitización basada en expresiones regulares nativas mitiga vectores de script comunes en texto plano, pero para renderizar HTML enriquecido se requeriría un parser DOM más complejo (innecesario dado que solo manejamos texto sintético). Además, `react@18.3.1` queda en desuso en Next 16 (se elimina en Next 17), por lo que la migración a React 19 queda como deuda técnica.
+- **Uso de IA y validación humana:** Estructuración de expresiones regulares y diseño de casos de prueba asistido por IA; validación de ejecución determinista y pruebas negativas realizadas manualmente en entorno local. La auditoría y la migración de Next.js se ejecutaron y revisaron de forma local con aprobación explícita antes de cada `commit`/`push`.
 
 # Evidencia individual — Jose Ismael Montalvo Lopez
 

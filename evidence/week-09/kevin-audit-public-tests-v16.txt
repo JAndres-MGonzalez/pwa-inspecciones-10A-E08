@@ -1,0 +1,10 @@
+﻿files: PASS
+check-secrets: PASS
+cursors: PASS
+tests: PASS
+package: PASS
+sync: contrato w09-security-privacy v1; suites sync: sync.cola, sync.conflictos, sync.modelo, sync
+sync: PASS
+capabilities: contrato w06 presente; modulos validados si existen
+capabilities: PASS
+PUBLIC_OK

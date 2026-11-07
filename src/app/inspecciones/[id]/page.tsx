@@ -10,10 +10,12 @@ export const dynamic = "force-dynamic";
 export default async function InspectionDetailPage({
   params
 }: {
-  params: { id: string };
+  // Next.js 15+ entrega `params` como Promise; en 14 el await devuelve el objeto.
+  params: Promise<{ id: string }> | { id: string };
 }) {
+  const { id } = await params;
   const inspections: Inspection[] = await loadInspections();
-  const inspection = inspections.find((item) => item.id === params.id);
+  const inspection = inspections.find((item) => item.id === id);
 
   if (!inspection) {
     notFound();

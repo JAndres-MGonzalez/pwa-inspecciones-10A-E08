@@ -1,0 +1,39 @@
+﻿
+> pwa-inspecciones-laboratorio@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.4.5 (Turbopack)
+npm.cmd : ÔÜá React 18 support is deprecated in Next.js 16 and will be removed in Next.js 17. Please upgrade to React 
+19. Learn more: https://nextjs.org/docs/messages/react-version
+En línea: 1 Carácter: 1
++ npm.cmd run build 2>&1 | Out-File -FilePath evidence\week-09\kevin-au ...
++ ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔÜá React 18 su...s/react-version:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Ô£ô Running next.config.mjs took 64ms
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 522ms
+  Running TypeScript ...
+  Finished TypeScript in 2.5s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/4) ...
+  Generating static pages using 8 workers (1/4) 
+  Generating static pages using 8 workers (2/4) 
+  Generating static pages using 8 workers (3/4) 
+Ô£ô Generating static pages using 8 workers (4/4) in 1172ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî ãÆ /
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /api/inspecciones
+Ôö£ Ôùï /captura
+Ôö£ Ôùï /inspecciones
+Ôöö ãÆ /inspecciones/[id]
+
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
